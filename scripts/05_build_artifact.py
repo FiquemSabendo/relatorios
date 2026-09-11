@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Costura artifact/template.html + artifact/payload.json + fontes em um HTML autocontido.
 
-Saída: artifact/renuncias.html — o explorador interativo (busca por empresa, ranking,
-achados), publicado como artefato no claude.ai. O site do GitHub Pages (docs/) é o
-relatório em abas, gerado por 06_export_relatorio.py + 07_build_relatorio.py.
+Saídas (idênticas):
+  artifact/renuncias.html   — nome histórico, usado para publicar o artefato no claude.ai
+  docs/index.html           — o que o GitHub Pages serve
 """
 import base64
 import os
@@ -13,7 +13,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TPL = os.path.join(ROOT, "artifact", "template.html")
 PAY = os.path.join(ROOT, "artifact", "payload.json")
 FONTS = os.path.join(ROOT, "artifact", "assets", "fonts")
-OUTS = [os.path.join(ROOT, "artifact", "renuncias.html")]
+OUTS = [os.path.join(ROOT, "artifact", "renuncias.html"),
+        os.path.join(ROOT, "docs", "index.html")]
 
 # Identidade visual da Fiquem Sabendo: Supply (títulos) + Roboto (texto), as mesmas
 # faces servidas em fiquemsabendo.com.br. Embutidas como data URI porque o site não

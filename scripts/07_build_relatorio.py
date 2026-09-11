@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Costura relatorio/template.html + relatorio/base.css + relatorio/dados.json + fontes
-e logos (artifact/assets) em docs/index.html — a página servida pelo GitHub Pages."""
+e logos (artifact/assets) em docs/relatorio.html (página secundária do GitHub Pages)."""
 import base64
 import os
 import sys
@@ -8,7 +8,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REL = os.path.join(ROOT, "relatorio")
 ASSETS = os.path.join(ROOT, "artifact", "assets")
-OUT = os.path.join(ROOT, "docs", "index.html")
+OUT = os.path.join(ROOT, "docs", "relatorio.html")
 
 FACES = [("Supply", 400, "Supply-Regular.woff2"), ("Supply", 700, "Supply-Bold.woff2"),
          ("Roboto", 400, "Roboto-Regular.woff2"), ("Roboto", 500, "Roboto-Medium.woff2"),
