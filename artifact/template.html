@@ -374,29 +374,6 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 .setor { display: block; font-size: 12.5px; color: var(--ink-2); overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
 #res-mais .empty { padding: 18px 0 4px; }
-
-/* ------------------------------------------------------------ achados -- */
-.ach-intro { max-width: 74ch; font-size: 15.5px; color: var(--ink-2); margin: 0 0 22px; }
-.ach-intro b { color: var(--ink); }
-.achado {
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
-  padding: 22px 24px 20px; margin-bottom: 20px;
-}
-.ach-cab { margin-bottom: 14px; }
-.ach-tag { display: inline-block; font-size: 12.5px; font-weight: 700; padding: 3px 9px;
-  background: var(--accent); color: #000; margin-bottom: 10px; }
-.ach-tag.crit { background: var(--critical); color: #fff; }
-.achado h3 { font-family: Supply, "Roboto Mono", ui-monospace, monospace;
-  font-size: clamp(19px, 2.1vw, 25px); font-weight: 700; line-height: 1.3; margin: 0;
-  color: var(--ink); text-wrap: balance; }
-.ach-lead { font-size: 15.5px; line-height: 1.62; color: var(--ink-2); max-width: 80ch; margin: 0 0 4px; }
-.ach-lead b { color: var(--ink); font-weight: 700; }
-.ach-evid { margin-top: 14px; }
-.ach-evid table { font-size: 13.5px; }
-.conferir { font-size: 13px; color: var(--muted); margin: 16px 0 0;
-  padding-top: 12px; border-top: 1px solid var(--line); display: flex; align-items: center;
-  gap: 12px; flex-wrap: wrap; }
-.conferir b { color: var(--ink-2); font-weight: 700; }
 </style>
 <div id="boot" class="loading">
   <div class="bar"><i></i></div>
@@ -453,7 +430,6 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
   <nav class="tabs" role="tablist" id="tabs">
     <button role="tab" data-v="resumo" aria-selected="true">Resumo</button>
     <button role="tab" data-v="ranking" aria-selected="false">Ranking de empresas</button>
-    <button role="tab" data-v="achados" aria-selected="false">Achados</button>
   </nav>
 
   <!-- ================================================ RESUMO ========= -->
@@ -506,15 +482,6 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     </div>
   </section>
 
-  <!-- ================================================ ACHADOS ======== -->
-  <section id="view-achados" role="tabpanel" class="hidden">
-    <p class="ach-intro"><span id="ach-n">Nove</span> leituras que os microdados sustentam e que não estão no óbvio do
-      ranking. Todas cobrem <b>2015 a 2023</b> em reais correntes, no nível de grupo econômico,
-      e <b>não obedecem aos filtros do topo</b> — são números fixos, prontos para citar. Cada
-      card traz o caminho para reproduzir o achado nas outras abas. São indícios: antes de
-      publicar, confirme com a Receita e com a empresa.</p>
-    <div id="ach-lista"></div>
-  </section>
 
   </div>
   <footer class="metod">
@@ -1429,376 +1396,6 @@ function montarDetalhe(g) {
 }
 </script>
 
-<script>
-"use strict";
-/* ===================================================================== *
- *  Achados — o que os microdados mostram e o release não conta
- *
- *  Tudo aqui é calculado sobre a série fechada de 2015 a 2023, em reais
- *  correntes, no nível de grupo econômico, e NÃO obedece aos filtros do
- *  topo: são números fixos, para citar. Cada card traz o caminho para
- *  reproduzir o achado nas outras duas abas.
- * ===================================================================== */
-let ACHADOS = null;
-
-function calcAchados() {
-  if (ACHADOS) return ACHADOS;
-  const E = entidades("grupo");
-  const NAC = IDX_PARCIAL;                       // 2015..2023
-  const A = {};
-
-  /* --- totais por grupo e ranking geral ------------------------------ */
-  const totG = new Float64Array(E.n);
-  let total = 0;
-  for (let g = 0; g < E.n; g++) {
-    let t = 0;
-    for (let a = 0; a < NAC; a++) t += E.vals[g * NA + a];
-    totG[g] = t; total += t;
-  }
-  const ordem = Array.from({ length: E.n }, (_, g) => g)
-    .filter(g => totG[g] > 0).sort((a, b) => totG[b] - totG[a]);
-  const posDe = new Int32Array(E.n);
-  ordem.forEach((g, i) => { posDe[g] = i + 1; });
-  A.total = total;
-
-  /* --- passo 1: cadastro (setor, município) -------------------------- */
-  const porSecao = new Map(), porMun = new Map();
-  for (let e = 0; e < D.n; e++) {
-    let t = 0;
-    for (let a = 0; a < NAC; a++) t += D.vals[e * NA + a];
-    if (t <= 0) continue;
-    const s = D.secaoDe[e];
-    porSecao.set(s, (porSecao.get(s) || 0) + t);
-    const k = MUN[D.mun[e]][0] + "/" + (MUN[D.mun[e]][1] || "—");
-    let m = porMun.get(k);
-    if (!m) porMun.set(k, m = { v: 0, gr: new Set() });
-    m.v += t; m.gr.add(E.dono[e]);
-  }
-  A.municipios = [...porMun.entries()].map(([mun, o]) => ({ mun, v: o.v, n: o.gr.size }))
-    .sort((a, b) => b.v - a.v);
-
-  /* --- passo 2: uma varredura pela blob de fundamento legal ---------- */
-  const ALVOS = ["Horário Eleitoral", "Perse (setor de eventos)", "Recof (entreposto industrial)",
-                 "Prouni", "Sudam/Sudene", "Lei Rouanet (Pronac)", "PAT (alimentação do trabalhador)"];
-  const alvoId = new Map(ALVOS.map(r => [REG_ID.get(r), r]));
-  const OPACOS = new Set(["Regimes aduaneiros especiais (PIS/Cofins)", "Outras isenções não capituladas"]
-    .map(r => REG_ID.get(r)));
-
-  const porRegAno = new Map();                   // regId -> Float64Array(NA)
-  const porRegGrupo = new Map();                 // regId -> Map(grupo -> valor)
-  const sudamUF = new Map();                     // UF -> valor
-  const financReg = new Map();                   // regId -> valor (seção K)
-  const opacoAno = new Float64Array(NA);
-  const idSudam = REG_ID.get("Sudam/Sudene");
-
-  for (let e = 0; e < D.n; e++) {
-    const g = E.dono[e], sec = D.secaoDe[e], uf = D.ufDe[e];
-    for (let k = D.itIni[e]; k < D.itFim[e]; k++) {
-      const a = D.itAno[k];
-      if (a >= NAC) continue;
-      const r = ITEM_REG[D.itId[k]], v = D.itVal[k];
-      let arr = porRegAno.get(r);
-      if (!arr) porRegAno.set(r, arr = new Float64Array(NA));
-      arr[a] += v;
-      if (OPACOS.has(r)) opacoAno[a] += v;
-      if (alvoId.has(r)) {
-        let m = porRegGrupo.get(r);
-        if (!m) porRegGrupo.set(r, m = new Map());
-        m.set(g, (m.get(g) || 0) + v);
-        if (r === idSudam) sudamUF.set(uf, (sudamUF.get(uf) || 0) + v);
-      }
-      if (sec === "K") financReg.set(r, (financReg.get(r) || 0) + v);
-    }
-  }
-
-  const topRegime = (nome, n) => {
-    const m = porRegGrupo.get(REG_ID.get(nome)) || new Map();
-    const tot = [...m.values()].reduce((x, y) => x + y, 0);
-    const ord = [...m.values()].sort((a, b) => a - b);
-    const mediana = ord.length ? (ord.length % 2 ? ord[ord.length >> 1]
-      : (ord[(ord.length >> 1) - 1] + ord[ord.length >> 1]) / 2) : 0;
-    const lista = [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, n)
-      .map(([g, v]) => ({ g, nome: E.nome[g], uf: E.uf[g], mun: E.mun[g], v, pct: v / (tot || 1),
-                          cnae: (CNAE.get(E.cnae[g]) || {}).desc || "Sem informação" }));
-    return { tot, n: m.size, mediana, lista };
-  };
-
-  A.eleitoral = topRegime("Horário Eleitoral", 6);
-  A.perse     = topRegime("Perse (setor de eventos)", 6);
-  A.recof     = topRegime("Recof (entreposto industrial)", 6);
-  A.prouni    = topRegime("Prouni", 5);
-  A.rouanet   = topRegime("Lei Rouanet (Pronac)", 5);
-  A.pat       = topRegime("PAT (alimentação do trabalhador)", 5);
-  A.sudam     = topRegime("Sudam/Sudene", 5);
-
-  /* --- opacidade ----------------------------------------------------- */
-  const totalAno = new Float64Array(NA);
-  for (let g = 0; g < E.n; g++) for (let a = 0; a < NAC; a++) totalAno[a] += E.vals[g * NA + a];
-  A.opaco = { ano: opacoAno, totalAno, na: NAC };
-  const outras = porRegAno.get(REG_ID.get("Outras isenções não capituladas"));
-  A.outrasCresc = outras
-    ? (outras[NAC - 1] / IPCA[NAC - 1]) / (outras[0] / IPCA[0]) - 1
-    : NaN;
-
-  /* --- setor público -------------------------------------------------- */
-  A.publico = ordem.filter(g => E.secao[g] === "O").slice(0, 6)
-    .map(g => ({ g, nome: E.nome[g], uf: E.uf[g], v: totG[g], pos: posDe[g] }));
-  A.publicoTotal = porSecao.get("O") || 0;
-
-  /* --- sem CNAE ------------------------------------------------------- */
-  A.semCnae = ordem.filter(g => E.secao[g] === "Z").slice(0, 6)
-    .map(g => ({ g, nome: E.nome[g], uf: E.uf[g], v: totG[g], pos: posDe[g] }));
-  A.semCnaeTotal = porSecao.get("Z") || 0;
-
-  /* --- Sudam/Sudene fora da área -------------------------------------- */
-  const AREA = new Set(["AC","AP","AM","PA","RO","RR","TO","MA","PI","CE","RN","PB","PE","AL","SE","BA","MG","ES"]);
-  const sudTot = [...sudamUF.values()].reduce((x, y) => x + y, 0) || 1;
-  A.sudamUF = [...sudamUF.entries()].map(([uf, v]) => ({ uf, v, pct: v / sudTot, dentro: AREA.has(uf) }))
-    .sort((a, b) => b.v - a.v).slice(0, 8);
-  A.sudamFora = [...sudamUF.entries()].filter(([uf]) => !AREA.has(uf))
-    .reduce((s, [, v]) => s + v, 0) / sudTot;
-
-  /* --- setor financeiro ----------------------------------------------- */
-  A.financeiro = [...financReg.entries()].map(([r, v]) => ({ reg: REGIMES[r], v }))
-    .sort((a, b) => b.v - a.v).slice(0, 5);
-  A.financeiroTotal = porSecao.get("K") || 0;
-
-  /* --- o hotel do Perse ------------------------------------------------ */
-  const topPerse = A.perse.lista[0];
-  if (topPerse) {
-    const anos = [];
-    for (let a = 0; a < NAC; a++) if (E.vals[topPerse.g * NA + a] > 0) anos.push(ANOS[a]);
-    A.perseAnos = anos;
-    A.perseCnpj = E.membros[topPerse.g].map(e => D.cnpj[e]);
-  }
-
-  return (ACHADOS = A);
-}
-
-/* --------------------------------------------------------- render ----- */
-const brl = v => "R$ " + compacto(v);
-const tituloCaso = s => s.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
-// quantas das seguintes somadas ainda cabem dentro do primeiro colocado
-function quantasSomadas(lista) {
-  let soma = 0, k = 0;
-  for (let i = 1; i < lista.length; i++) {
-    if (soma + lista[i].v > lista[0].v) break;
-    soma += lista[i].v; k++;
-  }
-  return k;
-}
-
-function tabelaAchado(cols, linhas) {
-  return `<div class="tablewrap"><table><thead><tr>` +
-    cols.map(c => `<th${c.n ? ' class="n"' : ""}>${esc(c.t)}</th>`).join("") +
-    `</tr></thead><tbody>` + linhas.map(l => `<tr${l.g !== undefined ? ` data-g="${l.g}"` : ""}>` +
-      l.c.map((v, i) => `<td${cols[i].n ? ' class="n"' : ""}>${v}</td>`).join("") + `</tr>`).join("") +
-    `</tbody></table></div>`;
-}
-function barrasAchado(itens, maxV) {
-  const cor = corSlot(0);
-  return itens.map(o => `<div class="barrow">
-    <span class="lbl" title="${esc(o.nome)}">${esc(o.nome)}</span>
-    <span class="track"><i style="left:0;width:${(o.v / maxV * 100).toFixed(2)}%;background:${cor}"></i></span>
-    <span class="val">${esc(brl(o.v))}${o.pct !== undefined ? ` <span class="sub">· ${esc(fmtPct(o.pct * 100, o.pct >= 0.1 ? 0 : 1))}</span>` : ""}</span>
-  </div>`).join("");
-}
-
-function renderAchados() {
-  const A = calcAchados();
-  const cards = [];
-
-  /* 1 — o Estado renunciando para si mesmo --------------------------- */
-  cards.push({
-    tag: "Quem recebe", cor: "s1",
-    titulo: `${A.publico[0].nome.split(" ").slice(0, 3).join(" ")} está entre os ${A.publico[0].pos} maiores beneficiários de renúncia fiscal federal`,
-    lead: `Órgãos da administração pública direta somam <b>${brl(A.publicoTotal)}</b> em renúncia
-      de tributos federais entre 2015 e 2023 — a União abrindo mão de imposto que ela mesma
-      cobraria de si. Ministério da Saúde, Aeronáutica, Marinha e Exército respondem pela
-      maior parte, quase toda por isenção de imposto de importação.`,
-    evid: tabelaAchado(
-      [{ t: "Órgão" }, { t: "UF" }, { t: "Posição no ranking geral", n: true }, { t: "2015–2023", n: true }],
-      A.publico.map(o => ({ g: o.g, c: [esc(o.nome), esc(o.uf), o.pos + "º", brl(o.v)] }))),
-    conferir: { texto: "Aba Resumo, filtro Setor = “Administração pública”", aba: "resumo", secao: "O" },
-  });
-
-  /* 2 — um quarto da renúncia não tem nome ---------------------------- */
-  const ult = A.opaco.na - 1;
-  const pctUlt = A.opaco.ano[ult] / (A.opaco.totalAno[ult] || 1);
-  cards.push({
-    tag: "Transparência", cor: "s2",
-    titulo: `${nfInt.format(pctUlt * 100)}% da renúncia federal está sob dois rótulos que não explicam nada`,
-    lead: `Em ${ANOS[ult]}, <b>${brl(A.opaco.ano[ult])}</b> — ${nf1.format(pctUlt * 100)}% de toda a
-      renúncia — foram declarados como “Bens Submetidos Aos Regimes Aduaneiros Especiais”
-      ou “Outras Isenções, Reduções E Suspensões Não Capituladas Nesta Tabela”. São os dois
-      maiores fundamentos legais da base, e nenhum diz qual regime foi usado. O segundo,
-      o balde do “não capitulado”, cresceu <b>${nfInt.format(A.outrasCresc * 100)}% em termos
-      reais</b> desde 2015 — o maior crescimento entre todos os mecanismos.`,
-    evid: `<div class="chartbox" id="ach-opaco"></div><div class="legend" id="ach-opaco-legend"></div>`,
-    conferir: { texto: "Aba Resumo, abrir por Mecanismo", aba: "resumo", dim: "regime" },
-  });
-
-  /* 3 — o hotel de Porto Velho ---------------------------------------- */
-  const p0 = A.perse.lista[0];
-  if (p0) cards.push({
-    tag: "Programa", cor: "s3",
-    titulo: `A maior beneficiária do Perse no país é uma empresa de ${tituloCaso(p0.mun)} que aparece em um único ano`,
-    lead: `O Programa Emergencial de Retomada do Setor de Eventos distribuiu
-      <b>${brl(A.perse.tot)}</b> a ${nfInt.format(A.perse.n)} grupos. O maior deles é
-      <b>${esc(p0.nome)}</b> (CNPJ ${esc(cnpjFmt(A.perseCnpj[0]))}), classificado como
-      “${esc(p0.cnae)}”, com <b>${brl(p0.v)}</b> — ${nfInt.format(p0.pct * 100)}% de todo o
-      programa. A empresa aparece em um único ano da série (${A.perseAnos.join(", ")}) e em
-      nenhum outro. A mediana das ${nfInt.format(A.perse.n)} beneficiárias do Perse é de
-      <b>${brl(A.perse.mediana)}</b> — esta empresa recebeu
-      ${nfInt.format(p0.v / (A.perse.mediana || 1))} vezes isso.`,
-    evid: barrasAchado(A.perse.lista, A.perse.lista[0].v),
-    conferir: { texto: `Aba Ranking, buscar “${p0.nome.split(" ").slice(0, 3).join(" ")}”`,
-                aba: "ranking", busca: p0.nome.split(" ").slice(0, 3).join(" ") },
-  });
-
-  /* 4 — o setor aéreo sem setor --------------------------------------- */
-  cards.push({
-    tag: "Transparência", cor: "s2",
-    titulo: `O ${A.semCnae[0].pos}º maior beneficiário do país não tem setor econômico na base`,
-    lead: `<b>${brl(A.semCnaeTotal)}</b> — ${nf1.format(A.semCnaeTotal / A.total * 100)}% de toda a
-      renúncia — está sob o CNAE <span class="mono">00000</span>, “Sem informação”. Não é
-      resíduo: entra aí <b>${esc(A.semCnae[0].nome)}</b>, ${A.semCnae[0].pos}ª maior beneficiária
-      do país, e boa parte do setor aéreo. Qualquer recorte setorial da renúncia federal ignora esse bloco
-      ou o joga numa categoria vazia.`,
-    evid: tabelaAchado(
-      [{ t: "Empresa" }, { t: "UF" }, { t: "Posição no ranking geral", n: true }, { t: "2015–2023", n: true }],
-      A.semCnae.map(o => ({ g: o.g, c: [esc(o.nome), esc(o.uf), o.pos + "º", brl(o.v)] }))),
-    conferir: { texto: "Aba Resumo, filtro Setor = “Sem informação”", aba: "resumo", secao: "Z" },
-  });
-
-  /* 5 — a geografia da renúncia --------------------------------------- */
-  const mun = A.municipios.slice(0, 8);
-  const sp = A.municipios.find(m => m.mun.startsWith("SÃO PAULO/"));
-  const macae = A.municipios.find(m => m.mun.startsWith("MACAÉ/"));
-  cards.push({
-    tag: "Geografia", cor: "s4",
-    titulo: macae && sp
-      ? `Macaé recebe ${nf1.format(macae.v / sp.v)}× o que vai para São Paulo, com ${nf1.format(macae.n / sp.n * 100)}% das empresas`
-      : "A renúncia não segue o tamanho da economia local",
-    lead: macae && sp ? `Macaé concentra <b>${brl(macae.v)}</b> em ${nfInt.format(macae.n)} grupos
-      econômicos. São Paulo, com ${nfInt.format(sp.n)} grupos, ficou com <b>${brl(sp.v)}</b>.
-      A renúncia federal não segue o tamanho da economia local: segue onde
-      estão os poços de petróleo, a Zona Franca e as plantas industriais incentivadas.` : "",
-    evid: tabelaAchado(
-      [{ t: "Município" }, { t: "Grupos", n: true }, { t: "2015–2023", n: true }, { t: "Por grupo", n: true }],
-      mun.map(m => ({ c: [esc(m.mun), nfInt.format(m.n), brl(m.v), brl(m.v / m.n)] }))),
-    conferir: { texto: "Aba Ranking, coluna Setor e a cidade no subtítulo de cada linha", aba: "ranking" },
-  });
-
-  /* 6 — horário eleitoral --------------------------------------------- */
-  const e0 = A.eleitoral.lista[0];
-  cards.push({
-    tag: "Concentração", cor: "s5",
-    titulo: `Uma única emissora fica com ${nfInt.format(A.eleitoral.lista[0].pct * 100)}% da compensação do horário eleitoral`,
-    lead: `A compensação fiscal pela veiculação gratuita da propaganda partidária e eleitoral
-      somou <b>${brl(A.eleitoral.tot)}</b> entre 2015 e 2023, distribuída a
-      ${nfInt.format(A.eleitoral.n)} grupos. <b>${esc(e0.nome)}</b> ficou com
-      <b>${brl(e0.v)}</b>, ou ${nfInt.format(e0.pct * 100)}% do total. É renúncia fiscal, não
-      verba publicitária — e por isso não aparece nas prestações de contas de campanha.`,
-    evid: barrasAchado(A.eleitoral.lista, A.eleitoral.lista[0].v),
-    conferir: { texto: "Aba Ranking, buscar “GLOBO COMUNICACAO” e abrir a linha", aba: "ranking", busca: "GLOBO COMUNICACAO" },
-  });
-
-  /* 7 — o Recof ---------------------------------------------------------- */
-  cards.push({
-    tag: "Concentração", cor: "s5",
-    titulo: `O incentivo mais concentrado do país cabe em ${nfInt.format(A.recof.n)} empresas`,
-    lead: `O Recof — regime de entreposto industrial que suspende tributos de importação para
-      quem industrializa e exporta — movimentou <b>${brl(A.recof.tot)}</b> entre 2015 e 2023
-      para apenas <b>${nfInt.format(A.recof.n)} grupos</b>, uma média de
-      ${brl(A.recof.tot / A.recof.n)} por empresa. É mais dinheiro que o Prouni
-      (${brl(A.prouni.tot)}) e a Lei Rouanet (${brl(A.rouanet.tot)}) somados, e praticamente
-      não aparece no debate público.`,
-    evid: barrasAchado(A.recof.lista, A.recof.lista[0].v),
-    conferir: { texto: "Aba Resumo, abrir por Mecanismo, e o Recof na legenda", aba: "resumo", dim: "regime" },
-  });
-
-  /* 8 — bancos e cultura -------------------------------------------------- */
-  const f0 = A.financeiro[0];
-  cards.push({
-    tag: "Quem recebe", cor: "s1",
-    titulo: "No setor financeiro, o maior mecanismo de renúncia é a Lei Rouanet",
-    lead: `Bancos, seguradoras e meios de pagamento acumulam <b>${brl(A.financeiroTotal)}</b> em
-      renúncia federal. O maior mecanismo do setor não é tributário-operacional: é
-      <b>${esc(f0.reg)}</b>, com ${brl(f0.v)}. Entre os maiores deduzentes de Rouanet e de
-      Incentivo ao Desporto está o <b>BNDES</b>, banco público — que abate do próprio IRPJ o
-      patrocínio cultural e esportivo.`,
-    evid: barrasAchado(A.financeiro.map(o => ({ nome: o.reg, v: o.v })), A.financeiro[0].v),
-    conferir: { texto: "Aba Resumo, filtro Setor = “Atividades financeiras e seguros”, abrir por Mecanismo",
-                aba: "resumo", secao: "K", dim: "regime" },
-  });
-
-  /* 9 — a armadilha do mapa regional -------------------------------------- */
-  cards.push({
-    tag: "Cuidado", cor: "s8",
-    titulo: "O incentivo da Sudam e da Sudene aparece como se fosse do Rio de Janeiro",
-    lead: `<b>${nfInt.format(A.sudamFora * 100)}%</b> do valor do incentivo regional
-      Sudam/Sudene está registrado em CNPJs fora da área das duas superintendências — 35% só
-      no Rio de Janeiro, onde ficam as sedes de Vale e Petrobras. O projeto incentivado está
-      no Pará ou no Maranhão; quem declara a redução do IRPJ é a matriz. <b>Não use este campo
-      como mapa do incentivo regional</b>: ele é o endereço de quem declara, não o do projeto.
-      O Portal não publica a localização do empreendimento.`,
-    evid: tabelaAchado(
-      [{ t: "UF que declara" }, { t: "2015–2023", n: true }, { t: "% do Sudam/Sudene", n: true }, { t: "Na área do incentivo?" }],
-      A.sudamUF.map(o => ({ c: [esc(o.uf), brl(o.v), nf1.format(o.pct * 100) + "%",
-        o.dentro ? "sim" : '<span class="pill crit">não</span>'] }))),
-    conferir: { texto: "Aba Ranking, buscar “VALE S.A.” e abrir a linha", aba: "ranking", busca: "VALE S.A." },
-  });
-
-  /* --- monta o HTML ---------------------------------------------------- */
-  const nx = $("#ach-n");
-  if (nx) nx.textContent = ["Zero","Uma","Duas","Três","Quatro","Cinco","Seis","Sete","Oito","Nove","Dez"][cards.length] || cards.length;
-  $("#ach-lista").innerHTML = cards.map((c, i) => `<article class="achado">
-      <div class="ach-cab">
-        <span class="ach-tag${c.tag === "Cuidado" ? " crit" : ""}">${esc(c.tag)}</span>
-        <h3>${esc(c.titulo)}</h3>
-      </div>
-      <p class="ach-lead">${c.lead}</p>
-      <div class="ach-evid">${c.evid}</div>
-      <p class="conferir"><b>Como conferir:</b> ${esc(c.conferir.texto)}
-        <button class="btn" type="button" data-card="${i}">Abrir</button></p>
-    </article>`).join("");
-
-  $("#ach-lista").querySelectorAll("button[data-card]").forEach(b =>
-    b.addEventListener("click", () => {
-      const c = cards[+b.dataset.card].conferir;
-      if (c.secao !== undefined) { S.secao = c.secao; $("#sel-secao").value = c.secao; invalidar(); }
-      if (c.dim !== undefined) { S.dim = c.dim; $("#sel-dim").value = c.dim; }
-      if (c.busca !== undefined) { S.busca = c.busca; }
-      salvar();
-      irParaAba(c.aba);
-      if (c.busca !== undefined) { const el = $("#busca"); if (el) el.value = c.busca; }
-    }));
-
-  /* gráfico da opacidade */
-  const anos = Array.from({ length: A.opaco.na }, (_, a) => a);
-  chartColunas($("#ach-opaco"), {
-    anos, altura: 260,
-    series: [
-      { nome: "Sob rótulo genérico", cor: corSlot(1), vals: anos.map(a => A.opaco.ano[a]) },
-      { nome: "Com mecanismo identificado", cor: css("--neutral-mark"),
-        vals: anos.map(a => A.opaco.totalAno[a] - A.opaco.ano[a]) },
-    ],
-    fmtEixo: v => fmtEixoNominal(v), fmtTip: brl,
-    aria: "Parcela da renúncia declarada sob rótulos genéricos, por ano",
-  });
-  $("#ach-opaco-legend").innerHTML =
-    `<span class="li"><i class="sw" style="background:${corSlot(1)}"></i>Sob rótulo genérico</span>` +
-    `<span class="li"><i class="sw" style="background:${css("--neutral-mark")}"></i>Com mecanismo identificado</span>`;
-}
-
-function fmtEixoNominal(v) {
-  const a = Math.abs(v);
-  if (a >= 1e9) return nfInt.format(v / 1e9) + " bi";
-  if (a >= 1e6) return nfInt.format(v / 1e6) + " mi";
-  return nfInt.format(v);
-}
-</script>
 
 <script>
 "use strict";
@@ -1819,12 +1416,11 @@ function montarNota2024() {
     `${nfInt.format(n23)} em 2023 — as declarações do ano ainda não estavam todas entregues.`;
 }
 
-const ABAS = ["resumo", "ranking", "achados"];
+const ABAS = ["resumo", "ranking"];
 
 function renderAll() {
   if (S.view === "resumo") renderPanorama();
-  else if (S.view === "ranking") renderRanking();
-  else renderAchados();
+  else renderRanking();
 }
 
 function irParaAba(v) {
@@ -1899,7 +1495,6 @@ function init() {
   /* --- redesenho ----------------------------------------------------- */
   const redesenhar = debounce(() => {
     if (S.view === "resumo") renderPanorama();
-    else if (S.view === "achados") renderAchados();
   }, 160);
   window.addEventListener("resize", redesenhar);
   const mq = window.matchMedia("(prefers-color-scheme: dark)");

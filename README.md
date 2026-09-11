@@ -1,20 +1,11 @@
 # Renúncias fiscais federais, 2015–2024
 
-**Publicado:** explorador em <https://fiquemsabendo.github.io/renuncias-fiscais/> ·
-relatório em abas em <https://fiquemsabendo.github.io/renuncias-fiscais/relatorio.html>
+**Publicado:** <https://fiquemsabendo.github.io/renuncias-fiscais/>
 
 Pipeline reprodutível que baixa os microdados de **Renúncias Fiscais** do Portal da
-Transparência, consolida em um banco DuckDB e gera duas saídas HTML autocontidas, na
-identidade visual da Fiquem Sabendo:
-
-1. **Explorador interativo** (`docs/index.html`, a página principal do site; cópia em
-   `artifact/renuncias.html` para o artefato do claude.ai; ~9 MB) — busca por empresa,
-   ranking dos 68 mil grupos com o fundamento legal de cada renúncia e achados jornalísticos.
-2. **Relatório em abas** (`docs/relatorio.html`) — cinco perguntas de reportagem, cada
-   uma com resposta direta, gráficos, tabela de dados originais, fontes, metodologia,
-   limitações e pautas sugeridas: *Quanto renuncia? · Quem recebe? · Onde e setores? · O que
-   prioriza? · Custo fiscal?* Só usa o que está no pipeline (Portal + IPCA + PIB do IBGE).
-O explorador tem três abas:
+Transparência, consolida em um banco DuckDB e gera uma página HTML autocontida
+(`docs/index.html`, servida pelo GitHub Pages; cópia em `artifact/renuncias.html` para o
+artefato do claude.ai; ~9 MB), na identidade visual da Fiquem Sabendo, com duas abas:
 
 - **Resumo** — a série anual em colunas empilhadas, abrível por setor, mecanismo, tipo de
   renúncia, tributo, UF ou maiores empresas, com tabela equivalente. Controles: medida
@@ -23,12 +14,6 @@ O explorador tem três abas:
   coluna de setor e busca por razão social, nome fantasia ou CNPJ. Cada linha abre no lugar
   com a série anual, a composição por mecanismo, a tabela do fundamento legal de cada
   renúncia e os CNPJs que compõem o grupo.
-- **Achados** — nove leituras com potencial de pauta, calculadas em JS sobre a série fechada
-  2015–2023 e independentes dos filtros: órgãos públicos entre os maiores beneficiários,
-  a fatia da renúncia sob rótulos genéricos, a maior beneficiária do Perse, o bloco sem CNAE,
-  a geografia por município, a concentração do horário eleitoral e do Recof, a Lei Rouanet no
-  setor financeiro e a armadilha do mapa regional do Sudam/Sudene. Cada card traz um botão
-  que aplica o filtro correspondente nas outras abas.
 
 O banco guarda mais do que o artefato mostra: concentração por setor, matriz setor ×
 mecanismo e métricas de outlier estão em `mart_setor_regime` e `mart_grupo_ano`.
@@ -40,9 +25,7 @@ bash   scripts/01_download.sh      # baixa e extrai os ZIPs de 2015 a 2024
 python3 scripts/02_macro.py        # IPCA e PIB via API do SIDRA/IBGE
 duckdb renuncias.duckdb < scripts/03_build_db.sql
 python3 scripts/04_export_payload.py   # artifact/payload.json
-python3 scripts/05_build_artifact.py   # artifact/renuncias.html e docs/index.html (explorador)
-python3 scripts/06_export_relatorio.py # relatorio/dados.json (agregados do relatório)
-python3 scripts/07_build_relatorio.py  # docs/relatorio.html (relatório em abas)
+python3 scripts/05_build_artifact.py   # artifact/renuncias.html e docs/index.html
 ```
 
 O GitHub Pages serve `docs/index.html` a partir da branch `main`; publicar é fazer commit
@@ -168,25 +151,3 @@ carregamento no navegador leva cerca de 0,8 s depois do download.
 `artifact/template.html` é a fonte editável do explorador; `05_build_artifact.py` injeta o
 payload e as fontes e grava `artifact/renuncias.html` e `docs/index.html`. Edite o template,
 nunca os arquivos gerados.
-
-## O relatório em abas
-
-`relatorio/template.html` (markup + JS) e `relatorio/base.css` (identidade FS) são as fontes;
-`06_export_relatorio.py` consulta o DuckDB e grava `relatorio/dados.json` (~80 KB) com todos
-os agregados; `07_build_relatorio.py` costura tudo em `docs/relatorio.html` (~300 KB). Todos os
-textos são montados em JS a partir do JSON, então nenhum número é digitado à mão. Convenções:
-
-- valores reais em reais de 2025 (média anual do IPCA); acumulados cobrem 2015–2024 com
-  2024 sinalizado como parcial;
-- **% do PIB = renúncia nominal ÷ PIB nominal do mesmo ano** — nunca o valor deflacionado
-  sobre o PIB nominal, que infla a razão (a aba "Custo fiscal" explica);
-- temas de política = tabela de correspondência mecanismo → tema em `06_export_relatorio.py`.
-
-### Identidade visual
-
-A página segue a identidade do site da Fiquem Sabendo: fontes **Supply** (títulos) e
-**Roboto** (texto), fundo branco, amarelo `#ffe706` como marca (destaques, chips, botões),
-faixa superior roxa `#8103e5`, links em azul `#1022ff` e rodapé preto. As fontes ficam em
-`artifact/assets/fonts/` e são embutidas como data URI porque o site não envia cabeçalho
-CORS. O amarelo é reservado à interface; a paleta dos gráficos deriva das cores de acento
-do site com contraste ≥ 3:1 sobre a superfície.
