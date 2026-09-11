@@ -1,0 +1,876 @@
+<meta charset="utf-8">
+<title>Renúncias Fiscais no Brasil · Fiquem Sabendo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Quanto o Brasil renuncia em tributos federais, quem recebe, onde, em que setores, o que a política prioriza e quanto isso pesa no PIB — relatório em abas com os microdados do Portal da Transparência, 2015 a 2024.">
+<meta property="og:title" content="Renúncias fiscais no Brasil (2015–2024) · Fiquem Sabendo">
+<meta property="og:description" content="Cada aba responde uma pergunta de reportagem, com dados originais, fontes e limitações explícitas.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 51 26'%3E%3Crect width='51' height='26' fill='%23000'/%3E%3Cpath fill='%23ffe706' d='M12.12 0H.433v25.998h11.685z'/%3E%3Cpath fill='%23fff' d='M16.695.387h13.689V3.57H21.63v7.412h8.302v3.19H21.63v11.832h-4.924zM39.388 17.97v1.719c0 1.634.582 2.392 2.148 2.392s1.952-1.123 1.952-2.296c0-2.345-.633-3.023-4.277-5.154-4.027-2.362-6.084-3.773-6.084-7.432 0-3.548 1.687-6.812 8.445-6.812 7.179 0 8.237 3.408 8.237 6.251v1.43h-6.49V6.58c0-1.503-.355-2.253-1.711-2.253-1.266 0-1.676.76-1.676 2.167 0 1.504.392 2.234 3.34 3.838 5.26 2.869 7.142 4.486 7.142 8.566 0 3.892-1.91 7.087-8.998 7.087-6.808 0-8.75-2.858-8.75-6.541V17.97z'/%3E%3C/svg%3E">
+
+<style>
+__FONTS__
+</style>
+<style>
+__BASE_CSS__
+</style>
+<style>
+/* ===================================================================== *
+ * Componentes do relatório em abas
+ * ===================================================================== */
+.wrap { max-width: 1180px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 500;
+  border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; color: var(--ink-2); background: var(--surface); }
+.chip.warn { border-color: var(--serious); color: var(--ink); }
+.chip b { color: var(--ink); font-weight: 700; }
+
+.tabs { position: sticky; top: 0; z-index: 40; background: var(--surface); margin: 0; padding-top: 6px;
+  gap: 0; }
+.tabs button { padding: 10px 14px 12px; font-size: 16px; }
+.tabs button .n { display: inline-block; font-family: Supply, ui-monospace, monospace; font-size: 12px;
+  color: var(--muted); margin-right: 6px; }
+.tabs button[aria-selected="true"] .n { color: var(--ink); }
+
+.aba { padding-top: 30px; }
+.aba > h2.pergunta { font-family: Supply, "Roboto Mono", ui-monospace, monospace; font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700; line-height: 1.25; margin: 0 0 18px; max-width: 26ch; text-wrap: balance; }
+
+.resposta { border-left: 10px solid var(--accent); padding: 4px 0 4px 18px; margin: 0 0 22px; }
+.resposta .rot { font-size: 12.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.resposta p { font-size: 19px; line-height: 1.5; margin: 4px 0 0; max-width: 62ch; color: var(--ink); }
+.resposta p b { font-weight: 700; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; margin: 0 0 30px; }
+.tile { background: var(--surface); padding: 16px 18px 14px; }
+.tile .v { font-family: Supply, "Roboto Mono", ui-monospace, monospace; font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
+.tile .v small { font-size: .6em; font-weight: 700; }
+.tile .v.txt { font-size: clamp(19px, 1.9vw, 24px); }
+.tile .k { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.35; }
+.tile.warn .v { color: var(--serious); }
+
+.sec { margin: 0 0 34px; }
+.sec h3 { font-size: 19px; font-weight: 700; margin: 0 0 8px; display: flex; align-items: center; gap: 12px; }
+.sec h3::before { content: ""; display: inline-block; width: 26px; height: 14px; background: var(--accent); flex: none; }
+.sec .prosa { font-size: 15.5px; line-height: 1.62; color: var(--ink-2); max-width: 78ch; margin: 0 0 8px; }
+.sec .prosa b { color: var(--ink); font-weight: 700; }
+.sec .prosa a { color: var(--link); }
+.figura { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 16px 18px 18px; margin-top: 12px; }
+.figura .fig-h { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 4px; }
+.figura .fig-t { font-size: 14px; font-weight: 700; }
+.figura .fig-s { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.figura .legend { margin-top: 10px; }
+.duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 16px; }
+.duas .figura { margin-top: 12px; }
+
+.barrow { grid-template-columns: minmax(150px, 300px) 1fr auto; }
+.barrow .lbl { color: var(--ink); }
+.barrow .lbl small { display: block; font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.barrow.mut .track i { background: var(--neutral-mark) !important; }
+
+.par { display: grid; grid-template-columns: minmax(150px, 280px) 1fr; gap: 12px; align-items: center; padding: 6px 0; font-size: 13px; }
+.par .lbl { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.par .tracks { display: grid; gap: 3px; }
+.par .track { position: relative; height: 11px; }
+.par .track i { position: absolute; top: 0; height: 11px; border-radius: 0 3px 3px 0; }
+.par .track span { position: absolute; top: -2px; font-size: 11.5px; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink-2); }
+
+details.dados { border: 1px solid var(--line); border-radius: var(--r-lg); margin: 0 0 30px; background: var(--surface); }
+details.dados > summary { cursor: pointer; padding: 14px 18px; font-weight: 700; font-size: 15px; list-style: none; display: flex; align-items: center; gap: 10px; }
+details.dados > summary::-webkit-details-marker { display: none; }
+details.dados > summary::before { content: "+"; font-family: Supply, monospace; font-size: 18px; width: 22px; height: 22px; display: inline-grid; place-items: center; background: var(--accent); color: #000; }
+details.dados[open] > summary::before { content: "–"; }
+details.dados .inner { padding: 0 18px 18px; }
+details.dados h4 { font-size: 12.5px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 18px 0 4px; }
+details.dados h4:first-child { margin-top: 0; }
+details.dados table { font-size: 13.5px; }
+details.dados td.txt { max-width: 56ch; }
+
+.metagrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 18px 28px; padding: 22px 0 8px; border-top: 1px solid var(--line); }
+.metagrid h4 { font-size: 12.5px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.metagrid ul { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--ink-2); }
+.metagrid li { margin-bottom: 5px; }
+.metagrid li b { color: var(--ink); }
+.metagrid .pautas li::marker { color: var(--purple); }
+.metagrid .pautas { font-weight: 500; color: var(--ink); }
+
+.aviso { font-size: 13.5px; background: var(--accent-wash); border: 1px solid var(--accent); border-radius: var(--r);
+  padding: 10px 14px; margin: 12px 0 0; color: var(--ink); max-width: 80ch; }
+
+@media (max-width: 720px) {
+  .tabs button { font-size: 14px; padding: 9px 9px 10px; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .par { grid-template-columns: minmax(100px, 140px) 1fr; }
+  .barrow { grid-template-columns: minmax(110px, 160px) 1fr auto; }
+}
+</style>
+
+<div id="app">
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Uma ferramenta da Fiquem Sabendo</span>
+    <a href="https://fiquemsabendo.com.br" target="_blank" rel="noopener">fiquemsabendo.com.br</a>
+  </div>
+</div>
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandrow">
+      <a class="logo" href="https://fiquemsabendo.com.br" target="_blank" rel="noopener">__LOGO__</a>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="eyebrow">Portal da Transparência · 2015–2024 · Relatório em abas</span>
+    </div>
+    <h1>Renúncias fiscais <mark>no Brasil</mark></h1>
+    <p class="dek" id="dek"></p>
+    <div class="chips" id="chips"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" data-v="quanto" aria-selected="true"><span class="n">01</span>Quanto renuncia?</button>
+    <button role="tab" data-v="quem" aria-selected="false"><span class="n">02</span>Quem recebe?</button>
+    <button role="tab" data-v="onde" aria-selected="false"><span class="n">03</span>Onde e setores?</button>
+    <button role="tab" data-v="prioriza" aria-selected="false"><span class="n">04</span>O que prioriza?</button>
+    <button role="tab" data-v="custo" aria-selected="false"><span class="n">05</span>Custo fiscal?</button>
+  </nav>
+  <section id="aba-quanto" class="aba" role="tabpanel"></section>
+  <section id="aba-quem" class="aba hidden" role="tabpanel"></section>
+  <section id="aba-onde" class="aba hidden" role="tabpanel"></section>
+  <section id="aba-prioriza" class="aba hidden" role="tabpanel"></section>
+  <section id="aba-custo" class="aba hidden" role="tabpanel"></section>
+</div>
+
+<footer class="metod">
+ <div class="wrap">
+  <div class="fsrow">
+    __LOGO_FS__
+    <p>A Fiquem Sabendo é uma organização sem fins lucrativos, independente e apartidária, cuja
+      missão é reduzir o desequilíbrio de poder entre sociedade e Estado a partir do acesso a
+      informações públicas.</p>
+  </div>
+  <h3>Sobre este relatório</h3>
+  <div class="cols">
+    <div>
+      <p><b>O que é.</b> Renúncia fiscal aqui é o Incentivo, Renúncia, Benefício ou Imunidade
+        de natureza tributária (IRBI) apurado pela Receita Federal por CNPJ e ano-calendário e
+        publicado no Portal da Transparência: a diferença entre o tributo calculado e o
+        efetivamente devido.</p>
+      <p><b>O que não é.</b> Não cobre tributos estaduais e municipais, nem o Simples Nacional,
+        nem renúncias de pessoa física. É uma parte do gasto tributário federal, não o total
+        estimado pela Receita no Demonstrativo de Gastos Tributários.</p>
+    </div>
+    <div>
+      <p><b>Fonte.</b> <span id="foot-fonte"></span></p>
+      <p><b>Deflator.</b> Valores reais usam a <b>média anual</b> do número-índice do IPCA
+        (IBGE, SIDRA 1737), trazidos a reais de <span id="foot-base"></span>.</p>
+      <p><b>% do PIB.</b> Renúncia nominal do ano ÷ PIB nominal do ano (IBGE, SIDRA 1846, soma
+        dos quatro trimestres a preços correntes). Numerador e denominador na mesma base de preços.</p>
+    </div>
+    <div>
+      <p><b>2024 é parcial.</b> <span id="foot-2024"></span></p>
+      <p><b>Grupo econômico</b> é aproximado pela raiz do CNPJ (8 primeiros dígitos): une matriz
+        e filiais, não capta controle societário entre raízes diferentes.</p>
+      <p><b>Reprodutível.</b> Pipeline, banco DuckDB e este HTML são gerados por scripts abertos.</p>
+    </div>
+  </div>
+  <div class="fim">
+    <span>Código e metodologia: <a href="https://github.com/FiquemSabendo/renuncias-fiscais" target="_blank" rel="noopener">github.com/FiquemSabendo/renuncias-fiscais</a></span>
+    <span><a href="https://fiquemsabendo.com.br" target="_blank" rel="noopener">fiquemsabendo.com.br</a> · <a href="https://fiquemsabendo.com.br/contato" target="_blank" rel="noopener">Contato</a></span>
+  </div>
+ </div>
+</footer>
+</div>
+
+<script id="dados" type="application/json">__DADOS__</script>
+<script>
+"use strict";
+/* ===================================================================== *
+ *  Dados e formatação
+ * ===================================================================== */
+const D = JSON.parse(document.getElementById("dados").textContent);
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const CORES = ["--s1", "--s2", "--s3", "--s4", "--s5", "--s6", "--s7", "--s8"];
+const corSlot = i => css(CORES[i % CORES.length]);
+const BASE = D.meta.ano_base, PARCIAL = D.meta.ano_parcial, ULT = D.meta.ultimo_completo;
+const ANOS = D.ano.map(a => a.ano);
+const nf = (d) => new Intl.NumberFormat("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
+const nf0 = nf(0), nf1 = nf(1), nf2 = nf(2);
+function brl(v) {
+  const a = Math.abs(v);
+  if (a >= 1e12) return "R$ " + nf2.format(v / 1e12) + " tri";
+  if (a >= 1e9)  return "R$ " + nf1.format(v / 1e9) + " bi";
+  if (a >= 1e6)  return "R$ " + nf1.format(v / 1e6) + " mi";
+  return "R$ " + nf0.format(v);
+}
+const bi = v => nf1.format(v / 1e9);
+const pct = (v, d = 1) => nf(d).format(v) + "%";
+const fmtEixoBi = (v, top) => top >= 1e12 ? nf1.format(v / 1e12) + " tri" : nf0.format(v / 1e9) + " bi";
+const fmtEixoPct = (v, top) => nf(top < 1 ? 2 : 1).format(v) + "%";
+const MAIUSC = new Set(["S.A.", "S.A", "S/A", "SA", "ME", "EPP", "GE", "LG", "CNH", "GM", "TAM", "HP", "ABB", "IBM", "3M", "BP", "BNDES", "MRS", "CSN", "JBS", "BRF", "WEG", "MSC", "ADM", "UPL", "FMC", "TAP", "FCA"]);
+const MINUSC = new Set(["da", "de", "do", "das", "dos", "e", "em", "na", "no", "para", "com"]);
+const titulo = s => String(s).trim().split(/\s+/).map((w, i) => {
+  const u = w.toUpperCase().replace(/\.+$/, "");
+  if (MAIUSC.has(u)) return u === "S.A" ? "S.A." : u === "S/A" ? "S/A" : u;
+  if (u === "LTDA" || u === "LTDA.") return "Ltda.";
+  if (i > 0 && MINUSC.has(w.toLowerCase())) return w.toLowerCase();
+  return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+}).join(" ");
+const dataBR = s => { const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString("pt-BR", { timeZone: "UTC" }); };
+const nomeCurto = s => titulo(s).replace(/ (S\.A\.|S\/A|SA|Ltda\.)$/, "").replace(/ (S\.A\.|S\/A|Ltda\.)$/, "");
+
+/* ===================================================================== *
+ *  Primitivas de gráfico (SVG à mão)
+ * ===================================================================== */
+const NS = "http://www.w3.org/2000/svg";
+function sv(tag, at, pai) {
+  const e = document.createElementNS(NS, tag);
+  if (at) for (const k in at) if (at[k] !== null && at[k] !== undefined) e.setAttribute(k, at[k]);
+  if (pai) pai.appendChild(e);
+  return e;
+}
+function ticksY(max, alvo) {
+  if (!(max > 0)) return { top: 1, vals: [0, 1] };
+  const bruto = max / (alvo || 5);
+  const mag = Math.pow(10, Math.floor(Math.log10(bruto)));
+  const r = bruto / mag;
+  const passo = (r <= 1 ? 1 : r <= 2 ? 2 : r <= 2.5 ? 2.5 : r <= 5 ? 5 : 10) * mag;
+  const top = Math.ceil(max / passo - 1e-9) * passo;
+  const vals = [];
+  for (let v = 0; v <= top + passo * 1e-6; v += passo) vals.push(+v.toFixed(10));
+  return { top, vals };
+}
+function caminhoTopo(x, y, w, h, r) {
+  if (h <= 0) return "";
+  const rr = Math.min(r, w / 2, h);
+  return `M${x},${y + h}L${x},${y + rr}Q${x},${y} ${x + rr},${y}L${x + w - rr},${y}` +
+         `Q${x + w},${y} ${x + w},${y + rr}L${x + w},${y + h}Z`;
+}
+function tipDe(box) {
+  let t = box.querySelector(".tip");
+  if (!t) { t = document.createElement("div"); t.className = "tip"; box.appendChild(t); }
+  return t;
+}
+function posTip(box, t, x, y) {
+  const larg = box.clientWidth, w = t.offsetWidth || 190;
+  t.style.left = Math.max(w / 2 + 4, Math.min(larg - w / 2 - 4, x)) + "px";
+  t.style.top = Math.max(t.offsetHeight + 6, y - 10) + "px";
+}
+function hachura(defs, id) {
+  const p = sv("pattern", { id, width: 6, height: 6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
+  sv("rect", { width: 6, height: 6, fill: "transparent" }, p);
+  sv("line", { x1: 0, y1: 0, x2: 0, y2: 6, stroke: css("--surface"), "stroke-width": 2.6 }, p);
+}
+
+/* colunas empilhadas por ano */
+function chartColunas(box, cfg) {
+  box.innerHTML = "";
+  const t = tipDe(box);
+  const W = Math.max(320, box.clientWidth), alt = cfg.altura || 320;
+  const M = { t: 16, r: 14, b: 30, l: 62 };
+  const pw = W - M.l - M.r, ph = alt - M.t - M.b;
+  const svg = sv("svg", { width: W, height: alt, role: "img", "aria-label": cfg.aria || "Gráfico de colunas" }, box);
+  hachura(sv("defs", {}, svg), "hach-" + box.id);
+  const anos = cfg.anos;
+  const totais = anos.map((_, k) => cfg.series.reduce((s, se) => s + (se.vals[k] || 0), 0));
+  const tk = ticksY(Math.max(...totais, 0), 5);
+  const y = v => M.t + ph - (v / tk.top) * ph;
+  for (const v of tk.vals) {
+    sv("line", { class: "gridline", x1: M.l, x2: M.l + pw, y1: y(v), y2: y(v) }, svg);
+    sv("text", { class: "axis-txt", x: M.l - 9, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = cfg.fmtEixo(v, tk.top);
+  }
+  sv("line", { class: "axis-line", x1: M.l, x2: M.l + pw, y1: y(0), y2: y(0) }, svg);
+  const banda = pw / anos.length, bw = Math.min(28, banda * 0.62), gap = 2;
+  anos.forEach((ano, k) => {
+    const cx = M.l + banda * (k + 0.5), bx = cx - bw / 2;
+    let acc = 0; const segs = [];
+    cfg.series.forEach((se, si) => { const v = se.vals[k] || 0; if (v > 0) { segs.push({ si, v, y0: acc, y1: acc + v }); acc += v; } });
+    segs.forEach((s, j) => {
+      const topo = y(s.y1), base = y(s.y0), ehTopo = j === segs.length - 1;
+      const h = Math.max(0.8, base - topo - (ehTopo ? 0 : gap));
+      sv("path", { d: ehTopo ? caminhoTopo(bx, topo, bw, h, 4) : `M${bx},${topo}h${bw}v${h}h${-bw}Z`, fill: cfg.series[s.si].cor }, svg);
+    });
+    if (ano === cfg.parcial) {
+      sv("rect", { x: bx, y: y(acc), width: bw, height: Math.max(0, y(0) - y(acc)), fill: `url(#hach-${box.id})` }, svg);
+      sv("text", { class: "axis-txt", x: cx, y: y(acc) - 7, "text-anchor": "middle" }, svg).textContent = "parcial";
+    }
+    sv("text", { class: "axis-txt", x: cx, y: alt - 10, "text-anchor": "middle" }, svg).textContent = ano;
+    const hit = sv("rect", { x: M.l + banda * k, y: M.t, width: banda, height: ph, fill: "transparent" }, svg);
+    hit.addEventListener("pointerenter", () => {
+      const linhas = cfg.series.map(se => ({ se, v: se.vals[k] || 0 })).filter(o => o.v > 0).sort((a, b) => b.v - a.v).slice(0, 9);
+      t.innerHTML = `<div class="t">${ano}${ano === cfg.parcial ? " · parcial" : ""}</div>` +
+        linhas.map(o => `<div class="row"><span class="nm"><i class="dot" style="background:${o.se.cor}"></i>${esc(o.se.nome)}</span><b>${esc(cfg.fmtTip(o.v))}</b></div>`).join("") +
+        (cfg.series.length > 1 ? `<div class="row tot"><span>Total</span><b>${esc(cfg.fmtTip(totais[k]))}</b></div>` : "");
+      t.classList.add("on"); posTip(box, t, cx, M.t + 20);
+    });
+    hit.addEventListener("pointerleave", () => t.classList.remove("on"));
+  });
+}
+
+/* linha por ano (uma série), com ponto parcial destacado */
+function chartLinha(box, cfg) {
+  box.innerHTML = "";
+  const t = tipDe(box);
+  const W = Math.max(320, box.clientWidth), alt = cfg.altura || 300;
+  const M = { t: 18, r: 18, b: 30, l: 56 };
+  const pw = W - M.l - M.r, ph = alt - M.t - M.b;
+  const svg = sv("svg", { width: W, height: alt, role: "img", "aria-label": cfg.aria || "Gráfico de linha" }, box);
+  const n = cfg.anos.length;
+  const tk = ticksY(Math.max(...cfg.vals.filter(v => isFinite(v))), 5);
+  const x = k => M.l + pw * (n === 1 ? .5 : k / (n - 1));
+  const y = v => M.t + ph - (v / tk.top) * ph;
+  for (const v of tk.vals) {
+    sv("line", { class: "gridline", x1: M.l, x2: M.l + pw, y1: y(v), y2: y(v) }, svg);
+    sv("text", { class: "axis-txt", x: M.l - 9, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = cfg.fmtEixo(v, tk.top);
+  }
+  sv("line", { class: "axis-line", x1: M.l, x2: M.l + pw, y1: y(0), y2: y(0) }, svg);
+  let d = "";
+  cfg.anos.forEach((a, k) => { if (a !== cfg.parcial) d += (d ? "L" : "M") + x(k).toFixed(1) + "," + y(cfg.vals[k]).toFixed(1); });
+  sv("path", { d, fill: "none", stroke: cfg.cor, "stroke-width": 2.5, "stroke-linejoin": "round" }, svg);
+  cfg.anos.forEach((a, k) => {
+    const parcial = a === cfg.parcial;
+    sv("circle", { cx: x(k), cy: y(cfg.vals[k]), r: parcial ? 4 : 3.5, fill: parcial ? css("--surface") : cfg.cor,
+                   stroke: cfg.cor, "stroke-width": 2, "stroke-dasharray": parcial ? "2 2" : null }, svg);
+    if (cfg.rotular) {
+      sv("text", { class: "axis-txt", x: x(k), y: y(cfg.vals[k]) - 10, "text-anchor": "middle", style: "fill:var(--ink);font-weight:700" }, svg)
+        .textContent = cfg.fmtTip(cfg.vals[k]) + (parcial ? "*" : "");
+    }
+    sv("text", { class: "axis-txt", x: x(k), y: alt - 10, "text-anchor": "middle" }, svg).textContent = a;
+    const hit = sv("rect", { x: x(k) - pw / n / 2, y: M.t, width: pw / n, height: ph, fill: "transparent" }, svg);
+    hit.addEventListener("pointerenter", () => {
+      t.innerHTML = `<div class="t">${a}${parcial ? " · parcial" : ""}</div>` + (cfg.tip ? cfg.tip(k) : `<div class="row"><span>${esc(cfg.nome)}</span><b>${esc(cfg.fmtTip(cfg.vals[k]))}</b></div>`);
+      t.classList.add("on"); posTip(box, t, x(k), y(cfg.vals[k]));
+    });
+    hit.addEventListener("pointerleave", () => t.classList.remove("on"));
+  });
+}
+
+/* curva de Pareto: % dos beneficiários (log) × % do valor acumulado */
+function chartPareto(box, cfg) {
+  box.innerHTML = "";
+  const t = tipDe(box);
+  const W = Math.max(320, box.clientWidth), alt = cfg.altura || 300;
+  const M = { t: 16, r: 18, b: 42, l: 50 };
+  const pw = W - M.l - M.r, ph = alt - M.t - M.b;
+  const svg = sv("svg", { width: W, height: alt, role: "img", "aria-label": "Curva de concentração" }, box);
+  const lx = v => Math.log10(v), x0 = lx(cfg.series[0].pts[0].pct_ent), x1 = 2;
+  const x = p => M.l + pw * (lx(p) - x0) / (x1 - x0);
+  const y = v => M.t + ph - (v / 100) * ph;
+  for (const v of [0, 25, 50, 75, 100]) {
+    sv("line", { class: "gridline", x1: M.l, x2: M.l + pw, y1: y(v), y2: y(v) }, svg);
+    sv("text", { class: "axis-txt", x: M.l - 8, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = v + "%";
+  }
+  for (const p of [0.001, 0.01, 0.1, 1, 10, 100]) {
+    if (p < cfg.series[0].pts[0].pct_ent) continue;
+    sv("line", { class: "gridline", x1: x(p), x2: x(p), y1: M.t, y2: M.t + ph }, svg);
+    sv("text", { class: "axis-txt", x: x(p), y: alt - 22, "text-anchor": "middle" }, svg).textContent = (p < 1 ? nf(p < .01 ? 3 : p < .1 ? 2 : 1).format(p) : p) + "%";
+  }
+  sv("text", { class: "axis-txt", x: M.l + pw / 2, y: alt - 6, "text-anchor": "middle" }, svg).textContent = "% dos beneficiários, do maior para o menor (escala logarítmica)";
+  cfg.series.forEach(se => {
+    let d = "";
+    se.pts.forEach((p, k) => { d += (k ? "L" : "M") + x(p.pct_ent).toFixed(1) + "," + y(p.pct_val).toFixed(1); });
+    sv("path", { d, fill: "none", stroke: se.cor, "stroke-width": 2.5, "stroke-linejoin": "round" }, svg);
+    se.pts.forEach(p => {
+      const c = sv("circle", { cx: x(p.pct_ent), cy: y(p.pct_val), r: 4, fill: se.cor, stroke: css("--surface"), "stroke-width": 1.5 }, svg);
+      c.addEventListener("pointerenter", () => {
+        t.innerHTML = `<div class="t">${esc(se.nome)}: ${nf0.format(p.k)} maiores</div><div class="row"><span>% dos beneficiários</span><b>${nf(p.pct_ent < .1 ? 3 : 1).format(p.pct_ent)}%</b></div><div class="row"><span>% do valor</span><b>${pct(p.pct_val)}</b></div>`;
+        t.classList.add("on"); posTip(box, t, x(p.pct_ent), y(p.pct_val));
+      });
+      c.addEventListener("pointerleave", () => t.classList.remove("on"));
+    });
+  });
+}
+
+/* barras horizontais (HTML) */
+function barras(itens, opt = {}) {
+  const max = opt.max || Math.max(...itens.map(i => i.v));
+  const fmt = opt.fmt || brl;
+  return itens.map((i, k) => `<div class="barrow${i.mut ? " mut" : ""}">
+    <span class="lbl" title="${esc(i.nome)}">${esc(i.nome)}${i.sub ? `<small>${esc(i.sub)}</small>` : ""}</span>
+    <span class="track"><i style="left:0;width:${(100 * i.v / max).toFixed(2)}%;background:${i.cor || opt.cor || css("--s1")}"></i></span>
+    <span class="val">${esc(fmt(i.v))}${i.pct !== undefined ? ` <span class="sub">· ${pct(i.pct)}</span>` : ""}</span>
+  </div>`).join("");
+}
+/* pares de barras (dois períodos) */
+function pares(itens, a, b, opt = {}) {
+  const max = Math.max(...itens.flatMap(i => [i.a, i.b]));
+  return `<div class="legend"><span class="li"><i class="sw" style="background:${css("--neutral-mark")}"></i>${esc(a)}</span><span class="li"><i class="sw" style="background:${css("--s1")}"></i>${esc(b)}</span></div>` +
+    itens.map(i => `<div class="par"><span class="lbl" title="${esc(i.nome)}">${esc(i.nome)}</span><span class="tracks">
+      <span class="track"><i style="width:${(100 * i.a / max).toFixed(2)}%;background:${css("--neutral-mark")}"></i><span style="left:calc(${(100 * i.a / max).toFixed(2)}% + 6px)">${pct(i.a)}</span></span>
+      <span class="track"><i style="width:${(100 * i.b / max).toFixed(2)}%;background:${css("--s1")}"></i><span style="left:calc(${(100 * i.b / max).toFixed(2)}% + 6px)">${pct(i.b)}</span></span>
+    </span></div>`).join("");
+}
+function legenda(series) {
+  return `<div class="legend">${series.map(s => `<span class="li"><i class="sw" style="background:${s.cor}"></i>${esc(s.nome)}</span>`).join("")}</div>`;
+}
+function tabela(cols, linhas) {
+  return `<div class="tablewrap"><table><thead><tr>${cols.map(c => `<th${c.n ? ' class="n"' : ""}>${esc(c.t)}</th>`).join("")}</tr></thead><tbody>` +
+    linhas.map(l => `<tr>${l.map((v, i) => `<td class="${cols[i].n ? "n" : ""}${cols[i].txt ? " txt" : ""}">${v}</td>`).join("")}</tr>`).join("") + "</tbody></table></div>";
+}
+function figura(id, titulo, sub, extra = "") {
+  return `<div class="figura"><div class="fig-h"><div><div class="fig-t">${titulo}</div>${sub ? `<div class="fig-s">${sub}</div>` : ""}</div>${extra}</div><div class="chartbox" id="${id}"></div><div id="${id}-leg"></div></div>`;
+}
+function tile(v, k, cls = "") { return `<div class="tile ${cls}"><div class="v${String(v).replace(/<[^>]+>/g, "").length > 11 ? " txt" : ""}">${v}</div><div class="k">${k}</div></div>`; }
+function metaBloco(fontes, metodologia, limitacoes, pautas) {
+  const li = a => a.map(x => `<li>${x}</li>`).join("");
+  return `<div class="metagrid">
+    <div><h4>Fontes</h4><ul>${li(fontes)}</ul></div>
+    <div><h4>Metodologia</h4><ul>${li(metodologia)}</ul></div>
+    <div><h4>Limitações</h4><ul>${li(limitacoes)}</ul></div>
+    <div><h4>Pautas sugeridas</h4><ul class="pautas">${li(pautas)}</ul></div></div>`;
+}
+const FONTE_PORTAL = `<b>Portal da Transparência — Renúncias Fiscais</b> (CGU/Receita Federal), arquivos anuais por beneficiário e por benefício, 2015–2024. CSV em latin-1; valores nominais no ano-calendário.`;
+const FONTE_IPCA = `<b>IPCA — IBGE/SIDRA 1737</b>, número-índice mensal; deflator = média anual do índice.`;
+const FONTE_PIB = `<b>PIB nominal — IBGE/SIDRA 1846</b>, soma dos quatro trimestres a preços correntes.`;
+const LIM_2024 = `<b>2024 é parcial</b>: o arquivo traz uma fração das declarações. Não comparar como ano fechado.`;
+const LIM_AUTO = `Dados apurados pela Receita por CNPJ; o Portal cobre uma parte do gasto tributário federal, não o total.`;
+
+/* ===================================================================== *
+ *  Cálculos comuns
+ * ===================================================================== */
+const A = D.ano, TOT = D.total;
+const porAno = k => A.map(a => a[k]);
+const pico = A.filter(a => a.ano !== PARCIAL).reduce((m, a) => a.real > m.real ? a : m, A[0]);
+const a2015 = A[0], aUlt = A.find(a => a.ano === ULT), aParc = A.find(a => a.ano === PARCIAL);
+const tiposOrdem = [...new Set(D.tipo_ano.map(t => t.tipo))];
+const tipoTot = {}; D.tipo_ano.forEach(t => { tipoTot[t.tipo] = (tipoTot[t.tipo] || 0) + t.real; });
+const tiposRank = tiposOrdem.slice().sort((a, b) => tipoTot[b] - tipoTot[a]);
+const tipoImport = tiposRank.filter(t => !/IRPJ/i.test(t));
+const pctImport = 100 * tipoImport.reduce((s, t) => s + tipoTot[t], 0) / TOT.real;
+const pareto = (arr, k) => arr.find(p => p.k === k).pct_val;
+
+/* ===================================================================== *
+ *  Aba 1 — Quanto renuncia?
+ * ===================================================================== */
+function abaQuanto(el) {
+  const alta = 100 * (pico.real / A.find(a => a.ano === 2017).real - 1);
+  el.innerHTML = `
+  <h2 class="pergunta">Quanto o Brasil renuncia em tributos federais?</h2>
+  <div class="resposta"><div class="rot">Resposta direta</div>
+    <p>Em dez anos, as renúncias declaradas ao Portal somam <b>${brl(TOT.real)}</b> em reais de ${BASE}
+    (${brl(TOT.nominal)} em valores da época). O pico foi <b>${pico.ano}</b>, com ${brl(pico.real)}.
+    <b>${pct(pctImport, 0)}</b> do volume da década está em tributos ligados à importação.</p></div>
+  <div class="tiles">
+    ${tile(brl(TOT.real), `total 2015–${PARCIAL}, reais de ${BASE}`)}
+    ${tile(pico.ano, `pico da série (${brl(pico.real)})`)}
+    ${tile(pct(pctImport, 0), "em tipos ligados à importação")}
+    ${tile(brl(aParc.real), `${PARCIAL} (arquivo incompleto)`, "warn")}
+  </div>
+
+  <div class="sec"><h3>Volume anual</h3>
+    <p class="prosa">Renúncia fiscal é tributo que o Estado deixa de arrecadar — por isenção, alíquota zero,
+      redução ou benefício aduaneiro. Os números vêm do que a Receita Federal apura por CNPJ e publica
+      no Portal da Transparência. Em reais constantes, a trajetória sobe de <b>${brl(a2015.real)}</b> em 2015
+      para <b>${brl(pico.real)}</b> em ${pico.ano} — alta de <b>${pct(alta, 0)}</b> sobre 2017, o vale da série —
+      com pandemia e câmbio elevando a base de importações beneficiadas. Depois veio o recuo:
+      ${brl(A.find(a => a.ano === 2022).real)} em 2022 e ${brl(aUlt.real)} em ${ULT}.</p>
+    <p class="prosa">A barra de ${PARCIAL} (${brl(aParc.real)}) <b>não é tendência</b>: o arquivo foi gerado com
+      ${nf0.format(aParc.n_cnpj)} CNPJs, contra ${nf0.format(aUlt.n_cnpj)} em ${ULT}. A "queda" é artefato de cobertura.</p>
+    ${figura("g-anual", "Renúncia por ano", `Barras hachuradas: ano parcial.`,
+      `<div class="seg" id="seg-medida"><button data-v="real" aria-pressed="true">Reais de ${BASE}</button><button data-v="nominal" aria-pressed="false">Nominal</button></div>`)}
+  </div>
+
+  <div class="sec"><h3>Quase tudo passa pela importação</h3>
+    <p class="prosa">${tiposRank.map((t, i) => `<b>${pct(100 * tipoTot[t] / TOT.real, 1)}</b> está em <b>${esc(t)}</b>`).join("; ")}.
+      Somados, os dois tipos aduaneiros respondem por <b>${pct(pctImport, 1)}</b> do volume histórico — Zona Franca,
+      Repetro, Drawback, regimes especiais. Só ${pct(100 - pctImport, 1)} é o que o contribuinte declara na apuração
+      do IRPJ e da CSLL (Sudam/Sudene, Prouni, Rouanet, Perse…). O Portal espelha sobretudo política
+      industrial via importação, não o mapa completo de quem paga menos imposto.</p>
+    ${figura("g-tipo", "Composição por tipo de renúncia", `Reais de ${BASE}. Hachura: ano parcial.`)}
+  </div>
+
+  <div class="sec"><h3>Detalhe de ${ULT}: tipo → benefício → tributo</h3>
+    <p class="prosa">No último ano completo, a Cofins sobre importação concentra a maior fatia; Imposto de Importação
+      e o benefício regional Sudam/Sudene (IRPJ) vêm em seguida. Programas com nome político — Perse,
+      Rouanet, Prouni — aparecem, mas finos frente ao grosso aduaneiro.</p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">Maiores combinações benefício × tributo em ${ULT}</div><div class="fig-s">Valores nominais de ${ULT} · % do total do ano</div></div></div>
+      <div id="g-arvore"></div></div>
+  </div>
+
+  <details class="dados"><summary>Dados originais</summary><div class="inner">
+    <h4>Volume anual — nominal vs. reais de ${BASE}</h4>
+    ${tabela([{ t: "Ano" }, { t: "Nominal (R$ bi)", n: 1 }, { t: `Reais de ${BASE} (R$ bi)`, n: 1 }, { t: "CNPJs", n: 1 }, { t: "Grupos", n: 1 }],
+      A.map(a => [a.ano + (a.ano === PARCIAL ? " *" : ""), bi(a.nominal), bi(a.real), nf0.format(a.n_cnpj), nf0.format(a.n_grupos)]))}
+    <h4>Composição por tipo de renúncia (acumulado 2015–${PARCIAL})</h4>
+    ${tabela([{ t: "Tipo de renúncia" }, { t: `R$ bi (${BASE})`, n: 1 }, { t: "% do total", n: 1 }],
+      tiposRank.map(t => [esc(t), bi(tipoTot[t]), pct(100 * tipoTot[t] / TOT.real)]))}
+    <p class="fig-s">* ano parcial</p>
+  </div></details>
+  ${metaBloco([FONTE_PORTAL, FONTE_IPCA],
+    ["Soma do valor de renúncia por ano-calendário de origem.", `Valores reais = nominais × (IPCA médio de ${BASE} ÷ IPCA médio do ano).`, "Tipo de renúncia conforme o campo original do CSV."],
+    [LIM_AUTO, LIM_2024],
+    [`Renúncias declaradas somam ${brl(TOT.real)} em reais de ${BASE} (2015–${PARCIAL}).`, `Pico em ${pico.ano}: ${brl(pico.real)} corrigidos pelo IPCA.`, `${pct(pctImport, 0)} do volume histórico está nos dois tipos ligados à importação.`])}`;
+
+  const desenha = medida => {
+    chartColunas($("#g-anual"), { anos: ANOS, parcial: PARCIAL, fmtEixo: fmtEixoBi, fmtTip: brl,
+      series: [{ nome: medida === "real" ? `Reais de ${BASE}` : "Nominal", cor: css("--s1"), vals: porAno(medida) }] });
+  };
+  desenha("real");
+  $("#seg-medida").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    $("#seg-medida").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    desenha(b.dataset.v);
+  });
+  const seriesTipo = tiposRank.map((t, i) => ({ nome: t, cor: corSlot(i), vals: ANOS.map(a => (D.tipo_ano.find(x => x.ano === a && x.tipo === t) || { real: 0 }).real) }));
+  chartColunas($("#g-tipo"), { anos: ANOS, parcial: PARCIAL, fmtEixo: fmtEixoBi, fmtTip: brl, series: seriesTipo });
+  $("#g-tipo-leg").innerHTML = legenda(seriesTipo);
+  const totUlt = aUlt.nominal;
+  const corTipo = Object.fromEntries(tiposRank.map((t, i) => [t, corSlot(i)]));
+  $("#g-arvore").innerHTML = barras(D.arvore_2023.slice(0, 14).map(r => ({
+    nome: titulo(r.beneficio) + (r.tributo.toUpperCase() === r.beneficio.toUpperCase() ? "" : ` · ${r.tributo}`), sub: r.tipo, v: r.nominal, pct: 100 * r.nominal / totUlt, cor: corTipo[r.tipo] }))) +
+    legenda(tiposRank.map(t => ({ nome: t, cor: corTipo[t] })));
+}
+
+/* ===================================================================== *
+ *  Aba 2 — Quem recebe?
+ * ===================================================================== */
+function abaQuem(el) {
+  const g0 = D.top_grupos[0];
+  const top10c = pareto(D.pareto_cnpj, 10), top100c = pareto(D.pareto_cnpj, 100);
+  const top10g = pareto(D.pareto_grupo, 10), top100g = pareto(D.pareto_grupo, 100);
+  const p = D.publico, pub0 = p.lista[0];
+  const semCnae = 100 * D.sem_cnae.real / TOT.real;
+  el.innerHTML = `
+  <h2 class="pergunta">Quem são os maiores beneficiários?</h2>
+  <div class="resposta"><div class="rot">Resposta direta</div>
+    <p>Os 10 maiores CNPJs concentram <b>${pct(top10c)}</b> do valor da década; os 100 maiores, <b>${pct(top100c)}</b>.
+    Agrupando matriz e filiais pela raiz do CNPJ, os 10 maiores grupos ficam com <b>${pct(top10g)}</b>.
+    <b>${esc(nomeCurto(g0.nome))}</b> lidera com ${brl(g0.real)} em ${g0.n_cnpj} CNPJs.</p></div>
+  <div class="tiles">
+    ${tile(pct(top10c), "nos 10 maiores CNPJs")}
+    ${tile(pct(top100c), "nos 100 maiores CNPJs")}
+    ${tile(brl(g0.real), `${esc(nomeCurto(g0.nome))} (grupo, ${g0.n_cnpj} CNPJs)`)}
+    ${tile(nf0.format(TOT.n_cnpj), `CNPJs distintos · ${nf0.format(TOT.n_grupos)} grupos`)}
+  </div>
+
+  <div class="sec"><h3>Top grupos econômicos</h3>
+    <p class="prosa">Quem aparece no ranking não recebe um cheque do Tesouro: é quem deixa de pagar tributo sob um
+      regime legal. Aqui o grupo é a <b>raiz do CNPJ</b> (8 primeiros dígitos), que une matriz e filiais —
+      um critério objetivo, mas que não capta controle societário entre raízes diferentes (a GE Celma,
+      por exemplo, não soma com outras empresas do grupo GE). Petróleo, aviação, montadoras, eletrônicos da
+      Zona Franca e fertilizantes dominam a lista.</p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">20 maiores grupos, acumulado 2015–${PARCIAL}</div><div class="fig-s">Reais de ${BASE} · UF e setor do CNPJ principal</div></div></div>
+      <div id="g-grupos"></div></div>
+  </div>
+
+  <div class="sec"><h3>Evolução dos maiores grupos na década</h3>
+    <p class="prosa">Anos de commodity alta (como 2021) elevam petróleo e mineração; as montadoras e a Zona Franca
+      aparecem de forma mais estrutural. Leia junto com a geografia: Rio de Janeiro e Amazonas não são
+      acidentes estatísticos — são o endereço desses grupos.</p>
+    ${figura("g-evol", "Oito maiores grupos e os demais, por ano", `Reais de ${BASE}. Hachura: ano parcial.`)}
+  </div>
+
+  <div class="sec"><h3>Concentração: curva de Pareto</h3>
+    <p class="prosa">A distribuição é desigual, mas não oligopolizada a ponto de dez CNPJs explicarem a maior parte.
+      Os 1.000 maiores CNPJs (${pct(100 * 1000 / TOT.n_cnpj, 1)} do total) respondem por <b>${pct(pareto(D.pareto_cnpj, 1000))}</b>
+      do valor; os 10.000 maiores, por ${pct(pareto(D.pareto_cnpj, 10000))}. Quanto mais acima a curva, maior a concentração.</p>
+    ${figura("g-pareto", "Valor acumulado × beneficiários acumulados", "Por CNPJ e por grupo (raiz do CNPJ)")}
+  </div>
+
+  <div class="sec"><h3>O Estado como beneficiário</h3>
+    <p class="prosa">Fora do óbvio: <b>${nf0.format(p.n)} CNPJs</b> de ministérios, comandos militares, universidades e
+      fundações públicas somam <b>${brl(p.real)}</b> na década — a União deixando de cobrar imposto de si mesma,
+      quase todo em isenção de importação. O ${esc(titulo(pub0.nome))} sozinho acumula ${brl(pub0.real)}.</p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">Maiores beneficiários públicos</div><div class="fig-s">Razão social contendo ministério, comando, universidade federal, fundação pública etc. · reais de ${BASE}</div></div></div>
+      <div id="g-publico"></div></div>
+  </div>
+
+  <div class="sec"><h3>Um bloco sem setor</h3>
+    <p class="prosa"><b>${pct(semCnae)}</b> do valor da década (${brl(D.sem_cnae.real)}, ${nf0.format(D.sem_cnae.n_cnpj)} CNPJs) está
+      registrado sem código CNAE — inclusive o segundo maior beneficiário do país. Nas análises por setor
+      esse bloco aparece como "Sem informação" e não é descartado.</p>
+  </div>
+
+  <details class="dados"><summary>Dados originais</summary><div class="inner">
+    <h4>25 maiores grupos (raiz do CNPJ)</h4>
+    ${tabela([{ t: "#" , n: 1 }, { t: "Grupo" }, { t: "Raiz" }, { t: "CNPJs", n: 1 }, { t: `R$ bi (${BASE})`, n: 1 }, { t: "R$ bi nominal", n: 1 }, { t: "UF" }, { t: "Setor" }],
+      D.top_grupos.map((g, i) => [i + 1, esc(titulo(g.nome)), `<span class="mono">${g.raiz}</span>`, g.n_cnpj, bi(g.real), bi(g.nominal), g.uf, esc(g.setor)]))}
+    <h4>20 maiores razões sociais</h4>
+    ${tabela([{ t: "#", n: 1 }, { t: "Razão social" }, { t: "CNPJs", n: 1 }, { t: `R$ bi (${BASE})`, n: 1 }],
+      D.top_razoes.map((g, i) => [i + 1, esc(titulo(g.nome)), g.n_cnpj, bi(g.real)]))}
+    <h4>Concentração por CNPJ</h4>
+    ${tabela([{ t: "N maiores", n: 1 }, { t: "% dos CNPJs", n: 1 }, { t: "% do valor", n: 1 }],
+      D.pareto_cnpj.map(q => [nf0.format(q.k), nf(q.pct_ent < .1 ? 3 : 1).format(q.pct_ent) + "%", pct(q.pct_val)]))}
+  </div></details>
+  ${metaBloco([FONTE_PORTAL, FONTE_IPCA],
+    ["Grupo econômico = raiz do CNPJ (8 dígitos); nome = razão social do CNPJ de maior valor.", "Setor público identificado por padrão textual na razão social (proxy).", "Concentração calculada sobre o acumulado em reais constantes."],
+    ["Raiz do CNPJ não capta controle societário entre raízes diferentes (holdings, subsidiárias com outro CNPJ).", LIM_2024],
+    [`${pct(top10c)} do valor está em 10 CNPJs; ${pct(top100c)} em 100.`, `${esc(nomeCurto(g0.nome))} lidera com ${brl(g0.real)} em ${g0.n_cnpj} CNPJs.`, `Órgãos públicos somam ${brl(p.real)}: o Estado é beneficiário de renúncia federal.`])}`;
+
+  $("#g-grupos").innerHTML = barras(D.top_grupos.slice(0, 20).map(g => ({
+    nome: nomeCurto(g.nome), sub: `${g.uf} · ${titulo(g.setor)} · ${g.n_cnpj} CNPJ${g.n_cnpj > 1 ? "s" : ""}`, v: g.real })));
+  const raizes = D.top_grupos.slice(0, 8).map(g => g.raiz);
+  const seriesEv = raizes.map((r, i) => ({ nome: nomeCurto(D.evolucao_top_nomes[r]), cor: corSlot(i),
+    vals: ANOS.map(a => (D.evolucao_top.find(x => x.ano === a && x.raiz === r) || { real: 0 }).real) }));
+  seriesEv.push({ nome: "Demais beneficiários", cor: css("--neutral-mark"), vals: ANOS.map(a => (D.evolucao_top.find(x => x.ano === a && x.raiz === "__demais") || { real: 0 }).real) });
+  chartColunas($("#g-evol"), { anos: ANOS, parcial: PARCIAL, fmtEixo: fmtEixoBi, fmtTip: brl, series: seriesEv, altura: 340 });
+  $("#g-evol-leg").innerHTML = legenda(seriesEv);
+  const sp = [{ nome: "Por CNPJ", cor: css("--s1"), pts: D.pareto_cnpj }, { nome: "Por grupo (raiz do CNPJ)", cor: css("--s2"), pts: D.pareto_grupo }];
+  chartPareto($("#g-pareto"), { series: sp });
+  $("#g-pareto-leg").innerHTML = legenda(sp);
+  $("#g-publico").innerHTML = barras(p.lista.map(o => ({ nome: titulo(o.nome), sub: `${o.uf} · ${o.n_cnpj} CNPJ${o.n_cnpj > 1 ? "s" : ""}`, v: o.real })), { cor: css("--s2") });
+}
+
+/* ===================================================================== *
+ *  Aba 3 — Onde e setores?
+ * ===================================================================== */
+function abaOnde(el) {
+  const uf = D.uf, rj = uf[0], am = uf.find(u => u.uf === "AM");
+  const mun = D.municipio;
+  const setores = D.setor.filter(s => s.setor !== "Sem informação");
+  const semInfo = D.setor.find(s => s.setor === "Sem informação");
+  const mix = ano => { const t = D.setor_ano.filter(s => s.ano === ano); const tot = t.reduce((s, x) => s + x.nominal, 0); return Object.fromEntries(t.map(x => [x.setor, 100 * x.nominal / tot])); };
+  const m15 = mix(2015), mUlt = mix(ULT);
+  const setoresMix = D.setor.slice(0, 10).map(s => ({ nome: s.setor, a: m15[s.setor] || 0, b: mUlt[s.setor] || 0 }));
+  const ganhou = setoresMix.filter(s => s.nome !== "Sem informação").slice().sort((x, y) => (y.b - y.a) - (x.b - x.a));
+  const sud = D.sudam_uf, sudArea = new Set(["AC", "AM", "AP", "PA", "RO", "RR", "TO", "MT", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES"]);
+  const sudFora = 100 * sud.filter(s => !sudArea.has(s.uf)).reduce((a, s) => a + s.real, 0) / D.sudam_total;
+  const sudRJ = sud.find(s => s.uf === "RJ");
+  el.innerHTML = `
+  <h2 class="pergunta">Onde e em que setores o benefício se concentra?</h2>
+  <div class="resposta"><div class="rot">Resposta direta</div>
+    <p><b>${rj.uf}</b> concentra <b>${pct(100 * rj.real / TOT.real)}</b> do valor. O Amazonas (${brl(am.real)}) reflete a Zona Franca.
+    No ranking municipal, <b>${titulo(mun[0].municipio)}</b>, <b>${titulo(mun[1].municipio)}</b> e <b>${titulo(mun[2].municipio)}</b> ocupam o pódio — petróleo e eletrônicos.</p></div>
+  <div class="tiles">
+    ${tile(pct(100 * rj.real / TOT.real), `em ${rj.uf} (${brl(rj.real)})`)}
+    ${tile(brl(am.real), "Amazonas (Zona Franca de Manaus)")}
+    ${tile(titulo(mun[0].municipio), `1º município · ${brl(mun[0].real)}`)}
+    ${tile(titulo(mun[2].municipio), `3º município com ${nf0.format(mun[2].n_cnpj)} CNPJs · ${brl(mun[2].real)}`)}
+  </div>
+
+  <div class="sec"><h3>Estados</h3>
+    <p class="prosa">A geografia das renúncias segue a geografia dos regimes: petróleo no litoral fluminense, eletrônicos
+      e montagem na Zona Franca de Manaus, indústria e comércio em São Paulo. O campo UF/município do Portal é a
+      <b>sede declarada do beneficiário</b> — proxy operacional, não prova de onde o valor agregado nasce.
+      O Rio de Janeiro concentra <b>${pct(100 * rj.real / TOT.real)}</b> (Petrobras, GE Celma em Petrópolis, Modec, Macaé);
+      São Paulo vem em segundo com ${pct(100 * uf[1].real / TOT.real)}; o Amazonas (${pct(100 * am.real / TOT.real)}) é quase
+      inteiramente Manaus — efeito estrutural do Decreto-Lei 288/1967.</p>
+    <div class="duas">
+      <div class="figura"><div class="fig-h"><div><div class="fig-t">10 maiores UFs</div><div class="fig-s">Acumulado 2015–${PARCIAL}, reais de ${BASE}</div></div></div><div id="g-uf"></div></div>
+      <div class="figura"><div class="fig-h"><div><div class="fig-t">12 maiores municípios</div><div class="fig-s">Sede declarada do CNPJ · nº de CNPJs</div></div></div><div id="g-mun"></div></div>
+    </div>
+  </div>
+
+  <div class="sec"><h3>Setores (seção CNAE)</h3>
+    <p class="prosa">Indústria de transformação e extração mineral dominam o desenho — coerente com Zona Franca, siderurgia,
+      petróleo e máquinas. Um bloco de <b>${pct(100 * semInfo.real / TOT.real)}</b> não tem CNAE informado e aparece
+      em cinza; ele não é descartado.</p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">Renúncia por seção CNAE</div><div class="fig-s">Acumulado 2015–${PARCIAL}, reais de ${BASE} · % do total</div></div></div><div id="g-setor"></div></div>
+  </div>
+
+  <div class="sec"><h3>Mix setorial: 2015 versus ${ULT}</h3>
+    <p class="prosa">Comparar a participação de cada seção no primeiro e no último ano completo mostra o deslocamento
+      do mix: <b>${esc(ganhou[0].nome)}</b> ganhou ${nf1.format(ganhou[0].b - ganhou[0].a)} pontos e
+      <b>${esc(ganhou[ganhou.length - 1].nome)}</b> perdeu ${nf1.format(ganhou[ganhou.length - 1].a - ganhou[ganhou.length - 1].b)}.
+      Parte disso é ciclo de commodities e mudança na composição das importações declaradas — não
+      necessariamente "desindustrialização" lida só por este gráfico.</p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">Participação no total do ano, %</div><div class="fig-s">Valores nominais de cada ano</div></div></div><div id="g-mix"></div></div>
+  </div>
+
+  <div class="sec"><h3>A armadilha do endereço: Sudam e Sudene</h3>
+    <p class="prosa">O incentivo regional de IRPJ para projetos no Norte e no Nordeste aparece <b>${pct(sudFora, 0)}</b> fora da
+      área das duas superintendências — ${pct(100 * sudRJ.real / D.sudam_total, 0)} só no Rio de Janeiro, onde ficam as
+      sedes de Vale e Petrobras. O projeto está no Pará ou no Maranhão; quem declara a redução é a matriz.
+      <b>Não use a UF do Portal como mapa do incentivo regional.</b></p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">Sudam/Sudene: UF que declara</div><div class="fig-s">Total ${brl(D.sudam_total)} · reais de ${BASE} · cinza = fora da área de abrangência</div></div></div><div id="g-sudam"></div></div>
+  </div>
+
+  <details class="dados"><summary>Dados originais</summary><div class="inner">
+    <h4>UFs</h4>
+    ${tabela([{ t: "UF" }, { t: `R$ bi (${BASE})`, n: 1 }, { t: "%", n: 1 }, { t: "CNPJs", n: 1 }],
+      uf.map(u => [u.uf || "—", bi(u.real), pct(100 * u.real / TOT.real), nf0.format(u.n_cnpj)]))}
+    <h4>Municípios</h4>
+    ${tabela([{ t: "Município" }, { t: "UF" }, { t: `R$ bi (${BASE})`, n: 1 }, { t: "CNPJs", n: 1 }],
+      mun.map(m => [esc(titulo(m.municipio)), m.uf, bi(m.real), nf0.format(m.n_cnpj)]))}
+    <h4>Setores</h4>
+    ${tabela([{ t: "Seção CNAE" }, { t: `R$ bi (${BASE})`, n: 1 }, { t: "%", n: 1 }, { t: "% em 2015", n: 1 }, { t: `% em ${ULT}`, n: 1 }],
+      D.setor.map(s => [esc(s.setor), bi(s.real), pct(100 * s.real / TOT.real), pct(m15[s.setor] || 0), pct(mUlt[s.setor] || 0)]))}
+  </div></details>
+  ${metaBloco([FONTE_PORTAL, FONTE_IPCA, "<b>CNAE 2.0 — IBGE/Concla</b>: seção derivada dos dois primeiros dígitos do código informado no Portal."],
+    ["UF e município conforme o Portal (sede declarada do CNPJ).", "Setor: 2 primeiros dígitos do CNAE → seção; código 00000 → \"Sem informação\".", "Área Sudam/Sudene: Norte, Centro-Oeste (MT), Nordeste, norte de MG e ES — simplificada por UF."],
+    ["A UF do CNPJ pode divergir do local da operação ou do projeto incentivado.", "CNAE ausente ou genérico em parte dos registros.", LIM_2024],
+    [`${rj.uf} concentra ${pct(100 * rj.real / TOT.real)} das renúncias declaradas.`, `${titulo(mun[1].municipio)} no topo municipal — efeito estrutural da ZFM (DL 288/67).`, `${pct(sudFora, 0)} do incentivo Sudam/Sudene está registrado fora da área — armadilha para qualquer mapa.`])}`;
+
+  $("#g-uf").innerHTML = barras(uf.slice(0, 10).map(u => ({ nome: u.uf, v: u.real, pct: 100 * u.real / TOT.real })));
+  $("#g-mun").innerHTML = barras(mun.slice(0, 12).map(m => ({ nome: titulo(m.municipio), sub: `${m.uf} · ${nf0.format(m.n_cnpj)} CNPJs`, v: m.real })));
+  $("#g-setor").innerHTML = barras(D.setor.slice(0, 14).map(s => ({ nome: s.setor, v: s.real, pct: 100 * s.real / TOT.real, mut: s.setor === "Sem informação" })));
+  $("#g-mix").innerHTML = pares(setoresMix, "2015", String(ULT));
+  $("#g-sudam").innerHTML = barras(sud.map(s => ({ nome: s.uf + (sudArea.has(s.uf) ? "" : " — fora da área"), v: s.real, pct: 100 * s.real / D.sudam_total, mut: !sudArea.has(s.uf) })), { cor: css("--s5") });
+}
+
+/* ===================================================================== *
+ *  Aba 4 — O que prioriza?
+ * ===================================================================== */
+const LEGIS = {
+  "Regimes aduaneiros especiais (importação)": ["Facilitar a importação de bens sob regimes especiais — admissão temporária, entreposto, isenções de PIS/Cofins e II — eixo transversal da política comercial e industrial.", "Lei 10.865/2004; Decreto 6.759/2009 (Regulamento Aduaneiro)"],
+  "Industrialização regional (ZFM, Sudam/Sudene)": ["Atrair e manter indústria no Norte e Nordeste: isenção de tributos de importação na Zona Franca de Manaus e redução de IRPJ em projetos prioritários nas áreas da Sudam e da Sudene.", "Decreto-Lei 288/1967; MP 2.199-14/2001; Lei 12.715/2012"],
+  "Exportação e cadeias globais (Recof, Drawback)": ["Integrar a produção brasileira ao comércio exterior: suspensão ou isenção de tributos na importação de insumos destinados à exportação.", "DL 37/1966, art. 78; Lei 8.402/1992; IN RFB 1.291/2012 (Recof)"],
+  "Petróleo, gás e energia (Repetro)": ["Desonerar bens de exploração e produção de petróleo e gás (plataformas, sondas, equipamentos) e o gás natural importado.", "Lei 13.586/2017; Decreto 6.759/2009; Decreto 681/1992"],
+  "Alimentos e insumos agropecuários": ["Baratear fertilizantes, defensivos e itens da cesta básica com alíquota zero de PIS/Cofins.", "Lei 10.925/2004; Lei 10.865/2004"],
+  "Saúde e farmacêuticos": ["Reduzir tributos sobre medicamentos, insumos farmacêuticos e programas de saúde (Pronon, Pronas/PCD).", "Decreto 6.426/2008; Lei 12.715/2012"],
+  "Cultura, educação, social e trabalho": ["Deduções e isenções que canalizam renúncia para cultura (Rouanet), educação (Prouni), alimentação do trabalhador (PAT), esporte, fundos sociais e o setor de eventos (Perse).", "Lei 8.313/1991; Lei 11.096/2005; Lei 6.321/1976; Lei 14.148/2021"],
+  "Indústria, infraestrutura e tecnologia": ["Programas setoriais: aeronáutico, autopeças, naval, semicondutores (Padis), software (Repes), infraestrutura (Reidi), portos (Reporto), P&D.", "Lei 11.484/2007; Lei 11.488/2007; Lei 11.196/2005; Lei 13.755/2018"],
+  "Estado, organismos internacionais e eleições": ["Imunidade dos entes públicos e organismos internacionais nas importações; compensação fiscal às emissoras pelo horário eleitoral gratuito.", "CF/88, art. 150, VI; Lei 9.504/1997, art. 99"],
+  "Rótulo genérico (sem mecanismo identificado)": ["Rubricas do próprio Portal que não identificam o regime: \"bens submetidos aos regimes aduaneiros especiais\" e \"outras isenções não capituladas\".", "Lei 10.865/2004, art. 14 (genérico)"],
+};
+function abaPrioriza(el) {
+  const temas = {}; D.regime.forEach(r => { temas[r.tema] = (temas[r.tema] || 0) + r.real; });
+  const temasRank = Object.entries(temas).sort((a, b) => b[1] - a[1]);
+  const tema = n => temas[n] || 0;
+  const generico = tema("Sem mecanismo identificado (\"outras isenções\")");
+  const fund0 = D.fundamento[0];
+  const manaus = D.municipio.find(m => m.municipio === "MANAUS"), macae = D.municipio.find(m => m.municipio === "MACAÉ");
+  const regTop = D.regime.slice(0, 15);
+  const corTema = Object.fromEntries(temasRank.map(([n], i) => [n, n.startsWith("Sem mecanismo") ? css("--s8") : corSlot(i)]));
+  el.innerHTML = `
+  <h2 class="pergunta">O que a política de benefícios prioriza?</h2>
+  <div class="resposta"><div class="rot">Resposta direta</div>
+    <p>Pelo volume, prioriza a competitividade na importação: <b>${esc(temasRank[0][0])}</b> lidera com
+    <b>${brl(temasRank[0][1])}</b> — e o maior fundamento legal da base (${brl(fund0.real)}) é um guarda-chuva
+    que não diz qual regime foi usado. Em seguida vem a <b>${esc(temasRank[1][0].split(" (")[0].toLowerCase())}</b>
+    (${brl(temasRank[1][1])}). Outros <b>${pct(100 * generico / TOT.real)}</b> estão sob "outras isenções não capituladas".</p></div>
+  <div class="tiles">
+    ${tile(brl(temasRank[0][1]), esc(temasRank[0][0]))}
+    ${tile(pct(100 * (fund0.real + generico) / TOT.real, 0), "sob rótulos que não identificam o regime")}
+    ${tile(brl(manaus.real), "Manaus — a Zona Franca no território")}
+    ${tile(brl(macae.real), "Macaé — o Repetro no território")}
+  </div>
+
+  <div class="sec"><h3>Temas de política</h3>
+    <p class="prosa">Prioridades aqui são inferidas pelo <b>volume renunciado</b> associado ao fundamento legal e ao benefício
+      fiscal — não por planos oficiais. Cada um dos ${D.n_fundamentos} fundamentos legais do Portal foi
+      classificado em ${D.n_regimes} mecanismos e estes, em ${temasRank.length} temas. O eixo mais grosso são os regimes
+      aduaneiros especiais; em seguida a industrialização regional (Zona Franca + Sudam/Sudene), a exportação
+      (Recof, Drawback), o agro e o petróleo. Semicondutores (Padis) são residuais em volume — prioridade
+      simbólica, não do caixa renunciado.</p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">Volume por tema</div><div class="fig-s">Acumulado 2015–${PARCIAL}, reais de ${BASE} · % do total</div></div></div><div id="g-tema"></div></div>
+    ${figura("g-tema-ano", "Evolução dos temas", `Reais de ${BASE}. Hachura: ano parcial.`)}
+  </div>
+
+  <div class="sec"><h3>Os mecanismos</h3>
+    <p class="prosa">Abaixo do tema está o mecanismo — o regime ou programa nomeado na lei. O Recof cabe em
+      <b>${nf0.format(D.regime.find(r => r.regime.startsWith("Recof")).n_grupos)} grupos</b>; o Perse, em
+      ${nf0.format(D.regime.find(r => r.regime.startsWith("Perse")).n_grupos)}. Número de beneficiários e volume
+      contam histórias diferentes.</p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">15 maiores mecanismos</div><div class="fig-s">Reais de ${BASE} · nº de grupos beneficiados</div></div></div><div id="g-regime"></div></div>
+  </div>
+
+  <div class="sec"><h3>O que a lei escreveu</h3>
+    <p class="prosa">O ranking de <b>Fundamento Legal</b> é a evidência bruta: cada barra é o texto que veio no CSV do
+      Portal, sem reinterpretar. Os dois maiores — "bens submetidos aos regimes aduaneiros especiais" e
+      "outras isenções não capituladas nesta tabela" — são justamente os que não dizem qual regime foi usado.</p>
+    <div class="figura"><div class="fig-h"><div><div class="fig-t">15 maiores fundamentos legais (campo original)</div><div class="fig-s">Reais de ${BASE}</div></div></div><div id="g-fund"></div></div>
+  </div>
+
+  <details class="dados"><summary>Dados originais</summary><div class="inner">
+    <h4>Objetivo típico × volume</h4>
+    ${tabela([{ t: "Tema" }, { t: `R$ bi (${BASE})`, n: 1 }, { t: "%", n: 1 }, { t: "Objetivo típico", txt: 1 }, { t: "Legislação", txt: 1 }],
+      temasRank.map(([n, v]) => [esc(n), bi(v), pct(100 * v / TOT.real), esc((LEGIS[n] || ["", ""])[0]), esc((LEGIS[n] || ["", ""])[1])]))}
+    <h4>Mecanismos (${D.n_regimes})</h4>
+    ${tabela([{ t: "Mecanismo" }, { t: "Tema" }, { t: `R$ bi (${BASE})`, n: 1 }, { t: "Grupos", n: 1 }],
+      D.regime.map(r => [esc(r.regime), esc(r.tema), bi(r.real), nf0.format(r.n_grupos)]))}
+    <h4>Fundamentos legais (15 maiores)</h4>
+    ${tabela([{ t: "Fundamento legal", txt: 1 }, { t: "Tipo" }, { t: `R$ bi (${BASE})`, n: 1 }],
+      D.fundamento.map(f => [esc(f.fundamento), esc(f.tipo), bi(f.real)]))}
+  </div></details>
+  ${metaBloco([FONTE_PORTAL, FONTE_IPCA, "Legislação citada: Decreto-Lei 288/1967; MP 2.199-14/2001; Lei 10.865/2004; DL 37/1966; Lei 8.402/1992; Lei 13.586/2017; Lei 10.925/2004; Lei 11.484/2007; Lei 8.313/1991; Lei 11.096/2005; Lei 14.148/2021."],
+    ["Fundamento legal → mecanismo por regra explícita sobre o texto (scripts/03_build_db.sql).", "Mecanismo → tema por tabela de correspondência (scripts/06_export_relatorio.py).", "Prioridade = volume observado, não ranking de planos oficiais."],
+    ["Inferência a partir da estrutura legal — não é texto de política industrial.", `O maior fundamento ("bens submetidos aos regimes aduaneiros especiais", ${pct(100 * fund0.real / TOT.real)}) e "outras isenções não capituladas" (${pct(100 * generico / TOT.real)}) não identificam o regime específico.`, LIM_2024],
+    [`${pct(100 * (fund0.real + generico) / TOT.real)} da renúncia federal está sob dois rótulos que não identificam o mecanismo.`, `Zona Franca + Sudam/Sudene somam ${brl(tema("Industrialização regional (ZFM, Sudam/Sudene)"))} na década.`, `Recof: ${brl(D.regime.find(r => r.regime.startsWith("Recof")).real)} em ${nf0.format(D.regime.find(r => r.regime.startsWith("Recof")).n_grupos)} grupos.`])}`;
+
+  $("#g-tema").innerHTML = barras(temasRank.map(([n, v]) => ({ nome: n, v, pct: 100 * v / TOT.real, cor: corTema[n] })));
+  const st = temasRank.map(([n]) => ({ nome: n, cor: corTema[n], vals: ANOS.map(a => D.regime_ano.filter(x => x.ano === a && (D.regime.find(r => r.regime === x.regime) || {}).tema === n).reduce((s, x) => s + x.real, 0)) }));
+  chartColunas($("#g-tema-ano"), { anos: ANOS, parcial: PARCIAL, fmtEixo: fmtEixoBi, fmtTip: brl, series: st, altura: 340 });
+  $("#g-tema-ano-leg").innerHTML = legenda(st);
+  $("#g-regime").innerHTML = barras(regTop.map(r => ({ nome: r.regime, sub: `${nf0.format(r.n_grupos)} grupos · ${r.tema.split(" (")[0]}`, v: r.real, cor: corTema[r.tema] })));
+  $("#g-fund").innerHTML = barras(D.fundamento.map(f => ({ nome: f.fundamento, sub: f.tipo, v: f.real })), { cor: css("--s2") });
+}
+
+/* ===================================================================== *
+ *  Aba 5 — Custo fiscal?
+ * ===================================================================== */
+function abaCusto(el) {
+  const comp = A.filter(a => a.ano !== PARCIAL);
+  const picoPib = comp.reduce((m, a) => a.pct_pib > m.pct_pib ? a : m, comp[0]);
+  const media = comp.reduce((s, a) => s + a.pct_pib, 0) / comp.length;
+  const porDia = aUlt.nominal / 365;
+  el.innerHTML = `
+  <h2 class="pergunta">Qual o custo fiscal para o país?</h2>
+  <div class="resposta"><div class="rot">Resposta direta</div>
+    <p>Em ${ULT}, as renúncias registradas no Portal equivaleram a <b>${pct(aUlt.pct_pib, 2)} do PIB</b> — ${brl(porDia)} por dia.
+    No pico, em ${picoPib.ano}, chegaram a <b>${pct(picoPib.pct_pib, 2)}</b>. A média dos anos completos é ${pct(media, 2)}.</p></div>
+  <div class="tiles">
+    ${tile(pct(aUlt.pct_pib, 2), `do PIB em ${ULT}`)}
+    ${tile(pct(picoPib.pct_pib, 2), `do PIB no pico (${picoPib.ano})`)}
+    ${tile(brl(porDia), `por dia em ${ULT}`)}
+    ${tile(brl(aUlt.pib), `PIB nominal de ${ULT}`)}
+  </div>
+
+  <div class="sec"><h3>Renúncia como proporção do PIB</h3>
+    <p class="prosa">Renúncia não é despesa orçamentária: é receita que não entra. Comparar com o PIB serve para
+      dar ordem de grandeza e para <b>isolar o ciclo econômico</b> — a economia cresce, a inflação corre e
+      o valor nominal sobe junto; a razão mostra se a renúncia cresceu <i>mais</i> que a economia. De
+      ${pct(a2015.pct_pib, 2)} em 2015 a série sobe até ${pct(picoPib.pct_pib, 2)} em ${picoPib.ano} e recua para
+      ${pct(aUlt.pct_pib, 2)} em ${ULT}: a alta da década não foi só inflação.</p>
+    ${figura("g-pib", "Renúncia ÷ PIB nominal, por ano", `Ponto vazado: ${PARCIAL}, parcial (numerador incompleto).`)}
+  </div>
+
+  <div class="sec"><h3>Como (não) fazer esta conta</h3>
+    <p class="prosa">A razão só faz sentido com numerador e denominador na <b>mesma base de preços</b>: renúncia nominal
+      do ano ÷ PIB nominal do ano. Dividir a renúncia <i>corrigida pelo IPCA</i> pelo PIB <i>nominal</i> deixa o
+      fator de inflação só em cima e infla o resultado — em ${ULT}, ${pct(100 * aUlt.real / aUlt.pib, 2)} em vez de
+      ${pct(aUlt.pct_pib, 2)}; em 2015, ${pct(100 * a2015.real / a2015.pib, 2)} em vez de ${pct(a2015.pct_pib, 2)}. O erro
+      cresce quanto mais antigo o ano e distorce a inclinação da série. Teste simples: o % do PIB tem de dar
+      igual calculado em nominal e calculado com os dois lados deflacionados.</p>
+    <div class="aviso"><b>O Portal não é o gasto tributário total.</b> A Receita estima no Demonstrativo de Gastos Tributários
+      (anexo ao PLOA) um volume bem maior, que inclui Simples Nacional, pessoa física, entidades imunes e
+      itens sob sigilo. Os números desta página são o que está publicado por CNPJ — uma lente, não o todo.</div>
+  </div>
+
+  <details class="dados"><summary>Dados originais</summary><div class="inner">
+    <h4>Renúncia × PIB</h4>
+    ${tabela([{ t: "Ano" }, { t: "Renúncia nominal (R$ bi)", n: 1 }, { t: "PIB nominal (R$ tri)", n: 1 }, { t: "% do PIB", n: 1 }, { t: `Renúncia em reais de ${BASE} (R$ bi)`, n: 1 }],
+      A.map(a => [a.ano + (a.ano === PARCIAL ? " *" : ""), bi(a.nominal), nf2.format(a.pib / 1e12), pct(a.pct_pib, 2), bi(a.real)]))}
+    <p class="fig-s">* ano parcial: o numerador está incompleto; o PIB, não.</p>
+  </div></details>
+  ${metaBloco([FONTE_PORTAL, FONTE_PIB, FONTE_IPCA],
+    ["% do PIB = renúncia nominal do ano ÷ PIB nominal do ano.", "PIB anual = soma dos quatro trimestres a preços correntes.", "Reais constantes só entram na coluna de valor absoluto, nunca na razão."],
+    ["Renúncia ≠ despesa orçamentária.", "Cobertura parcial do Portal frente ao gasto tributário total estimado pela Receita.", LIM_2024],
+    [`Renúncias do Portal chegaram a ${pct(picoPib.pct_pib, 2)} do PIB em ${picoPib.ano}.`, `Em ${ULT}, ${pct(aUlt.pct_pib, 2)} do PIB — ${brl(porDia)} por dia.`, "A alta da década supera a inflação e o crescimento da economia: a razão com o PIB quase dobrou entre 2017 e 2021."])}`;
+
+  chartLinha($("#g-pib"), { anos: ANOS, vals: porAno("pct_pib"), parcial: PARCIAL, cor: css("--s1"), nome: "% do PIB",
+    fmtEixo: fmtEixoPct, fmtTip: v => pct(v, 2), rotular: true,
+    tip: k => `<div class="row"><span>% do PIB</span><b>${pct(A[k].pct_pib, 2)}</b></div><div class="row"><span>Renúncia nominal</span><b>${brl(A[k].nominal)}</b></div><div class="row"><span>PIB nominal</span><b>${brl(A[k].pib)}</b></div>` });
+}
+
+/* ===================================================================== *
+ *  Navegação e boot
+ * ===================================================================== */
+const ABAS = { quanto: abaQuanto, quem: abaQuem, onde: abaOnde, prioriza: abaPrioriza, custo: abaCusto };
+const feita = {};
+function irParaAba(v, rolar) {
+  if (!ABAS[v]) v = "quanto";
+  document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.v === v));
+  for (const k in ABAS) document.getElementById("aba-" + k).classList.toggle("hidden", k !== v);
+  if (!feita[v]) { ABAS[v](document.getElementById("aba-" + v)); feita[v] = true; }
+  if (location.hash !== "#" + v) history.replaceState(null, "", "#" + v);
+  if (rolar) window.scrollTo({ top: document.getElementById("tabs").offsetTop - 4, behavior: "smooth" });
+}
+$("#tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) irParaAba(b.dataset.v, true); });
+window.addEventListener("hashchange", () => irParaAba(location.hash.slice(1)));
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { for (const k in feita) { feita[k] = false; } irParaAba(location.hash.slice(1) || "quanto"); }, 200); });
+
+$("#dek").textContent = `Em dez anos, o governo federal registrou renúncias fiscais por CNPJ que somam ${brl(TOT.real)} em reais de ${BASE}. Cada aba responde uma pergunta de reportagem — com dados originais, fontes e limitações explícitas.`;
+$("#chips").innerHTML = [
+  `Fonte: <b>Portal da Transparência</b>`, `Valores em <b>reais de ${BASE}</b> (IPCA/IBGE)`,
+  `Base: <b>renuncias.duckdb</b>`, `Arquivos da CGU de <b>${dataBR(D.meta.arquivo_atualizado_em)}</b>`,
+  `<span class="chip warn">${PARCIAL} incompleto</span>`,
+].map(c => c.startsWith("<span") ? c : `<span class="chip">${c}</span>`).join("");
+$("#foot-fonte").innerHTML = `Portal da Transparência, <a href="https://portaldatransparencia.gov.br/download-de-dados/renuncias" target="_blank" rel="noopener">Renúncias Fiscais</a> (arquivos 2015–${PARCIAL}, publicados pela CGU em ${dataBR(D.meta.arquivo_atualizado_em)}; extraídos em ${dataBR(D.meta.baixado_em)}). IPCA e PIB: IBGE/SIDRA.`;
+$("#foot-base").textContent = BASE;
+$("#foot-2024").textContent = `O arquivo de ${PARCIAL} traz ${brl(aParc.nominal)} e ${nf0.format(aParc.n_cnpj)} CNPJs, contra ${brl(aUlt.nominal)} e ${nf0.format(aUlt.n_cnpj)} em ${ULT}. Ele entra nos acumulados da década, sempre sinalizado, e fica fora das comparações ano a ano.`;
+irParaAba(location.hash.slice(1) || "quanto");
+</script>

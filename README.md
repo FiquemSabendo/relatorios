@@ -1,13 +1,20 @@
 # Renúncias fiscais federais, 2015–2024
 
-**Ferramenta publicada:** <https://fiquemsabendo.github.io/renuncias-fiscais/>
+**Relatório publicado:** <https://fiquemsabendo.github.io/renuncias-fiscais/>
 
 Pipeline reprodutível que baixa os microdados de **Renúncias Fiscais** do Portal da
-Transparência, consolida em um banco DuckDB e gera um artefato HTML autocontido para
-explorar a série — busca por empresa, evolução anual por setor, por mecanismo jurídico e
-por empresa em valor nominal, real (IPCA) e % do PIB, concentração e detecção de outliers.
+Transparência, consolida em um banco DuckDB e gera duas saídas HTML autocontidas, na
+identidade visual da Fiquem Sabendo:
 
-O artefato tem três abas:
+1. **Relatório em abas** (`docs/index.html`, o site) — cinco perguntas de reportagem, cada
+   uma com resposta direta, gráficos, tabela de dados originais, fontes, metodologia,
+   limitações e pautas sugeridas: *Quanto renuncia? · Quem recebe? · Onde e setores? · O que
+   prioriza? · Custo fiscal?* Só usa o que está no pipeline (Portal + IPCA + PIB do IBGE).
+2. **Explorador interativo** (`artifact/renuncias.html`, ~9 MB) — busca por empresa, ranking
+   dos 68 mil grupos com o fundamento legal de cada renúncia e achados jornalísticos. Não
+   está no site; é publicado como artefato no claude.ai.
+
+O explorador tem três abas:
 
 - **Resumo** — a série anual em colunas empilhadas, abrível por setor, mecanismo, tipo de
   renúncia, tributo, UF ou maiores empresas, com tabela equivalente. Controles: medida
@@ -33,7 +40,9 @@ bash   scripts/01_download.sh      # baixa e extrai os ZIPs de 2015 a 2024
 python3 scripts/02_macro.py        # IPCA e PIB via API do SIDRA/IBGE
 duckdb renuncias.duckdb < scripts/03_build_db.sql
 python3 scripts/04_export_payload.py   # artifact/payload.json
-python3 scripts/05_build_artifact.py   # artifact/renuncias.html e docs/index.html
+python3 scripts/05_build_artifact.py   # artifact/renuncias.html (explorador)
+python3 scripts/06_export_relatorio.py # relatorio/dados.json (agregados do relatório)
+python3 scripts/07_build_relatorio.py  # docs/index.html (relatório em abas)
 ```
 
 O GitHub Pages serve `docs/index.html` a partir da branch `main`; publicar é fazer commit
@@ -156,9 +165,21 @@ para os gráficos, todos em SVG/Canvas desenhados à mão. São quatro blobs:
 A abertura por fundamento legal cobre **todos** os 77.523 CNPJs, não uma amostra. O
 carregamento no navegador leva cerca de 0,8 s depois do download.
 
-`artifact/template.html` é a fonte editável; `05_build_artifact.py` injeta o payload e as
-fontes e grava duas cópias idênticas: `artifact/renuncias.html` e `docs/index.html`.
-Edite o template, nunca os arquivos gerados.
+`artifact/template.html` é a fonte editável do explorador; `05_build_artifact.py` injeta o
+payload e as fontes. Edite o template, nunca o arquivo gerado.
+
+## O relatório em abas
+
+`relatorio/template.html` (markup + JS) e `relatorio/base.css` (identidade FS) são as fontes;
+`06_export_relatorio.py` consulta o DuckDB e grava `relatorio/dados.json` (~80 KB) com todos
+os agregados; `07_build_relatorio.py` costura tudo em `docs/index.html` (~300 KB). Todos os
+textos são montados em JS a partir do JSON, então nenhum número é digitado à mão. Convenções:
+
+- valores reais em reais de 2025 (média anual do IPCA); acumulados cobrem 2015–2024 com
+  2024 sinalizado como parcial;
+- **% do PIB = renúncia nominal ÷ PIB nominal do mesmo ano** — nunca o valor deflacionado
+  sobre o PIB nominal, que infla a razão (a aba "Custo fiscal" explica);
+- temas de política = tabela de correspondência mecanismo → tema em `06_export_relatorio.py`.
 
 ### Identidade visual
 
