@@ -1,0 +1,1927 @@
+<meta charset="utf-8">
+<title>Renúncias Fiscais Federais · Fiquem Sabendo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Quanto cada empresa deixou de recolher em tributos federais por incentivos, isenções e regimes especiais — CNPJ a CNPJ, com o fundamento legal, de 2015 a 2024. Uma ferramenta da Fiquem Sabendo com dados do Portal da Transparência.">
+<meta property="og:title" content="Renúncias Fiscais Federais · Fiquem Sabendo">
+<meta property="og:description" content="Quem deixa de pagar tributos federais, quanto e com base em qual lei — 77 mil CNPJs, 2015 a 2024.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 51 26'%3E%3Crect width='51' height='26' fill='%23000'/%3E%3Cpath fill='%23ffe706' d='M12.12 0H.433v25.998h11.685z'/%3E%3Cpath fill='%23fff' d='M16.695.387h13.689V3.57H21.63v7.412h8.302v3.19H21.63v11.832h-4.924zM39.388 17.97v1.719c0 1.634.582 2.392 2.148 2.392s1.952-1.123 1.952-2.296c0-2.345-.633-3.023-4.277-5.154-4.027-2.362-6.084-3.773-6.084-7.432 0-3.548 1.687-6.812 8.445-6.812 7.179 0 8.237 3.408 8.237 6.251v1.43h-6.49V6.58c0-1.503-.355-2.253-1.711-2.253-1.266 0-1.676.76-1.676 2.167 0 1.504.392 2.234 3.34 3.838 5.26 2.869 7.142 4.486 7.142 8.566 0 3.892-1.91 7.087-8.998 7.087-6.808 0-8.75-2.858-8.75-6.541V17.97z'/%3E%3C/svg%3E">
+
+<style>
+/* Fontes da identidade visual da Fiquem Sabendo (Supply + Roboto), embutidas pelo
+ * scripts/05_build_artifact.py a partir de artifact/assets/fonts/. */
+__FONTS__
+</style>
+<style>
+/* ===================================================================== *
+ * Tokens. Identidade visual da Fiquem Sabendo (fiquemsabendo.com.br):
+ * fundo branco, texto preto, amarelo #ffe706 como marca, roxo #8103e5 na
+ * faixa superior, azul #1022ff em links. Paleta categórica dos gráficos
+ * derivada das cores de acento do site, com contraste ≥ 3:1 sobre a
+ * superfície; o amarelo fica reservado à interface (marcas, chips, botões),
+ * não a dados.
+ * ===================================================================== */
+:root {
+  color-scheme: light;
+  --plane:        #ffffff;
+  --surface:      #ffffff;
+  --surface-2:    #f8f8f8;
+  --surface-3:    #f4f4f4;
+  --ink:          #000000;
+  --ink-2:        #292929;
+  --muted:        #707070;
+  --grid:         #eaeaea;
+  --axis:         #c4c4c4;
+  --line:         #dddddd;
+  --line-strong:  #c4c4c4;
+  --accent:       #ffe706;
+  --accent-ink:   #000000;
+  --accent-wash:  #fff9c2;
+  --link:         #1022ff;
+  --purple:       #8103e5;
+  --shadow:       none;
+
+  --s1:#1022ff; --s2:#8103e5; --s3:#f200c6; --s4:#ff7716;
+  --s5:#118f52; --s6:#0087f7; --s7:#e03030; --s8:#707070;
+  --neutral-mark: #c4c4c4;
+  --seq1:#e0e4ff; --seq2:#b8c0ff; --seq3:#8f9bff; --seq4:#5f70ff;
+  --seq5:#1022ff; --seq6:#0c19c4; --seq7:#08118a;
+
+  --good:#118f52; --warning:#e0a800; --serious:#ff7716; --critical:#e03030;
+  --good-text:#0b6b3c;
+
+  --r-sm: 6px; --r: 8px; --r-lg: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --plane:        #000000;
+    --surface:      #151515;
+    --surface-2:    #1e1e1e;
+    --surface-3:    #292929;
+    --ink:          #ffffff;
+    --ink-2:        #d9d9d9;
+    --muted:        #a3a3a3;
+    --grid:         #292929;
+    --axis:         #4a4a4a;
+    --line:         rgba(255,255,255,.14);
+    --line-strong:  rgba(255,255,255,.26);
+    --accent:       #ffe706;
+    --accent-ink:   #000000;
+    --accent-wash:  rgba(255,231,6,.16);
+    --link:         #8f9bff;
+    --shadow:       none;
+
+    --s1:#5f70ff; --s2:#b06cff; --s3:#ff5ad9; --s4:#ff9147;
+    --s5:#2ec779; --s6:#4fb0ff; --s7:#ff7a7a; --s8:#a3a3a3;
+    --neutral-mark: #4a4a4a;
+    --good-text:#2ec779;
+    --seq1:#08118a; --seq2:#0c19c4; --seq3:#1022ff; --seq4:#5f70ff;
+    --seq5:#8f9bff; --seq6:#b8c0ff; --seq7:#e0e4ff;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --plane:        #000000;
+  --surface:      #151515;
+  --surface-2:    #1e1e1e;
+  --surface-3:    #292929;
+  --ink:          #ffffff;
+  --ink-2:        #d9d9d9;
+  --muted:        #a3a3a3;
+  --grid:         #292929;
+  --axis:         #4a4a4a;
+  --line:         rgba(255,255,255,.14);
+  --line-strong:  rgba(255,255,255,.26);
+  --accent:       #ffe706;
+  --accent-ink:   #000000;
+  --accent-wash:  rgba(255,231,6,.16);
+  --link:         #8f9bff;
+  --shadow:       none;
+
+  --s1:#5f70ff; --s2:#b06cff; --s3:#ff5ad9; --s4:#ff9147;
+  --s5:#2ec779; --s6:#4fb0ff; --s7:#ff7a7a; --s8:#a3a3a3;
+  --neutral-mark: #4a4a4a;
+  --good-text:#2ec779;
+  --seq1:#08118a; --seq2:#0c19c4; --seq3:#1022ff; --seq4:#5f70ff;
+  --seq5:#8f9bff; --seq6:#b8c0ff; --seq7:#e0e4ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--plane);
+  color: var(--ink);
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--link); }
+
+.display { font-family: Supply, "Roboto Mono", ui-monospace, monospace; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: .95em; }
+.num  { font-variant-numeric: tabular-nums; }
+mark { background: var(--accent); color: #000; padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+:where(a):focus-visible, :where(button):focus-visible, :where(input):focus-visible,
+:where(select):focus-visible, :where([tabindex]):focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* ------------------------------------------------------------ shell -- */
+.wrap { max-width: 1360px; margin: 0 auto; padding: 0 20px 44px; }
+
+/* faixa roxa do site */
+.topbar { background: var(--purple); color: #fff; font-size: 13px; letter-spacing: .02em; }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 9px 20px; flex-wrap: wrap; }
+.topbar span { text-transform: uppercase; }
+.topbar a { color: #fff; text-decoration: none; font-weight: 700; font-size: 12px;
+  border: 2px solid #fff; border-radius: 999px; padding: 3px 12px; white-space: nowrap; }
+.topbar a:hover { background: #fff; color: var(--purple); }
+
+.masthead { background: var(--surface); padding: 22px 0 0; }
+.masthead .wrap, .controlbar .wrap { padding-bottom: 0; }
+.brandrow { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 30px; }
+.brandrow .logo { display: block; width: 148px; height: 49px; color: var(--ink); }
+.brandrow .logo svg { width: 100%; height: 100%; display: block; }
+.brandrow .sep { width: 1px; height: 34px; background: var(--line); }
+.eyebrow {
+  font-size: 13px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+h1 {
+  font-family: Supply, "Roboto Mono", ui-monospace, monospace;
+  font-size: clamp(26px, 3.6vw, 40px); font-weight: 700; line-height: 1.25; letter-spacing: 0;
+  margin: 0 0 12px; text-wrap: balance; max-width: 24ch;
+}
+.dek { color: var(--ink-2); max-width: 66ch; margin: 0 0 24px; font-size: 17px; line-height: 1.55; }
+
+/* --------------------------------------------------------- controls -- */
+.controlbar {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.controls {
+  display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: flex-end;
+  padding: 12px 0 13px;
+}
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field > label { font-size: 12px; font-weight: 500; letter-spacing: .03em; text-transform: uppercase; color: var(--muted); }
+select, input[type="text"], input[type="search"] {
+  font: inherit; font-size: 14px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 5px 11px; min-height: 34px;
+}
+select { cursor: pointer; }
+.seg { display: inline-flex; gap: 6px; }
+.seg button {
+  font: inherit; font-size: 13.5px; font-weight: 500; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+  padding: 5px 14px; cursor: pointer; min-height: 34px; white-space: nowrap;
+}
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
+.seg button:hover:not([aria-pressed="true"]) { border-color: var(--ink); }
+
+.check { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink); cursor: pointer; min-height: 34px; }
+.check input { accent-color: var(--ink); width: 16px; height: 16px; }
+
+/* ------------------------------------------------------------- tabs -- */
+.tabs { display: flex; gap: 28px; border-bottom: 1px solid var(--line); margin: 26px 0 26px; overflow-x: auto; }
+.tabs button {
+  font: inherit; font-size: 17px; font-weight: 400; color: var(--ink);
+  background: none; border: 0; border-bottom: 6px solid transparent;
+  padding: 8px 2px 10px; cursor: pointer; white-space: nowrap; margin-bottom: -1px;
+}
+.tabs button[aria-selected="true"] { border-bottom-color: var(--ink); font-weight: 700; }
+.tabs button:hover:not([aria-selected="true"]) { border-bottom-color: var(--accent); }
+
+/* ------------------------------------------------------------ cards -- */
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: 20px 22px 22px;
+}
+.card + .card { margin-top: 20px; }
+.cardhead { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+.cardhead h2 { font-size: 20px; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 12px; }
+.cardhead h2::before { content: ""; display: inline-block; width: 26px; height: 14px; background: var(--accent); flex: none; }
+.cardhead .sub { font-size: 13.5px; color: var(--muted); margin: 4px 0 0; max-width: 62ch; }
+.cardtools { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+.grid2 { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 18px; align-items: start; }
+@media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+
+.ghost {
+  font: inherit; font-size: 13.5px; font-weight: 500; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+  padding: 5px 14px; cursor: pointer; min-height: 34px;
+}
+.ghost:hover { border-color: var(--ink); }
+.ghost[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.btn {
+  font: inherit; font-size: 13.5px; font-weight: 700; color: #000;
+  background: var(--accent); border: 1px solid var(--accent); border-radius: 999px;
+  padding: 6px 18px; cursor: pointer; min-height: 34px; white-space: nowrap;
+}
+.btn:hover { border-color: #000; }
+
+/* ----------------------------------------------------------- charts -- */
+.chartbox { position: relative; margin-top: 12px; }
+.chartbox svg { display: block; max-width: 100%; overflow: visible; }
+.axis-txt { font-size: 11.5px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.axis-line { stroke: var(--axis); stroke-width: 1; }
+.gridline { stroke: var(--grid); stroke-width: 1; }
+.serie-lbl { font-size: 11.5px; font-weight: 500; fill: var(--ink-2); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 12px; }
+.legend .li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); cursor: default; }
+.legend .sw { width: 11px; height: 11px; border-radius: 2px; flex: none; }
+.legend .li.dim { opacity: .38; }
+
+.tip {
+  position: absolute; pointer-events: none; z-index: 30; opacity: 0;
+  transform: translate(-50%, -100%); transition: opacity .09s ease;
+  background: var(--surface); border: 1px solid var(--ink);
+  border-radius: var(--r); padding: 9px 11px;
+  font-size: 12.5px; min-width: 168px; max-width: 300px;
+}
+.tip.on { opacity: 1; }
+.tip .t { font-weight: 700; font-size: 13px; margin-bottom: 5px; }
+.tip .row { display: flex; justify-content: space-between; gap: 14px; padding: 1.5px 0; color: var(--ink-2); }
+.tip .row b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.tip .row .nm { display: inline-flex; align-items: center; gap: 6px; }
+.tip .dot { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+.tip .tot { border-top: 1px solid var(--line); margin-top: 5px; padding-top: 5px; }
+
+/* ----------------------------------------------------------- tables -- */
+.tablewrap { overflow-x: auto; margin-top: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 11px 8px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { font-size: 11.5px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+th.n, td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td .meta { display: block; overflow: hidden; text-overflow: ellipsis; }
+td > .nm + .meta { max-width: 46ch; white-space: nowrap; }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { color: var(--ink); }
+th.sortable[data-dir]::after { content: " ↓"; }
+th.sortable[data-dir="asc"]::after { content: " ↑"; }
+tbody tr.clickable { cursor: pointer; }
+tbody tr.clickable:hover { background: var(--surface-2); }
+tbody tr.on { background: var(--accent-wash); }
+td .nm { display: block; font-weight: 500; }
+td .meta { font-size: 12px; color: var(--muted); }
+.swatch-cell { width: 14px; padding-right: 8px; }
+.swatch-cell span { display: block; width: 10px; height: 10px; border-radius: 2px; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700;
+  padding: 2px 8px; border-radius: 999px; white-space: nowrap;
+  border: 1px solid currentColor;
+}
+.pill.crit { color: var(--critical); }
+.pill.warn { color: var(--serious); }
+.pill.new  { color: var(--link); }
+.pill.mut  { color: var(--muted); }
+
+/* ------------------------------------------------------------ misc --- */
+.note {
+  font-size: 13px; color: var(--ink-2); background: var(--surface-2);
+  border-left: 4px solid var(--accent); border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 9px 13px; margin-top: 12px;
+}
+.note.alert { border-left-color: var(--serious); }
+.empty { color: var(--muted); font-size: 14px; padding: 34px 0; text-align: center; }
+.hidden { display: none !important; }
+
+.searchrow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.searchrow input[type="search"] { flex: 1 1 320px; min-height: 44px; font-size: 15px;
+  background: var(--surface-3); border-color: transparent; border-radius: 999px; padding: 6px 18px; }
+.searchrow input[type="search"]:focus { background: var(--surface); border-color: var(--ink); outline: none; }
+.hits { font-size: 13px; color: var(--muted); }
+
+.detail-empty { color: var(--muted); font-size: 14px; text-align: center; padding: 40px 12px; }
+.dtitle { font-family: Supply, ui-monospace, monospace; font-size: 19px; font-weight: 700; margin: 0; text-wrap: balance; }
+.dmeta { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.dmeta .mono { color: var(--ink-2); }
+.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 14px; }
+.kv > div { background: var(--surface); padding: 9px 11px; }
+.kv .k { font-size: 11px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.kv .v { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 1px; }
+
+/* ------------------------------------------------------------ load --- */
+.loading { display: grid; place-items: center; min-height: 62vh; gap: 14px; text-align: center; }
+.loading .bar { width: 210px; height: 4px; background: var(--surface-3); overflow: hidden; }
+.loading .bar i { display: block; height: 100%; width: 34%; background: var(--accent); animation: slide 1.15s ease-in-out infinite; }
+@keyframes slide { 0% { transform: translateX(-100%);} 100% { transform: translateX(320%);} }
+.loading p { color: var(--muted); font-size: 13.5px; margin: 0; }
+
+/* ------------------------------------------------------------ foot --- */
+footer.metod { background: #000; color: #fff; margin-top: 40px; border-top: 1px solid rgba(255,255,255,.18); }
+footer.metod .wrap { padding: 44px 20px 40px; }
+footer.metod .fsrow { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; flex-wrap: wrap; }
+footer.metod .fsrow .logo-fs { width: 50px; height: auto; display: block; }
+footer.metod .fsrow p { margin: 0; color: #fff; max-width: 72ch; font-size: 13.5px; }
+footer.metod h3 { font-size: 13px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: #a3a3a3; margin: 0 0 12px; }
+footer.metod .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 18px 34px; }
+footer.metod p { font-size: 13px; color: #d9d9d9; margin: 0 0 9px; line-height: 1.55; }
+footer.metod b { color: #fff; font-weight: 700; }
+footer.metod a { color: var(--accent); }
+footer.metod .mono { color: #fff; }
+footer.metod .fim { border-top: 1px solid rgba(255,255,255,.18); margin-top: 26px; padding-top: 16px;
+  font-size: 12.5px; color: #a3a3a3; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+/* ------------------------------------------------------ novos blocos --- */
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; align-items: start; }
+.grid3 > .card { margin-top: 0; }
+
+/* linhas expansíveis do ranking */
+tr.det > td { padding: 0; border-bottom: 1px solid var(--line); }
+.detbox { background: var(--surface-2); border-left: 6px solid var(--accent);
+  padding: 18px 20px 20px; margin-bottom: 2px; }
+.detbox h4 { font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--muted); margin: 22px 0 0; }
+.detbox h4:first-of-type { margin-top: 14px; }
+.detcols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px 28px; }
+.detbox table { font-size: 13px; }
+.detbox .tablewrap { max-height: 460px; overflow: auto; }
+.detbox th { position: sticky; top: 0; background: var(--surface-2); z-index: 1; }
+tr.clickable .caret { display: inline-block; width: 12px; color: var(--muted); transition: transform .12s ease; }
+tr.clickable[aria-expanded="true"] .caret { transform: rotate(90deg); color: var(--ink); }
+tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
+
+.fundamento { font-size: 12.5px; color: var(--ink-2); line-height: 1.4; }
+.tagreg { display: inline-block; font-size: 11.5px; font-weight: 500; padding: 2px 7px;
+  background: var(--accent); color: #000; white-space: nowrap; }
+
+.barrow { display: grid; grid-template-columns: minmax(120px, 268px) 1fr auto; gap: 12px; align-items: center;
+  padding: 5px 0; font-size: 13px; }
+.barrow .lbl { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barrow .track { position: relative; height: 16px; }
+.barrow .track i { position: absolute; top: 0; height: 16px; border-radius: 0 4px 4px 0; }
+.barrow .track i:first-child { border-radius: 0; }
+.barrow .val { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; font-size: 12.5px; }
+.barrow .sub { color: var(--muted); font-weight: 400; }
+
+.setor { display: block; font-size: 12.5px; color: var(--ink-2); overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+#res-mais .empty { padding: 18px 0 4px; }
+
+/* ------------------------------------------------------------ achados -- */
+.ach-intro { max-width: 74ch; font-size: 15.5px; color: var(--ink-2); margin: 0 0 22px; }
+.ach-intro b { color: var(--ink); }
+.achado {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 22px 24px 20px; margin-bottom: 20px;
+}
+.ach-cab { margin-bottom: 14px; }
+.ach-tag { display: inline-block; font-size: 12.5px; font-weight: 700; padding: 3px 9px;
+  background: var(--accent); color: #000; margin-bottom: 10px; }
+.ach-tag.crit { background: var(--critical); color: #fff; }
+.achado h3 { font-family: Supply, "Roboto Mono", ui-monospace, monospace;
+  font-size: clamp(19px, 2.1vw, 25px); font-weight: 700; line-height: 1.3; margin: 0;
+  color: var(--ink); text-wrap: balance; }
+.ach-lead { font-size: 15.5px; line-height: 1.62; color: var(--ink-2); max-width: 80ch; margin: 0 0 4px; }
+.ach-lead b { color: var(--ink); font-weight: 700; }
+.ach-evid { margin-top: 14px; }
+.ach-evid table { font-size: 13.5px; }
+.conferir { font-size: 13px; color: var(--muted); margin: 16px 0 0;
+  padding-top: 12px; border-top: 1px solid var(--line); display: flex; align-items: center;
+  gap: 12px; flex-wrap: wrap; }
+.conferir b { color: var(--ink-2); font-weight: 700; }
+</style>
+<div id="boot" class="loading">
+  <div class="bar"><i></i></div>
+  <p id="bootmsg">Descompactando os microdados de renúncia fiscal…</p>
+</div>
+
+<div id="app" class="hidden">
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Uma ferramenta da Fiquem Sabendo</span>
+    <a href="https://fiquemsabendo.com.br" target="_blank" rel="noopener">fiquemsabendo.com.br</a>
+  </div>
+</div>
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandrow">
+      <a class="logo" href="https://fiquemsabendo.com.br" target="_blank" rel="noopener"><svg role="img" aria-label="Fiquem Sabendo" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 148 49"><g clip-path="url(#clip0_3984_5564)"><path fill="#ffe706" d="M148.003.5H86.227v21.184h61.776zM34.354 27.059H.211v21.184h34.143z"/><path fill="currentColor" d="M43.375 41.76v1.444c0 1.373.464 2.01 1.712 2.01s1.557-.945 1.557-1.926c0-1.967-.503-2.538-3.406-4.32-3.2-1.99-4.845-3.17-4.845-6.24 0-2.976 1.343-5.725 6.727-5.725 5.71 0 6.558 2.86 6.558 5.252v1.201h-5.164v-1.255c0-1.264-.284-1.89-1.363-1.89-1.01 0-1.335.636-1.335 1.816 0 1.257.312 1.877 2.662 3.223 4.18 2.406 5.686 3.76 5.686 7.194 0 3.267-1.519 5.953-7.166 5.953-5.42 0-6.967-2.399-6.967-5.49V41.76zm15.594 1.47-.701 4.964h-5.573l4.019-20.857h8.149l4.113 20.857h-5.685l-.784-4.964zm3.075-3.538c-.404-2.67-.97-6.728-1.236-8.726h-.215c-.098 1.453-.773 6.147-1.149 8.726zm8.026-12.36h6.718c4.828 0 7.161 1.534 7.161 4.758v.829c0 2.827-1.433 3.715-2.769 4.09 1.312.397 3.242 1.17 3.242 4.077v1.661c0 3.644-2.077 5.442-7.269 5.442H70.07zm6.168 8.21c1.843 0 2.478-.435 2.478-2.03v-1.078c0-1.336-.585-1.942-2.317-1.942h-1.026v5.05zm-.865 9.516h1.093c1.95 0 2.413-.661 2.413-2.207v-1.914c0-1.618-.52-2.307-2.77-2.307h-.736zm22.099-6.082h-5.86v5.685h6.869l-.656 3.528H86.141V27.332h11.64v3.547h-6.168v4.571h5.86zm2.106 9.213V27.332h6.047c.903 2.546 3.75 11.99 3.98 12.907h.133c-.303-2.775-.497-6.57-.497-9.48v-3.427h5.074v20.857h-6.11a2531 2531 0 0 1-3.878-13.444h-.147c.212 2.45.379 6.603.379 9.88v3.564zm17.294-20.857h6.718c5.855 0 7.876 1.96 7.876 6.276v7.84c0 3.594-1.038 6.74-7.504 6.74h-7.095zm5.472 17.623h1.066c2.143 0 2.497-1.024 2.497-2.652v-9.34c0-1.541-.47-2.378-2.54-2.378h-1.023zm25.659-12.044v9.677c0 4.139-2.655 5.912-7.615 5.912-4.714 0-7.138-1.819-7.138-5.872v-9.825c0-4.027 3.015-5.778 7.391-5.778 4.397-.007 7.362 1.721 7.362 5.886m-9.233-.451v10.66c0 1.288.603 1.96 1.824 1.96 1.274 0 1.85-.608 1.85-1.98V32.422c0-1.302-.491-1.97-1.865-1.97-1.163.008-1.809.626-1.809 2.009M0 .805h10.586V3.4h-6.77v6.04h6.42v2.598h-6.42v9.645H.009zm16.167 0v20.879h-3.808V.804zm15.739 5.368v10.075c0 3.86-2.206 5.73-6.782 5.73-4.53 0-6.413-1.99-6.413-5.686V6.16c0-3.807 2.513-5.65 6.66-5.65 4.268.002 6.535 1.948 6.535 5.663m-9.308-.233v10.643c0 1.992.983 2.857 2.701 2.857 1.836 0 2.72-.821 2.72-2.928V5.94c0-1.893-.837-2.871-2.732-2.871-1.779-.006-2.69.898-2.69 2.87m7.517 14.023 3.768 2.183-2.271 1.963-4.55-2.626zM38.15.805v16.028c0 1.609.742 2.605 2.623 2.605 1.924 0 2.563-1.031 2.563-2.596V.805h3.826V16.77c0 3.267-2.006 5.208-6.462 5.208-4.28 0-6.356-1.723-6.356-5.184V.804zm22.103 11.099h-6.306v7.205h7.216l-.495 2.575H50.133V.804h10.475v2.597h-6.661v5.93h6.306zm16.705 1.615c0-3.667.07-7.961.154-10.286h-.043c-.68 3.571-2.502 12.336-3.856 18.451H69.57C68.553 16.283 66.698 6.99 66.025 3.21h-.085c.085 2.428.225 7.157.225 10.743v7.731H62.68V.804h5.672c1.298 5.671 2.743 12.338 3.127 15.152h.042C71.978 13.144 73.786 6.15 75.1.805h5.508v20.879h-3.65z"/></g><defs><clipPath id="clip0_3984_5564"><path fill="#fff" d="M0 .5h148v48H0z"/></clipPath></defs></svg></a>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="eyebrow">Dados abertos · Portal da Transparência · Receita Federal</span>
+    </div>
+    <h1>Quem deixa de pagar <mark>tributos federais</mark></h1>
+    <p class="dek">Quanto cada empresa deixou de recolher por conta de incentivos, isenções e
+      regimes especiais — CNPJ a CNPJ, com o fundamento legal de cada renúncia, de 2015 a 2024.</p>
+  </div>
+</header>
+
+<div class="controlbar">
+  <div class="wrap">
+    <div class="controls">
+      <div class="field">
+        <label id="lbl-medida">Medida</label>
+        <div class="seg" role="group" aria-labelledby="lbl-medida" id="seg-medida">
+          <button data-v="nominal" aria-pressed="true">Nominal</button>
+          <button data-v="real" aria-pressed="false">Real (IPCA)</button>
+          <button data-v="pib" aria-pressed="false">% do PIB</button>
+        </div>
+      </div>
+      <div class="field" id="fld-base">
+        <label for="sel-base">Preços de</label>
+        <select id="sel-base"></select>
+      </div>
+      <div class="field">
+        <label for="sel-secao">Setor (seção CNAE)</label>
+        <select id="sel-secao"></select>
+      </div>
+      <label class="check"><input type="checkbox" id="chk-2024"> Incluir 2024 (parcial)</label>
+      <button class="ghost" id="btn-reset" type="button">Limpar filtros</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" data-v="resumo" aria-selected="true">Resumo</button>
+    <button role="tab" data-v="ranking" aria-selected="false">Ranking de empresas</button>
+    <button role="tab" data-v="achados" aria-selected="false">Achados</button>
+  </nav>
+
+  <!-- ================================================ RESUMO ========= -->
+  <section id="view-resumo" role="tabpanel">
+    <div class="card">
+      <div class="cardhead">
+        <div>
+          <h2 id="pan-title">Renúncia por ano</h2>
+          <p class="sub" id="pan-sub"></p>
+        </div>
+        <div class="cardtools">
+          <div class="field">
+            <label for="sel-dim">Abrir por</label>
+            <select id="sel-dim">
+              <option value="secao">Setor (seção CNAE)</option>
+              <option value="regime">Mecanismo</option>
+              <option value="tipo">Tipo de renúncia</option>
+              <option value="tributo">Tributo</option>
+              <option value="uf">UF</option>
+              <option value="empresa">Maiores empresas</option>
+              <option value="nenhuma">Nada (total)</option>
+            </select>
+          </div>
+          <button class="ghost" id="btn-pan-tab" type="button" aria-pressed="false">Ver tabela</button>
+        </div>
+      </div>
+      <div class="chartbox" id="pan-chart"></div>
+      <div class="legend" id="pan-legend"></div>
+      <div class="tablewrap hidden" id="pan-table"></div>
+      <div id="pan-note"></div>
+    </div>
+  </section>
+
+  <!-- ================================================ RANKING ======== -->
+  <section id="view-ranking" role="tabpanel" class="hidden">
+    <div class="card">
+      <div class="searchrow">
+        <input type="search" id="busca" placeholder="Buscar por razão social, nome fantasia ou CNPJ — ex.: petrobras, 33592510, embraer"
+               autocomplete="off" spellcheck="false" aria-label="Buscar empresa">
+        <span class="hits" id="busca-hits"></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="cardhead"><div>
+        <h2 id="res-title">Ranking de beneficiários</h2>
+        <p class="sub" id="res-sub"></p>
+      </div></div>
+      <div class="tablewrap" id="res-table"></div>
+      <div id="res-mais"></div>
+    </div>
+  </section>
+
+  <!-- ================================================ ACHADOS ======== -->
+  <section id="view-achados" role="tabpanel" class="hidden">
+    <p class="ach-intro"><span id="ach-n">Nove</span> leituras que os microdados sustentam e que não estão no óbvio do
+      ranking. Todas cobrem <b>2015 a 2023</b> em reais correntes, no nível de grupo econômico,
+      e <b>não obedecem aos filtros do topo</b> — são números fixos, prontos para citar. Cada
+      card traz o caminho para reproduzir o achado nas outras abas. São indícios: antes de
+      publicar, confirme com a Receita e com a empresa.</p>
+    <div id="ach-lista"></div>
+  </section>
+
+  </div>
+  <footer class="metod">
+   <div class="wrap">
+    <div class="fsrow">
+      <svg class="logo-fs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 51 26"><g clip-path="url(#clip0_7729_993)"><path fill="#ffe706" d="M12.12 0H.433v25.998h11.685z"/><path fill="#fff" d="M16.695.387h13.689V3.57H21.63v7.412h8.302v3.19H21.63v11.832h-4.924zM39.388 17.97v1.719c0 1.634.582 2.392 2.148 2.392s1.952-1.123 1.952-2.296c0-2.345-.633-3.023-4.277-5.154-4.027-2.362-6.084-3.773-6.084-7.432 0-3.548 1.687-6.812 8.445-6.812 7.179 0 8.237 3.408 8.237 6.251v1.43h-6.49V6.58c0-1.503-.355-2.253-1.711-2.253-1.266 0-1.676.76-1.676 2.167 0 1.504.392 2.234 3.34 3.838 5.26 2.869 7.142 4.486 7.142 8.566 0 3.892-1.91 7.087-8.998 7.087-6.808 0-8.75-2.858-8.75-6.541V17.97z"/></g><defs><clipPath id="clip0_7729_993"><path fill="#fff" d="M.434 0h49.98v26H.434z"/></clipPath></defs></svg>
+      <p>A Fiquem Sabendo é uma organização sem fins lucrativos, independente e apartidária, cuja
+        missão é reduzir o desequilíbrio de poder entre sociedade e Estado a partir do acesso a
+        informações públicas.</p>
+    </div>
+    <h3>Como ler estes números</h3>
+    <div class="cols">
+      <div>
+        <p><b>O que é.</b> Renúncia fiscal aqui é o Incentivo, Renúncia, Benefício ou Imunidade
+          de natureza tributária (IRBI) apurado pela Receita Federal: a diferença entre o tributo
+          calculado e o efetivamente devido, por CNPJ e por ano-calendário.</p>
+        <p><b>O que não é.</b> Não cobre tributos estaduais e municipais (ICMS, ISS, IPTU),
+          nem o Simples Nacional, nem renúncias de pessoa física. É um recorte da União.</p>
+        <p><b>Fonte.</b> <span id="foot-fonte"></span></p>
+      </div>
+      <div>
+        <p><b>Mecanismo.</b> A origem jurídica vem do campo <b>Fundamento Legal</b> do arquivo
+          detalhado da Receita — <span id="foot-fund"></span> dispositivos distintos. Para o
+          IRPJ/CSLL declarado, o próprio benefício já nomeia o programa; para a renúncia de
+          importação, o mecanismo só aparece no fundamento. O agrupamento em
+          <span id="foot-reg"></span> mecanismos é nosso, por regra explícita sobre esse texto;
+          o fundamento original aparece sempre ao lado, sem interpretação.</p>
+        <p><b>Deflator.</b> Valores reais usam a <b>média anual</b> do número-índice do IPCA
+          (IBGE, tabela SIDRA 1737) — o deflator adequado a um fluxo distribuído ao longo do ano.</p>
+        <p><b>% do PIB.</b> PIB nominal anual = soma dos quatro trimestres a preços correntes
+          (IBGE, tabela SIDRA 1846). Nessa medida o resumo do período é a <b>média anual</b>,
+          não a soma: somar percentuais de anos diferentes não significa nada.</p>
+      </div>
+      <div>
+        <p><b>Empresa.</b> Cada linha do ranking é um grupo econômico, aproximado pela raiz do
+          CNPJ (8 primeiros dígitos), que une matriz e filiais. Não capta controle societário
+          entre CNPJs de raízes diferentes. Os CNPJs que compõem o grupo aparecem ao abrir a linha.</p>
+        <p><b>2024 é parcial.</b> <span id="foot-2024"></span></p>
+        <p><b>Sem CNAE.</b> <span id="foot-cnae"></span> do valor da série está sob o código
+          <span class="mono">00000</span> na origem e aparece como “Sem informação”, não é descartado.</p>
+        <p><b>Arredondamento.</b> Os valores embutidos nesta página estão arredondados para reais
+          inteiros; o banco DuckDB que a gera guarda os centavos.</p>
+      </div>
+    </div>
+    <div class="fim">
+      <span>Código, banco DuckDB e metodologia: <a href="https://github.com/FiquemSabendo/renuncias-fiscais" target="_blank" rel="noopener">github.com/FiquemSabendo/renuncias-fiscais</a></span>
+      <span><a href="https://fiquemsabendo.com.br" target="_blank" rel="noopener">fiquemsabendo.com.br</a> · <a href="https://fiquemsabendo.com.br/contato" target="_blank" rel="noopener">Contato</a></span>
+    </div>
+   </div>
+  </footer>
+</div>
+
+<script id="dados" type="application/json">__PAYLOAD__</script>
+
+<script>
+"use strict";
+/* ===================================================================== *
+ *  Renúncias Fiscais Federais — leitura do payload e modelo em memória
+ * ===================================================================== */
+
+const P = JSON.parse(document.getElementById("dados").textContent);
+const ANO0 = P.meta.ano0;
+const ANOS = P.meta.anos;
+const NA   = ANOS.length;
+const ANO_PARCIAL = P.meta.ano_parcial;
+const IDX_PARCIAL = ANO_PARCIAL - ANO0;
+
+const IPCA = new Float64Array(NA);
+const PIB  = new Float64Array(NA);
+P.macro.forEach(([ano, ipca, pib]) => { IPCA[ano - ANO0] = ipca; PIB[ano - ANO0] = pib; });
+
+const SECOES = P.secoes;                       // {A: "Agropecuária…", …}
+const CNAE   = new Map(P.cnae.map(r => [r[0], { desc: r[1], secao: r[2] }]));
+const MUN    = P.mun;                          // [[municipio, uf], …]
+
+/* Cada "item" é um par benefício fiscal × fundamento legal — o grão mais fino
+   publicado pela Receita. É dele que sai o mecanismo jurídico da renúncia. */
+const ITEM = P.item.map(([tipo, benef, trib, fund, reg]) =>
+  ({ tipo, benef, trib, fund, reg }));
+const REGIMES = [...new Set(ITEM.map(i => i.reg))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+const REG_ID = new Map(REGIMES.map((r, i) => [r, i]));
+const ITEM_REG = Uint16Array.from(ITEM, i => REG_ID.get(i.reg));
+const TIPOS = [...new Set(ITEM.map(i => i.tipo))];
+const TRIBUTOS = [...new Set(ITEM.map(i => i.trib))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+
+const CORES = ["--s1","--s2","--s3","--s4","--s5","--s6","--s7","--s8"];
+const SEQ = ["--seq1","--seq2","--seq3","--seq4","--seq5","--seq6","--seq7"];
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* --------------------------------------------------------- utilidades -- */
+const nfInt = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 0 });
+const nf1   = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const nf2   = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+function compacto(v) {
+  const a = Math.abs(v);
+  if (a >= 1e9)  return nf2.format(v / 1e9)  + " bi";
+  if (a >= 1e6)  return nf1.format(v / 1e6)  + " mi";
+  if (a >= 1e3)  return nfInt.format(v / 1e3) + " mil";
+  return nfInt.format(v);
+}
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+function norm(s) {
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+}
+function cnpjFmt(c) {
+  return c.length === 14
+    ? `${c.slice(0,2)}.${c.slice(2,5)}.${c.slice(5,8)}/${c.slice(8,12)}-${c.slice(12)}`
+    : c;
+}
+function dataBR(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return iso || "—";
+  return d.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+}
+function debounce(fn, ms) {
+  let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+function corDeFundo(hex) {
+  const h = hex.replace("#", "");
+  const f = c => { const v = parseInt(c, 16) / 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); };
+  const L = .2126 * f(h.slice(0,2)) + .7152 * f(h.slice(2,4)) + .0722 * f(h.slice(4,6));
+  return L > .42 ? "#0f1419" : "#ffffff";
+}
+
+/* ------------------------------------------------------- descompressão -- */
+async function gunzipB64(b64) {
+  const bin = atob(b64);
+  const u8 = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+  const stream = new Blob([u8]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return await new Response(stream).text();
+}
+
+/* ------------------------------------------------------------ modelo --- */
+const D = {};
+
+async function carregar() {
+  const msg = document.getElementById("bootmsg");
+  const passo = t => { msg.textContent = t; return new Promise(r => setTimeout(r, 0)); };
+
+  await passo("Descompactando o cadastro de 77.523 CNPJs…");
+  const linhasDim = (await gunzipB64(P.dim)).split("\n");
+  const N = linhasDim.length;
+  D.n = N;
+  D.cnpj = new Array(N); D.razao = new Array(N); D.fant = new Array(N);
+  D.cnae = new Array(N); D.mun = new Int32Array(N);
+  for (let i = 0; i < N; i++) {
+    const p = linhasDim[i].split("\t");
+    D.cnpj[i] = p[0]; D.razao[i] = p[1]; D.fant[i] = p[2]; D.cnae[i] = p[3];
+    D.mun[i] = +p[4];
+  }
+
+  await passo("Descompactando 251 mil totais anuais…");
+  const linhasFato = (await gunzipB64(P.fato)).split("\n");
+  D.vals = new Float64Array(N * NA);
+  for (let i = 0; i < N; i++) {
+    const l = linhasFato[i];
+    if (!l) continue;
+    const p = l.split(" ");
+    for (let j = 0; j < p.length; j += 2) D.vals[i * NA + (+p[j])] = +p[j + 1];
+  }
+
+  await passo("Descompactando 711 mil linhas de fundamento legal…");
+  const linhasItem = (await gunzipB64(P.itens)).split("\n");
+  const total = P.meta.n_itens;
+  D.itIni = new Int32Array(N); D.itFim = new Int32Array(N);
+  D.itAno = new Uint8Array(total); D.itId = new Uint16Array(total);
+  D.itVal = new Float64Array(total);
+  let k = 0;
+  for (let i = 0; i < N; i++) {
+    D.itIni[i] = k;
+    const l = linhasItem[i];
+    if (l) {
+      const p = l.split(" ");
+      for (let j = 0; j < p.length; j += 3) {
+        D.itAno[k] = +p[j]; D.itId[k] = +p[j + 1]; D.itVal[k] = +p[j + 2]; k++;
+      }
+    }
+    D.itFim[i] = k;
+  }
+
+  await passo("Montando o cubo por mecanismo, setor e UF…");
+  const linhasAgg = (await gunzipB64(P.agg)).split("\n").filter(Boolean);
+  D.agg = linhasAgg.map(l => { const p = l.split("\t"); return [+p[0], +p[1], p[2], p[3], +p[4]]; });
+
+  await passo("Agrupando por raiz de CNPJ…");
+  D.secaoDe = new Array(N);
+  D.ufDe = new Array(N);
+  for (let i = 0; i < N; i++) {
+    D.secaoDe[i] = (CNAE.get(D.cnae[i]) || { secao: "Z" }).secao;
+    D.ufDe[i] = MUN[D.mun[i]][1] || "—";
+  }
+}
+
+/* -------------------------------------------- entidades (grupo/estab) -- */
+const cacheEnt = {};
+
+function entidades(nivel) {
+  if (cacheEnt[nivel]) return cacheEnt[nivel];
+  const N = D.n;
+  let n, chaveDe, membros;
+  const dono = new Int32Array(N);
+
+  if (nivel === "estab") {
+    n = N;
+    chaveDe = new Array(N);
+    for (let i = 0; i < N; i++) { chaveDe[i] = D.cnpj[i]; dono[i] = i; }
+    membros = null;
+  } else {
+    const mapa = new Map();
+    for (let i = 0; i < N; i++) {
+      const r = D.cnpj[i].slice(0, 8);
+      let g = mapa.get(r);
+      if (g === undefined) { g = mapa.size; mapa.set(r, g); }
+      dono[i] = g;
+    }
+    n = mapa.size;
+    chaveDe = new Array(n);
+    for (const [r, g] of mapa) chaveDe[g] = r;
+    membros = new Array(n);
+    for (let g = 0; g < n; g++) membros[g] = [];
+    for (let i = 0; i < N; i++) membros[dono[i]].push(i);
+  }
+
+  const vals  = new Float64Array(n * NA);
+  const total = new Float64Array(n);
+  const nome  = new Array(n), busca = new Array(n), cnae = new Array(n);
+  const secao = new Array(n), uf = new Array(n), mun = new Array(n);
+  const nEstab = new Int32Array(n), principal = new Int32Array(n);
+
+  for (let g = 0; g < n; g++) {
+    const ms = membros ? membros[g] : [g];
+    let melhor = ms[0], melhorV = -1;
+    const nomes = [];
+    for (const i of ms) {
+      let t = 0;
+      for (let a = 0; a < NA; a++) { const v = D.vals[i * NA + a]; vals[g * NA + a] += v; t += v; }
+      total[g] += t;
+      if (t > melhorV) { melhorV = t; melhor = i; }
+      nomes.push(D.razao[i]);
+      if (D.fant[i]) nomes.push(D.fant[i]);
+    }
+    principal[g] = melhor;
+    nEstab[g] = ms.length;
+    nome[g]  = D.razao[melhor];
+    cnae[g]  = D.cnae[melhor];
+    secao[g] = D.secaoDe[melhor];
+    uf[g]    = D.ufDe[melhor];
+    mun[g]   = MUN[D.mun[melhor]][0];
+    const uniq = [...new Set(nomes)].join(" ");
+    busca[g] = norm(uniq.length > 400 ? uniq.slice(0, 400) : uniq) + " " + chaveDe[g];
+  }
+
+  return (cacheEnt[nivel] = { n, chave: chaveDe, membros, dono, vals, total, nome, busca,
+                              cnae, secao, uf, mun, nEstab, principal, nivel });
+}
+
+/* ------------------------------------------------------------ estado -- */
+/* O nível é sempre o grupo econômico (raiz do CNPJ); uf e regime existem só
+   como pontos de extensão — não há controle para eles nesta versão. */
+const S = {
+  view: "resumo", medida: "nominal", anoBase: 2023, nivel: "grupo",
+  incluir2024: false, uf: "", secao: "", regime: "", dim: "secao",
+  panTabela: false, busca: "", aberta: null,
+};
+
+const LS = "renuncias.v3";
+try {
+  const g = JSON.parse(localStorage.getItem(LS) || "{}");
+  for (const k of ["medida", "anoBase", "secao", "incluir2024", "dim"])
+    if (g[k] !== undefined) S[k] = g[k];
+} catch (e) { /* armazenamento indisponível — segue com os padrões */ }
+const salvar = debounce(() => {
+  try {
+    localStorage.setItem(LS, JSON.stringify({
+      medida: S.medida, anoBase: S.anoBase, secao: S.secao,
+      incluir2024: S.incluir2024, dim: S.dim }));
+  } catch (e) { /* idem */ }
+}, 400);
+
+/* ------------------------------------------------------- transformação -- */
+const anosAtivos = () => S.incluir2024 ? NA : IDX_PARCIAL;
+
+function conv(v, a) {
+  if (S.medida === "real") return v * IPCA[S.anoBase - ANO0] / IPCA[a];
+  if (S.medida === "pib")  return PIB[a] ? v / PIB[a] * 100 : 0;
+  return v;
+}
+function casasPct(v) {
+  const a = Math.abs(v);
+  return a >= 1 ? 2 : a >= 0.1 ? 3 : a >= 0.01 ? 4 : 5;
+}
+function fmtPct(v, casas) {
+  const d = casas === undefined ? casasPct(v) : casas;
+  if (v > 0 && v < Math.pow(10, -d)) return "<" + Math.pow(10, -d).toFixed(d).replace(".", ",") + "%";
+  return v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+}
+function fmtV(v) {
+  if (S.medida === "pib") return fmtPct(v);
+  return "R$ " + compacto(v);
+}
+function fmtEixo(v, ref) {
+  if (S.medida === "pib") {
+    if (v === 0) return "0%";
+    return fmtPct(v, Math.max(1, casasPct(ref === undefined ? v : ref) - 1));
+  }
+  const a = Math.abs(v);
+  if (a >= 1e9) return nfInt.format(v / 1e9) + " bi";
+  if (a >= 1e6) return nfInt.format(v / 1e6) + " mi";
+  if (a >= 1e3) return nfInt.format(v / 1e3) + " mil";
+  return nfInt.format(v);
+}
+function fmtVar(p) {
+  if (!isFinite(p)) return "—";
+  if (p >= 9) return "×" + nf1.format(1 + p);
+  return (p >= 0 ? "+" : "") + nfInt.format(p * 100) + "%";
+}
+const rotuloMedida = () => S.medida === "nominal" ? "R$ correntes"
+  : S.medida === "real" ? `R$ de ${S.anoBase}` : "% do PIB";
+
+/* ----------------------------------------------------- fatia filtrada -- */
+/* Os filtros (UF, setor, mecanismo) valem no nível do ESTABELECIMENTO: um grupo
+   entra na fatia com o valor dos CNPJs que passam no filtro, não com o total.
+   É o que faz o ranking, os cortes por setor e o cubo por mecanismo fecharem
+   entre si. O nível de agregação (grupo ou estabelecimento) decide só quem é a
+   "empresa" no ranking. */
+let FATIA = null;
+
+function passaEstab(e) {
+  if (S.uf && D.ufDe[e] !== S.uf) return false;
+  if (S.secao && D.secaoDe[e] !== S.secao) return false;
+  return true;
+}
+
+function valsFiltrados(E) {
+  if (!S.uf && !S.secao && !S.regime) return E.vals;
+  const out = new Float64Array(E.n * NA);
+  const regId = S.regime ? REG_ID.get(S.regime) : -1;
+  for (let e = 0; e < D.n; e++) {
+    if (!passaEstab(e)) continue;
+    const base = E.dono[e] * NA;
+    if (regId < 0) {
+      for (let a = 0; a < NA; a++) out[base + a] += D.vals[e * NA + a];
+    } else {
+      for (let k = D.itIni[e]; k < D.itFim[e]; k++)
+        if (ITEM_REG[D.itId[k]] === regId) out[base + D.itAno[k]] += D.itVal[k];
+    }
+  }
+  return out;
+}
+
+function fatia() {
+  const E = entidades(S.nivel);
+  const chave = [S.nivel, S.uf, S.secao, S.regime, S.incluir2024, S.medida, S.anoBase].join("|");
+  if (FATIA && FATIA.chave === chave) return FATIA;
+  const na = anosAtivos();
+  const vals = valsFiltrados(E);
+  const idx = [];
+  for (let g = 0; g < E.n; g++) {
+    let t = 0;
+    for (let a = 0; a < na; a++) t += vals[g * NA + a];
+    if (t > 0) idx.push(g);
+  }
+  const totalAno = new Float64Array(NA);
+  for (const g of idx) for (let a = 0; a < na; a++) totalAno[a] += vals[g * NA + a];
+  // totalEnt já sai na medida em vigor: somar reais correntes de anos diferentes
+  // (ou pior, somar % do PIB) daria um número sem sentido
+  const totalEnt = new Float64Array(idx.length);
+  idx.forEach((g, k) => {
+    let t = 0;
+    for (let a = 0; a < na; a++) t += conv(vals[g * NA + a], a);
+    totalEnt[k] = S.medida === "pib" ? t / na : t;
+  });
+  const ordem = idx.map((_, k) => k).sort((a, b) => totalEnt[b] - totalEnt[a]);
+  const posDe = new Int32Array(E.n).fill(-1);
+  idx.forEach((g, k) => { posDe[g] = k; });
+  return (FATIA = { chave, E, vals, idx, posDe, totalAno, totalEnt, ordem, na });
+}
+function invalidar() { FATIA = null; }
+</script>
+
+<script>
+"use strict";
+/* ===================================================================== *
+ *  Primitivas de gráfico — SVG desenhado à mão (a CSP bloqueia CDN)
+ * ===================================================================== */
+const NS = "http://www.w3.org/2000/svg";
+function sv(tag, at, pai) {
+  const e = document.createElementNS(NS, tag);
+  if (at) for (const k in at) if (at[k] !== null && at[k] !== undefined) e.setAttribute(k, at[k]);
+  if (pai) pai.appendChild(e);
+  return e;
+}
+function ticksY(max, alvo) {
+  if (!(max > 0)) return { top: 1, vals: [0, 1] };
+  const bruto = max / (alvo || 5);
+  const mag = Math.pow(10, Math.floor(Math.log10(bruto)));
+  const r = bruto / mag;
+  const passo = (r <= 1 ? 1 : r <= 2 ? 2 : r <= 2.5 ? 2.5 : r <= 5 ? 5 : 10) * mag;
+  const top = Math.ceil(max / passo - 1e-9) * passo;
+  const vals = [];
+  for (let v = 0; v <= top + passo * 1e-6; v += passo) vals.push(+v.toFixed(10));
+  return { top, vals };
+}
+function caminhoTopo(x, y, w, h, r) {
+  if (h <= 0) return "";
+  const rr = Math.min(r, w / 2, h);
+  return `M${x},${y + h}L${x},${y + rr}Q${x},${y} ${x + rr},${y}L${x + w - rr},${y}` +
+         `Q${x + w},${y} ${x + w},${y + rr}L${x + w},${y + h}Z`;
+}
+function tipDe(box) {
+  let t = box.querySelector(".tip");
+  if (!t) { t = document.createElement("div"); t.className = "tip"; box.appendChild(t); }
+  return t;
+}
+function posTip(box, t, x, y) {
+  const larg = box.clientWidth;
+  const w = t.offsetWidth || 190;
+  const px = Math.max(w / 2 + 4, Math.min(larg - w / 2 - 4, x));
+  t.style.left = px + "px";
+  t.style.top = Math.max(t.offsetHeight + 6, y - 10) + "px";
+}
+function hachura(defs, id) {
+  const p = sv("pattern", { id, width: 6, height: 6, patternUnits: "userSpaceOnUse",
+                            patternTransform: "rotate(45)" }, defs);
+  sv("rect", { width: 6, height: 6, fill: "transparent" }, p);
+  sv("line", { x1: 0, y1: 0, x2: 0, y2: 6, stroke: css("--surface"), "stroke-width": 2.6 }, p);
+}
+
+/* ------------------------------------------------ colunas empilhadas -- */
+function chartColunas(box, cfg) {
+  box.innerHTML = "";
+  const t = tipDe(box);
+  const W = Math.max(320, box.clientWidth);
+  const alt = cfg.altura || 340;
+  const M = { t: 16, r: 14, b: 30, l: 62 };
+  const pw = W - M.l - M.r, ph = alt - M.t - M.b;
+  const svg = sv("svg", { width: W, height: alt, role: "img",
+                          "aria-label": cfg.aria || "Gráfico de colunas empilhadas" }, box);
+  const defs = sv("defs", {}, svg);
+  hachura(defs, "hach-" + box.id);
+
+  const anos = cfg.anos;
+  const totais = anos.map((_, k) => cfg.series.reduce((s, se) => s + (se.vals[k] || 0), 0));
+  const tk = ticksY(Math.max(...totais, 0), 5);
+  const y = v => M.t + ph - (v / tk.top) * ph;
+
+  for (const v of tk.vals) {
+    sv("line", { class: "gridline", x1: M.l, x2: M.l + pw, y1: y(v), y2: y(v) }, svg);
+    const txt = sv("text", { class: "axis-txt", x: M.l - 9, y: y(v) + 4, "text-anchor": "end" }, svg);
+    txt.textContent = cfg.fmtEixo(v, tk.top);
+  }
+  sv("line", { class: "axis-line", x1: M.l, x2: M.l + pw, y1: y(0), y2: y(0) }, svg);
+
+  const banda = pw / anos.length;
+  const bw = Math.min(24, banda * 0.62);
+  const gap = 2;
+
+  anos.forEach((ai, k) => {
+    const cx = M.l + banda * (k + 0.5);
+    const bx = cx - bw / 2;
+    let acc = 0;
+    const segs = [];
+    cfg.series.forEach((se, si) => {
+      const v = se.vals[k] || 0;
+      if (v <= 0) return;
+      segs.push({ si, v, y0: acc, y1: acc + v });
+      acc += v;
+    });
+    segs.forEach((s, j) => {
+      const topo = y(s.y1), base = y(s.y0);
+      let h = base - topo;
+      const ehTopo = j === segs.length - 1;
+      const corte = ehTopo ? 0 : gap;
+      h = Math.max(0.8, h - corte);
+      const yy = topo;
+      const d = ehTopo ? caminhoTopo(bx, yy, bw, h, 4)
+                       : `M${bx},${yy}h${bw}v${h}h${-bw}Z`;
+      sv("path", { d, fill: cfg.series[s.si].cor }, svg);
+    });
+    if (cfg.parcial !== undefined && ai === cfg.parcial) {
+      sv("rect", { x: bx, y: y(acc), width: bw, height: Math.max(0, y(0) - y(acc)),
+                   fill: `url(#hach-${box.id})` }, svg);
+      const lb = sv("text", { class: "axis-txt", x: cx, y: y(acc) - 7, "text-anchor": "middle" }, svg);
+      lb.textContent = "parcial";
+    }
+    const rot = sv("text", { class: "axis-txt", x: cx, y: alt - 10, "text-anchor": "middle" }, svg);
+    rot.textContent = ANOS[ai];
+
+    const hit = sv("rect", { x: M.l + banda * k, y: M.t, width: banda, height: ph,
+                             fill: "transparent" }, svg);
+    hit.addEventListener("pointerenter", () => {
+      const linhas = cfg.series.map((se, si) => ({ se, v: se.vals[k] || 0 }))
+        .filter(o => o.v > 0).sort((a, b) => b.v - a.v).slice(0, 9);
+      t.innerHTML = `<div class="t">${ANOS[ai]}${ai === cfg.parcial ? " · parcial" : ""}</div>` +
+        linhas.map(o => `<div class="row"><span class="nm"><i class="dot" style="background:${o.se.cor}"></i>${esc(o.se.nome)}</span><b>${esc(cfg.fmtTip(o.v))}</b></div>`).join("") +
+        `<div class="row tot"><span>Total</span><b>${esc(cfg.fmtTip(totais[k]))}</b></div>`;
+      t.classList.add("on");
+      posTip(box, t, M.l + banda * (k + 0.5), M.t + 20);
+    });
+    hit.addEventListener("pointerleave", () => t.classList.remove("on"));
+  });
+  return svg;
+}
+
+/* -------------------------------------------------------- sparkline --- */
+function sparkline(vals, w, h, cor, parcialIdx) {
+  const fin = vals.filter(v => isFinite(v));
+  const max = Math.max(...fin, 1e-9), min = 0;
+  const n = vals.length;
+  const x = k => (n === 1 ? w / 2 : (w * k) / (n - 1));
+  const y = v => h - 1.5 - ((v - min) / (max - min || 1)) * (h - 3);
+  let d = "";
+  vals.forEach((v, k) => { d += (k ? "L" : "M") + x(k).toFixed(1) + "," + y(v).toFixed(1); });
+  const ult = n - 1;
+  return `<svg width="${w}" height="${h}" aria-hidden="true" style="display:block">
+    <path d="${d}" fill="none" stroke="${cor}" stroke-width="1.5" stroke-linejoin="round"/>
+    <circle cx="${x(ult).toFixed(1)}" cy="${y(vals[ult]).toFixed(1)}" r="2.4" fill="${cor}"/>
+  </svg>`;
+}
+</script>
+
+<script>
+"use strict";
+/* ===================================================================== *
+ *  Resumo — a série anual, aberta pela dimensão escolhida
+ * ===================================================================== */
+const $ = s => document.querySelector(s);
+const corSlot = i => css(CORES[i % CORES.length]);
+const ULTIMO_COMPLETO = IDX_PARCIAL - 1;
+// somar % do PIB entre anos não significa nada; nesse modo o resumo é a média
+const agrega = vs => S.medida === "pib"
+  ? vs.reduce((x, y) => x + y, 0) / (vs.length || 1)
+  : vs.reduce((x, y) => x + y, 0);
+
+const rotuloFiltro = () => S.secao ? SECOES[S.secao] : "todos os setores";
+
+/* ---------------------------------------------------------- panorama -- */
+const NOME_CAT = (dim, c) => dim === "secao" ? (SECOES[c] || c) : c;
+const ROTULO_DIM = {
+  secao: "setor (seção CNAE)", regime: "mecanismo", tipo: "tipo de renúncia",
+  tributo: "tributo", uf: "UF", empresa: "maiores empresas", nenhuma: null,
+};
+const rotuloItem = (dim, id) =>
+  dim === "regime" ? ITEM[id].reg : dim === "tipo" ? ITEM[id].tipo : ITEM[id].trib;
+
+const cacheOrdemDim = {};
+function ordemGlobalDim(dim) {
+  if (cacheOrdemDim[dim]) return cacheOrdemDim[dim];
+  const tot = new Map();
+  for (const [, id, sec, uf, v] of D.agg) {
+    const c = dim === "secao" ? sec : dim === "uf" ? (uf || "—") : rotuloItem(dim, id);
+    tot.set(c, (tot.get(c) || 0) + v);
+  }
+  return (cacheOrdemDim[dim] = [...tot.entries()].sort((a, b) => b[1] - a[1]).map(e => e[0]));
+}
+
+/* Percorre o cubo exato ano × item × seção × UF respeitando o filtro de setor. */
+function varreAgg(fn, na) {
+  for (const [a, id, sec, uf, v] of D.agg) {
+    if (a >= na) continue;
+    if (S.secao && sec !== S.secao) continue;
+    fn(a, id, sec, uf, v);
+  }
+}
+
+function seriesPanorama() {
+  const F = fatia();
+  const anos = Array.from({ length: F.na }, (_, a) => a);
+  const dim = S.dim;
+
+  if (dim === "nenhuma") {
+    return [{ nome: "Total", cor: corSlot(0), vals: anos.map(a => conv(F.totalAno[a], a)) }];
+  }
+
+  if (dim === "empresa") {
+    const top = F.ordem.slice(0, 7);
+    const series = top.map((k, i) => {
+      const g = F.idx[k];
+      return { nome: F.E.nome[g], cor: corSlot(i), vals: anos.map(a => conv(F.vals[g * NA + a], a)) };
+    });
+    const resto = anos.map(a => {
+      let s = F.totalAno[a];
+      top.forEach(k => { s -= F.vals[F.idx[k] * NA + a]; });
+      return conv(s, a);
+    });
+    if (resto.some(v => v > 0)) series.push({ nome: "Demais empresas", cor: css("--neutral-mark"), vals: resto });
+    return series;
+  }
+
+  const ordem = ordemGlobalDim(dim);
+  const principais = new Set(ordem.slice(0, 7));
+  // "Sem informação" (CNAE 00000) é ausência de dado, não uma categoria: recebe
+  // o cinza escuro da paleta e não consome uma cor categórica.
+  const semInfo = c => NOME_CAT(dim, c) === "Sem informação";
+  let slot = 0;
+  const cor = new Map(ordem.slice(0, 7).map(c => [c, semInfo(c) ? css("--s8") : corSlot(slot++)]));
+  const acc = new Map();
+  const add = (c, a, v) => {
+    const key = principais.has(c) ? c : "__outras";
+    if (!acc.has(key)) acc.set(key, new Float64Array(NA));
+    acc.get(key)[a] += v;
+  };
+  varreAgg((a, id, sec, uf, v) =>
+    add(dim === "secao" ? sec : dim === "uf" ? (uf || "—") : rotuloItem(dim, id), a, v), F.na);
+
+  const series = [];
+  for (const c of ordem) {
+    if (!acc.has(c)) continue;
+    const vals = anos.map(a => conv(acc.get(c)[a], a));
+    if (vals.every(v => v <= 0)) continue;
+    series.push({ nome: NOME_CAT(dim, c), cor: cor.get(c), vals });
+  }
+  if (acc.has("__outras")) {
+    const vals = anos.map(a => conv(acc.get("__outras")[a], a));
+    if (vals.some(v => v > 0)) series.push({ nome: "Outras categorias", cor: css("--neutral-mark"), vals });
+  }
+  return series;
+}
+
+function renderPanorama() {
+  const F = fatia();
+  const anos = Array.from({ length: F.na }, (_, a) => a);
+  const series = seriesPanorama();
+  const rotDim = ROTULO_DIM[S.dim];
+
+  $("#pan-title").textContent = rotDim
+    ? `Renúncia por ano, aberta por ${rotDim}`
+    : "Renúncia por ano";
+  $("#pan-sub").textContent = `${rotuloMedida()} · ${rotuloFiltro()} · ` +
+    `${nfInt.format(F.idx.length)} grupos econômicos · total de ${ANOS[0]} a ${ANOS[F.na - 1]}: ` +
+    fmtV(agrega(anos.map(a => conv(F.totalAno[a], a))));
+
+  chartColunas($("#pan-chart"), {
+    anos, series, altura: 420, parcial: S.incluir2024 ? IDX_PARCIAL : undefined,
+    fmtEixo, fmtTip: fmtV,
+    aria: `Renúncia fiscal por ano de ${ANOS[0]} a ${ANOS[F.na - 1]}` +
+          (rotDim ? `, empilhada por ${rotDim}` : ""),
+  });
+  $("#pan-legend").innerHTML = series.length > 1 ? series.map(s =>
+    `<span class="li"><i class="sw" style="background:${s.cor}"></i>${esc(s.nome)}</span>`).join("") : "";
+
+  const tw = $("#pan-table");
+  tw.innerHTML = `<table><thead><tr><th class="swatch-cell"></th><th>${esc(rotDim || "Série")}</th>` +
+    anos.map(a => `<th class="n">${ANOS[a]}${a === IDX_PARCIAL ? "*" : ""}</th>`).join("") +
+    `<th class="n">${S.medida === "pib" ? "Média" : "Total"}</th></tr></thead><tbody>` +
+    series.map(s => `<tr><td class="swatch-cell"><span style="background:${s.cor}"></span></td>
+      <td>${esc(s.nome)}</td>` +
+      s.vals.map(v => `<td class="n">${esc(fmtV(v))}</td>`).join("") +
+      `<td class="n">${esc(fmtV(agrega(s.vals)))}</td></tr>`).join("") +
+    (series.length > 1 ? `<tr><td></td><td><b>Total</b></td>` +
+      anos.map(a => `<td class="n"><b>${esc(fmtV(conv(F.totalAno[a], a)))}</b></td>`).join("") +
+      `<td class="n"><b>${esc(fmtV(agrega(anos.map(a => conv(F.totalAno[a], a)))))}</b></td></tr>` : "") +
+    `</tbody></table>`;
+  tw.classList.toggle("hidden", !S.panTabela);
+  $("#btn-pan-tab").setAttribute("aria-pressed", String(S.panTabela));
+  $("#btn-pan-tab").textContent = S.panTabela ? "Ocultar tabela" : "Ver tabela";
+
+  $("#pan-note").innerHTML = S.incluir2024
+    ? `<div class="note alert"><b>2024 é parcial.</b> ${esc(NOTA2024)} A coluna hachurada não é comparável com os anos fechados.</div>`
+    : "";
+}
+</script>
+
+<script>
+"use strict";
+/* ===================================================================== *
+ *  Ranking — todos os grupos econômicos, carregados por rolagem
+ * ===================================================================== */
+const LOTE = 120;
+let LISTA = [];        // índices de entidade, do maior para o menor
+let MOSTRADOS = 0;
+let OBS = null;
+
+function buscarEmpresas() {
+  const F = fatia();
+  const q = norm(S.busca.trim());
+  if (!q) { LISTA = F.ordem.map(k => F.idx[k]); return; }
+  const soDigitos = /^[\d.\/\s-]+$/.test(q) ? q.replace(/\D/g, "") : null;
+  const alvo = soDigitos && soDigitos.length >= 3 ? soDigitos : q;
+  const hits = [];
+  for (let k = 0; k < F.idx.length; k++)
+    if (F.E.busca[F.idx[k]].indexOf(alvo) >= 0) hits.push(k);
+  hits.sort((a, b) => F.totalEnt[b] - F.totalEnt[a]);
+  LISTA = hits.map(k => F.idx[k]);
+}
+
+function renderRanking() {
+  const F = fatia();
+  buscarEmpresas();
+
+  $("#busca-hits").textContent = S.busca.trim()
+    ? `${nfInt.format(LISTA.length)} ${LISTA.length === 1 ? "resultado" : "resultados"}`
+    : `${nfInt.format(LISTA.length)} grupos econômicos na seleção`;
+  $("#res-title").textContent = S.busca.trim() ? "Resultados da busca" : "Ranking de beneficiários";
+  $("#res-sub").textContent =
+    `Clique em uma linha para abrir a série anual e o fundamento legal de cada renúncia. ` +
+    `${ANOS[0]}–${ANOS[F.na - 1]} · ${rotuloMedida()} · ${rotuloFiltro()}`;
+
+  if (!LISTA.length) {
+    $("#res-table").innerHTML = `<div class="empty">Nenhuma empresa encontrada para “${esc(S.busca)}”.</div>`;
+    $("#res-mais").innerHTML = "";
+    return;
+  }
+
+  $("#res-table").innerHTML = `<table><thead><tr>
+      <th class="n" style="width:64px">#</th>
+      <th>Empresa</th>
+      <th style="width:190px">Setor</th>
+      <th style="width:64px">${ANOS[0]}–${ANOS[F.na - 1]}</th>
+      <th class="n">${S.medida === "pib" ? "Média anual" : "Acumulado"}</th>
+      <th class="n">${ANOS[ULTIMO_COMPLETO]}</th>
+    </tr></thead><tbody id="res-corpo"></tbody></table>`;
+  MOSTRADOS = 0;
+  S.aberta = null;
+  proximoLote();
+  ligarRolagem();
+}
+
+function linhaHTML(g, i, F) {
+  const vals = Array.from({ length: F.na }, (_, a) => conv(F.vals[g * NA + a], a));
+  const setor = SECOES[F.E.secao[g]] || "Sem informação";
+  return `<tr class="clickable" data-g="${g}" aria-expanded="false">
+    <td class="n"><span class="caret">&#9656;</span> ${nfInt.format(i + 1)}</td>
+    <td><span class="nm">${esc(F.E.nome[g])}</span>
+        <span class="meta">${esc(F.E.uf[g])} · ${esc(F.E.mun[g])}${
+          F.E.nEstab[g] > 1 ? ` · ${F.E.nEstab[g]} CNPJs` : ""}</span></td>
+    <td><span class="setor" title="${esc(setor)}">${esc(setor)}</span></td>
+    <td>${sparkline(vals, 60, 20, css("--s1"))}</td>
+    <td class="n">${esc(fmtV(agrega(vals)))}</td>
+    <td class="n">${esc(fmtV(vals[ULTIMO_COMPLETO]))}</td></tr>`;
+}
+
+function proximoLote() {
+  const F = fatia();
+  const corpo = $("#res-corpo");
+  if (!corpo) return;
+  const fim = Math.min(LISTA.length, MOSTRADOS + LOTE);
+  let html = "";
+  for (let i = MOSTRADOS; i < fim; i++) html += linhaHTML(LISTA[i], i, F);
+  corpo.insertAdjacentHTML("beforeend", html);
+  const novas = [...corpo.querySelectorAll("tr[data-g]")].slice(MOSTRADOS);
+  novas.forEach(tr => {
+    tr.tabIndex = 0;
+    tr.setAttribute("role", "button");
+    const ir = () => alternarDetalhe(tr, +tr.dataset.g);
+    tr.addEventListener("click", ir);
+    tr.addEventListener("keydown", ev => {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); ir(); }
+    });
+  });
+  MOSTRADOS = fim;
+  $("#res-mais").innerHTML = MOSTRADOS < LISTA.length
+    ? `<div class="empty" id="sentinela">Mostrando ${nfInt.format(MOSTRADOS)} de
+       ${nfInt.format(LISTA.length)} — role para carregar mais</div>`
+    : `<div class="empty">Fim da lista: ${nfInt.format(LISTA.length)} grupos.</div>`;
+}
+
+/* Carrega por rolagem: 69 mil linhas de uma vez travariam a página. */
+function ligarRolagem() {
+  if (OBS) OBS.disconnect();
+  OBS = new IntersectionObserver(entradas => {
+    if (!entradas.some(e => e.isIntersecting)) return;
+    let voltas = 0;
+    while (MOSTRADOS < LISTA.length && voltas++ < 4) {
+      proximoLote();
+      const s = $("#sentinela");
+      if (!s || s.getBoundingClientRect().top > window.innerHeight) break;
+    }
+    const s = $("#sentinela");
+    if (s) OBS.observe(s);
+  }, { rootMargin: "600px" });
+  const s = $("#sentinela");
+  if (s) OBS.observe(s);
+}
+
+/* ------------------------------------------------------- linha aberta -- */
+function alternarDetalhe(tr, g) {
+  const antiga = $("#res-corpo tr.det");
+  const eraEsta = S.aberta === g;
+  if (antiga) antiga.remove();
+  $("#res-corpo").querySelectorAll('tr[aria-expanded="true"]')
+    .forEach(o => o.setAttribute("aria-expanded", "false"));
+  if (eraEsta) { S.aberta = null; return; }
+  S.aberta = g;
+  tr.setAttribute("aria-expanded", "true");
+  tr.insertAdjacentHTML("afterend", `<tr class="det"><td colspan="6">${detalheHTML(g)}</td></tr>`);
+  montarDetalhe(g);
+  tr.scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+
+/* Itens (benefício × fundamento) de uma entidade, já filtrados. */
+function itensDaEmpresa(g) {
+  const F = fatia(), E = F.E;
+  const ms = E.membros ? E.membros[g] : [g];
+  const m = new Map();
+  for (const e of ms) {
+    if (!passaEstab(e)) continue;
+    for (let k = D.itIni[e]; k < D.itFim[e]; k++) {
+      const it = D.itId[k], a = D.itAno[k];
+      if (a >= F.na) continue;
+      let arr = m.get(it);
+      if (!arr) m.set(it, arr = new Float64Array(NA));
+      arr[a] += D.itVal[k];
+    }
+  }
+  const linhas = [];
+  for (const [it, arr] of m) {
+    const vs = Array.from({ length: F.na }, (_, a) => conv(arr[a], a));
+    linhas.push({ it, v: agrega(vs) });
+  }
+  return linhas.sort((a, b) => b.v - a.v);
+}
+
+function detalheHTML(g) {
+  const F = fatia(), E = F.E;
+  const vals = Array.from({ length: F.na }, (_, a) => conv(F.vals[g * NA + a], a));
+  const acum = agrega(vals);
+  const pico = vals.indexOf(Math.max(...vals));
+  const a23 = ULTIMO_COMPLETO;
+  const noAno = F.vals[g * NA + a23];
+  const rank = F.idx.filter(o => F.vals[o * NA + a23] > noAno).length + 1;
+  const share = F.totalAno[a23] ? noAno / F.totalAno[a23] * 100 : 0;
+  const info = CNAE.get(E.cnae[g]) || { desc: "Sem informação" };
+
+  return `<div class="detbox">
+    <div class="cardhead">
+      <div>
+        <h3 class="dtitle">${esc(E.nome[g])}</h3>
+        <div class="dmeta"><span class="mono">${esc(E.chave[g])}/…</span>
+          · ${esc(E.mun[g])}/${esc(E.uf[g])} · ${esc(info.desc)}
+          ${E.nEstab[g] > 1 ? ` · <b>${E.nEstab[g]} estabelecimentos</b>` : ""}</div>
+      </div>
+    </div>
+
+    <div class="kv">
+      <div><div class="k">${S.medida === "pib" ? "Média anual" : "Acumulado"}</div><div class="v">${esc(fmtV(acum))}</div></div>
+      <div><div class="k">Ano de pico</div><div class="v">${ANOS[pico]}</div></div>
+      <div><div class="k">Posição em ${ANOS[a23]}</div><div class="v">${noAno > 0 ? rank + "º" : "—"}</div></div>
+      <div><div class="k">% do total ${ANOS[a23]}</div><div class="v">${nf2.format(share)}%</div></div>
+    </div>
+
+    <div class="detcols" style="margin-top:16px">
+      <div>
+        <h4>Renúncia por ano</h4>
+        <div class="chartbox" id="det-chart"></div>
+      </div>
+      <div>
+        <h4>Por mecanismo</h4>
+        <div id="det-mec"></div>
+      </div>
+    </div>
+    <h4>Origem: o fundamento legal de cada renúncia</h4>
+    <div class="tablewrap" id="det-fund"></div>
+    <div id="det-estabs"></div>
+  </div>`;
+}
+
+function montarDetalhe(g) {
+  const F = fatia(), E = F.E;
+  const anos = Array.from({ length: F.na }, (_, a) => a);
+  const vals = anos.map(a => conv(F.vals[g * NA + a], a));
+
+  chartColunas($("#det-chart"), {
+    anos, series: [{ nome: E.nome[g], cor: corSlot(0), vals }], altura: 200,
+    parcial: S.incluir2024 ? IDX_PARCIAL : undefined, fmtEixo, fmtTip: fmtV,
+    aria: `Renúncia anual de ${E.nome[g]}`,
+  });
+
+  const linhas = itensDaEmpresa(g);
+  const totalEmp = linhas.reduce((s, l) => s + l.v, 0) || 1;
+
+  const porReg = new Map();
+  for (const l of linhas) porReg.set(ITEM[l.it].reg, (porReg.get(ITEM[l.it].reg) || 0) + l.v);
+  const regs = [...porReg.entries()].sort((a, b) => b[1] - a[1]);
+  const maxR = regs.length ? regs[0][1] : 1;
+  const corMec = corSlot(0);
+  $("#det-mec").innerHTML = regs.slice(0, 10).map(([r, v]) => `<div class="barrow">
+      <span class="lbl" title="${esc(r)}">${esc(r)}</span>
+      <span class="track"><i style="left:0;width:${(v / maxR * 100).toFixed(2)}%;background:${corMec}"></i></span>
+      <span class="val">${esc(fmtV(v))} <span class="sub">· ${nfInt.format(v / totalEmp * 100)}%</span></span>
+    </div>`).join("") || `<div class="hits">Sem abertura disponível para esta seleção.</div>`;
+
+  $("#det-fund").innerHTML = `<table><thead><tr><th>Fundamento legal</th><th>Mecanismo</th>
+      <th>Tributo</th><th class="n">Valor</th><th class="n">%</th></tr></thead><tbody>` +
+    linhas.map(l => `<tr>
+      <td class="fundamento" style="min-width:34ch">${esc(ITEM[l.it].fund)}
+        <span class="meta">${esc(ITEM[l.it].tipo)} · ${esc(ITEM[l.it].benef)}</span></td>
+      <td><span class="tagreg">${esc(ITEM[l.it].reg)}</span></td>
+      <td>${esc(ITEM[l.it].trib)}</td>
+      <td class="n">${esc(fmtV(l.v))}</td>
+      <td class="n">${nfInt.format(l.v / totalEmp * 100)}%</td></tr>`).join("") + `</tbody></table>`;
+
+  if (E.nEstab[g] > 1) {
+    const ms = E.membros[g].filter(passaEstab).map(e => {
+      const vs = anos.map(a => conv(D.vals[e * NA + a], a));
+      return { e, t: agrega(vs) };
+    }).sort((a, b) => b.t - a.t);
+    $("#det-estabs").innerHTML = `<h4>Estabelecimentos do grupo</h4>
+      <div class="tablewrap"><table><thead><tr><th>CNPJ</th><th>Município</th><th>UF</th>
+      <th class="n">${S.medida === "pib" ? "Média anual" : "Acumulado"}</th></tr></thead><tbody>` +
+      ms.slice(0, 15).map(o => `<tr>
+        <td><span class="mono" style="font-size:12px">${esc(cnpjFmt(D.cnpj[o.e]))}</span>
+            <span class="meta">${esc((CNAE.get(D.cnae[o.e]) || {}).desc || "Sem informação")}</span></td>
+        <td>${esc(MUN[D.mun[o.e]][0])}</td><td>${esc(D.ufDe[o.e])}</td>
+        <td class="n">${esc(fmtV(o.t))}</td></tr>`).join("") + `</tbody></table></div>` +
+      (ms.length > 15 ? `<div class="note">Mostrando os 15 maiores de ${ms.length} estabelecimentos.</div>` : "");
+  }
+}
+</script>
+
+<script>
+"use strict";
+/* ===================================================================== *
+ *  Achados — o que os microdados mostram e o release não conta
+ *
+ *  Tudo aqui é calculado sobre a série fechada de 2015 a 2023, em reais
+ *  correntes, no nível de grupo econômico, e NÃO obedece aos filtros do
+ *  topo: são números fixos, para citar. Cada card traz o caminho para
+ *  reproduzir o achado nas outras duas abas.
+ * ===================================================================== */
+let ACHADOS = null;
+
+function calcAchados() {
+  if (ACHADOS) return ACHADOS;
+  const E = entidades("grupo");
+  const NAC = IDX_PARCIAL;                       // 2015..2023
+  const A = {};
+
+  /* --- totais por grupo e ranking geral ------------------------------ */
+  const totG = new Float64Array(E.n);
+  let total = 0;
+  for (let g = 0; g < E.n; g++) {
+    let t = 0;
+    for (let a = 0; a < NAC; a++) t += E.vals[g * NA + a];
+    totG[g] = t; total += t;
+  }
+  const ordem = Array.from({ length: E.n }, (_, g) => g)
+    .filter(g => totG[g] > 0).sort((a, b) => totG[b] - totG[a]);
+  const posDe = new Int32Array(E.n);
+  ordem.forEach((g, i) => { posDe[g] = i + 1; });
+  A.total = total;
+
+  /* --- passo 1: cadastro (setor, município) -------------------------- */
+  const porSecao = new Map(), porMun = new Map();
+  for (let e = 0; e < D.n; e++) {
+    let t = 0;
+    for (let a = 0; a < NAC; a++) t += D.vals[e * NA + a];
+    if (t <= 0) continue;
+    const s = D.secaoDe[e];
+    porSecao.set(s, (porSecao.get(s) || 0) + t);
+    const k = MUN[D.mun[e]][0] + "/" + (MUN[D.mun[e]][1] || "—");
+    let m = porMun.get(k);
+    if (!m) porMun.set(k, m = { v: 0, gr: new Set() });
+    m.v += t; m.gr.add(E.dono[e]);
+  }
+  A.municipios = [...porMun.entries()].map(([mun, o]) => ({ mun, v: o.v, n: o.gr.size }))
+    .sort((a, b) => b.v - a.v);
+
+  /* --- passo 2: uma varredura pela blob de fundamento legal ---------- */
+  const ALVOS = ["Horário Eleitoral", "Perse (setor de eventos)", "Recof (entreposto industrial)",
+                 "Prouni", "Sudam/Sudene", "Lei Rouanet (Pronac)", "PAT (alimentação do trabalhador)"];
+  const alvoId = new Map(ALVOS.map(r => [REG_ID.get(r), r]));
+  const OPACOS = new Set(["Regimes aduaneiros especiais (PIS/Cofins)", "Outras isenções não capituladas"]
+    .map(r => REG_ID.get(r)));
+
+  const porRegAno = new Map();                   // regId -> Float64Array(NA)
+  const porRegGrupo = new Map();                 // regId -> Map(grupo -> valor)
+  const sudamUF = new Map();                     // UF -> valor
+  const financReg = new Map();                   // regId -> valor (seção K)
+  const opacoAno = new Float64Array(NA);
+  const idSudam = REG_ID.get("Sudam/Sudene");
+
+  for (let e = 0; e < D.n; e++) {
+    const g = E.dono[e], sec = D.secaoDe[e], uf = D.ufDe[e];
+    for (let k = D.itIni[e]; k < D.itFim[e]; k++) {
+      const a = D.itAno[k];
+      if (a >= NAC) continue;
+      const r = ITEM_REG[D.itId[k]], v = D.itVal[k];
+      let arr = porRegAno.get(r);
+      if (!arr) porRegAno.set(r, arr = new Float64Array(NA));
+      arr[a] += v;
+      if (OPACOS.has(r)) opacoAno[a] += v;
+      if (alvoId.has(r)) {
+        let m = porRegGrupo.get(r);
+        if (!m) porRegGrupo.set(r, m = new Map());
+        m.set(g, (m.get(g) || 0) + v);
+        if (r === idSudam) sudamUF.set(uf, (sudamUF.get(uf) || 0) + v);
+      }
+      if (sec === "K") financReg.set(r, (financReg.get(r) || 0) + v);
+    }
+  }
+
+  const topRegime = (nome, n) => {
+    const m = porRegGrupo.get(REG_ID.get(nome)) || new Map();
+    const tot = [...m.values()].reduce((x, y) => x + y, 0);
+    const ord = [...m.values()].sort((a, b) => a - b);
+    const mediana = ord.length ? (ord.length % 2 ? ord[ord.length >> 1]
+      : (ord[(ord.length >> 1) - 1] + ord[ord.length >> 1]) / 2) : 0;
+    const lista = [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, n)
+      .map(([g, v]) => ({ g, nome: E.nome[g], uf: E.uf[g], mun: E.mun[g], v, pct: v / (tot || 1),
+                          cnae: (CNAE.get(E.cnae[g]) || {}).desc || "Sem informação" }));
+    return { tot, n: m.size, mediana, lista };
+  };
+
+  A.eleitoral = topRegime("Horário Eleitoral", 6);
+  A.perse     = topRegime("Perse (setor de eventos)", 6);
+  A.recof     = topRegime("Recof (entreposto industrial)", 6);
+  A.prouni    = topRegime("Prouni", 5);
+  A.rouanet   = topRegime("Lei Rouanet (Pronac)", 5);
+  A.pat       = topRegime("PAT (alimentação do trabalhador)", 5);
+  A.sudam     = topRegime("Sudam/Sudene", 5);
+
+  /* --- opacidade ----------------------------------------------------- */
+  const totalAno = new Float64Array(NA);
+  for (let g = 0; g < E.n; g++) for (let a = 0; a < NAC; a++) totalAno[a] += E.vals[g * NA + a];
+  A.opaco = { ano: opacoAno, totalAno, na: NAC };
+  const outras = porRegAno.get(REG_ID.get("Outras isenções não capituladas"));
+  A.outrasCresc = outras
+    ? (outras[NAC - 1] / IPCA[NAC - 1]) / (outras[0] / IPCA[0]) - 1
+    : NaN;
+
+  /* --- setor público -------------------------------------------------- */
+  A.publico = ordem.filter(g => E.secao[g] === "O").slice(0, 6)
+    .map(g => ({ g, nome: E.nome[g], uf: E.uf[g], v: totG[g], pos: posDe[g] }));
+  A.publicoTotal = porSecao.get("O") || 0;
+
+  /* --- sem CNAE ------------------------------------------------------- */
+  A.semCnae = ordem.filter(g => E.secao[g] === "Z").slice(0, 6)
+    .map(g => ({ g, nome: E.nome[g], uf: E.uf[g], v: totG[g], pos: posDe[g] }));
+  A.semCnaeTotal = porSecao.get("Z") || 0;
+
+  /* --- Sudam/Sudene fora da área -------------------------------------- */
+  const AREA = new Set(["AC","AP","AM","PA","RO","RR","TO","MA","PI","CE","RN","PB","PE","AL","SE","BA","MG","ES"]);
+  const sudTot = [...sudamUF.values()].reduce((x, y) => x + y, 0) || 1;
+  A.sudamUF = [...sudamUF.entries()].map(([uf, v]) => ({ uf, v, pct: v / sudTot, dentro: AREA.has(uf) }))
+    .sort((a, b) => b.v - a.v).slice(0, 8);
+  A.sudamFora = [...sudamUF.entries()].filter(([uf]) => !AREA.has(uf))
+    .reduce((s, [, v]) => s + v, 0) / sudTot;
+
+  /* --- setor financeiro ----------------------------------------------- */
+  A.financeiro = [...financReg.entries()].map(([r, v]) => ({ reg: REGIMES[r], v }))
+    .sort((a, b) => b.v - a.v).slice(0, 5);
+  A.financeiroTotal = porSecao.get("K") || 0;
+
+  /* --- o hotel do Perse ------------------------------------------------ */
+  const topPerse = A.perse.lista[0];
+  if (topPerse) {
+    const anos = [];
+    for (let a = 0; a < NAC; a++) if (E.vals[topPerse.g * NA + a] > 0) anos.push(ANOS[a]);
+    A.perseAnos = anos;
+    A.perseCnpj = E.membros[topPerse.g].map(e => D.cnpj[e]);
+  }
+
+  return (ACHADOS = A);
+}
+
+/* --------------------------------------------------------- render ----- */
+const brl = v => "R$ " + compacto(v);
+const tituloCaso = s => s.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+// quantas das seguintes somadas ainda cabem dentro do primeiro colocado
+function quantasSomadas(lista) {
+  let soma = 0, k = 0;
+  for (let i = 1; i < lista.length; i++) {
+    if (soma + lista[i].v > lista[0].v) break;
+    soma += lista[i].v; k++;
+  }
+  return k;
+}
+
+function tabelaAchado(cols, linhas) {
+  return `<div class="tablewrap"><table><thead><tr>` +
+    cols.map(c => `<th${c.n ? ' class="n"' : ""}>${esc(c.t)}</th>`).join("") +
+    `</tr></thead><tbody>` + linhas.map(l => `<tr${l.g !== undefined ? ` data-g="${l.g}"` : ""}>` +
+      l.c.map((v, i) => `<td${cols[i].n ? ' class="n"' : ""}>${v}</td>`).join("") + `</tr>`).join("") +
+    `</tbody></table></div>`;
+}
+function barrasAchado(itens, maxV) {
+  const cor = corSlot(0);
+  return itens.map(o => `<div class="barrow">
+    <span class="lbl" title="${esc(o.nome)}">${esc(o.nome)}</span>
+    <span class="track"><i style="left:0;width:${(o.v / maxV * 100).toFixed(2)}%;background:${cor}"></i></span>
+    <span class="val">${esc(brl(o.v))}${o.pct !== undefined ? ` <span class="sub">· ${esc(fmtPct(o.pct * 100, o.pct >= 0.1 ? 0 : 1))}</span>` : ""}</span>
+  </div>`).join("");
+}
+
+function renderAchados() {
+  const A = calcAchados();
+  const cards = [];
+
+  /* 1 — o Estado renunciando para si mesmo --------------------------- */
+  cards.push({
+    tag: "Quem recebe", cor: "s1",
+    titulo: `${A.publico[0].nome.split(" ").slice(0, 3).join(" ")} está entre os ${A.publico[0].pos} maiores beneficiários de renúncia fiscal federal`,
+    lead: `Órgãos da administração pública direta somam <b>${brl(A.publicoTotal)}</b> em renúncia
+      de tributos federais entre 2015 e 2023 — a União abrindo mão de imposto que ela mesma
+      cobraria de si. Ministério da Saúde, Aeronáutica, Marinha e Exército respondem pela
+      maior parte, quase toda por isenção de imposto de importação.`,
+    evid: tabelaAchado(
+      [{ t: "Órgão" }, { t: "UF" }, { t: "Posição no ranking geral", n: true }, { t: "2015–2023", n: true }],
+      A.publico.map(o => ({ g: o.g, c: [esc(o.nome), esc(o.uf), o.pos + "º", brl(o.v)] }))),
+    conferir: { texto: "Aba Resumo, filtro Setor = “Administração pública”", aba: "resumo", secao: "O" },
+  });
+
+  /* 2 — um quarto da renúncia não tem nome ---------------------------- */
+  const ult = A.opaco.na - 1;
+  const pctUlt = A.opaco.ano[ult] / (A.opaco.totalAno[ult] || 1);
+  cards.push({
+    tag: "Transparência", cor: "s2",
+    titulo: `${nfInt.format(pctUlt * 100)}% da renúncia federal está sob dois rótulos que não explicam nada`,
+    lead: `Em ${ANOS[ult]}, <b>${brl(A.opaco.ano[ult])}</b> — ${nf1.format(pctUlt * 100)}% de toda a
+      renúncia — foram declarados como “Bens Submetidos Aos Regimes Aduaneiros Especiais”
+      ou “Outras Isenções, Reduções E Suspensões Não Capituladas Nesta Tabela”. São os dois
+      maiores fundamentos legais da base, e nenhum diz qual regime foi usado. O segundo,
+      o balde do “não capitulado”, cresceu <b>${nfInt.format(A.outrasCresc * 100)}% em termos
+      reais</b> desde 2015 — o maior crescimento entre todos os mecanismos.`,
+    evid: `<div class="chartbox" id="ach-opaco"></div><div class="legend" id="ach-opaco-legend"></div>`,
+    conferir: { texto: "Aba Resumo, abrir por Mecanismo", aba: "resumo", dim: "regime" },
+  });
+
+  /* 3 — o hotel de Porto Velho ---------------------------------------- */
+  const p0 = A.perse.lista[0];
+  if (p0) cards.push({
+    tag: "Programa", cor: "s3",
+    titulo: `A maior beneficiária do Perse no país é uma empresa de ${tituloCaso(p0.mun)} que aparece em um único ano`,
+    lead: `O Programa Emergencial de Retomada do Setor de Eventos distribuiu
+      <b>${brl(A.perse.tot)}</b> a ${nfInt.format(A.perse.n)} grupos. O maior deles é
+      <b>${esc(p0.nome)}</b> (CNPJ ${esc(cnpjFmt(A.perseCnpj[0]))}), classificado como
+      “${esc(p0.cnae)}”, com <b>${brl(p0.v)}</b> — ${nfInt.format(p0.pct * 100)}% de todo o
+      programa. A empresa aparece em um único ano da série (${A.perseAnos.join(", ")}) e em
+      nenhum outro. A mediana das ${nfInt.format(A.perse.n)} beneficiárias do Perse é de
+      <b>${brl(A.perse.mediana)}</b> — esta empresa recebeu
+      ${nfInt.format(p0.v / (A.perse.mediana || 1))} vezes isso.`,
+    evid: barrasAchado(A.perse.lista, A.perse.lista[0].v),
+    conferir: { texto: `Aba Ranking, buscar “${p0.nome.split(" ").slice(0, 3).join(" ")}”`,
+                aba: "ranking", busca: p0.nome.split(" ").slice(0, 3).join(" ") },
+  });
+
+  /* 4 — o setor aéreo sem setor --------------------------------------- */
+  cards.push({
+    tag: "Transparência", cor: "s2",
+    titulo: `O ${A.semCnae[0].pos}º maior beneficiário do país não tem setor econômico na base`,
+    lead: `<b>${brl(A.semCnaeTotal)}</b> — ${nf1.format(A.semCnaeTotal / A.total * 100)}% de toda a
+      renúncia — está sob o CNAE <span class="mono">00000</span>, “Sem informação”. Não é
+      resíduo: entra aí <b>${esc(A.semCnae[0].nome)}</b>, ${A.semCnae[0].pos}ª maior beneficiária
+      do país, e boa parte do setor aéreo. Qualquer recorte setorial da renúncia federal ignora esse bloco
+      ou o joga numa categoria vazia.`,
+    evid: tabelaAchado(
+      [{ t: "Empresa" }, { t: "UF" }, { t: "Posição no ranking geral", n: true }, { t: "2015–2023", n: true }],
+      A.semCnae.map(o => ({ g: o.g, c: [esc(o.nome), esc(o.uf), o.pos + "º", brl(o.v)] }))),
+    conferir: { texto: "Aba Resumo, filtro Setor = “Sem informação”", aba: "resumo", secao: "Z" },
+  });
+
+  /* 5 — a geografia da renúncia --------------------------------------- */
+  const mun = A.municipios.slice(0, 8);
+  const sp = A.municipios.find(m => m.mun.startsWith("SÃO PAULO/"));
+  const macae = A.municipios.find(m => m.mun.startsWith("MACAÉ/"));
+  cards.push({
+    tag: "Geografia", cor: "s4",
+    titulo: macae && sp
+      ? `Macaé recebe ${nf1.format(macae.v / sp.v)}× o que vai para São Paulo, com ${nf1.format(macae.n / sp.n * 100)}% das empresas`
+      : "A renúncia não segue o tamanho da economia local",
+    lead: macae && sp ? `Macaé concentra <b>${brl(macae.v)}</b> em ${nfInt.format(macae.n)} grupos
+      econômicos. São Paulo, com ${nfInt.format(sp.n)} grupos, ficou com <b>${brl(sp.v)}</b>.
+      A renúncia federal não segue o tamanho da economia local: segue onde
+      estão os poços de petróleo, a Zona Franca e as plantas industriais incentivadas.` : "",
+    evid: tabelaAchado(
+      [{ t: "Município" }, { t: "Grupos", n: true }, { t: "2015–2023", n: true }, { t: "Por grupo", n: true }],
+      mun.map(m => ({ c: [esc(m.mun), nfInt.format(m.n), brl(m.v), brl(m.v / m.n)] }))),
+    conferir: { texto: "Aba Ranking, coluna Setor e a cidade no subtítulo de cada linha", aba: "ranking" },
+  });
+
+  /* 6 — horário eleitoral --------------------------------------------- */
+  const e0 = A.eleitoral.lista[0];
+  cards.push({
+    tag: "Concentração", cor: "s5",
+    titulo: `Uma única emissora fica com ${nfInt.format(A.eleitoral.lista[0].pct * 100)}% da compensação do horário eleitoral`,
+    lead: `A compensação fiscal pela veiculação gratuita da propaganda partidária e eleitoral
+      somou <b>${brl(A.eleitoral.tot)}</b> entre 2015 e 2023, distribuída a
+      ${nfInt.format(A.eleitoral.n)} grupos. <b>${esc(e0.nome)}</b> ficou com
+      <b>${brl(e0.v)}</b>, ou ${nfInt.format(e0.pct * 100)}% do total. É renúncia fiscal, não
+      verba publicitária — e por isso não aparece nas prestações de contas de campanha.`,
+    evid: barrasAchado(A.eleitoral.lista, A.eleitoral.lista[0].v),
+    conferir: { texto: "Aba Ranking, buscar “GLOBO COMUNICACAO” e abrir a linha", aba: "ranking", busca: "GLOBO COMUNICACAO" },
+  });
+
+  /* 7 — o Recof ---------------------------------------------------------- */
+  cards.push({
+    tag: "Concentração", cor: "s5",
+    titulo: `O incentivo mais concentrado do país cabe em ${nfInt.format(A.recof.n)} empresas`,
+    lead: `O Recof — regime de entreposto industrial que suspende tributos de importação para
+      quem industrializa e exporta — movimentou <b>${brl(A.recof.tot)}</b> entre 2015 e 2023
+      para apenas <b>${nfInt.format(A.recof.n)} grupos</b>, uma média de
+      ${brl(A.recof.tot / A.recof.n)} por empresa. É mais dinheiro que o Prouni
+      (${brl(A.prouni.tot)}) e a Lei Rouanet (${brl(A.rouanet.tot)}) somados, e praticamente
+      não aparece no debate público.`,
+    evid: barrasAchado(A.recof.lista, A.recof.lista[0].v),
+    conferir: { texto: "Aba Resumo, abrir por Mecanismo, e o Recof na legenda", aba: "resumo", dim: "regime" },
+  });
+
+  /* 8 — bancos e cultura -------------------------------------------------- */
+  const f0 = A.financeiro[0];
+  cards.push({
+    tag: "Quem recebe", cor: "s1",
+    titulo: "No setor financeiro, o maior mecanismo de renúncia é a Lei Rouanet",
+    lead: `Bancos, seguradoras e meios de pagamento acumulam <b>${brl(A.financeiroTotal)}</b> em
+      renúncia federal. O maior mecanismo do setor não é tributário-operacional: é
+      <b>${esc(f0.reg)}</b>, com ${brl(f0.v)}. Entre os maiores deduzentes de Rouanet e de
+      Incentivo ao Desporto está o <b>BNDES</b>, banco público — que abate do próprio IRPJ o
+      patrocínio cultural e esportivo.`,
+    evid: barrasAchado(A.financeiro.map(o => ({ nome: o.reg, v: o.v })), A.financeiro[0].v),
+    conferir: { texto: "Aba Resumo, filtro Setor = “Atividades financeiras e seguros”, abrir por Mecanismo",
+                aba: "resumo", secao: "K", dim: "regime" },
+  });
+
+  /* 9 — a armadilha do mapa regional -------------------------------------- */
+  cards.push({
+    tag: "Cuidado", cor: "s8",
+    titulo: "O incentivo da Sudam e da Sudene aparece como se fosse do Rio de Janeiro",
+    lead: `<b>${nfInt.format(A.sudamFora * 100)}%</b> do valor do incentivo regional
+      Sudam/Sudene está registrado em CNPJs fora da área das duas superintendências — 35% só
+      no Rio de Janeiro, onde ficam as sedes de Vale e Petrobras. O projeto incentivado está
+      no Pará ou no Maranhão; quem declara a redução do IRPJ é a matriz. <b>Não use este campo
+      como mapa do incentivo regional</b>: ele é o endereço de quem declara, não o do projeto.
+      O Portal não publica a localização do empreendimento.`,
+    evid: tabelaAchado(
+      [{ t: "UF que declara" }, { t: "2015–2023", n: true }, { t: "% do Sudam/Sudene", n: true }, { t: "Na área do incentivo?" }],
+      A.sudamUF.map(o => ({ c: [esc(o.uf), brl(o.v), nf1.format(o.pct * 100) + "%",
+        o.dentro ? "sim" : '<span class="pill crit">não</span>'] }))),
+    conferir: { texto: "Aba Ranking, buscar “VALE S.A.” e abrir a linha", aba: "ranking", busca: "VALE S.A." },
+  });
+
+  /* --- monta o HTML ---------------------------------------------------- */
+  const nx = $("#ach-n");
+  if (nx) nx.textContent = ["Zero","Uma","Duas","Três","Quatro","Cinco","Seis","Sete","Oito","Nove","Dez"][cards.length] || cards.length;
+  $("#ach-lista").innerHTML = cards.map((c, i) => `<article class="achado">
+      <div class="ach-cab">
+        <span class="ach-tag${c.tag === "Cuidado" ? " crit" : ""}">${esc(c.tag)}</span>
+        <h3>${esc(c.titulo)}</h3>
+      </div>
+      <p class="ach-lead">${c.lead}</p>
+      <div class="ach-evid">${c.evid}</div>
+      <p class="conferir"><b>Como conferir:</b> ${esc(c.conferir.texto)}
+        <button class="btn" type="button" data-card="${i}">Abrir</button></p>
+    </article>`).join("");
+
+  $("#ach-lista").querySelectorAll("button[data-card]").forEach(b =>
+    b.addEventListener("click", () => {
+      const c = cards[+b.dataset.card].conferir;
+      if (c.secao !== undefined) { S.secao = c.secao; $("#sel-secao").value = c.secao; invalidar(); }
+      if (c.dim !== undefined) { S.dim = c.dim; $("#sel-dim").value = c.dim; }
+      if (c.busca !== undefined) { S.busca = c.busca; }
+      salvar();
+      irParaAba(c.aba);
+      if (c.busca !== undefined) { const el = $("#busca"); if (el) el.value = c.busca; }
+    }));
+
+  /* gráfico da opacidade */
+  const anos = Array.from({ length: A.opaco.na }, (_, a) => a);
+  chartColunas($("#ach-opaco"), {
+    anos, altura: 260,
+    series: [
+      { nome: "Sob rótulo genérico", cor: corSlot(1), vals: anos.map(a => A.opaco.ano[a]) },
+      { nome: "Com mecanismo identificado", cor: css("--neutral-mark"),
+        vals: anos.map(a => A.opaco.totalAno[a] - A.opaco.ano[a]) },
+    ],
+    fmtEixo: v => fmtEixoNominal(v), fmtTip: brl,
+    aria: "Parcela da renúncia declarada sob rótulos genéricos, por ano",
+  });
+  $("#ach-opaco-legend").innerHTML =
+    `<span class="li"><i class="sw" style="background:${corSlot(1)}"></i>Sob rótulo genérico</span>` +
+    `<span class="li"><i class="sw" style="background:${css("--neutral-mark")}"></i>Com mecanismo identificado</span>`;
+}
+
+function fmtEixoNominal(v) {
+  const a = Math.abs(v);
+  if (a >= 1e9) return nfInt.format(v / 1e9) + " bi";
+  if (a >= 1e6) return nfInt.format(v / 1e6) + " mi";
+  return nfInt.format(v);
+}
+</script>
+
+<script>
+"use strict";
+/* ===================================================================== *
+ *  Controles, roteamento e inicialização
+ * ===================================================================== */
+let NOTA2024 = "";
+function montarNota2024() {
+  const E = entidades("grupo");
+  let v24 = 0, v23 = 0, n24 = 0, n23 = 0;
+  for (let g = 0; g < E.n; g++) {
+    const a = E.vals[g * NA + IDX_PARCIAL], b = E.vals[g * NA + ULTIMO_COMPLETO];
+    if (a > 0) { v24 += a; n24++; }
+    if (b > 0) { v23 += b; n23++; }
+  }
+  NOTA2024 = `O arquivo do Portal, atualizado em ${dataBR(P.meta.arquivo_atualizado_em)}, ` +
+    `traz para 2024 apenas R$ ${compacto(v24)} e ${nfInt.format(n24)} grupos, contra R$ ${compacto(v23)} e ` +
+    `${nfInt.format(n23)} em 2023 — as declarações do ano ainda não estavam todas entregues.`;
+}
+
+const ABAS = ["resumo", "ranking", "achados"];
+
+function renderAll() {
+  if (S.view === "resumo") renderPanorama();
+  else if (S.view === "ranking") renderRanking();
+  else renderAchados();
+}
+
+function irParaAba(v) {
+  S.view = v;
+  try { history.replaceState(null, "", "#" + v); } catch (e) { /* sandbox sem history */ }
+  document.querySelectorAll("#tabs button").forEach(b =>
+    b.setAttribute("aria-selected", String(b.dataset.v === v)));
+  ABAS.forEach(k => $("#view-" + k).classList.toggle("hidden", k !== v));
+  renderAll();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function segLigar(sel, prop, depois) {
+  const cx = $(sel);
+  cx.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    S[prop] = b.dataset.v;
+    cx.querySelectorAll("button").forEach(o => o.setAttribute("aria-pressed", String(o === b)));
+    if (depois) depois();
+    salvar(); renderAll();
+  }));
+  cx.querySelectorAll("button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.v === S[prop])));
+}
+
+function init() {
+  montarNota2024();
+
+  $("#sel-base").innerHTML = ANOS.map(a =>
+    `<option value="${a}"${a === S.anoBase ? " selected" : ""}>${a}</option>`).join("");
+  const secs = Object.entries(SECOES).sort((a, b) => a[1].localeCompare(b[1], "pt-BR"));
+  $("#sel-secao").innerHTML = `<option value="">Todos</option>` +
+    secs.map(([k, n]) => `<option value="${k}"${k === S.secao ? " selected" : ""}>${esc(n)}</option>`).join("");
+  $("#sel-dim").value = S.dim;
+  $("#chk-2024").checked = S.incluir2024;
+  $("#fld-base").classList.toggle("hidden", S.medida !== "real");
+
+  segLigar("#seg-medida", "medida", () => {
+    $("#fld-base").classList.toggle("hidden", S.medida !== "real");
+  });
+  $("#sel-base").addEventListener("change", e => { S.anoBase = +e.target.value; salvar(); renderAll(); });
+  $("#sel-secao").addEventListener("change", e => { S.secao = e.target.value; invalidar(); salvar(); renderAll(); });
+  $("#chk-2024").addEventListener("change", e => { S.incluir2024 = e.target.checked; invalidar(); salvar(); renderAll(); });
+  $("#btn-reset").addEventListener("click", () => {
+    S.secao = ""; S.busca = "";
+    $("#sel-secao").value = "";
+    const b = $("#busca"); if (b) b.value = "";
+    invalidar(); salvar(); renderAll();
+  });
+
+  document.querySelectorAll("#tabs button").forEach(b =>
+    b.addEventListener("click", () => irParaAba(b.dataset.v)));
+
+  $("#sel-dim").addEventListener("change", e => { S.dim = e.target.value; salvar(); renderPanorama(); });
+  $("#btn-pan-tab").addEventListener("click", () => { S.panTabela = !S.panTabela; renderPanorama(); });
+
+  $("#busca").addEventListener("input", debounce(e => {
+    S.busca = e.target.value; renderRanking();
+  }, 160));
+
+  /* --- rodapé -------------------------------------------------------- */
+  const E0 = entidades("grupo");
+  let semCnae = 0, tudo = 0;
+  for (let g = 0; g < E0.n; g++) { tudo += E0.total[g]; if (E0.secao[g] === "Z") semCnae += E0.total[g]; }
+  $("#foot-cnae").textContent = nf1.format(semCnae / tudo * 100) + "%";
+  $("#foot-2024").textContent = NOTA2024;
+  $("#foot-fund").textContent = nfInt.format(P.meta.n_fundamentos || new Set(ITEM.map(i => i.fund)).size);
+  $("#foot-reg").textContent = nfInt.format(REGIMES.length);
+  $("#foot-fonte").innerHTML = `Portal da Transparência, <a href="${esc(P.meta.url)}" target="_blank" rel="noopener">Renúncias Fiscais</a> ` +
+    `(arquivos ${ANOS[0]}–${ANOS[NA - 1]}, atualizados em ${esc(dataBR(P.meta.arquivo_atualizado_em))}; ` +
+    `extraídos em ${esc(dataBR(P.meta.extraido_em))}). IPCA e PIB: IBGE/SIDRA.`;
+
+  /* --- redesenho ----------------------------------------------------- */
+  const redesenhar = debounce(() => {
+    if (S.view === "resumo") renderPanorama();
+    else if (S.view === "achados") renderAchados();
+  }, 160);
+  window.addEventListener("resize", redesenhar);
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  if (mq.addEventListener) mq.addEventListener("change", () => renderAll());
+  new MutationObserver(() => renderAll())
+    .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  const h = (location.hash || "").replace(/^#/, "");
+  irParaAba(ABAS.includes(h) ? h : S.view);
+}
+
+(async function boot() {
+  try {
+    await carregar();
+    $("#boot").classList.add("hidden");
+    $("#app").classList.remove("hidden");
+    init();
+  } catch (err) {
+    $("#boot").innerHTML = `<p style="max-width:44ch">Não foi possível carregar os dados nesta página:
+      <b>${esc(err && err.message ? err.message : String(err))}</b>. Recarregue a página; se persistir,
+      o navegador pode não suportar <span class="mono">DecompressionStream</span>.</p>`;
+    console.error(err);
+  }
+})();
+</script>
