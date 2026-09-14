@@ -97,10 +97,6 @@ page = f'''<meta charset="utf-8">
 body {{ margin:0; background:var(--surface); color:var(--ink); font-family: Roboto, "Helvetica Neue", Arial, sans-serif; font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased; }}
 a {{ color: var(--link); }}
 .wrap {{ max-width: 1000px; margin: 0 auto; padding: 0 20px; }}
-.topbar {{ background: var(--purple); color:#fff; font-size:13px; text-transform:uppercase; letter-spacing:.02em; }}
-.topbar .wrap {{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding:9px 20px; flex-wrap:wrap; }}
-.topbar a {{ color:#fff; text-decoration:none; font-weight:700; font-size:12px; border:2px solid #fff; border-radius:999px; padding:3px 12px; text-transform:none; }}
-.topbar a:hover {{ background:#fff; color:var(--purple); }}
 header {{ padding: 26px 0 8px; }}
 .logo {{ display:block; width:148px; height:49px; color:var(--ink); }}
 .logo svg {{ width:100%; height:100%; display:block; }}
@@ -124,7 +120,6 @@ footer p {{ margin:0; font-size:13.5px; max-width:72ch; }}
 footer .fim {{ border-top:1px solid rgba(255,255,255,.18); margin-top:26px; padding-top:16px; font-size:12.5px; color:#a3a3a3; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }}
 footer a {{ color: var(--accent); }}
 </style>
-<div class="topbar"><div class="wrap"><span>Relatórios da Fiquem Sabendo</span><a href="https://fiquemsabendo.com.br" target="_blank" rel="noopener">fiquemsabendo.com.br</a></div></div>
 <header class="wrap">
   <a class="logo" href="https://fiquemsabendo.com.br" target="_blank" rel="noopener">{logo}</a>
   <h1>Relatórios e <mark>ferramentas de dados</mark></h1>
