@@ -2,13 +2,14 @@
 
 Relatórios e ferramentas de dados publicados pela [Fiquem Sabendo](https://fiquemsabendo.com.br).
 Cada relatório vive em uma pasta própria, com pipeline reprodutível e README; o site
-estático é servido pelo GitHub Pages a partir de `docs/`.
+estático é servido pelo GitHub Pages a partir de `docs/`, no domínio `relatorios.fiquemsabendo.com.br`
+(`docs/CNAME`).
 
-**Site:** <https://fiquemsabendo.github.io/relatorios/>
+**Site:** <https://relatorios.fiquemsabendo.com.br/>
 
 | Relatório | Pasta | Página |
 |---|---|---|
-| Renúncias fiscais federais por CNPJ, 2015–2024 | [`renuncias-fiscais/`](renuncias-fiscais/) | [/renuncias-fiscais/](https://fiquemsabendo.github.io/relatorios/renuncias-fiscais/) |
+| Renúncias fiscais federais por CNPJ, 2015–2024 | [`renuncias-fiscais/`](renuncias-fiscais/) | [/renuncias-fiscais/](https://relatorios.fiquemsabendo.com.br/renuncias-fiscais/) |
 
 ## Estrutura
 

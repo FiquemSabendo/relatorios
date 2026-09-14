@@ -1,6 +1,6 @@
 # Renúncias fiscais federais, 2015–2024
 
-**Publicado:** <https://fiquemsabendo.github.io/relatorios/renuncias-fiscais/>
+**Publicado:** <https://relatorios.fiquemsabendo.com.br/renuncias-fiscais/>
 
 Pipeline reprodutível que baixa os microdados de **Renúncias Fiscais** do Portal da
 Transparência, consolida em um banco DuckDB e gera uma página HTML autocontida
