@@ -42,6 +42,7 @@ relatorios/
    ```
 
 4. Rode `python3 build_index.py` (ou só faça o push: o workflow `Índice dos relatórios`
-   regenera `docs/index.html` e commita). Os cards saem do mais recente para o mais antigo;
-   `"oculto": true` tira um relatório do índice sem apagar nada.
+   regenera `docs/index.html` e commita). Enquanto houver um único relatório, o índice
+   redireciona para ele; a partir do segundo vira uma lista de cards, do mais recente para
+   o mais antigo. `"oculto": true` tira um relatório do índice sem apagar nada.
 5. Dados brutos e bancos locais ficam fora do git (`.gitignore` já cobre `*/data/raw/` e `*/*.duckdb`).

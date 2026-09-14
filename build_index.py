@@ -13,6 +13,9 @@ recente para o mais antigo. Campos do JSON:
   publicado_em  AAAA-MM-DD, usado na ordenação e exibido no card
   oculto        true para não listar
 
+Enquanto houver um único relatório publicado, o índice é uma página de
+redirecionamento para ele; a lista com cards só aparece a partir do segundo.
+
 Roda localmente (`python3 build_index.py`) e no GitHub Actions a cada push.
 """
 import base64
@@ -91,8 +94,6 @@ page = f'''<meta charset="utf-8">
 <style>
 {fonts}
 :root {{ color-scheme: light; --ink:#000; --ink-2:#292929; --muted:#707070; --line:#ddd; --surface:#fff; --accent:#ffe706; --purple:#8103e5; --link:#1022ff; }}
-@media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{ color-scheme: dark; --ink:#fff; --ink-2:#d9d9d9; --muted:#a3a3a3; --line:rgba(255,255,255,.16); --surface:#000; --link:#8f9bff; }} }}
-:root[data-theme="dark"] {{ color-scheme: dark; --ink:#fff; --ink-2:#d9d9d9; --muted:#a3a3a3; --line:rgba(255,255,255,.16); --surface:#000; --link:#8f9bff; }}
 * {{ box-sizing: border-box; }}
 body {{ margin:0; background:var(--surface); color:var(--ink); font-family: Roboto, "Helvetica Neue", Arial, sans-serif; font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased; }}
 a {{ color: var(--link); }}
@@ -136,6 +137,18 @@ footer a {{ color: var(--accent); }}
   <div class="fim"><span>Código: <a href="https://github.com/FiquemSabendo/relatorios" target="_blank" rel="noopener">github.com/FiquemSabendo/relatorios</a></span><span><a href="https://fiquemsabendo.com.br" target="_blank" rel="noopener">fiquemsabendo.com.br</a> · <a href="https://fiquemsabendo.com.br/contato" target="_blank" rel="noopener">Contato</a></span></div>
 </div></footer>
 '''
+if n == 1:
+    destino = relatorios[0]["pasta"] + "/"
+    page = f'''<meta charset="utf-8">
+<title>{esc(relatorios[0]["titulo"])} · Fiquem Sabendo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="0; url={esc(destino)}">
+<link rel="canonical" href="https://relatorios.fiquemsabendo.com.br/{esc(destino)}">
+<!-- gerado por build_index.py: com um único relatório publicado, o índice redireciona para ele -->
+<script>location.replace("{esc(destino)}" + location.hash);</script>
+<p style="font-family:Roboto,Arial,sans-serif;padding:24px">Redirecionando para <a href="{esc(destino)}">{esc(relatorios[0]["titulo"])}</a>…</p>
+'''
+
 out = os.path.join(DOCS, "index.html")
 open(out, "w", encoding="utf-8").write(page)
-print(f"{out}: {n} relatório(s) — " + ", ".join(m["pasta"] for m in relatorios))
+print(f"{out}: {n} relatório(s) — " + ", ".join(m["pasta"] for m in relatorios) + (" (redirecionamento)" if n == 1 else ""))

@@ -19,8 +19,8 @@
 <style>
 /* ===================================================================== *
  * Tokens. Identidade visual da Fiquem Sabendo (fiquemsabendo.com.br):
- * fundo branco, texto preto, amarelo #ffe706 como marca, roxo #8103e5 na
- * faixa superior, azul #1022ff em links. Paleta categórica dos gráficos
+ * fundo branco, texto preto, amarelo #ffe706 como marca, azul #1022ff em
+ * links. Só tema claro, como o site. Paleta categórica dos gráficos
  * derivada das cores de acento do site, com contraste ≥ 3:1 sobre a
  * superfície; o amarelo fica reservado à interface (marcas, chips, botões),
  * não a dados.
@@ -55,60 +55,6 @@
   --good-text:#0b6b3c;
 
   --r-sm: 6px; --r: 8px; --r-lg: 12px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --plane:        #000000;
-    --surface:      #151515;
-    --surface-2:    #1e1e1e;
-    --surface-3:    #292929;
-    --ink:          #ffffff;
-    --ink-2:        #d9d9d9;
-    --muted:        #a3a3a3;
-    --grid:         #292929;
-    --axis:         #4a4a4a;
-    --line:         rgba(255,255,255,.14);
-    --line-strong:  rgba(255,255,255,.26);
-    --accent:       #ffe706;
-    --accent-ink:   #000000;
-    --accent-wash:  rgba(255,231,6,.16);
-    --link:         #8f9bff;
-    --shadow:       none;
-
-    --s1:#5f70ff; --s2:#b06cff; --s3:#ff5ad9; --s4:#ff9147;
-    --s5:#2ec779; --s6:#4fb0ff; --s7:#ff7a7a; --s8:#a3a3a3;
-    --neutral-mark: #4a4a4a;
-    --good-text:#2ec779;
-    --seq1:#08118a; --seq2:#0c19c4; --seq3:#1022ff; --seq4:#5f70ff;
-    --seq5:#8f9bff; --seq6:#b8c0ff; --seq7:#e0e4ff;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --plane:        #000000;
-  --surface:      #151515;
-  --surface-2:    #1e1e1e;
-  --surface-3:    #292929;
-  --ink:          #ffffff;
-  --ink-2:        #d9d9d9;
-  --muted:        #a3a3a3;
-  --grid:         #292929;
-  --axis:         #4a4a4a;
-  --line:         rgba(255,255,255,.14);
-  --line-strong:  rgba(255,255,255,.26);
-  --accent:       #ffe706;
-  --accent-ink:   #000000;
-  --accent-wash:  rgba(255,231,6,.16);
-  --link:         #8f9bff;
-  --shadow:       none;
-
-  --s1:#5f70ff; --s2:#b06cff; --s3:#ff5ad9; --s4:#ff9147;
-  --s5:#2ec779; --s6:#4fb0ff; --s7:#ff7a7a; --s8:#a3a3a3;
-  --neutral-mark: #4a4a4a;
-  --good-text:#2ec779;
-  --seq1:#08118a; --seq2:#0c19c4; --seq3:#1022ff; --seq4:#5f70ff;
-  --seq5:#8f9bff; --seq6:#b8c0ff; --seq7:#e0e4ff;
 }
 
 * { box-sizing: border-box; }
@@ -1487,10 +1433,6 @@ function init() {
     if (S.view === "resumo") renderPanorama();
   }, 160);
   window.addEventListener("resize", redesenhar);
-  const mq = window.matchMedia("(prefers-color-scheme: dark)");
-  if (mq.addEventListener) mq.addEventListener("change", () => renderAll());
-  new MutationObserver(() => renderAll())
-    .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
   const h = (location.hash || "").replace(/^#/, "");
   irParaAba(ABAS.includes(h) ? h : S.view);
