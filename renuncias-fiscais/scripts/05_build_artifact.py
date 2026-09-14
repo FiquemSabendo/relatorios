@@ -3,7 +3,7 @@
 
 Saídas (idênticas):
   artifact/renuncias.html   — nome histórico, usado para publicar o artefato no claude.ai
-  docs/index.html           — o que o GitHub Pages serve
+  ../docs/renuncias-fiscais/index.html — o que o GitHub Pages serve
 """
 import base64
 import os
@@ -14,7 +14,7 @@ TPL = os.path.join(ROOT, "artifact", "template.html")
 PAY = os.path.join(ROOT, "artifact", "payload.json")
 FONTS = os.path.join(ROOT, "artifact", "assets", "fonts")
 OUTS = [os.path.join(ROOT, "artifact", "renuncias.html"),
-        os.path.join(ROOT, "docs", "index.html")]
+        os.path.join(os.path.dirname(ROOT), "docs", "renuncias-fiscais", "index.html")]
 
 # Identidade visual da Fiquem Sabendo: Supply (títulos) + Roboto (texto), as mesmas
 # faces servidas em fiquemsabendo.com.br. Embutidas como data URI porque o site não

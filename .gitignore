@@ -1,4 +1,5 @@
-data/raw/
-artifact/_test/
-artifact/payload.json
-renuncias.duckdb
+# dados brutos e bancos locais de cada relatório
+*/data/raw/
+*/*.duckdb
+*/artifact/_test/
+*/artifact/payload.json
