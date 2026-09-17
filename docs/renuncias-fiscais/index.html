@@ -90,7 +90,7 @@ mark { background: var(--accent); color: #000; padding: 0 .12em; box-decoration-
 
 
 .masthead { background: var(--surface); padding: 22px 0 0; }
-.masthead .wrap, .controlbar .wrap { padding-bottom: 0; }
+.masthead .wrap, .controlbar .wrap, .tabwrap { padding-bottom: 0; }
 .brandrow { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 30px; }
 .brandrow .logo { display: block; width: 148px; height: 49px; color: var(--ink); }
 .brandrow .logo svg { width: 100%; height: 100%; display: block; }
@@ -109,6 +109,7 @@ h1 {
 /* --------------------------------------------------------- controls -- */
 .controlbar {
   position: sticky; top: 0; z-index: 40;
+  margin-bottom: 26px;
   background: color-mix(in srgb, var(--surface) 94%, transparent);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--line);
@@ -337,6 +338,13 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
   </div>
 </header>
 
+<div class="wrap tabwrap">
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" data-v="resumo" aria-selected="true">Resumo</button>
+    <button role="tab" data-v="ranking" aria-selected="false">Ranking de empresas</button>
+  </nav>
+</div>
+
 <div class="controlbar">
   <div class="wrap">
     <div class="controls">
@@ -363,10 +371,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 </div>
 
 <div class="wrap">
-  <nav class="tabs" role="tablist" id="tabs">
-    <button role="tab" data-v="resumo" aria-selected="true">Resumo</button>
-    <button role="tab" data-v="ranking" aria-selected="false">Ranking de empresas</button>
-  </nav>
+
 
   <!-- ================================================ RESUMO ========= -->
   <section id="view-resumo" role="tabpanel">
