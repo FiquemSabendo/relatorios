@@ -54,3 +54,18 @@ A revisão e os valores antes/depois de todos os anos estão em `../revisao-defl
 ## Atualização para agosto/2026
 
 Consulta oficial e reprodução em `12_atualizar_referencia_ipca.py`. Confirmado IPCA mensal, não IPCA-15; mês máximo 202608. Arquivo oficial de conferência: https://www.ibge.gov.br/biblioteca/visualizacao/periodicos/236/inpc_ipca_2026_ago.pdf, página 15, publicado em 11/09/2026. IPCA escolhido para comparar poder de compra pela inflação ao consumidor, não para medir volume ou retorno da política. O índice 7633,23 é um nível acumulado, não uma taxa percentual. A série nominal e os denominadores de origem permanecem inalterados. A revisão anual está em `../referencia-ipca/revisao-anual.csv`. A referência de preços é congelada na extração e explicitada em todos os rótulos. Não há suposição de inflação futura.
+
+## Gráficos e hierarquia
+
+A série anual apresenta rótulos fixos em R$ bilhões, com uma casa decimal, sem tooltip.
+2024 recebe a segunda linha “(parcial)”. A tabela visível mantém ano, valor nominal e
+valor corrigido; meses de origem e fatores permanecem no JSON e na documentação técnica.
+
+As barras horizontais permitem navegar por tipo → benefício fiscal → tributo, com todos
+os benefícios disponíveis, sem corte por top N. A soma usa 2015–2024 (2024 parcial),
+corrigindo cada ano antes de acumular, na referência agosto/2026. Exportação: agrupamento
+por ano e pelos três campos de dim_item, com vazios explicitados como “Sem informação”.
+A soma das folhas fecha com o total e com cada tipo; percentuais referem-se ao nível
+selecionado. A escala das barras é comum dentro de cada nível e recalculada ao navegar.
+A mudança é de apresentação: totais e série monetária permaneceram idênticos.
+Capturas e verificação dos caminhos completos em `../graficos-apresentacao/`.

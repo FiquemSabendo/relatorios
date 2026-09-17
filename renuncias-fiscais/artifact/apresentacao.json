@@ -18,6 +18,176 @@
   "fonte_ipca_pagina": 18,
   "fonte_ipca_sha256": "7adc4242ffcd4a113c5f76276074164fe5190d6a6f39c5a28f168326bf055a07",
   "formula": "nominal do período × IPCA 2026-08 ÷ média dos índices dos meses cobertos (jan–dez/2015–2023; jan–jun/2024)",
+  "hierarquia": [
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Atividade Audiovisual - Dedução do Imposto de Renda",
+      "tributo": "IRPJ",
+      "real": 937285420.4014101
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Empresa Cidadã",
+      "tributo": "IRPJ",
+      "real": 3437963292.168109
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Finam - Fundo de Investimentos da Amazônia",
+      "tributo": "IRPJ",
+      "real": 564081.7605844471
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Finor - Fundo de Investimentos do Nordeste",
+      "tributo": "IRPJ",
+      "real": 109688716.79321098
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Fundos de Direitos da Criança e do Adolescente",
+      "tributo": "IRPJ",
+      "real": 4142211439.400501
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Fundos do Idoso",
+      "tributo": "IRPJ",
+      "real": 3569233129.9977283
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Horário Eleitoral",
+      "tributo": "IRPJ",
+      "real": 20028046714.81098
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Incentivo ao Desporto",
+      "tributo": "IRPJ",
+      "real": 4303093814.019759
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Padis - Programa de Apoio ao Desenvolvimento Tecnológico da Indústria de Semicondutores",
+      "tributo": "IRPJ",
+      "real": 632559559.1693954
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Programa Emergencial de Retomada do Setor de Eventos (Perse) - CSLL",
+      "tributo": "CSLL",
+      "real": 4453816595.174221
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Programa Emergencial de Retomada do Setor de Eventos (Perse) - IRPJ",
+      "tributo": "IRPJ",
+      "real": 11557077026.072119
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Programa Rota 2030 CSLL",
+      "tributo": "CSLL",
+      "real": 213721260.42676225
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Programa Rota 2030 IR",
+      "tributo": "IRPJ",
+      "real": 572883512.9579031
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Programa de Alimentação do Trabalhador",
+      "tributo": "IRPJ",
+      "real": 18182625843.15063
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Pronac - Programa Nacional de Apoio à Cultura - Dedução do Imposto de Renda",
+      "tributo": "IRPJ",
+      "real": 17530858383.74061
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Pronas/PCD - Programa Nacional de Apoio à Atenção da Saúde da Pessoa com Deficiência",
+      "tributo": "IRPJ",
+      "real": 868625378.5954986
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Pronon - Programa Nacional de Apoio à Atenção Oncológica",
+      "tributo": "IRPJ",
+      "real": 1343305287.6828604
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Prouni - Programa Universidade para Todos",
+      "tributo": "IRPJ",
+      "real": 15282723697.909546
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Prouni - Programa Universidade para Todos CSLL",
+      "tributo": "CSLL",
+      "real": 5262637401.347282
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Sudam/Sudene - Isenção Projeto Industrial / Agrícola",
+      "tributo": "IRPJ",
+      "real": 12119969.834642135
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Sudam/Sudene - Isenção Projeto Tecnologia Digital",
+      "tributo": "IRPJ",
+      "real": 30794541.40764627
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Sudam/Sudene - Redução 75% Projeto Setor Prioritário",
+      "tributo": "IRPJ",
+      "real": 164318003555.64862
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Sudam/Sudene - Redução Escalonada Setor Prioritário, Projeto Industrial / Agrícola",
+      "tributo": "IRPJ",
+      "real": 1278333.327480314
+    },
+    {
+      "tipo": "IRPJ/CSLL declarado",
+      "beneficio": "Sudam/Sudene - Redução por Reinvestimento",
+      "tributo": "IRPJ",
+      "real": 6318277450.766007
+    },
+    {
+      "tipo": "Importação: II e IPI",
+      "beneficio": "IPI",
+      "tributo": "IPI",
+      "real": 172902951552.814
+    },
+    {
+      "tipo": "Importação: II e IPI",
+      "beneficio": "Imposto de Importação",
+      "tributo": "Imposto de Importação",
+      "real": 419337576902.2121
+    },
+    {
+      "tipo": "Importação: PIS/Cofins",
+      "beneficio": "COFINS",
+      "tributo": "COFINS",
+      "real": 688462753942.228
+    },
+    {
+      "tipo": "Importação: PIS/Cofins",
+      "beneficio": "PIS",
+      "tributo": "PIS",
+      "real": 146484513915.81058
+    }
+  ],
   "anos": [
     {
       "ano": 2015,

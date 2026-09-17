@@ -58,9 +58,21 @@ for y, nominal, idx in macro:
     annual.append(dict(ano=y,nominal=nominal,real=nominal*base/origins[y],fator=base/origins[y],indice_medio=idx,indice_origem=origins[y],meses_origem=coverage[str(y)],parcial=y==2024))
 total = sum(r['real'] for r in annual)
 assert abs(sum(by_type.values())-total)<0.05
+# Hierarquia monetária: cada linha pertence a um tipo, benefício e tributo.
+hierarchy = defaultdict(float)
+for y, tipo, beneficio, tributo, value in con.execute("""SELECT f.ano,
+ coalesce(nullif(i.tipo_curto,''),'Sem informação'),
+ coalesce(nullif(i.beneficio_fiscal,''),'Sem informação'),
+ coalesce(nullif(i.tributo,''),'Sem informação'), sum(f.valor)
+ FROM fato_item_ano f JOIN dim_item i USING(item_id) GROUP BY 1,2,3,4""").fetchall():
+    hierarchy[(tipo,beneficio,tributo)] += value * base / origins[y]
+assert abs(sum(hierarchy.values()) - total) < 0.05
+for tipo, expected in by_type.items():
+    assert abs(sum(v for (t,b,tr),v in hierarchy.items() if t == tipo) - expected) < 0.05
 out = dict(base=reference['base'],base_mes=reference['base_mes'],indice_base=base,referencia=reference,
  fonte_ipca=URL,fonte_ipca_pagina=18,fonte_ipca_sha256=hashlib.sha256(PDF.read_bytes()).hexdigest(),
  formula=f"nominal do período × IPCA {reference['base_mes']} ÷ média dos índices dos meses cobertos (jan–dez/2015–2023; jan–jun/2024)",
+ hierarquia=[dict(tipo=t,beneficio=b,tributo=tr,real=v) for (t,b,tr),v in sorted(hierarchy.items())],
  anos=annual,total_real=total,total_nominal=sum(r['nominal'] for r in annual),
  tipos=[dict(tipo=t,real=v,participacao=v/total) for t,v in sorted(by_type.items(),key=lambda x:-x[1])],
  cnpjs=con.execute('select count(*) from dim_estab').fetchone()[0],
