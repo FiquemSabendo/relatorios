@@ -327,6 +327,10 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 .intro-track { height: 24px; background: var(--surface-2); }
 .intro-track i { display: block; height: 100%; background: var(--data-1); }
 #intro-chart { overflow-x: auto; }
+#ben-top table { min-width: 820px; }
+#ben-top td:nth-child(2) { min-width: 280px; }
+#ben-kpis { grid-template-columns: repeat(3,minmax(0,1fr)); }
+@media (max-width:600px) { #ben-kpis { grid-template-columns: 1fr; } }
 #view-apresentacao summary { cursor: pointer; margin-top: 18px; }
 
 </style>
@@ -353,6 +357,8 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 <div class="wrap tabwrap">
   <nav class="tabs" role="tablist" id="tabs">
     <button role="tab" data-v="apresentacao" aria-selected="true">Apresentação</button>
+    <button role="tab" data-v="metodologia" aria-selected="false">Metodologia</button>
+    <button role="tab" data-v="beneficiarios" aria-selected="false">Maiores Beneficiários</button>
     <button role="tab" data-v="resumo" aria-selected="false">Resumo</button>
     <button role="tab" data-v="ranking" aria-selected="false">Ranking de empresas</button>
   </nav>
@@ -392,18 +398,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <p>São receitas que o poder público deixa de arrecadar ao conceder tratamentos tributários
         favorecidos, como isenções, reduções de alíquotas e créditos presumidos. Elas podem apoiar
         atividades, regiões ou objetivos de política pública. Não são transferências de dinheiro às empresas.
-        A <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm#art14" target="_blank" rel="noopener">Lei de Responsabilidade Fiscal, de 2000 (art. 14)</a>
-        trata da concessão e ampliação desses benefícios.</p>
-      <h3>O que esta base reúne?</h3>
-      <p>São registros da Receita Federal divulgados pelo Portal da Transparência, por CNPJ e ano-calendário,
-        com valores, tipos de renúncia, tributos, benefícios e fundamentos legais. O ano se refere ao fato gerador,
-        e não à data de publicação da declaração. <span id="intro-cobertura"></span></p>
-      <p>Este é um recorte das renúncias federais identificadas por beneficiário, não o total de todos os gastos
-        tributários do país. Não abrange tributos estaduais ou municipais nem todos os benefícios federais.
-        A presença de uma empresa na base não indica irregularidade.</p>
-      <p><a href="https://portaldatransparencia.gov.br/download-de-dados/renuncias" target="_blank" rel="noopener">Baixar os arquivos originais</a>
-        · <a href="https://portaldatransparencia.gov.br/dicionario-de-dados/renuncias" target="_blank" rel="noopener">Dicionário dos dados</a>
-        · <a href="https://portaldatransparencia.gov.br/entenda-a-gestao-publica/renuncias-fiscais" target="_blank" rel="noopener">Cobertura e explicação da fonte</a></p>
+</p>
     </div>
     <div class="card">
       <h2>Quanto foi registrado em renúncias por ano?</h2>
@@ -423,18 +418,28 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <p class="sub">As porcentagens se referem ao acumulado de todos os tributos, corrigido pelo IPCA;
         descrevem este acervo, não o universo de todos os benefícios tributários.</p>
     </div>
+
+  </section>
+
+  <section id="view-metodologia" role="tabpanel" class="hidden">
     <div class="card intro-copy" id="metodologia">
       <h2>Metodologia: como ler estes números</h2>
+            <h3>O que esta base reúne?</h3>
+      <p>São registros da Receita Federal divulgados pelo Portal da Transparência, por CNPJ e ano-calendário,
+        com valores, tipos de renúncia, tributos, benefícios e fundamentos legais. O ano se refere ao fato gerador,
+        e não à data de publicação da declaração. <span id="intro-cobertura"></span></p>
+      <p>Este é um recorte das renúncias federais identificadas por beneficiário, não o total de todos os gastos
+        tributários do país. Não abrange tributos estaduais ou municipais nem todos os benefícios federais.
+        A presença de uma empresa na base não indica irregularidade.</p>
+      <p><a href="https://portaldatransparencia.gov.br/download-de-dados/renuncias" target="_blank" rel="noopener">Baixar os arquivos originais</a>
+        · <a href="https://portaldatransparencia.gov.br/dicionario-de-dados/renuncias" target="_blank" rel="noopener">Dicionário dos dados</a>
+        · <a href="https://portaldatransparencia.gov.br/entenda-a-gestao-publica/renuncias-fiscais" target="_blank" rel="noopener">Cobertura e explicação da fonte</a></p>
+
       <h3>Fonte e cobertura</h3>
-      <p><b>O que é.</b> Renúncia fiscal aqui é o Incentivo, Renúncia, Benefício ou Imunidade
-          de natureza tributária (IRBI) apurado pela Receita Federal: a diferença entre o tributo
-          calculado e o efetivamente devido, por CNPJ e por ano-calendário.</p>
-      <p><b>O que não é.</b> Não cobre tributos estaduais e municipais (ICMS, ISS, IPTU),
-          nem o Simples Nacional, nem renúncias de pessoa física. É um recorte da União.</p>
       <p><b>Fonte.</b> <span id="foot-fonte"></span></p>
       <h3>Beneficiários e fundamentos legais</h3>
-      <p><b>Empresa.</b> Cada linha do ranking é um grupo econômico, aproximado pela raiz do
-          CNPJ (8 primeiros dígitos), que une matriz e filiais. Não capta controle societário
+      <p><b>Empresa.</b> Cada linha do ranking reúne estabelecimentos com a mesma raiz do
+          CNPJ (8 primeiros dígitos), unindo matriz e filiais. Não é uma identificação completa de grupo econômico. Não capta controle societário
           entre CNPJs de raízes diferentes. Os CNPJs que compõem o grupo aparecem ao abrir a linha.</p>
       <p><b>Mecanismo.</b> A origem jurídica vem do campo <b>Fundamento Legal</b> do arquivo
           detalhado da Receita — <span id="foot-fund"></span> dispositivos distintos. Para o
@@ -443,7 +448,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
           <span id="foot-reg"></span> mecanismos é nosso, por regra explícita sobre esse texto;
           o fundamento original aparece sempre ao lado, sem interpretação.</p>
       <h3>Correção pela inflação e bases de preços</h3>
-      <p>Nos dois gráficos desta aba, a referência é <b><span data-base-ipca></span></b>.
+      <p>Nos gráficos da Apresentação e de Maiores Beneficiários, a referência é <b><span data-base-ipca></span></b>.
         Multiplicamos o valor nominal de cada ano pelo número-índice do IPCA de <span data-base-ipca></span>,
         dividido pela média dos índices dos meses cobertos: <b>janeiro a dezembro para 2015–2023</b>
         e <b>janeiro a junho para 2024</b>. Depois, somamos os valores corrigidos.
@@ -456,9 +461,20 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         não mede o retorno econômico dos incentivos.</p>
       <p><b>As bases de preços variam entre as abas.</b> No Resumo, “Real” usa a média de janeiro a dezembro
         do ano escolhido. No ranking, os valores são nominais; ao abrir uma empresa, “Real” usa a média de
-        janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos desta apresentação sem converter a base.
+        janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos da Apresentação sem converter a base.
         <span id="intro-diferenca"></span></p>
 
+      <h3>Concentração e setores em Maiores Beneficiários</h3>
+      <p>O recorte é 2015–2024, incluindo 2024 parcial, em preços de <span data-base-ipca></span>.
+        A concentração usa os oito primeiros dígitos dos CNPJs com 14 dígitos. O grupo dos maiores 1% é arredondado
+        para cima em número de empresas. Os percentuais de valor usam o saldo total da base, preservando registros negativos
+        e o valor do identificador inválido; este último não conta como empresa. <span id="ben-qualidade"></span></p>
+      <p>Nos gráficos setoriais, cada estabelecimento leva seus valores para o seu próprio setor da classificação editorial.
+        Isso difere do rótulo resumido da raiz no ranking, que acompanha o estabelecimento de maior valor acumulado.
+        O cadastro atual é aplicado a toda a série; não representa mudanças históricas de atividade. “Não identificado”
+        permanece no total e na tabela. A evolução destaca os seis setores identificados de maior acumulado.</p>
+      <p>O ranking principal continua nominal e cobre 2015–2023. Assim, posições e acumulados podem diferir da nova aba,
+        embora a chave de agrupamento por raiz seja a mesma.</p>
       <h3>Participação no PIB</h3>
       <p><b>% do PIB.</b> PIB nominal anual = soma dos quatro trimestres a preços correntes
           (IBGE, tabela SIDRA 1846). Nessa medida o resumo do período é a <b>média anual</b>,
@@ -479,6 +495,37 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
           de mudanças de atividade. Os filtros de setor continuam usando a seção CNAE original.</p>
       <p><b>Arredondamento.</b> Os microdados do explorador estão arredondados para reais
           inteiros; o banco DuckDB que a gera guarda os centavos.</p>
+    </div>
+  </section>
+
+  <section id="view-beneficiarios" role="tabpanel" class="hidden">
+    <div class="card intro-copy">
+      <h2>Quem concentra as renúncias registradas?</h2>
+      <p class="sub">2015–2024, com 2024 parcial · reais de <span data-base-ipca></span> (IPCA) · beneficiários por raiz do CNPJ</p>
+      <p class="dek" id="ben-concentracao"></p>
+      <div class="kv" id="ben-kpis"></div>
+      <p class="note">Aqui, cada beneficiário reúne matriz e filiais com a mesma raiz do CNPJ, incluindo empresas e outras pessoas jurídicas. Raízes diferentes
+        podem ter o mesmo controlador, mas não são reunidas. O acumulado inclui 2024 parcial; difere do ranking nominal de 2015–2023.</p>
+    </div>
+    <div class="card">
+      <h2>Os 20 beneficiários com maiores valores acumulados</h2>
+      <p class="sub">Agrupamento por raiz do CNPJ · valores em reais de <span data-base-ipca></span></p>
+      <div class="tablewrap" id="ben-top"></div>
+    </div>
+    <div class="card">
+      <h2>Quais setores concentram os maiores valores?</h2>
+      <p class="sub">Dez maiores setores identificados · classificação editorial · acumulado 2015–2024</p>
+      <div id="ben-setores"></div>
+      <p class="note" id="ben-sem-setor"></p>
+      <details><summary>Ver todos os setores</summary><div class="tablewrap" id="ben-setores-table"></div></details>
+    </div>
+    <div class="card">
+      <h2>Como evoluíram os maiores setores?</h2>
+      <p class="sub">Seis maiores setores identificados no acumulado · R$ bilhões de <span data-base-ipca></span> (IPCA)</p>
+      <div class="chartbox" id="ben-evolucao" style="overflow-x:auto"></div>
+      <div class="legend" id="ben-legend"></div>
+      <p class="note">2024 é parcial. O trecho tracejado não representa uma queda anual comparável aos anos completos.</p>
+      <details><summary>Ver valores por setor e ano</summary><div class="tablewrap" id="ben-evolucao-table"></div></details>
     </div>
   </section>
 
@@ -1107,7 +1154,7 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Finor - Fundo de Investimentos do Nordeste",
       "tributo": "IRPJ",
-      "real": 109688716.79321098
+      "real": 109688716.79321101
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1125,13 +1172,13 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Horário Eleitoral",
       "tributo": "IRPJ",
-      "real": 20028046714.81098
+      "real": 20028046714.810986
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Incentivo ao Desporto",
       "tributo": "IRPJ",
-      "real": 4303093814.019759
+      "real": 4303093814.019758
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1143,13 +1190,13 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Programa Emergencial de Retomada do Setor de Eventos (Perse) - CSLL",
       "tributo": "CSLL",
-      "real": 4453816595.174221
+      "real": 4453816595.174222
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Programa Emergencial de Retomada do Setor de Eventos (Perse) - IRPJ",
       "tributo": "IRPJ",
-      "real": 11557077026.072119
+      "real": 11557077026.07212
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1167,7 +1214,7 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Programa de Alimentação do Trabalhador",
       "tributo": "IRPJ",
-      "real": 18182625843.15063
+      "real": 18182625843.150635
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1191,7 +1238,7 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Prouni - Programa Universidade para Todos",
       "tributo": "IRPJ",
-      "real": 15282723697.909546
+      "real": 15282723697.909544
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1209,13 +1256,13 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Sudam/Sudene - Isenção Projeto Tecnologia Digital",
       "tributo": "IRPJ",
-      "real": 30794541.40764627
+      "real": 30794541.407646272
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Sudam/Sudene - Redução 75% Projeto Setor Prioritário",
       "tributo": "IRPJ",
-      "real": 164318003555.64862
+      "real": 164318003555.64856
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1227,7 +1274,7 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Sudam/Sudene - Redução por Reinvestimento",
       "tributo": "IRPJ",
-      "real": 6318277450.766007
+      "real": 6318277450.766006
     },
     {
       "tipo": "Importação: II e IPI",
@@ -1245,7 +1292,7 @@ const AP = {
       "tipo": "Importação: PIS/Cofins",
       "beneficio": "COFINS",
       "tributo": "COFINS",
-      "real": 688462753942.228
+      "real": 688462753942.2281
     },
     {
       "tipo": "Importação: PIS/Cofins",
@@ -1407,7 +1454,825 @@ const AP = {
   ],
   "cnpjs": 77523,
   "razao_base_media2023": 1.145932759358369,
-  "razao_base_media2024": 1.0979789243255957
+  "razao_base_media2024": 1.0979789243255957,
+  "beneficiarios": {
+    "n_raizes": 69462,
+    "n_raizes_negativas": 3,
+    "saldo_negativo": -10335.462176337805,
+    "n_top1": 695,
+    "pct_empresas_top1": 1.0005470617028016,
+    "pct_valor_top1": 82.89168991779728,
+    "pct_top10": 25.568688350783432,
+    "pct_top100": 55.5863798492303,
+    "valor_identificador_invalido": 200294.89049263686,
+    "top20": [
+      {
+        "raiz": "33000167",
+        "nome": "PETROLEO BRASILEIRO S A PETROBRAS",
+        "real": 171352141988.1825,
+        "cnpjs": 62,
+        "participacao": 0.10018851864925536
+      },
+      {
+        "raiz": "33435231",
+        "nome": "GE CELMA LTDA.",
+        "real": 57680525285.62732,
+        "cnpjs": 4,
+        "participacao": 0.03372543999873937
+      },
+      {
+        "raiz": "33592510",
+        "nome": "VALE S.A.",
+        "real": 40888061811.27695,
+        "cnpjs": 23,
+        "participacao": 0.02390699232457536
+      },
+      {
+        "raiz": "00280273",
+        "nome": "SAMSUNG ELETRONICA DA AMAZONIA LTDA",
+        "real": 30235834744.188923,
+        "cnpjs": 5,
+        "participacao": 0.017678702221025595
+      },
+      {
+        "raiz": "07689002",
+        "nome": "EMBRAER S.A.",
+        "real": 28259752756.478165,
+        "cnpjs": 8,
+        "participacao": 0.016523299523510025
+      },
+      {
+        "raiz": "02012862",
+        "nome": "TAM LINHAS AEREAS S/A.",
+        "real": 28241990821.972656,
+        "cnpjs": 12,
+        "participacao": 0.016512914232227383
+      },
+      {
+        "raiz": "16701716",
+        "nome": "STELLANTIS AUTOMOVEIS BRASIL LTDA.",
+        "real": 26889607773.764004,
+        "cnpjs": 7,
+        "participacao": 0.015722184378055303
+      },
+      {
+        "raiz": "05217376",
+        "nome": "MODEC SERVICOS DE PETROLEO DO BRASIL LTDA",
+        "real": 20149523776.219616,
+        "cnpjs": 4,
+        "participacao": 0.011781299697827057
+      },
+      {
+        "raiz": "59275792",
+        "nome": "GENERAL MOTORS DO BRASIL LTDA",
+        "real": 19218516907.759563,
+        "cnpjs": 9,
+        "participacao": 0.011236945843121652
+      },
+      {
+        "raiz": "01844555",
+        "nome": "CNH INDUSTRIAL BRASIL LTDA.",
+        "real": 14384602701.836147,
+        "cnpjs": 8,
+        "participacao": 0.008410586639497229
+      },
+      {
+        "raiz": "61064911",
+        "nome": "CATERPILLAR BRASIL LTDA",
+        "real": 14303250973.90433,
+        "cnpjs": 4,
+        "participacao": 0.00836302079633661
+      },
+      {
+        "raiz": "00913443",
+        "nome": "RENAULT DO BRASIL S.A",
+        "real": 14288086537.003283,
+        "cnpjs": 1,
+        "participacao": 0.008354154245550388
+      },
+      {
+        "raiz": "92660604",
+        "nome": "YARA BRASIL FERTILIZANTES S/A",
+        "real": 14284924403.721346,
+        "cnpjs": 30,
+        "participacao": 0.00835230536612809
+      },
+      {
+        "raiz": "60744463",
+        "nome": "SYNGENTA PROTECAO DE CULTIVOS LTDA",
+        "real": 13429420662.10763,
+        "cnpjs": 9,
+        "participacao": 0.007852097714349306
+      },
+      {
+        "raiz": "00394544",
+        "nome": "MINISTERIO DA SAUDE",
+        "real": 13071294424.965448,
+        "cnpjs": 5,
+        "participacao": 0.007642703558125793
+      },
+      {
+        "raiz": "01785706",
+        "nome": "VENTURA PETROLEO S.A.",
+        "real": 11371081469.815916,
+        "cnpjs": 1,
+        "participacao": 0.006648599747176921
+      },
+      {
+        "raiz": "01166372",
+        "nome": "LG ELECTRONICS DO BRASIL LTDA",
+        "real": 11216544735.084703,
+        "cnpjs": 2,
+        "participacao": 0.006558243091287081
+      },
+      {
+        "raiz": "59104422",
+        "nome": "VOLKSWAGEN DO BRASIL INDUSTRIA DE VEICULOS AUTOMOTORES LTDA",
+        "real": 11129755158.435324,
+        "cnpjs": 5,
+        "participacao": 0.006507497772216036
+      },
+      {
+        "raiz": "09296295",
+        "nome": "AZUL LINHAS AEREAS BRASILEIRAS S.A.",
+        "real": 10419102494.967817,
+        "cnpjs": 4,
+        "participacao": 0.006091983633899238
+      },
+      {
+        "raiz": "07575651",
+        "nome": "GOL LINHAS AEREAS S.A.",
+        "real": 10347411625.15077,
+        "cnpjs": 4,
+        "participacao": 0.006050066433657049
+      }
+    ],
+    "setores": [
+      {
+        "setor": "Petróleo, Gás e Combustíveis",
+        "valores": [
+          25095035457.646,
+          20961062212.783615,
+          12095699171.853958,
+          31419787069.26991,
+          38575684650.46977,
+          71308380824.52841,
+          46222822276.608444,
+          23151615734.449135,
+          32283032628.675232,
+          9654897348.408924
+        ],
+        "real": 310768017374.69336,
+        "participacao": 0.18170410327572017
+      },
+      {
+        "setor": "Automotivo",
+        "valores": [
+          8560357824.088486,
+          8389429233.928002,
+          8885665395.125889,
+          12443189319.413351,
+          18337791769.98125,
+          21326355042.88463,
+          31724204733.03118,
+          29597142467.530285,
+          25459217980.674927,
+          11846796966.939585
+        ],
+        "real": 176570150733.59756,
+        "participacao": 0.10323945551199998
+      },
+      {
+        "setor": "Aviação",
+        "valores": [
+          12891666280.715977,
+          12662513263.445044,
+          10485921537.570026,
+          13864373462.446655,
+          17672078458.55932,
+          13614958324.426882,
+          18403150974.93225,
+          20447506426.865547,
+          18362751220.432636,
+          10678138356.266472
+        ],
+        "real": 149083058305.66083,
+        "participacao": 0.0871679256181976
+      },
+      {
+        "setor": "Não identificado",
+        "valores": [
+          12088399946.946642,
+          10798072123.259655,
+          10606918964.843391,
+          12602711112.802542,
+          13610432670.80434,
+          15224496247.337955,
+          19314511643.341507,
+          16654077988.564526,
+          14570541321.828783,
+          4787587722.59562
+        ],
+        "real": 130257749742.32497,
+        "participacao": 0.07616088621856268
+      },
+      {
+        "setor": "Mineração e Metalurgia",
+        "valores": [
+          5293515084.350455,
+          7709172251.488864,
+          7687632760.048641,
+          9431601751.740833,
+          7533122273.499158,
+          9018872265.185434,
+          32832115877.63382,
+          18258042238.891758,
+          14325680393.47598,
+          2403333003.982289
+        ],
+        "real": 114493087900.29723,
+        "participacao": 0.06694338768814963
+      },
+      {
+        "setor": "Eletrônicos e Eletrodomésticos",
+        "valores": [
+          10614256658.534498,
+          8099163694.964202,
+          9614729150.23377,
+          10385504662.827532,
+          10399411641.107971,
+          12408324713.343655,
+          16006283706.369823,
+          12783076271.738409,
+          9702496447.910381,
+          5628413441.681669
+        ],
+        "real": 105641660388.71191,
+        "participacao": 0.06176801374751831
+      },
+      {
+        "setor": "Agroquímicos e Fertilizantes",
+        "valores": [
+          7145183409.179479,
+          5979833698.023303,
+          5814859973.133384,
+          7902199833.514489,
+          9043988410.192635,
+          10809642840.473146,
+          16759334115.061548,
+          23389476236.25165,
+          12469913042.356829,
+          4426962787.528247
+        ],
+        "real": 103741394345.7147,
+        "participacao": 0.06065694015556693
+      },
+      {
+        "setor": "Máquinas e Equipamentos",
+        "valores": [
+          7116522371.268825,
+          5915190416.994243,
+          6018958173.511403,
+          7993852324.356679,
+          8353585757.756397,
+          11517425704.85695,
+          17126046085.689825,
+          15439618693.125631,
+          12869148489.815317,
+          5863637111.222353
+        ],
+        "real": 98213985128.59763,
+        "participacao": 0.05742509878489183
+      },
+      {
+        "setor": "Alimentos e Bebidas",
+        "valores": [
+          6477904011.556121,
+          7598544550.6727295,
+          7388618467.25598,
+          7147479188.788953,
+          7413081019.223878,
+          9494156460.76871,
+          10704018190.364605,
+          10858487009.109222,
+          9643666581.280699,
+          3967907677.013723
+        ],
+        "real": 80693863156.03462,
+        "participacao": 0.04718119376789815
+      },
+      {
+        "setor": "Transporte e Logística",
+        "valores": [
+          5684494620.345564,
+          5912449644.154694,
+          4646301462.238018,
+          4840213009.069066,
+          13591965625.395239,
+          12698418723.093723,
+          12323672356.017233,
+          9804547583.87687,
+          7293094571.650338,
+          3144238797.8627124
+        ],
+        "real": 79939396393.70348,
+        "participacao": 0.04674006180181353
+      },
+      {
+        "setor": "Químico",
+        "valores": [
+          4292120858.342102,
+          4520182227.128563,
+          3951924628.4442687,
+          5272997113.335119,
+          5283823080.160861,
+          6382655768.768629,
+          9715557064.468056,
+          8580270541.995724,
+          5883310509.4103775,
+          2788426310.670662
+        ],
+        "real": 56671268102.724365,
+        "participacao": 0.03313533367781494
+      },
+      {
+        "setor": "Agropecuária",
+        "valores": [
+          1359807294.442825,
+          1336632489.0508451,
+          1427433938.5048041,
+          1919932976.5761948,
+          2679994430.605803,
+          3253697407.042079,
+          4415750811.00365,
+          6051959886.1846695,
+          4759382953.886326,
+          1802328139.545238
+        ],
+        "real": 29006920326.842434,
+        "participacao": 0.01696016369800469
+      },
+      {
+        "setor": "Farmacêutico",
+        "valores": [
+          1334495950.9723237,
+          1564319450.7272954,
+          1614439847.2453902,
+          2101944369.3395145,
+          2847779604.785511,
+          3551998187.031599,
+          3825579746.877225,
+          4315113068.359875,
+          4690896632.10152,
+          2680648280.1617756
+        ],
+        "real": 28527215137.602028,
+        "participacao": 0.01667968309390654
+      },
+      {
+        "setor": "Naval",
+        "valores": [
+          4373362976.896301,
+          5613451337.035514,
+          2650675633.0644646,
+          3061836026.2882595,
+          2731716887.4816284,
+          1436918154.2215192,
+          2135327032.5799224,
+          3176920144.9942145,
+          2305279571.776285,
+          841218137.9383969
+        ],
+        "real": 28326705902.2765,
+        "participacao": 0.016562446606345475
+      },
+      {
+        "setor": "Serviços Profissionais",
+        "valores": [
+          1861011026.1899357,
+          1684500804.9270213,
+          1593730157.919374,
+          3848993840.9602075,
+          2084968415.852585,
+          2912308199.330512,
+          3168219800.830639,
+          3734485982.498111,
+          3160104604.8525987,
+          1079476150.582163
+        ],
+        "real": 25127798983.94315,
+        "participacao": 0.014692065870359249
+      },
+      {
+        "setor": "Mídia, Cultura e Entretenimento",
+        "valores": [
+          2909681720.945973,
+          4682346531.52683,
+          2824042392.2699184,
+          4006558552.278219,
+          263068920.02782702,
+          2464720798.0938044,
+          224930427.18019316,
+          4673114631.88743,
+          2847576464.4032106,
+          72363071.19855694
+        ],
+        "real": 24968403509.811966,
+        "participacao": 0.014598868340131117
+      },
+      {
+        "setor": "Comércio Diversificado",
+        "valores": [
+          3290044059.3719287,
+          2309583855.318714,
+          1605178395.4473524,
+          1542945807.1833198,
+          1846626543.3703039,
+          2184211477.4556675,
+          2795677931.6340814,
+          2392265780.15458,
+          2850828795.2976737,
+          2554542855.6865716
+        ],
+        "real": 23371905500.920193,
+        "participacao": 0.01366540600530729
+      },
+      {
+        "setor": "Administração Pública",
+        "valores": [
+          1960156694.4653502,
+          1719715928.0305488,
+          1313514790.980285,
+          1700609008.9399838,
+          1683271411.8941438,
+          2530530540.480764,
+          4996519698.008615,
+          2946564466.136444,
+          2495502947.940434,
+          957462280.3475575
+        ],
+        "real": 22303847767.224125,
+        "participacao": 0.013040919372521166
+      },
+      {
+        "setor": "Educação",
+        "valores": [
+          2535867733.8081436,
+          2520185590.252368,
+          2628275172.271806,
+          2700349674.863845,
+          2218750130.3513865,
+          2299458308.5353894,
+          2010071644.387474,
+          2265883524.106158,
+          2544086005.6485887,
+          112494517.91369426
+        ],
+        "real": 21835422302.138855,
+        "participacao": 0.012767033952123455
+      },
+      {
+        "setor": "Financeiro e Seguros",
+        "valores": [
+          1821785560.072459,
+          1851504682.9162118,
+          1489364924.819488,
+          1384454521.6343637,
+          1949700491.0866237,
+          1399833439.1600268,
+          1483421694.7994585,
+          1452406363.173948,
+          2034888158.3978004,
+          211049004.5281713
+        ],
+        "real": 15078408840.588552,
+        "participacao": 0.008816250720872746
+      },
+      {
+        "setor": "Saúde",
+        "valores": [
+          1091727226.695262,
+          1086849256.6793647,
+          1128987522.858159,
+          1267232853.8554797,
+          1417929813.7511177,
+          1696553052.5190184,
+          2854907128.1735997,
+          1836338478.7973957,
+          1703220260.897102,
+          814931342.1315633
+        ],
+        "real": 14898676936.358063,
+        "participacao": 0.008711162607996372
+      },
+      {
+        "setor": "Têxtil, Vestuário e Calçados",
+        "valores": [
+          1377041287.1288545,
+          1151700003.1968546,
+          1138529095.6859577,
+          1232908130.9391153,
+          1280355431.0439565,
+          1291302186.6796234,
+          1921426899.9559395,
+          1590955907.5234303,
+          1233560279.6862206,
+          443512321.52301675
+        ],
+        "real": 12661291543.362968,
+        "participacao": 0.007402977454482972
+      },
+      {
+        "setor": "Serviços Administrativos e Operacionais",
+        "valores": [
+          450528222.0834746,
+          501819704.2156839,
+          484545448.13512135,
+          518462148.7963348,
+          1029004111.1960715,
+          1473952179.3517644,
+          1062634947.4295938,
+          1998992789.1445467,
+          2317711910.9904304,
+          230539979.3701406
+        ],
+        "real": 10068191440.713161,
+        "participacao": 0.005886808149685874
+      },
+      {
+        "setor": "Turismo, Hotelaria e Alimentação",
+        "valores": [
+          62483570.66611403,
+          63948224.893453255,
+          89061550.03759563,
+          104413710.96836951,
+          107221248.25705002,
+          52024078.85462507,
+          121753632.76389843,
+          2945673429.878945,
+          4805487467.899597,
+          1540947.6053713076
+        ],
+        "real": 8353607861.82502,
+        "participacao": 0.0048843019255092966
+      },
+      {
+        "setor": "Outras Indústrias",
+        "valores": [
+          732412186.0348059,
+          693792775.3755764,
+          828821703.2849207,
+          735412502.8083061,
+          844081188.1996139,
+          885169701.3704615,
+          1168589412.9154048,
+          1053079732.8525909,
+          978893721.6654962,
+          421616205.817426
+        ],
+        "real": 8341869130.324602,
+        "participacao": 0.004877438363103819
+      },
+      {
+        "setor": "Madeira, Papel e Celulose",
+        "valores": [
+          444663332.90648484,
+          746464310.4905201,
+          949104137.6110628,
+          956426316.7264066,
+          445223773.6923786,
+          636846237.2756914,
+          911641808.5515088,
+          1215971182.8795998,
+          998501368.6660635,
+          267578614.7304877
+        ],
+        "real": 7572421083.530204,
+        "participacao": 0.0044275469343102985
+      },
+      {
+        "setor": "Holdings e Participações",
+        "valores": [
+          402291994.3568973,
+          307049125.60217494,
+          506417772.744751,
+          486095524.2228608,
+          405155416.594356,
+          2086386225.3447788,
+          1999007120.3787892,
+          339900031.73893666,
+          276017901.1826595,
+          87265210.52909061
+        ],
+        "real": 6895586322.695294,
+        "participacao": 0.0040318059107574715
+      },
+      {
+        "setor": "Locação de Bens",
+        "valores": [
+          656675223.8795011,
+          148519059.2022959,
+          662970160.7736603,
+          77268457.16546738,
+          133477082.33044322,
+          363170224.53345495,
+          327846351.7980369,
+          631187274.447659,
+          737367747.6665576,
+          107887646.69626813
+        ],
+        "real": 3846369228.4933443,
+        "participacao": 0.0022489478725477756
+      },
+      {
+        "setor": "Higiene e Cosméticos",
+        "valores": [
+          328770580.6656959,
+          330787957.5219091,
+          339585786.50049585,
+          373035820.27526754,
+          338986050.59417695,
+          457186396.5804497,
+          353076567.0067627,
+          482303394.15673095,
+          527475698.4027888,
+          213068646.45640853
+        ],
+        "real": 3744276898.160686,
+        "participacao": 0.002189255129738731
+      },
+      {
+        "setor": "Telecomunicações",
+        "valores": [
+          302405826.75865227,
+          270460924.2778298,
+          257767777.7044469,
+          460348699.218907,
+          295752091.91815287,
+          441306054.92657846,
+          590387934.6300976,
+          509440724.9067718,
+          549725718.2460871,
+          5078498.107872715
+        ],
+        "real": 3682674250.695396,
+        "participacao": 0.002153236449593808
+      },
+      {
+        "setor": "Materiais de Construção",
+        "valores": [
+          224121091.09672093,
+          144704456.6255272,
+          184098960.75520447,
+          158597545.38243383,
+          205823516.57805052,
+          261277941.305224,
+          319755451.3092274,
+          323965990.0878729,
+          287085828.921927,
+          108296965.4964727
+        ],
+        "real": 2217727747.558661,
+        "participacao": 0.0012966914519841582
+      },
+      {
+        "setor": "Tecnologia da Informação",
+        "valores": [
+          73552867.89238301,
+          48347420.15234333,
+          62213511.61050791,
+          78721644.9306641,
+          92744409.6300643,
+          100883939.85239594,
+          103543857.14027123,
+          120667924.26786923,
+          160493255.13821208,
+          3830357.5994172343
+        ],
+        "real": 844999188.2141284,
+        "participacao": 0.0004940657055389215
+      },
+      {
+        "setor": "Imobiliário",
+        "valores": [
+          65373547.44830114,
+          47173527.602443665,
+          51835759.32640727,
+          56538991.45601722,
+          43434534.13612759,
+          148712699.5067008,
+          38491088.76246707,
+          143979378.68100128,
+          210304835.71846977,
+          36535730.75580356
+        ],
+        "real": 842380093.3937393,
+        "participacao": 0.0004925343372863156
+      },
+      {
+        "setor": "Móveis e Decoração",
+        "valores": [
+          65589264.002178036,
+          50959860.14451392,
+          52086459.95114481,
+          77141276.00026402,
+          83011338.0863268,
+          131258178.02196836,
+          144116703.6221061,
+          104939424.38160874,
+          98432139.98075972,
+          27430183.701534454
+        ],
+        "real": 834964827.892405,
+        "participacao": 0.0004881986782315205
+      },
+      {
+        "setor": "Tabaco",
+        "valores": [
+          67883824.9624482,
+          65798699.6212009,
+          51851618.95856905,
+          64127141.07973576,
+          28717253.85918029,
+          195068563.12938967,
+          61913102.66143727,
+          81031370.97671126,
+          89221223.51685415,
+          83859372.4771013
+        ],
+        "real": 789472171.2426279,
+        "participacao": 0.0004615994082937411
+      },
+      {
+        "setor": "Serviços Pessoais",
+        "valores": [
+          1094598.4193439123,
+          21830718.063333277,
+          2550317.5003561703,
+          764164.8786617464,
+          1262568.7811244705,
+          1420951.0649732465,
+          3187811.473241527,
+          3952166.1065348317,
+          2062721.3205198506,
+          1659.2716414556166
+        ],
+        "real": 38127676.879730485,
+        "participacao": 2.229301263348729e-05
+      },
+      {
+        "setor": "Construção Civil",
+        "valores": [
+          1743865.8452591458,
+          3488368.8675628807,
+          1374076.8093522317,
+          5425031.703889959,
+          1474098.7240156152,
+          1505631.086650211,
+          704481.3324744243,
+          789206.0562752037,
+          2461531.566751717,
+          0.0
+        ],
+        "real": 18966291.992231388,
+        "participacao": 1.1089471522929355e-05
+      },
+      {
+        "setor": "Assistência Social e Organizações",
+        "valores": [
+          1445905.3894043763,
+          2729816.286202727,
+          725635.7554547287,
+          1333603.8140958513,
+          1309385.3124846607,
+          1733950.7421779989,
+          1433443.572482901,
+          1170479.352799993,
+          1929242.2820161835,
+          518835.16509584984
+        ],
+        "real": 14330297.672215268,
+        "participacao": 8.378834830562766e-06
+      },
+      {
+        "setor": "Saneamento e Meio Ambiente",
+        "valores": [
+          752141.6602564435,
+          177127.7428492138,
+          483045.18527710915,
+          1361229.8967013508,
+          718276.394722865,
+          1029544.3585306248,
+          2181252.795925206,
+          2507214.927162688,
+          1684610.6421459808,
+          103441.61169590587
+        ],
+        "real": 10997885.215267388,
+        "participacao": 6.4303942466513065e-06
+      }
+    ]
+  }
 }
 ;
 function renderComposicao() {
@@ -1420,12 +2285,52 @@ function renderComposicao() {
     <div class="intro-track" aria-hidden="true"><i style="width:${v/max*100}%;background:${corSlot(0)}"></i></div>
   </div>`).join("");
 }
-function renderApresentacao() {
-  const moeda = v => fmtV(v, "nominal");
+function renderBeneficiarios() {
+  const B = AP.beneficiarios, moeda = v => fmtV(v,"nominal");
+  renderMetodologia();
+  $("#ben-concentracao").innerHTML = `<b>${nf2.format(B.pct_empresas_top1)}% dos beneficiários concentram ${nf1.format(B.pct_valor_top1)}% das renúncias registradas.</b> São as ${nfInt.format(B.n_top1)} maiores entre ${nfInt.format(B.n_raizes)} raízes de CNPJ presentes no acervo.`;
+  $("#ben-kpis").innerHTML = [[nf1.format(B.pct_top10)+"%","nos 10 maiores"],[nf1.format(B.pct_top100)+"%","nos 100 maiores"],[moeda(AP.total_real),"acumulado, com 2024 parcial"]].map(([v,k])=>`<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+  $("#ben-top").innerHTML = `<table><thead><tr><th>#</th><th>Beneficiário</th><th>Raiz do CNPJ</th><th class="n">Estabelecimentos</th><th class="n">Acumulado</th><th class="n">% do total</th></tr></thead><tbody>` +
+    B.top20.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.nome)}</td><td class="mono">${esc(r.raiz)}</td><td class="n">${r.cnpjs}</td><td class="n">${moeda(r.real)}</td><td class="n">${nf1.format(r.participacao*100)}%</td></tr>`).join("")+`</tbody></table>`;
+  const identificados = B.setores.filter(r=>r.setor!=="Não identificado"), top=identificados.slice(0,10), max=top[0].real;
+  $("#ben-setores").innerHTML = top.map(r=>`<div class="intro-tipo"><div><b>${esc(r.setor)}</b><span>${moeda(r.real)} · ${nf1.format(r.participacao*100)}%</span></div><div class="intro-track"><i style="width:${r.real/max*100}%;background:${corSlot(0)}"></i></div></div>`).join("");
+  const sem = B.setores.find(r=>r.setor==="Não identificado");
+  $("#ben-sem-setor").textContent = sem ? `Sem setor identificado: ${moeda(sem.real)} (${nf1.format(sem.participacao*100)}% do total). Esse valor permanece na soma e na tabela abaixo.` : "Todos os registros têm setor identificado.";
+  $("#ben-setores-table").innerHTML = `<table><thead><tr><th>Setor</th><th class="n">Acumulado</th><th class="n">% do total</th></tr></thead><tbody>`+B.setores.map(r=>`<tr><td>${esc(r.setor)}</td><td class="n">${moeda(r.real)}</td><td class="n">${nf1.format(r.participacao*100)}%</td></tr>`).join("")+`</tbody></table>`;
+  const series=identificados.slice(0,6), box=$("#ben-evolucao");box.innerHTML="";
+  const W=Math.max(700,box.clientWidth),H=360,M={l:62,r:22,t:24,b:36},pw=W-M.l-M.r,ph=H-M.t-M.b;
+  const ticks=ticksY(Math.max(...series.flatMap(r=>r.valores)),5);
+  const x=a=>M.l+pw*a/(NA-1),y=v=>M.t+ph-v/ticks.top*ph;
+  const svg=sv("svg",{width:W,height:H,role:"img","aria-label":"Evolução anual dos seis maiores setores; 2024 parcial"},box);
+  for (const v of ticks.vals) {
+    sv("line",{x1:M.l,x2:W-M.r,y1:y(v),y2:y(v),class:"gridline"},svg);
+    sv("text",{x:M.l-8,y:y(v)+4,"text-anchor":"end",class:"axis-txt"},svg).textContent=nfInt.format(v/1e9);
+  }
+  ANOS.forEach((ano,a)=>sv("text",{x:x(a),y:H-12,"text-anchor":"middle",class:"axis-txt"},svg).textContent=ano);
+  sv("text",{x:x(NA-1),y:14,"text-anchor":"end",class:"axis-txt"},svg).textContent="2024 parcial";
+  series.forEach((r,i)=>{
+    const pts=r.valores.slice(0,IDX_PARCIAL).map((v,a)=>`${x(a)},${y(v)}`).join(" ");
+    sv("polyline",{points:pts,fill:"none",stroke:corSlot(i),"stroke-width":2.5},svg);
+    sv("line",{x1:x(IDX_PARCIAL-1),x2:x(IDX_PARCIAL),y1:y(r.valores[IDX_PARCIAL-1]),y2:y(r.valores[IDX_PARCIAL]),stroke:corSlot(i),"stroke-width":2.5,"stroke-dasharray":"5 5"},svg);
+    r.valores.forEach((v,a)=>sv("circle",{cx:x(a),cy:y(v),r:3,fill:a===IDX_PARCIAL?"white":corSlot(i),stroke:corSlot(i)},svg));
+  });
+  $("#ben-legend").innerHTML=series.map((r,i)=>`<span class="li"><i class="sw" style="background:${corSlot(i)}"></i>${esc(r.setor)}</span>`).join("");
+  $("#ben-evolucao-table").innerHTML=`<table><thead><tr><th>Setor</th>${ANOS.map(a=>`<th class="n">${a}${a===ANO_PARCIAL?" (parcial)":""}</th>`).join("")}</tr></thead><tbody>`+series.map(r=>`<tr><td>${esc(r.setor)}</td>${r.valores.map(v=>`<td class="n">${moeda(v)}</td>`).join("")}</tr>`).join("")+`</tbody></table>`;
+}
+
+function renderMetodologia() {
   document.querySelectorAll("[data-base-ipca]").forEach(el => { el.textContent = AP.base; });
   $("#intro-base-fonte").href = AP.referencia.fonte_periodo;
   $("#intro-cobertura").textContent = `O acervo reúne ${nfInt.format(AP.cnpjs)} CNPJs de ${ANOS[0]} a ${ANOS[NA-1]}, ` +
     `em arquivos atualizados em ${dataBR(P.meta.arquivo_atualizado_em)} e extraídos em ${dataBR(P.meta.extraido_em)}.`;
+  $("#intro-ipca-fonte").href = AP.fonte_ipca;
+  $("#intro-diferenca").textContent = `Para o mesmo período e recorte, preços de ${AP.base} produzem valores ${nf2.format((AP.razao_base_media2023-1)*100)}% maiores que preços médios de 2023.`;
+  const B = AP.beneficiarios;
+  $("#ben-qualidade").textContent = `${B.n_raizes_negativas} raízes têm saldo acumulado negativo (${fmtV(B.saldo_negativo,"nominal")}); o identificador inválido soma ${fmtV(B.valor_identificador_invalido,"nominal")}.`;
+}
+function renderApresentacao() {
+  const moeda = v => fmtV(v, "nominal");
+  renderMetodologia();
   $("#intro-total").innerHTML = `O acumulado do período é de <b>${esc(moeda(AP.total_real))}</b> em preços de ${esc(AP.base)}, ` +
     `incluindo o ano parcial. Em valores nominais, a soma é ${esc(moeda(AP.total_nominal))}.`;
   chartColunas($("#intro-chart"), {
@@ -1437,8 +2342,7 @@ function renderApresentacao() {
   $("#intro-table").innerHTML = `<table><thead><tr><th>Ano</th><th class="n">Nominal</th><th class="n">Reais de ${esc(AP.base)}</th></tr></thead><tbody>` +
     AP.anos.map(r => `<tr><td>${r.ano}${r.parcial ? " (parcial)" : ""}</td><td class="n">${moeda(r.nominal)}</td><td class="n">${moeda(r.real)}</td></tr>`).join("") + `</tbody></table>`;
   renderComposicao();
-  $("#intro-ipca-fonte").href = AP.fonte_ipca;
-  $("#intro-diferenca").textContent = `Para o mesmo período e recorte, preços de ${AP.base} produzem valores ${nf2.format((AP.razao_base_media2023-1)*100)}% maiores que preços médios de 2023.`;
+
 }
 
 /* ---------------------------------------------------------- panorama -- */
@@ -1867,10 +2771,12 @@ function montarNota2024() {
     `${nfInt.format(n23)} em 2023. A cobertura de 2024 se limita à importação no primeiro semestre; IRPJ/CSLL vai até 2023.`;
 }
 
-const ABAS = ["apresentacao", "resumo", "ranking"];
+const ABAS = ["apresentacao", "metodologia", "beneficiarios", "resumo", "ranking"];
 
 function renderAll() {
   if (S.view === "apresentacao") renderApresentacao();
+  else if (S.view === "metodologia") renderMetodologia();
+  else if (S.view === "beneficiarios") renderBeneficiarios();
   else if (S.view === "resumo") renderPanorama();
   else renderRanking();
 }
@@ -1901,6 +2807,7 @@ function segLigar(sel, prop, depois) {
 
 function init() {
   montarNota2024();
+  renderMetodologia();
   document.querySelectorAll("[data-base-ipca]").forEach(el => { el.textContent = AP.base; });
 
   $("#sel-base").innerHTML = ANOS.map(a =>
@@ -1950,6 +2857,7 @@ function init() {
   /* --- redesenho ----------------------------------------------------- */
   const redesenhar = debounce(() => {
     if (S.view === "apresentacao") renderApresentacao();
+    else if (S.view === "beneficiarios") renderBeneficiarios();
     else if (S.view === "resumo") renderPanorama();
   }, 160);
   window.addEventListener("resize", redesenhar);

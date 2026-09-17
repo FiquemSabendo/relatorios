@@ -206,3 +206,13 @@ Para atualizar a referência de “dinheiro de hoje”, rodar `12_atualizar_refe
 `11_export_apresentacao.py` e `05_build_artifact.py`, nessa ordem. A resposta oficial fica
 arquivada em `qa/referencia-ipca/`; o build não consulta a internet nem muda a referência
 silenciosamente. A API alternativa oficial de agregados do IBGE fornece SIDRA 1737/2266.
+
+## Abas e maiores beneficiários
+
+Ordem: Apresentação, Metodologia, Maiores Beneficiários, Resumo e Ranking de empresas.
+A Metodologia reúne a descrição da base, as fontes e os critérios em uma aba própria.
+Maiores Beneficiários usa o acumulado real de 2015–2024, incluindo 2024 parcial.
+Concentração por raiz do CNPJ, sem inferir controlador; inclui empresas e outras pessoas
+jurídicas. Os setores são somados por estabelecimento usando a classificação editorial,
+em vez de atribuir todo o grupo ao setor do estabelecimento principal. A série de seis
+setores destaca 2024 com linha tracejada. Detalhes em `qa/maiores-beneficiarios/metodologia.md`.

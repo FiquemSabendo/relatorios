@@ -1,0 +1,161 @@
+{
+  "erros_js": [],
+  "setores_comparados_payload": [
+    {
+      "setor": "Petróleo, Gás e Combustíveis",
+      "diff": 37.2225341796875
+    },
+    {
+      "setor": "Automotivo",
+      "diff": 7.4300537109375
+    },
+    {
+      "setor": "Aviação",
+      "diff": -4.695220947265625
+    },
+    {
+      "setor": "Não identificado",
+      "diff": 64.20915222167969
+    },
+    {
+      "setor": "Mineração e Metalurgia",
+      "diff": 18.70953369140625
+    },
+    {
+      "setor": "Eletrônicos e Eletrodomésticos",
+      "diff": -6.920318603515625
+    },
+    {
+      "setor": "Agroquímicos e Fertilizantes",
+      "diff": -2.442352294921875
+    },
+    {
+      "setor": "Máquinas e Equipamentos",
+      "diff": -34.1304931640625
+    },
+    {
+      "setor": "Alimentos e Bebidas",
+      "diff": 43.46971130371094
+    },
+    {
+      "setor": "Transporte e Logística",
+      "diff": -13.774810791015625
+    },
+    {
+      "setor": "Químico",
+      "diff": 11.513809204101562
+    },
+    {
+      "setor": "Agropecuária",
+      "diff": -16.850997924804688
+    },
+    {
+      "setor": "Farmacêutico",
+      "diff": -2.67694091796875
+    },
+    {
+      "setor": "Naval",
+      "diff": 2.0152664184570312
+    },
+    {
+      "setor": "Serviços Profissionais",
+      "diff": 37.43699264526367
+    },
+    {
+      "setor": "Mídia, Cultura e Entretenimento",
+      "diff": 26.52120590209961
+    },
+    {
+      "setor": "Comércio Diversificado",
+      "diff": -14.399250030517578
+    },
+    {
+      "setor": "Administração Pública",
+      "diff": 6.399318695068359
+    },
+    {
+      "setor": "Educação",
+      "diff": -4.296169281005859
+    },
+    {
+      "setor": "Financeiro e Seguros",
+      "diff": -21.730812072753906
+    },
+    {
+      "setor": "Saúde",
+      "diff": -17.933324813842773
+    },
+    {
+      "setor": "Têxtil, Vestuário e Calçados",
+      "diff": 12.672954559326172
+    },
+    {
+      "setor": "Serviços Administrativos e Operacionais",
+      "diff": -5.165046691894531
+    },
+    {
+      "setor": "Turismo, Hotelaria e Alimentação",
+      "diff": -21.48179531097412
+    },
+    {
+      "setor": "Outras Indústrias",
+      "diff": -20.33762550354004
+    },
+    {
+      "setor": "Madeira, Papel e Celulose",
+      "diff": 15.49695873260498
+    },
+    {
+      "setor": "Holdings e Participações",
+      "diff": 23.851491928100586
+    },
+    {
+      "setor": "Locação de Bens",
+      "diff": 6.135098934173584
+    },
+    {
+      "setor": "Higiene e Cosméticos",
+      "diff": 8.186839580535889
+    },
+    {
+      "setor": "Telecomunicações",
+      "diff": -20.71562099456787
+    },
+    {
+      "setor": "Materiais de Construção",
+      "diff": 1.223236083984375
+    },
+    {
+      "setor": "Tecnologia da Informação",
+      "diff": 24.27709448337555
+    },
+    {
+      "setor": "Imobiliário",
+      "diff": -9.450146198272705
+    },
+    {
+      "setor": "Móveis e Decoração",
+      "diff": -14.12387728691101
+    },
+    {
+      "setor": "Tabaco",
+      "diff": -2.1822710037231445
+    },
+    {
+      "setor": "Serviços Pessoais",
+      "diff": 15.920845672488213
+    },
+    {
+      "setor": "Construção Civil",
+      "diff": -1.5429592542350292
+    },
+    {
+      "setor": "Assistência Social e Organizações",
+      "diff": -4.080617943778634
+    },
+    {
+      "setor": "Saneamento e Meio Ambiente",
+      "diff": 3.8558688201010227
+    }
+  ]
+}

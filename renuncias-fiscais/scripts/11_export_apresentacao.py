@@ -3,6 +3,8 @@
 import json
 import re
 import hashlib
+import math
+from classificacao_setorial import classificar_estabelecimentos
 from pathlib import Path
 from collections import defaultdict
 import duckdb
@@ -77,6 +79,42 @@ out = dict(base=reference['base'],base_mes=reference['base_mes'],indice_base=bas
  tipos=[dict(tipo=t,real=v,participacao=v/total) for t,v in sorted(by_type.items(),key=lambda x:-x[1])],
  cnpjs=con.execute('select count(*) from dim_estab').fetchone()[0],
  razao_base_media2023=base/means[2023],razao_base_media2024=base/means[2024])
+# Concentração por raiz, preservando o valor do identificador inválido no total.
+estabs = con.execute("SELECT estab_id,cnpj,razao_social,nome_fantasia,cnae,municipio,uf FROM dim_estab ORDER BY estab_id").fetchall()
+classification = {r['estab_id']:r['setor'] for r in classificar_estabelecimentos(estabs)}
+by_id = {r[0]:r for r in estabs}
+roots = {}
+sectors = defaultdict(lambda:[0.0]*len(annual))
+invalid = 0.0
+estab_nominal = dict(con.execute('SELECT estab_id,sum(valor) FROM fato_empresa_ano GROUP BY 1').fetchall())
+for eid,year,value in con.execute('SELECT estab_id,ano,valor FROM fato_empresa_ano').fetchall():
+    corrected = value*base/origins[year]
+    sectors[classification[eid]][year-2015] += corrected
+    cnpj = by_id[eid][1]
+    if not re.fullmatch(r'[0-9]{14}',cnpj):
+        invalid += corrected
+        continue
+    root = cnpj[:8]
+    r = roots.setdefault(root,dict(raiz=root,real=0.0,membros=set()))
+    r['real'] += corrected
+    r['membros'].add(eid)
+negative = [r for r in roots.values() if r['real']<0]
+rank = sorted(roots.values(),key=lambda r:-r['real'])
+assert abs(sum(r['real'] for r in rank)+invalid-total)<0.05
+n = len(rank); n1 = math.ceil(n/100)
+top20=[]
+for r in rank[:20]:
+    principal = max(sorted(r['membros']),key=lambda e:estab_nominal[e])
+    top20.append(dict(raiz=r['raiz'],nome=by_id[principal][2],real=r['real'],cnpjs=len(r['membros']),participacao=r['real']/total))
+sector_rows=[dict(setor=name,valores=vals,real=sum(vals),participacao=sum(vals)/total) for name,vals in sectors.items()]
+sector_rows.sort(key=lambda r:-r['real'])
+for i,year in enumerate(annual):
+    assert abs(sum(r['valores'][i] for r in sector_rows)-year['real'])<.05
+out['beneficiarios']=dict(n_raizes=n,n_raizes_negativas=len(negative),saldo_negativo=sum(r['real'] for r in negative),n_top1=n1,pct_empresas_top1=n1/n*100,
+ pct_valor_top1=sum(r['real'] for r in rank[:n1])/total*100,
+ pct_top10=sum(r['real'] for r in rank[:10])/total*100,
+ pct_top100=sum(r['real'] for r in rank[:100])/total*100,
+ valor_identificador_invalido=invalid,top20=top20,setores=sector_rows)
 (ROOT/'artifact/apresentacao.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
 (QA/'validacao.json').write_text(json.dumps(dict(total_real=total,soma_tipos=sum(by_type.values()),indice_base=base, medias_2020_2024_conferidas=True,tipos=out['tipos'],fatores=[{'ano':r['ano'],'fator':r['fator']} for r in annual]),ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({k:out[k] for k in ['total_real','indice_base','razao_base_media2023','razao_base_media2024','tipos']},ensure_ascii=False,indent=2))

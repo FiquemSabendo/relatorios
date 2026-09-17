@@ -323,6 +323,10 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 .intro-track { height: 24px; background: var(--surface-2); }
 .intro-track i { display: block; height: 100%; background: var(--data-1); }
 #intro-chart { overflow-x: auto; }
+#ben-top table { min-width: 820px; }
+#ben-top td:nth-child(2) { min-width: 280px; }
+#ben-kpis { grid-template-columns: repeat(3,minmax(0,1fr)); }
+@media (max-width:600px) { #ben-kpis { grid-template-columns: 1fr; } }
 #view-apresentacao summary { cursor: pointer; margin-top: 18px; }
 
 </style>
@@ -349,6 +353,8 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 <div class="wrap tabwrap">
   <nav class="tabs" role="tablist" id="tabs">
     <button role="tab" data-v="apresentacao" aria-selected="true">Apresentação</button>
+    <button role="tab" data-v="metodologia" aria-selected="false">Metodologia</button>
+    <button role="tab" data-v="beneficiarios" aria-selected="false">Maiores Beneficiários</button>
     <button role="tab" data-v="resumo" aria-selected="false">Resumo</button>
     <button role="tab" data-v="ranking" aria-selected="false">Ranking de empresas</button>
   </nav>
@@ -388,18 +394,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <p>São receitas que o poder público deixa de arrecadar ao conceder tratamentos tributários
         favorecidos, como isenções, reduções de alíquotas e créditos presumidos. Elas podem apoiar
         atividades, regiões ou objetivos de política pública. Não são transferências de dinheiro às empresas.
-        A <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm#art14" target="_blank" rel="noopener">Lei de Responsabilidade Fiscal, de 2000 (art. 14)</a>
-        trata da concessão e ampliação desses benefícios.</p>
-      <h3>O que esta base reúne?</h3>
-      <p>São registros da Receita Federal divulgados pelo Portal da Transparência, por CNPJ e ano-calendário,
-        com valores, tipos de renúncia, tributos, benefícios e fundamentos legais. O ano se refere ao fato gerador,
-        e não à data de publicação da declaração. <span id="intro-cobertura"></span></p>
-      <p>Este é um recorte das renúncias federais identificadas por beneficiário, não o total de todos os gastos
-        tributários do país. Não abrange tributos estaduais ou municipais nem todos os benefícios federais.
-        A presença de uma empresa na base não indica irregularidade.</p>
-      <p><a href="https://portaldatransparencia.gov.br/download-de-dados/renuncias" target="_blank" rel="noopener">Baixar os arquivos originais</a>
-        · <a href="https://portaldatransparencia.gov.br/dicionario-de-dados/renuncias" target="_blank" rel="noopener">Dicionário dos dados</a>
-        · <a href="https://portaldatransparencia.gov.br/entenda-a-gestao-publica/renuncias-fiscais" target="_blank" rel="noopener">Cobertura e explicação da fonte</a></p>
+</p>
     </div>
     <div class="card">
       <h2>Quanto foi registrado em renúncias por ano?</h2>
@@ -419,18 +414,28 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <p class="sub">As porcentagens se referem ao acumulado de todos os tributos, corrigido pelo IPCA;
         descrevem este acervo, não o universo de todos os benefícios tributários.</p>
     </div>
+
+  </section>
+
+  <section id="view-metodologia" role="tabpanel" class="hidden">
     <div class="card intro-copy" id="metodologia">
       <h2>Metodologia: como ler estes números</h2>
+            <h3>O que esta base reúne?</h3>
+      <p>São registros da Receita Federal divulgados pelo Portal da Transparência, por CNPJ e ano-calendário,
+        com valores, tipos de renúncia, tributos, benefícios e fundamentos legais. O ano se refere ao fato gerador,
+        e não à data de publicação da declaração. <span id="intro-cobertura"></span></p>
+      <p>Este é um recorte das renúncias federais identificadas por beneficiário, não o total de todos os gastos
+        tributários do país. Não abrange tributos estaduais ou municipais nem todos os benefícios federais.
+        A presença de uma empresa na base não indica irregularidade.</p>
+      <p><a href="https://portaldatransparencia.gov.br/download-de-dados/renuncias" target="_blank" rel="noopener">Baixar os arquivos originais</a>
+        · <a href="https://portaldatransparencia.gov.br/dicionario-de-dados/renuncias" target="_blank" rel="noopener">Dicionário dos dados</a>
+        · <a href="https://portaldatransparencia.gov.br/entenda-a-gestao-publica/renuncias-fiscais" target="_blank" rel="noopener">Cobertura e explicação da fonte</a></p>
+
       <h3>Fonte e cobertura</h3>
-      <p><b>O que é.</b> Renúncia fiscal aqui é o Incentivo, Renúncia, Benefício ou Imunidade
-          de natureza tributária (IRBI) apurado pela Receita Federal: a diferença entre o tributo
-          calculado e o efetivamente devido, por CNPJ e por ano-calendário.</p>
-      <p><b>O que não é.</b> Não cobre tributos estaduais e municipais (ICMS, ISS, IPTU),
-          nem o Simples Nacional, nem renúncias de pessoa física. É um recorte da União.</p>
       <p><b>Fonte.</b> <span id="foot-fonte"></span></p>
       <h3>Beneficiários e fundamentos legais</h3>
-      <p><b>Empresa.</b> Cada linha do ranking é um grupo econômico, aproximado pela raiz do
-          CNPJ (8 primeiros dígitos), que une matriz e filiais. Não capta controle societário
+      <p><b>Empresa.</b> Cada linha do ranking reúne estabelecimentos com a mesma raiz do
+          CNPJ (8 primeiros dígitos), unindo matriz e filiais. Não é uma identificação completa de grupo econômico. Não capta controle societário
           entre CNPJs de raízes diferentes. Os CNPJs que compõem o grupo aparecem ao abrir a linha.</p>
       <p><b>Mecanismo.</b> A origem jurídica vem do campo <b>Fundamento Legal</b> do arquivo
           detalhado da Receita — <span id="foot-fund"></span> dispositivos distintos. Para o
@@ -439,7 +444,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
           <span id="foot-reg"></span> mecanismos é nosso, por regra explícita sobre esse texto;
           o fundamento original aparece sempre ao lado, sem interpretação.</p>
       <h3>Correção pela inflação e bases de preços</h3>
-      <p>Nos dois gráficos desta aba, a referência é <b><span data-base-ipca></span></b>.
+      <p>Nos gráficos da Apresentação e de Maiores Beneficiários, a referência é <b><span data-base-ipca></span></b>.
         Multiplicamos o valor nominal de cada ano pelo número-índice do IPCA de <span data-base-ipca></span>,
         dividido pela média dos índices dos meses cobertos: <b>janeiro a dezembro para 2015–2023</b>
         e <b>janeiro a junho para 2024</b>. Depois, somamos os valores corrigidos.
@@ -452,9 +457,20 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         não mede o retorno econômico dos incentivos.</p>
       <p><b>As bases de preços variam entre as abas.</b> No Resumo, “Real” usa a média de janeiro a dezembro
         do ano escolhido. No ranking, os valores são nominais; ao abrir uma empresa, “Real” usa a média de
-        janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos desta apresentação sem converter a base.
+        janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos da Apresentação sem converter a base.
         <span id="intro-diferenca"></span></p>
 
+      <h3>Concentração e setores em Maiores Beneficiários</h3>
+      <p>O recorte é 2015–2024, incluindo 2024 parcial, em preços de <span data-base-ipca></span>.
+        A concentração usa os oito primeiros dígitos dos CNPJs com 14 dígitos. O grupo dos maiores 1% é arredondado
+        para cima em número de empresas. Os percentuais de valor usam o saldo total da base, preservando registros negativos
+        e o valor do identificador inválido; este último não conta como empresa. <span id="ben-qualidade"></span></p>
+      <p>Nos gráficos setoriais, cada estabelecimento leva seus valores para o seu próprio setor da classificação editorial.
+        Isso difere do rótulo resumido da raiz no ranking, que acompanha o estabelecimento de maior valor acumulado.
+        O cadastro atual é aplicado a toda a série; não representa mudanças históricas de atividade. “Não identificado”
+        permanece no total e na tabela. A evolução destaca os seis setores identificados de maior acumulado.</p>
+      <p>O ranking principal continua nominal e cobre 2015–2023. Assim, posições e acumulados podem diferir da nova aba,
+        embora a chave de agrupamento por raiz seja a mesma.</p>
       <h3>Participação no PIB</h3>
       <p><b>% do PIB.</b> PIB nominal anual = soma dos quatro trimestres a preços correntes
           (IBGE, tabela SIDRA 1846). Nessa medida o resumo do período é a <b>média anual</b>,
@@ -475,6 +491,37 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
           de mudanças de atividade. Os filtros de setor continuam usando a seção CNAE original.</p>
       <p><b>Arredondamento.</b> Os microdados do explorador estão arredondados para reais
           inteiros; o banco DuckDB que a gera guarda os centavos.</p>
+    </div>
+  </section>
+
+  <section id="view-beneficiarios" role="tabpanel" class="hidden">
+    <div class="card intro-copy">
+      <h2>Quem concentra as renúncias registradas?</h2>
+      <p class="sub">2015–2024, com 2024 parcial · reais de <span data-base-ipca></span> (IPCA) · beneficiários por raiz do CNPJ</p>
+      <p class="dek" id="ben-concentracao"></p>
+      <div class="kv" id="ben-kpis"></div>
+      <p class="note">Aqui, cada beneficiário reúne matriz e filiais com a mesma raiz do CNPJ, incluindo empresas e outras pessoas jurídicas. Raízes diferentes
+        podem ter o mesmo controlador, mas não são reunidas. O acumulado inclui 2024 parcial; difere do ranking nominal de 2015–2023.</p>
+    </div>
+    <div class="card">
+      <h2>Os 20 beneficiários com maiores valores acumulados</h2>
+      <p class="sub">Agrupamento por raiz do CNPJ · valores em reais de <span data-base-ipca></span></p>
+      <div class="tablewrap" id="ben-top"></div>
+    </div>
+    <div class="card">
+      <h2>Quais setores concentram os maiores valores?</h2>
+      <p class="sub">Dez maiores setores identificados · classificação editorial · acumulado 2015–2024</p>
+      <div id="ben-setores"></div>
+      <p class="note" id="ben-sem-setor"></p>
+      <details><summary>Ver todos os setores</summary><div class="tablewrap" id="ben-setores-table"></div></details>
+    </div>
+    <div class="card">
+      <h2>Como evoluíram os maiores setores?</h2>
+      <p class="sub">Seis maiores setores identificados no acumulado · R$ bilhões de <span data-base-ipca></span> (IPCA)</p>
+      <div class="chartbox" id="ben-evolucao" style="overflow-x:auto"></div>
+      <div class="legend" id="ben-legend"></div>
+      <p class="note">2024 é parcial. O trecho tracejado não representa uma queda anual comparável aos anos completos.</p>
+      <details><summary>Ver valores por setor e ano</summary><div class="tablewrap" id="ben-evolucao-table"></div></details>
     </div>
   </section>
 
@@ -1071,12 +1118,52 @@ function renderComposicao() {
     <div class="intro-track" aria-hidden="true"><i style="width:${v/max*100}%;background:${corSlot(0)}"></i></div>
   </div>`).join("");
 }
-function renderApresentacao() {
-  const moeda = v => fmtV(v, "nominal");
+function renderBeneficiarios() {
+  const B = AP.beneficiarios, moeda = v => fmtV(v,"nominal");
+  renderMetodologia();
+  $("#ben-concentracao").innerHTML = `<b>${nf2.format(B.pct_empresas_top1)}% dos beneficiários concentram ${nf1.format(B.pct_valor_top1)}% das renúncias registradas.</b> São as ${nfInt.format(B.n_top1)} maiores entre ${nfInt.format(B.n_raizes)} raízes de CNPJ presentes no acervo.`;
+  $("#ben-kpis").innerHTML = [[nf1.format(B.pct_top10)+"%","nos 10 maiores"],[nf1.format(B.pct_top100)+"%","nos 100 maiores"],[moeda(AP.total_real),"acumulado, com 2024 parcial"]].map(([v,k])=>`<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+  $("#ben-top").innerHTML = `<table><thead><tr><th>#</th><th>Beneficiário</th><th>Raiz do CNPJ</th><th class="n">Estabelecimentos</th><th class="n">Acumulado</th><th class="n">% do total</th></tr></thead><tbody>` +
+    B.top20.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.nome)}</td><td class="mono">${esc(r.raiz)}</td><td class="n">${r.cnpjs}</td><td class="n">${moeda(r.real)}</td><td class="n">${nf1.format(r.participacao*100)}%</td></tr>`).join("")+`</tbody></table>`;
+  const identificados = B.setores.filter(r=>r.setor!=="Não identificado"), top=identificados.slice(0,10), max=top[0].real;
+  $("#ben-setores").innerHTML = top.map(r=>`<div class="intro-tipo"><div><b>${esc(r.setor)}</b><span>${moeda(r.real)} · ${nf1.format(r.participacao*100)}%</span></div><div class="intro-track"><i style="width:${r.real/max*100}%;background:${corSlot(0)}"></i></div></div>`).join("");
+  const sem = B.setores.find(r=>r.setor==="Não identificado");
+  $("#ben-sem-setor").textContent = sem ? `Sem setor identificado: ${moeda(sem.real)} (${nf1.format(sem.participacao*100)}% do total). Esse valor permanece na soma e na tabela abaixo.` : "Todos os registros têm setor identificado.";
+  $("#ben-setores-table").innerHTML = `<table><thead><tr><th>Setor</th><th class="n">Acumulado</th><th class="n">% do total</th></tr></thead><tbody>`+B.setores.map(r=>`<tr><td>${esc(r.setor)}</td><td class="n">${moeda(r.real)}</td><td class="n">${nf1.format(r.participacao*100)}%</td></tr>`).join("")+`</tbody></table>`;
+  const series=identificados.slice(0,6), box=$("#ben-evolucao");box.innerHTML="";
+  const W=Math.max(700,box.clientWidth),H=360,M={l:62,r:22,t:24,b:36},pw=W-M.l-M.r,ph=H-M.t-M.b;
+  const ticks=ticksY(Math.max(...series.flatMap(r=>r.valores)),5);
+  const x=a=>M.l+pw*a/(NA-1),y=v=>M.t+ph-v/ticks.top*ph;
+  const svg=sv("svg",{width:W,height:H,role:"img","aria-label":"Evolução anual dos seis maiores setores; 2024 parcial"},box);
+  for (const v of ticks.vals) {
+    sv("line",{x1:M.l,x2:W-M.r,y1:y(v),y2:y(v),class:"gridline"},svg);
+    sv("text",{x:M.l-8,y:y(v)+4,"text-anchor":"end",class:"axis-txt"},svg).textContent=nfInt.format(v/1e9);
+  }
+  ANOS.forEach((ano,a)=>sv("text",{x:x(a),y:H-12,"text-anchor":"middle",class:"axis-txt"},svg).textContent=ano);
+  sv("text",{x:x(NA-1),y:14,"text-anchor":"end",class:"axis-txt"},svg).textContent="2024 parcial";
+  series.forEach((r,i)=>{
+    const pts=r.valores.slice(0,IDX_PARCIAL).map((v,a)=>`${x(a)},${y(v)}`).join(" ");
+    sv("polyline",{points:pts,fill:"none",stroke:corSlot(i),"stroke-width":2.5},svg);
+    sv("line",{x1:x(IDX_PARCIAL-1),x2:x(IDX_PARCIAL),y1:y(r.valores[IDX_PARCIAL-1]),y2:y(r.valores[IDX_PARCIAL]),stroke:corSlot(i),"stroke-width":2.5,"stroke-dasharray":"5 5"},svg);
+    r.valores.forEach((v,a)=>sv("circle",{cx:x(a),cy:y(v),r:3,fill:a===IDX_PARCIAL?"white":corSlot(i),stroke:corSlot(i)},svg));
+  });
+  $("#ben-legend").innerHTML=series.map((r,i)=>`<span class="li"><i class="sw" style="background:${corSlot(i)}"></i>${esc(r.setor)}</span>`).join("");
+  $("#ben-evolucao-table").innerHTML=`<table><thead><tr><th>Setor</th>${ANOS.map(a=>`<th class="n">${a}${a===ANO_PARCIAL?" (parcial)":""}</th>`).join("")}</tr></thead><tbody>`+series.map(r=>`<tr><td>${esc(r.setor)}</td>${r.valores.map(v=>`<td class="n">${moeda(v)}</td>`).join("")}</tr>`).join("")+`</tbody></table>`;
+}
+
+function renderMetodologia() {
   document.querySelectorAll("[data-base-ipca]").forEach(el => { el.textContent = AP.base; });
   $("#intro-base-fonte").href = AP.referencia.fonte_periodo;
   $("#intro-cobertura").textContent = `O acervo reúne ${nfInt.format(AP.cnpjs)} CNPJs de ${ANOS[0]} a ${ANOS[NA-1]}, ` +
     `em arquivos atualizados em ${dataBR(P.meta.arquivo_atualizado_em)} e extraídos em ${dataBR(P.meta.extraido_em)}.`;
+  $("#intro-ipca-fonte").href = AP.fonte_ipca;
+  $("#intro-diferenca").textContent = `Para o mesmo período e recorte, preços de ${AP.base} produzem valores ${nf2.format((AP.razao_base_media2023-1)*100)}% maiores que preços médios de 2023.`;
+  const B = AP.beneficiarios;
+  $("#ben-qualidade").textContent = `${B.n_raizes_negativas} raízes têm saldo acumulado negativo (${fmtV(B.saldo_negativo,"nominal")}); o identificador inválido soma ${fmtV(B.valor_identificador_invalido,"nominal")}.`;
+}
+function renderApresentacao() {
+  const moeda = v => fmtV(v, "nominal");
+  renderMetodologia();
   $("#intro-total").innerHTML = `O acumulado do período é de <b>${esc(moeda(AP.total_real))}</b> em preços de ${esc(AP.base)}, ` +
     `incluindo o ano parcial. Em valores nominais, a soma é ${esc(moeda(AP.total_nominal))}.`;
   chartColunas($("#intro-chart"), {
@@ -1088,8 +1175,7 @@ function renderApresentacao() {
   $("#intro-table").innerHTML = `<table><thead><tr><th>Ano</th><th class="n">Nominal</th><th class="n">Reais de ${esc(AP.base)}</th></tr></thead><tbody>` +
     AP.anos.map(r => `<tr><td>${r.ano}${r.parcial ? " (parcial)" : ""}</td><td class="n">${moeda(r.nominal)}</td><td class="n">${moeda(r.real)}</td></tr>`).join("") + `</tbody></table>`;
   renderComposicao();
-  $("#intro-ipca-fonte").href = AP.fonte_ipca;
-  $("#intro-diferenca").textContent = `Para o mesmo período e recorte, preços de ${AP.base} produzem valores ${nf2.format((AP.razao_base_media2023-1)*100)}% maiores que preços médios de 2023.`;
+
 }
 
 /* ---------------------------------------------------------- panorama -- */
@@ -1518,10 +1604,12 @@ function montarNota2024() {
     `${nfInt.format(n23)} em 2023. A cobertura de 2024 se limita à importação no primeiro semestre; IRPJ/CSLL vai até 2023.`;
 }
 
-const ABAS = ["apresentacao", "resumo", "ranking"];
+const ABAS = ["apresentacao", "metodologia", "beneficiarios", "resumo", "ranking"];
 
 function renderAll() {
   if (S.view === "apresentacao") renderApresentacao();
+  else if (S.view === "metodologia") renderMetodologia();
+  else if (S.view === "beneficiarios") renderBeneficiarios();
   else if (S.view === "resumo") renderPanorama();
   else renderRanking();
 }
@@ -1552,6 +1640,7 @@ function segLigar(sel, prop, depois) {
 
 function init() {
   montarNota2024();
+  renderMetodologia();
   document.querySelectorAll("[data-base-ipca]").forEach(el => { el.textContent = AP.base; });
 
   $("#sel-base").innerHTML = ANOS.map(a =>
@@ -1601,6 +1690,7 @@ function init() {
   /* --- redesenho ----------------------------------------------------- */
   const redesenhar = debounce(() => {
     if (S.view === "apresentacao") renderApresentacao();
+    else if (S.view === "beneficiarios") renderBeneficiarios();
     else if (S.view === "resumo") renderPanorama();
   }, 160);
   window.addEventListener("resize", redesenhar);
