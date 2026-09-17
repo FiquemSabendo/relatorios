@@ -1382,12 +1382,11 @@ function montarDetalhe(g) {
     }).sort((a, b) => b.t - a.t);
     $("#det-estabs").innerHTML = `<div class="tablewrap"><table><thead><tr><th>CNPJ</th><th>Município</th><th>UF</th>
       <th class="n">Acumulado 2015–2024 (inclui parcial)</th></tr></thead><tbody>` +
-      ms.slice(0, 15).map(o => `<tr>
+      ms.map(o => `<tr>
         <td><span class="mono" style="font-size:12px">${esc(cnpjFmt(D.cnpj[o.e]))}</span>
             <span class="meta">${esc((CNAE.get(D.cnae[o.e]) || {}).desc || "Sem informação")}</span></td>
         <td>${esc(MUN[D.mun[o.e]][0])}</td><td>${esc(D.ufDe[o.e])}</td>
-        <td class="n">${esc(fmtV(o.t))}</td></tr>`).join("") + `</tbody></table></div>` +
-      (ms.length > 15 ? `<div class="note">Mostrando os 15 maiores de ${ms.length} estabelecimentos.</div>` : "");
+        <td class="n">${esc(fmtV(o.t))}</td></tr>`).join("") + `</tbody></table></div>`;
   }
 }
 </script>
