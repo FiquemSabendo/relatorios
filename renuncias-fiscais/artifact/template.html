@@ -419,8 +419,26 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <p class="sub">As porcentagens se referem ao acumulado de todos os tributos, corrigido pelo IPCA;
         descrevem este acervo, não o universo de todos os benefícios tributários.</p>
     </div>
-    <div class="card intro-copy">
-      <h2>Como corrigimos os valores pela inflação?</h2>
+    <div class="card intro-copy" id="metodologia">
+      <h2>Metodologia: como ler estes números</h2>
+      <h3>Fonte e cobertura</h3>
+      <p><b>O que é.</b> Renúncia fiscal aqui é o Incentivo, Renúncia, Benefício ou Imunidade
+          de natureza tributária (IRBI) apurado pela Receita Federal: a diferença entre o tributo
+          calculado e o efetivamente devido, por CNPJ e por ano-calendário.</p>
+      <p><b>O que não é.</b> Não cobre tributos estaduais e municipais (ICMS, ISS, IPTU),
+          nem o Simples Nacional, nem renúncias de pessoa física. É um recorte da União.</p>
+      <p><b>Fonte.</b> <span id="foot-fonte"></span></p>
+      <h3>Beneficiários e fundamentos legais</h3>
+      <p><b>Empresa.</b> Cada linha do ranking é um grupo econômico, aproximado pela raiz do
+          CNPJ (8 primeiros dígitos), que une matriz e filiais. Não capta controle societário
+          entre CNPJs de raízes diferentes. Os CNPJs que compõem o grupo aparecem ao abrir a linha.</p>
+      <p><b>Mecanismo.</b> A origem jurídica vem do campo <b>Fundamento Legal</b> do arquivo
+          detalhado da Receita — <span id="foot-fund"></span> dispositivos distintos. Para o
+          IRPJ/CSLL declarado, o próprio benefício já nomeia o programa; para a renúncia de
+          importação, o mecanismo só aparece no fundamento. O agrupamento em
+          <span id="foot-reg"></span> mecanismos é nosso, por regra explícita sobre esse texto;
+          o fundamento original aparece sempre ao lado, sem interpretação.</p>
+      <h3>Correção pela inflação e bases de preços</h3>
       <p>Nos dois gráficos desta aba, a referência é <b><span data-base-ipca></span></b>.
         Multiplicamos o valor nominal de cada ano pelo número-índice do IPCA de <span data-base-ipca></span>,
         dividido pela média dos índices dos meses cobertos: <b>janeiro a dezembro para 2015–2023</b>
@@ -436,6 +454,27 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         do ano escolhido. No ranking, os valores são nominais; ao abrir uma empresa, “Real” usa a média de
         janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos desta apresentação sem converter a base.
         <span id="intro-diferenca"></span></p>
+
+      <h3>Participação no PIB</h3>
+      <p><b>% do PIB.</b> PIB nominal anual = soma dos quatro trimestres a preços correntes
+          (IBGE, tabela SIDRA 1846). Nessa medida o resumo do período é a <b>média anual</b>,
+          não a soma: somar percentuais de anos diferentes não significa nada.</p>
+      <h3>Cobertura parcial, cadastro e classificação setorial</h3>
+      <p><b>2024 é parcial.</b> <span id="foot-2024"></span></p>
+      <p><b>Sem CNAE.</b> <span id="foot-cnae"></span> do valor da série está sob o código
+          <span class="mono">00000</span> na origem e aparece como “Sem informação”, não é descartado.</p>
+      <p><b>Setor.</b> Classificação editorial, não oficial, que reúne atividades específicas em setores
+          como Automotivo, Aviação e Farmacêutico. A atividade fica no detalhe. A classificação é baseada em classes,
+          grupos e divisões da CNAE. Se o código estiver ausente, usamos uma fonte documentada
+          da empresa ou, quando houver concordância, as atividades conhecidas de outros CNPJs
+          da mesma raiz. Sem evidência suficiente: “Não identificado”. Ao abrir a empresa,
+          aparecem a origem e a evidência da classificação.</p>
+      <p>O rótulo da raiz acompanha o estabelecimento de maior renúncia acumulada em
+          2015–2024, incluindo o ano parcial; não descreve necessariamente todas as suas
+          atividades. É uma classificação do cadastro disponível, não uma série histórica
+          de mudanças de atividade. Os filtros de setor continuam usando a seção CNAE original.</p>
+      <p><b>Arredondamento.</b> Os microdados do explorador estão arredondados para reais
+          inteiros; o banco DuckDB que a gera guarda os centavos.</p>
     </div>
   </section>
 
@@ -498,53 +537,6 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <p>A Fiquem Sabendo é uma organização sem fins lucrativos, independente e apartidária, cuja
         missão é reduzir o desequilíbrio de poder entre sociedade e Estado a partir do acesso a
         informações públicas.</p>
-    </div>
-    <h3>Como ler estes números</h3>
-    <div class="cols">
-      <div>
-        <p><b>O que é.</b> Renúncia fiscal aqui é o Incentivo, Renúncia, Benefício ou Imunidade
-          de natureza tributária (IRBI) apurado pela Receita Federal: a diferença entre o tributo
-          calculado e o efetivamente devido, por CNPJ e por ano-calendário.</p>
-        <p><b>O que não é.</b> Não cobre tributos estaduais e municipais (ICMS, ISS, IPTU),
-          nem o Simples Nacional, nem renúncias de pessoa física. É um recorte da União.</p>
-        <p><b>Fonte.</b> <span id="foot-fonte"></span></p>
-      </div>
-      <div>
-        <p><b>Mecanismo.</b> A origem jurídica vem do campo <b>Fundamento Legal</b> do arquivo
-          detalhado da Receita — <span id="foot-fund"></span> dispositivos distintos. Para o
-          IRPJ/CSLL declarado, o próprio benefício já nomeia o programa; para a renúncia de
-          importação, o mecanismo só aparece no fundamento. O agrupamento em
-          <span id="foot-reg"></span> mecanismos é nosso, por regra explícita sobre esse texto;
-          o fundamento original aparece sempre ao lado, sem interpretação.</p>
-        <p><b>Deflator.</b> A Apresentação expressa os valores em preços de <b><span data-base-ipca></span></b>.
-          No Resumo, a referência é a <b>média de janeiro a dezembro do ano selecionado</b>;
-          no detalhe do ranking, é a <b>média de janeiro a dezembro de 2023</b>.
-          Usamos o número-índice do IPCA (IBGE), dividido pela média dos índices dos meses cobertos na origem:
-          janeiro–dezembro para 2015–2023 e janeiro–junho para 2024, em todas as abas. O ranking principal usa valores nominais.</p>
-        <p><b>% do PIB.</b> PIB nominal anual = soma dos quatro trimestres a preços correntes
-          (IBGE, tabela SIDRA 1846). Nessa medida o resumo do período é a <b>média anual</b>,
-          não a soma: somar percentuais de anos diferentes não significa nada.</p>
-      </div>
-      <div>
-        <p><b>Empresa.</b> Cada linha do ranking é um grupo econômico, aproximado pela raiz do
-          CNPJ (8 primeiros dígitos), que une matriz e filiais. Não capta controle societário
-          entre CNPJs de raízes diferentes. Os CNPJs que compõem o grupo aparecem ao abrir a linha.</p>
-        <p><b>2024 é parcial.</b> <span id="foot-2024"></span></p>
-        <p><b>Sem CNAE.</b> <span id="foot-cnae"></span> do valor da série está sob o código
-          <span class="mono">00000</span> na origem e aparece como “Sem informação”, não é descartado.</p>
-        <p><b>Setor.</b> Classificação editorial, não oficial, que reúne atividades específicas em setores
-          como Automotivo, Aviação e Farmacêutico. A atividade fica no detalhe. A classificação é baseada em classes,
-          grupos e divisões da CNAE. Se o código estiver ausente, usamos uma fonte documentada
-          da empresa ou, quando houver concordância, as atividades conhecidas de outros CNPJs
-          da mesma raiz. Sem evidência suficiente: “Não identificado”. Ao abrir a empresa,
-          aparecem a origem e a evidência da classificação.</p>
-        <p>O rótulo da raiz acompanha o estabelecimento de maior renúncia acumulada em
-          2015–2024, incluindo o ano parcial; não descreve necessariamente todas as suas
-          atividades. É uma classificação do cadastro disponível, não uma série histórica
-          de mudanças de atividade. Os filtros de setor continuam usando a seção CNAE original.</p>
-        <p><b>Arredondamento.</b> Os microdados do explorador estão arredondados para reais
-          inteiros; o banco DuckDB que a gera guarda os centavos.</p>
-      </div>
     </div>
     <div class="fim">
       <span>Código, banco DuckDB e metodologia: <a href="https://github.com/FiquemSabendo/relatorios/tree/main/renuncias-fiscais" target="_blank" rel="noopener">github.com/FiquemSabendo/relatorios</a></span>
