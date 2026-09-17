@@ -1,0 +1,12 @@
+{
+  "erros_js": [],
+  "valor_2024_nominal": "R$ 2,73 bi",
+  "valor_2024_real_base_2023": "R$ 2,61 bi",
+  "dashboard_preservado": {
+    "medida": "pib",
+    "secao": "C",
+    "parcial": true
+  },
+  "ranking_independente": true,
+  "detalhe_inclui_2024_com_checkbox_desmarcada": true
+}

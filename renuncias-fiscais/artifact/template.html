@@ -718,11 +718,16 @@ const salvar = debounce(() => {
 }, 400);
 
 /* ------------------------------------------------------- transformação -- */
-const anosAtivos = () => S.incluir2024 ? NA : IDX_PARCIAL;
+// O ranking mantém período completo e valores nominais, sem filtros do dashboard.
+const contexto = () => S.view === "ranking"
+  ? { medida: "nominal", anoBase: 2023, incluir2024: false, secao: "", uf: "", regime: "" }
+  : S;
+const DET = { medida: "nominal", anoBase: 2023 };
+const anosAtivos = () => contexto().incluir2024 ? NA : IDX_PARCIAL;
 
-function conv(v, a) {
-  if (S.medida === "real") return v * IPCA[S.anoBase - ANO0] / IPCA[a];
-  if (S.medida === "pib")  return PIB[a] ? v / PIB[a] * 100 : 0;
+function conv(v, a, medida = contexto().medida, anoBase = contexto().anoBase) {
+  if (medida === "real") return v * IPCA[anoBase - ANO0] / IPCA[a];
+  if (medida === "pib")  return PIB[a] ? v / PIB[a] * 100 : 0;
   return v;
 }
 function casasPct(v) {
@@ -734,12 +739,12 @@ function fmtPct(v, casas) {
   if (v > 0 && v < Math.pow(10, -d)) return "<" + Math.pow(10, -d).toFixed(d).replace(".", ",") + "%";
   return v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
 }
-function fmtV(v) {
-  if (S.medida === "pib") return fmtPct(v);
+function fmtV(v, medida = contexto().medida) {
+  if (medida === "pib") return fmtPct(v);
   return "R$ " + compacto(v);
 }
-function fmtEixo(v, ref) {
-  if (S.medida === "pib") {
+function fmtEixo(v, ref, medida = contexto().medida) {
+  if (medida === "pib") {
     if (v === 0) return "0%";
     return fmtPct(v, Math.max(1, casasPct(ref === undefined ? v : ref) - 1));
   }
@@ -754,25 +759,25 @@ function fmtVar(p) {
   if (p >= 9) return "×" + nf1.format(1 + p);
   return (p >= 0 ? "+" : "") + nfInt.format(p * 100) + "%";
 }
-const rotuloMedida = () => S.medida === "nominal" ? "R$ correntes"
-  : S.medida === "real" ? `R$ de ${S.anoBase}` : "% do PIB";
+const rotuloMedida = () => contexto().medida === "nominal" ? "R$ correntes"
+  : contexto().medida === "real" ? `R$ de ${contexto().anoBase}` : "% do PIB";
 
 /* ----------------------------------------------------- fatia filtrada -- */
 /* Os filtros (UF, setor, mecanismo) valem no nível do ESTABELECIMENTO: um grupo
    entra na fatia com o valor dos CNPJs que passam no filtro, não com o total.
-   É o que faz o ranking, os cortes por setor e o cubo por mecanismo fecharem
-   entre si. O nível de agregação (grupo ou estabelecimento) decide só quem é a
-   "empresa" no ranking. */
+   No dashboard, os cortes por setor e o cubo por mecanismo fecham entre si.
+   O ranking ignora esses filtros; seu detalhe inclui também o ano parcial. */
 let FATIA = null;
 
 function passaEstab(e) {
+  if (S.view === "ranking") return true;
   if (S.uf && D.ufDe[e] !== S.uf) return false;
   if (S.secao && D.secaoDe[e] !== S.secao) return false;
   return true;
 }
 
 function valsFiltrados(E) {
-  if (!S.uf && !S.secao && !S.regime) return E.vals;
+  if (S.view === "ranking" || (!S.uf && !S.secao && !S.regime)) return E.vals;
   const out = new Float64Array(E.n * NA);
   const regId = S.regime ? REG_ID.get(S.regime) : -1;
   for (let e = 0; e < D.n; e++) {
@@ -788,11 +793,12 @@ function valsFiltrados(E) {
   return out;
 }
 
-function fatia() {
+function fatia(detalhe = false) {
+  const C = contexto();
   const E = entidades(S.nivel);
-  const chave = [S.nivel, S.uf, S.secao, S.regime, S.incluir2024, S.medida, S.anoBase].join("|");
+  const chave = [S.nivel, C.uf, C.secao, C.regime, C.incluir2024, C.medida, C.anoBase, detalhe].join("|");
   if (FATIA && FATIA.chave === chave) return FATIA;
-  const na = anosAtivos();
+  const na = detalhe ? NA : anosAtivos();
   const vals = valsFiltrados(E);
   const idx = [];
   for (let g = 0; g < E.n; g++) {
@@ -808,7 +814,7 @@ function fatia() {
   idx.forEach((g, k) => {
     let t = 0;
     for (let a = 0; a < na; a++) t += conv(vals[g * NA + a], a);
-    totalEnt[k] = S.medida === "pib" ? t / na : t;
+    totalEnt[k] = C.medida === "pib" ? t / na : t;
   });
   const ordem = idx.map((_, k) => k).sort((a, b) => totalEnt[b] - totalEnt[a]);
   const posDe = new Int32Array(E.n).fill(-1);
@@ -968,11 +974,11 @@ const $ = s => document.querySelector(s);
 const corSlot = i => css(CORES[i % CORES.length]);
 const ULTIMO_COMPLETO = IDX_PARCIAL - 1;
 // somar % do PIB entre anos não significa nada; nesse modo o resumo é a média
-const agrega = vs => S.medida === "pib"
+const agrega = vs => contexto().medida === "pib"
   ? vs.reduce((x, y) => x + y, 0) / (vs.length || 1)
   : vs.reduce((x, y) => x + y, 0);
 
-const rotuloFiltro = () => S.secao ? SECOES[S.secao] : "todos os setores";
+const rotuloFiltro = () => contexto().secao ? SECOES[contexto().secao] : "todos os setores";
 
 /* ---------------------------------------------------------- panorama -- */
 const NOME_CAT = (dim, c) => dim === "secao" ? (SECOES[c] || c) : c;
@@ -1148,7 +1154,7 @@ function renderRanking() {
       <th style="width:170px">Setor</th>
       <th style="width:190px">Setor (seção CNAE)</th>
       <th style="width:64px">${ANOS[0]}–${ANOS[F.na - 1]}</th>
-      <th class="n">${S.medida === "pib" ? "Média anual" : "Acumulado"}</th>
+      <th class="n">Acumulado</th>
       <th class="n">${ANOS[ULTIMO_COMPLETO]}</th>
     </tr></thead><tbody id="res-corpo"></tbody></table>`;
   MOSTRADOS = 0;
@@ -1225,15 +1231,28 @@ function alternarDetalhe(tr, g) {
     .forEach(o => o.setAttribute("aria-expanded", "false"));
   if (eraEsta) { S.aberta = null; return; }
   S.aberta = g;
+  DET.medida = "nominal";
   tr.setAttribute("aria-expanded", "true");
   tr.insertAdjacentHTML("afterend", `<tr class="det"><td colspan="7">${detalheHTML(g)}</td></tr>`);
   montarDetalhe(g);
   tr.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
 
+// Formatação própria do detalhe: inclui o ano parcial e nunca herda % do PIB.
+function formatadoresDetalhe() {
+  const medida = DET.medida, base = DET.anoBase;
+  return {
+    conv: (v, a) => conv(v, a, medida, base),
+    fmtV: v => fmtV(v, medida),
+    fmtEixo: (v, ref) => fmtEixo(v, ref, medida),
+    agrega: vs => vs.reduce((x, y) => x + y, 0),
+  };
+}
+
 /* Itens (benefício × fundamento) de uma entidade, já filtrados. */
 function itensDaEmpresa(g) {
-  const F = fatia(), E = F.E;
+  const { conv, fmtV, fmtEixo, agrega } = formatadoresDetalhe();
+  const F = fatia(true), E = F.E;
   const ms = E.membros ? E.membros[g] : [g];
   const m = new Map();
   for (const e of ms) {
@@ -1255,7 +1274,8 @@ function itensDaEmpresa(g) {
 }
 
 function detalheHTML(g) {
-  const F = fatia(), E = F.E;
+  const { conv, fmtV, fmtEixo, agrega } = formatadoresDetalhe();
+  const F = fatia(true), E = F.E;
   const vals = Array.from({ length: F.na }, (_, a) => conv(F.vals[g * NA + a], a));
   const acum = agrega(vals);
   const pico = vals.indexOf(Math.max(...vals));
@@ -1279,8 +1299,17 @@ function detalheHTML(g) {
       </div>
     </div>
 
+    <div class="searchrow" style="margin:12px 0">
+      <div class="seg" id="det-medida" role="group" aria-label="Medida dos valores da empresa">
+        <button type="button" data-medida="nominal" aria-pressed="${DET.medida === 'nominal'}">Nominal</button>
+        <button type="button" data-medida="real" aria-pressed="${DET.medida === 'real'}">Real (IPCA, R$ de ${DET.anoBase})</button>
+      </div>
+    </div>
+    <p class="note"><b>${ANO_PARCIAL} é parcial.</b> ${esc(NOTA2024)}
+      O detalhe inclui esse ano; o ranking usa somente os anos completos, em valores nominais.</p>
     <div class="kv">
-      <div><div class="k">${S.medida === "pib" ? "Média anual" : "Acumulado"}</div><div class="v">${esc(fmtV(acum))}</div></div>
+      <div><div class="k">Acumulado 2015–2024 (inclui parcial)</div><div class="v">${esc(fmtV(acum))}</div></div>
+      <div><div class="k">${ANO_PARCIAL} (parcial)</div><div class="v" id="det-valor-parcial">${esc(fmtV(vals[IDX_PARCIAL]))}</div></div>
       <div><div class="k">Ano de pico</div><div class="v">${ANOS[pico]}</div></div>
       <div><div class="k">Posição em ${ANOS[a23]}</div><div class="v">${noAno > 0 ? rank + "º" : "—"}</div></div>
       <div><div class="k">% do total ${ANOS[a23]}</div><div class="v">${nf2.format(share)}%</div></div>
@@ -1303,13 +1332,19 @@ function detalheHTML(g) {
 }
 
 function montarDetalhe(g) {
-  const F = fatia(), E = F.E;
+  const { conv, fmtV, fmtEixo, agrega } = formatadoresDetalhe();
+  const F = fatia(true), E = F.E;
+  $("#det-medida").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    DET.medida = b.dataset.medida;
+    $("#res-corpo tr.det > td").innerHTML = detalheHTML(g);
+    montarDetalhe(g);
+  }));
   const anos = Array.from({ length: F.na }, (_, a) => a);
   const vals = anos.map(a => conv(F.vals[g * NA + a], a));
 
   chartColunas($("#det-chart"), {
     anos, series: [{ nome: E.nome[g], cor: corSlot(0), vals }], altura: 200,
-    parcial: S.incluir2024 ? IDX_PARCIAL : undefined, fmtEixo, fmtTip: fmtV,
+    parcial: IDX_PARCIAL, fmtEixo, fmtTip: fmtV,
     aria: `Renúncia anual de ${E.nome[g]}`,
   });
 
@@ -1344,7 +1379,7 @@ function montarDetalhe(g) {
     }).sort((a, b) => b.t - a.t);
     $("#det-estabs").innerHTML = `<h4>Estabelecimentos do grupo</h4>
       <div class="tablewrap"><table><thead><tr><th>CNPJ</th><th>Município</th><th>UF</th>
-      <th class="n">${S.medida === "pib" ? "Média anual" : "Acumulado"}</th></tr></thead><tbody>` +
+      <th class="n">Acumulado 2015–2024 (inclui parcial)</th></tr></thead><tbody>` +
       ms.slice(0, 15).map(o => `<tr>
         <td><span class="mono" style="font-size:12px">${esc(cnpjFmt(D.cnpj[o.e]))}</span>
             <span class="meta">${esc((CNAE.get(D.cnae[o.e]) || {}).desc || "Sem informação")}</span></td>
@@ -1384,6 +1419,8 @@ function renderAll() {
 
 function irParaAba(v) {
   S.view = v;
+  $(".controlbar").classList.toggle("hidden", v !== "resumo");
+  invalidar();
   try { history.replaceState(null, "", "#" + v); } catch (e) { /* sandbox sem history */ }
   document.querySelectorAll("#tabs button").forEach(b =>
     b.setAttribute("aria-selected", String(b.dataset.v === v)));

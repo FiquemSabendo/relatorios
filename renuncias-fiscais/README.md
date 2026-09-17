@@ -154,6 +154,18 @@ carregamento no navegador leva cerca de 0,8 s depois do download.
 payload e as fontes e grava `artifact/renuncias.html` e `../docs/renuncias-fiscais/index.html`. Edite o template,
 nunca os arquivos gerados.
 
+## Filtros e detalhe das empresas
+
+Os controles de medida, seção CNAE e inclusão de 2024 aparecem somente no dashboard.
+O ranking usa valores nominais de 2015–2023 e não herda os filtros do dashboard.
+Ao voltar ao dashboard, as seleções anteriores são preservadas.
+
+Ao abrir uma empresa no ranking, o detalhe inclui sempre 2024, identificado como parcial,
+e oferece as opções Nominal e Real (IPCA, R$ de 2023). Essa opção afeta os valores,
+gráficos e tabelas do detalhe, sem alterar a ordenação ou os valores do ranking.
+O acumulado do detalhe inclui 2024 e, portanto, tem período diferente do ranking.
+As verificações de interface estão em `qa/filtros-ranking/`.
+
 ## Setor e atividade
 
 O ranking também oferece uma classificação editorial por setores, como Automotivo, Aviação e Farmacêutico,
