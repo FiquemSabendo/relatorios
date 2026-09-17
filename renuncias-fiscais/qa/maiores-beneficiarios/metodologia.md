@@ -10,7 +10,7 @@ Resultados: 69.462 raízes; 695 maiores (1,000547%) concentram 82,891690%; top 1
 
 ## Setores
 
-Aplica classificar_estabelecimentos, mesma classificação editorial em produção. Cada estabelecimento contribui para seu próprio setor. A soma dos setores fecha com cada total anual; o total de dez anos fecha com a Apresentação. “Não identificado” é mantido: aparece em nota com peso e na tabela completa. As barras destacam os dez maiores setores identificados; a evolução destaca os seis maiores do acumulado, não uma seleção diferente a cada ano. Gráfico de linhas em valores absolutos, sem empilhamento, para facilitar a comparação das trajetórias; 2024 é tracejado e marcado parcial.
+Aplica classificar_estabelecimentos, mesma classificação editorial em produção. Cada estabelecimento contribui para seu próprio setor. A soma dos setores fecha com cada total anual; o total de dez anos fecha com a Apresentação. “Não identificado” é mantido: aparece em nota com peso e na tabela completa. As barras destacam os dez maiores setores identificados. A tabela anual fica visível e inclui todos os setores nos dez anos de 2015–2024, ordenados pelo acumulado; 2024 está marcado como parcial. O gráfico de evolução foi removido.
 
 Essa alocação difere do rótulo da raiz exibido no ranking: ali o setor acompanha o estabelecimento de maior acumulado nominal, e não representa necessariamente toda a atividade da raiz. Cadastro do snapshot aplicado a toda a série: não há histórico anual de CNAE/atividade. Não usar a evolução para afirmar mudança de atividade de uma empresa.
 
@@ -22,6 +22,6 @@ No código arquivado do Carabetta, gerar_relatorio_site.py:157–214 agrupa prim
 
 ## Verificação e limites
 
-Exportador reconcilia os setores com os dez totais anuais e as raízes com o total. Navegador comparou setores calculados no banco com microdados embutidos (diferenças pequenas pelo arredondamento para reais inteiros do payload), testou acesso direto às novas abas, 20 linhas, dez barras, seis séries, filtros restritos ao Resumo e ausência de erros JavaScript. Capturas desktop e mobile arquivadas aqui.
+Exportador reconcilia os setores com os dez totais anuais e as raízes com o total. Navegador comparou setores calculados no banco com microdados embutidos (diferenças pequenas pelo arredondamento para reais inteiros do payload), testou acesso direto às novas abas, 20 linhas, dez barras, tabela com todos os setores e anos, ausência da aba Resumo e ausência de erros JavaScript. Capturas desktop e mobile arquivadas aqui.
 
 Suposições: usa classificação cadastral atual em anos anteriores; não supõe que todas as raízes sejam empresas privadas nem que raiz equivalha a controlador. CNPJs com formato válido não tiveram a situação cadastral revalidada nesta edição. Negativos e identificador inválido seguem preservados como na auditoria original. Cobertura incompleta de 2024 impede ler a última variação como queda anual comparável. Fontes fiscais e IPCA permanecem as do snapshot documentado em ../apresentacao/metodologia.md.

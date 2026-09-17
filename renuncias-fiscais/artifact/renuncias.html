@@ -359,34 +359,8 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     <button role="tab" data-v="apresentacao" aria-selected="true">Apresentação</button>
     <button role="tab" data-v="metodologia" aria-selected="false">Metodologia</button>
     <button role="tab" data-v="beneficiarios" aria-selected="false">Maiores Beneficiários</button>
-    <button role="tab" data-v="resumo" aria-selected="false">Resumo</button>
-    <button role="tab" data-v="ranking" aria-selected="false">Ranking de empresas</button>
+    <button role="tab" data-v="ranking" aria-selected="false">Ranking de beneficiários</button>
   </nav>
-</div>
-
-<div class="controlbar">
-  <div class="wrap">
-    <div class="controls">
-      <div class="field">
-        <label id="lbl-medida">Medida</label>
-        <div class="seg" role="group" aria-labelledby="lbl-medida" id="seg-medida">
-          <button data-v="nominal" aria-pressed="true">Nominal</button>
-          <button data-v="real" aria-pressed="false">Real (IPCA)</button>
-          <button data-v="pib" aria-pressed="false">% do PIB</button>
-        </div>
-      </div>
-      <div class="field" id="fld-base">
-        <label for="sel-base">Preços de</label>
-        <select id="sel-base"></select>
-      </div>
-      <div class="field">
-        <label for="sel-secao">Setor (seção CNAE)</label>
-        <select id="sel-secao"></select>
-      </div>
-      <label class="check"><input type="checkbox" id="chk-2024"> Incluir 2024 (parcial)</label>
-      <button class="ghost" id="btn-reset" type="button">Limpar filtros</button>
-    </div>
-  </div>
 </div>
 
 <div class="wrap">
@@ -448,7 +422,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
           <span id="foot-reg"></span> mecanismos é nosso, por regra explícita sobre esse texto;
           o fundamento original aparece sempre ao lado, sem interpretação.</p>
       <h3>Correção pela inflação e bases de preços</h3>
-      <p>Nos gráficos da Apresentação e de Maiores Beneficiários, a referência é <b><span data-base-ipca></span></b>.
+      <p>Nos gráficos e tabelas da Apresentação e de Maiores Beneficiários, a referência é <b><span data-base-ipca></span></b>.
         Multiplicamos o valor nominal de cada ano pelo número-índice do IPCA de <span data-base-ipca></span>,
         dividido pela média dos índices dos meses cobertos: <b>janeiro a dezembro para 2015–2023</b>
         e <b>janeiro a junho para 2024</b>. Depois, somamos os valores corrigidos.
@@ -459,8 +433,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         do período coberto. Para 2024, usamos somente os seis meses do primeiro semestre.
         A correção não recupera a data de cada operação nem os tributos e meses ausentes. O IPCA compara poder de compra pela inflação ao consumidor;
         não mede o retorno econômico dos incentivos.</p>
-      <p><b>As bases de preços variam entre as abas.</b> No Resumo, “Real” usa a média de janeiro a dezembro
-        do ano escolhido. No ranking, os valores são nominais; ao abrir uma empresa, “Real” usa a média de
+      <p><b>As bases de preços variam entre as abas.</b> No ranking, os valores são nominais; ao abrir uma empresa, “Real” usa a média de
         janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos da Apresentação sem converter a base.
         <span id="intro-diferenca"></span></p>
 
@@ -469,16 +442,12 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         A concentração usa os oito primeiros dígitos dos CNPJs com 14 dígitos. O grupo dos maiores 1% é arredondado
         para cima em número de empresas. Os percentuais de valor usam o saldo total da base, preservando registros negativos
         e o valor do identificador inválido; este último não conta como empresa. <span id="ben-qualidade"></span></p>
-      <p>Nos gráficos setoriais, cada estabelecimento leva seus valores para o seu próprio setor da classificação editorial.
+      <p>Nos gráficos e tabelas setoriais, cada estabelecimento leva seus valores para o seu próprio setor da classificação editorial.
         Isso difere do rótulo resumido da raiz no ranking, que acompanha o estabelecimento de maior valor acumulado.
         O cadastro atual é aplicado a toda a série; não representa mudanças históricas de atividade. “Não identificado”
-        permanece no total e na tabela. A evolução destaca os seis setores identificados de maior acumulado.</p>
+        permanece no total e na tabela. A tabela anual mostra todos os setores de 2015 a 2024, ordenados pelo acumulado.</p>
       <p>O ranking principal continua nominal e cobre 2015–2023. Assim, posições e acumulados podem diferir da nova aba,
         embora a chave de agrupamento por raiz seja a mesma.</p>
-      <h3>Participação no PIB</h3>
-      <p><b>% do PIB.</b> PIB nominal anual = soma dos quatro trimestres a preços correntes
-          (IBGE, tabela SIDRA 1846). Nessa medida o resumo do período é a <b>média anual</b>,
-          não a soma: somar percentuais de anos diferentes não significa nada.</p>
       <h3>Cobertura parcial, cadastro e classificação setorial</h3>
       <p><b>2024 é parcial.</b> <span id="foot-2024"></span></p>
       <p><b>Sem CNAE.</b> <span id="foot-cnae"></span> do valor da série está sob o código
@@ -492,7 +461,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <p>O rótulo da raiz acompanha o estabelecimento de maior renúncia acumulada em
           2015–2024, incluindo o ano parcial; não descreve necessariamente todas as suas
           atividades. É uma classificação do cadastro disponível, não uma série histórica
-          de mudanças de atividade. Os filtros de setor continuam usando a seção CNAE original.</p>
+          de mudanças de atividade.</p>
       <p><b>Arredondamento.</b> Os microdados do explorador estão arredondados para reais
           inteiros; o banco DuckDB que a gera guarda os centavos.</p>
     </div>
@@ -520,43 +489,10 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <details><summary>Ver todos os setores</summary><div class="tablewrap" id="ben-setores-table"></div></details>
     </div>
     <div class="card">
-      <h2>Como evoluíram os maiores setores?</h2>
-      <p class="sub">Seis maiores setores identificados no acumulado · R$ bilhões de <span data-base-ipca></span> (IPCA)</p>
-      <div class="chartbox" id="ben-evolucao" style="overflow-x:auto"></div>
-      <div class="legend" id="ben-legend"></div>
-      <p class="note">2024 é parcial. O trecho tracejado não representa uma queda anual comparável aos anos completos.</p>
-      <details><summary>Ver valores por setor e ano</summary><div class="tablewrap" id="ben-evolucao-table"></div></details>
-    </div>
-  </section>
-
-  <!-- ================================================ RESUMO ========= -->
-  <section id="view-resumo" role="tabpanel">
-    <div class="card">
-      <div class="cardhead">
-        <div>
-          <h2 id="pan-title">Renúncia por ano</h2>
-          <p class="sub" id="pan-sub"></p>
-        </div>
-        <div class="cardtools">
-          <div class="field">
-            <label for="sel-dim">Abrir por</label>
-            <select id="sel-dim">
-              <option value="secao">Setor (seção CNAE)</option>
-              <option value="regime">Mecanismo</option>
-              <option value="tipo">Tipo de renúncia</option>
-              <option value="tributo">Tributo</option>
-              <option value="uf">UF</option>
-              <option value="empresa">Maiores empresas</option>
-              <option value="nenhuma">Nada (total)</option>
-            </select>
-          </div>
-          <button class="ghost" id="btn-pan-tab" type="button" aria-pressed="false">Ver tabela</button>
-        </div>
-      </div>
-      <div class="chartbox" id="pan-chart"></div>
-      <div class="legend" id="pan-legend"></div>
-      <div class="tablewrap hidden" id="pan-table"></div>
-      <div id="pan-note"></div>
+      <h2>Renúncias por setor e ano</h2>
+      <p class="sub">Todos os setores · valores em reais de <span data-base-ipca></span> (IPCA) · ordenados pelo acumulado de 2015–2024</p>
+      <p class="note">2024 é parcial: cobre apenas a importação no primeiro semestre e não é diretamente comparável aos anos completos. Deslize a tabela horizontalmente para consultar todos os anos.</p>
+      <div class="tablewrap" id="ben-evolucao-table"></div>
     </div>
   </section>
 
@@ -2297,25 +2233,7 @@ function renderBeneficiarios() {
   const sem = B.setores.find(r=>r.setor==="Não identificado");
   $("#ben-sem-setor").textContent = sem ? `Sem setor identificado: ${moeda(sem.real)} (${nf1.format(sem.participacao*100)}% do total). Esse valor permanece na soma e na tabela abaixo.` : "Todos os registros têm setor identificado.";
   $("#ben-setores-table").innerHTML = `<table><thead><tr><th>Setor</th><th class="n">Acumulado</th><th class="n">% do total</th></tr></thead><tbody>`+B.setores.map(r=>`<tr><td>${esc(r.setor)}</td><td class="n">${moeda(r.real)}</td><td class="n">${nf1.format(r.participacao*100)}%</td></tr>`).join("")+`</tbody></table>`;
-  const series=identificados.slice(0,6), box=$("#ben-evolucao");box.innerHTML="";
-  const W=Math.max(700,box.clientWidth),H=360,M={l:62,r:22,t:24,b:36},pw=W-M.l-M.r,ph=H-M.t-M.b;
-  const ticks=ticksY(Math.max(...series.flatMap(r=>r.valores)),5);
-  const x=a=>M.l+pw*a/(NA-1),y=v=>M.t+ph-v/ticks.top*ph;
-  const svg=sv("svg",{width:W,height:H,role:"img","aria-label":"Evolução anual dos seis maiores setores; 2024 parcial"},box);
-  for (const v of ticks.vals) {
-    sv("line",{x1:M.l,x2:W-M.r,y1:y(v),y2:y(v),class:"gridline"},svg);
-    sv("text",{x:M.l-8,y:y(v)+4,"text-anchor":"end",class:"axis-txt"},svg).textContent=nfInt.format(v/1e9);
-  }
-  ANOS.forEach((ano,a)=>sv("text",{x:x(a),y:H-12,"text-anchor":"middle",class:"axis-txt"},svg).textContent=ano);
-  sv("text",{x:x(NA-1),y:14,"text-anchor":"end",class:"axis-txt"},svg).textContent="2024 parcial";
-  series.forEach((r,i)=>{
-    const pts=r.valores.slice(0,IDX_PARCIAL).map((v,a)=>`${x(a)},${y(v)}`).join(" ");
-    sv("polyline",{points:pts,fill:"none",stroke:corSlot(i),"stroke-width":2.5},svg);
-    sv("line",{x1:x(IDX_PARCIAL-1),x2:x(IDX_PARCIAL),y1:y(r.valores[IDX_PARCIAL-1]),y2:y(r.valores[IDX_PARCIAL]),stroke:corSlot(i),"stroke-width":2.5,"stroke-dasharray":"5 5"},svg);
-    r.valores.forEach((v,a)=>sv("circle",{cx:x(a),cy:y(v),r:3,fill:a===IDX_PARCIAL?"white":corSlot(i),stroke:corSlot(i)},svg));
-  });
-  $("#ben-legend").innerHTML=series.map((r,i)=>`<span class="li"><i class="sw" style="background:${corSlot(i)}"></i>${esc(r.setor)}</span>`).join("");
-  $("#ben-evolucao-table").innerHTML=`<table><thead><tr><th>Setor</th>${ANOS.map(a=>`<th class="n">${a}${a===ANO_PARCIAL?" (parcial)":""}</th>`).join("")}</tr></thead><tbody>`+series.map(r=>`<tr><td>${esc(r.setor)}</td>${r.valores.map(v=>`<td class="n">${moeda(v)}</td>`).join("")}</tr>`).join("")+`</tbody></table>`;
+  $("#ben-evolucao-table").innerHTML=`<table><thead><tr><th>Setor</th>${ANOS.map(a=>`<th class="n">${a}${a===ANO_PARCIAL?" (parcial)":""}</th>`).join("")}</tr></thead><tbody>`+B.setores.map(r=>`<tr><td>${esc(r.setor)}</td>${r.valores.map(v=>`<td class="n">${moeda(v)}</td>`).join("")}</tr>`).join("")+`</tbody><tfoot><tr><th>Total</th>${AP.anos.map(r=>`<td class="n"><b>${moeda(r.real)}</b></td>`).join("")}</tr></tfoot></table>`;
 }
 
 function renderMetodologia() {
@@ -2428,48 +2346,6 @@ function seriesPanorama() {
   return series;
 }
 
-function renderPanorama() {
-  const F = fatia();
-  const anos = Array.from({ length: F.na }, (_, a) => a);
-  const series = seriesPanorama();
-  const rotDim = ROTULO_DIM[S.dim];
-
-  $("#pan-title").textContent = rotDim
-    ? `Renúncia por ano, aberta por ${rotDim}`
-    : "Renúncia por ano";
-  $("#pan-sub").textContent = `${rotuloMedida()} · ${rotuloFiltro()} · ` +
-    `${nfInt.format(F.idx.length)} grupos econômicos · total de ${ANOS[0]} a ${ANOS[F.na - 1]}: ` +
-    fmtV(agrega(anos.map(a => conv(F.totalAno[a], a))));
-
-  chartColunas($("#pan-chart"), {
-    anos, series, altura: 420, parcial: S.incluir2024 ? IDX_PARCIAL : undefined,
-    fmtEixo, fmtTip: fmtV,
-    aria: `Renúncia fiscal por ano de ${ANOS[0]} a ${ANOS[F.na - 1]}` +
-          (rotDim ? `, empilhada por ${rotDim}` : ""),
-  });
-  $("#pan-legend").innerHTML = series.length > 1 ? series.map(s =>
-    `<span class="li"><i class="sw" style="background:${s.cor}"></i>${esc(s.nome)}</span>`).join("") : "";
-
-  const tw = $("#pan-table");
-  tw.innerHTML = `<table><thead><tr><th class="swatch-cell"></th><th>${esc(rotDim || "Série")}</th>` +
-    anos.map(a => `<th class="n">${ANOS[a]}${a === IDX_PARCIAL ? "*" : ""}</th>`).join("") +
-    `<th class="n">${S.medida === "pib" ? "Média" : "Total"}</th></tr></thead><tbody>` +
-    series.map(s => `<tr><td class="swatch-cell"><span style="background:${s.cor}"></span></td>
-      <td>${esc(s.nome)}</td>` +
-      s.vals.map(v => `<td class="n">${esc(fmtV(v))}</td>`).join("") +
-      `<td class="n">${esc(fmtV(agrega(s.vals)))}</td></tr>`).join("") +
-    (series.length > 1 ? `<tr><td></td><td><b>Total</b></td>` +
-      anos.map(a => `<td class="n"><b>${esc(fmtV(conv(F.totalAno[a], a)))}</b></td>`).join("") +
-      `<td class="n"><b>${esc(fmtV(agrega(anos.map(a => conv(F.totalAno[a], a)))))}</b></td></tr>` : "") +
-    `</tbody></table>`;
-  tw.classList.toggle("hidden", !S.panTabela);
-  $("#btn-pan-tab").setAttribute("aria-pressed", String(S.panTabela));
-  $("#btn-pan-tab").textContent = S.panTabela ? "Ocultar tabela" : "Ver tabela";
-
-  $("#pan-note").innerHTML = S.incluir2024
-    ? `<div class="note alert"><b>2024 é parcial.</b> ${esc(NOTA2024)} A coluna hachurada não é comparável com os anos fechados.</div>`
-    : "";
-}
 </script>
 
 <script>
@@ -2771,19 +2647,17 @@ function montarNota2024() {
     `${nfInt.format(n23)} em 2023. A cobertura de 2024 se limita à importação no primeiro semestre; IRPJ/CSLL vai até 2023.`;
 }
 
-const ABAS = ["apresentacao", "metodologia", "beneficiarios", "resumo", "ranking"];
+const ABAS = ["apresentacao", "metodologia", "beneficiarios", "ranking"];
 
 function renderAll() {
   if (S.view === "apresentacao") renderApresentacao();
   else if (S.view === "metodologia") renderMetodologia();
   else if (S.view === "beneficiarios") renderBeneficiarios();
-  else if (S.view === "resumo") renderPanorama();
   else renderRanking();
 }
 
 function irParaAba(v) {
   S.view = v;
-  $(".controlbar").classList.toggle("hidden", v !== "resumo");
   invalidar();
   try { history.replaceState(null, "", "#" + v); } catch (e) { /* sandbox sem history */ }
   document.querySelectorAll("#tabs button").forEach(b =>
@@ -2793,50 +2667,13 @@ function irParaAba(v) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function segLigar(sel, prop, depois) {
-  const cx = $(sel);
-  cx.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-    S[prop] = b.dataset.v;
-    cx.querySelectorAll("button").forEach(o => o.setAttribute("aria-pressed", String(o === b)));
-    if (depois) depois();
-    salvar(); renderAll();
-  }));
-  cx.querySelectorAll("button").forEach(b =>
-    b.setAttribute("aria-pressed", String(b.dataset.v === S[prop])));
-}
-
 function init() {
   montarNota2024();
   renderMetodologia();
   document.querySelectorAll("[data-base-ipca]").forEach(el => { el.textContent = AP.base; });
 
-  $("#sel-base").innerHTML = ANOS.map(a =>
-    `<option value="${a}"${a === S.anoBase ? " selected" : ""}>Jan–dez/${a} (média)</option>`).join("");
-  const secs = Object.entries(SECOES).sort((a, b) => a[1].localeCompare(b[1], "pt-BR"));
-  $("#sel-secao").innerHTML = `<option value="">Todos</option>` +
-    secs.map(([k, n]) => `<option value="${k}"${k === S.secao ? " selected" : ""}>${esc(n)}</option>`).join("");
-  $("#sel-dim").value = S.dim;
-  $("#chk-2024").checked = S.incluir2024;
-  $("#fld-base").classList.toggle("hidden", S.medida !== "real");
-
-  segLigar("#seg-medida", "medida", () => {
-    $("#fld-base").classList.toggle("hidden", S.medida !== "real");
-  });
-  $("#sel-base").addEventListener("change", e => { S.anoBase = +e.target.value; salvar(); renderAll(); });
-  $("#sel-secao").addEventListener("change", e => { S.secao = e.target.value; invalidar(); salvar(); renderAll(); });
-  $("#chk-2024").addEventListener("change", e => { S.incluir2024 = e.target.checked; invalidar(); salvar(); renderAll(); });
-  $("#btn-reset").addEventListener("click", () => {
-    S.secao = ""; S.busca = "";
-    $("#sel-secao").value = "";
-    const b = $("#busca"); if (b) b.value = "";
-    invalidar(); salvar(); renderAll();
-  });
-
   document.querySelectorAll("#tabs button").forEach(b =>
     b.addEventListener("click", () => irParaAba(b.dataset.v)));
-
-  $("#sel-dim").addEventListener("change", e => { S.dim = e.target.value; salvar(); renderPanorama(); });
-  $("#btn-pan-tab").addEventListener("click", () => { S.panTabela = !S.panTabela; renderPanorama(); });
 
   $("#busca").addEventListener("input", debounce(e => {
     S.busca = e.target.value; renderRanking();
@@ -2852,13 +2689,12 @@ function init() {
   $("#foot-reg").textContent = nfInt.format(REGIMES.length);
   $("#foot-fonte").innerHTML = `Portal da Transparência, <a href="${esc(P.meta.url)}" target="_blank" rel="noopener">Renúncias Fiscais</a> ` +
     `(arquivos ${ANOS[0]}–${ANOS[NA - 1]}, atualizados em ${esc(dataBR(P.meta.arquivo_atualizado_em))}; ` +
-    `extraídos em ${esc(dataBR(P.meta.extraido_em))}). IPCA e PIB: IBGE/SIDRA.`;
+    `extraídos em ${esc(dataBR(P.meta.extraido_em))}). IPCA: IBGE/SIDRA.`;
 
   /* --- redesenho ----------------------------------------------------- */
   const redesenhar = debounce(() => {
     if (S.view === "apresentacao") renderApresentacao();
     else if (S.view === "beneficiarios") renderBeneficiarios();
-    else if (S.view === "resumo") renderPanorama();
   }, 160);
   window.addEventListener("resize", redesenhar);
 

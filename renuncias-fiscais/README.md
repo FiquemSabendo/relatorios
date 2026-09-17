@@ -5,15 +5,12 @@
 Pipeline reprodutível que baixa os microdados de **Renúncias Fiscais** do Portal da
 Transparência, consolida em um banco DuckDB e gera uma página HTML autocontida
 (`../docs/renuncias-fiscais/index.html`, servida pelo GitHub Pages; cópia em `artifact/renuncias.html` para o
-artefato do claude.ai; ~9 MB), na identidade visual da Fiquem Sabendo, com duas abas:
+artefato do claude.ai; ~9 MB), na identidade visual da Fiquem Sabendo, com quatro abas:
 
-- **Resumo** — a série anual em colunas empilhadas, abrível por setor, mecanismo, tipo de
-  renúncia, tributo, UF ou maiores empresas, com tabela equivalente. Controles: medida
-  (nominal, real pelo IPCA com ano-base, % do PIB), setor e inclusão do ano parcial.
-- **Ranking de empresas** — todos os 68.190 grupos econômicos, carregados por rolagem, com
-  coluna de setor e busca por razão social, nome fantasia ou CNPJ. Cada linha abre no lugar
-  com a série anual, a composição por mecanismo, a tabela do fundamento legal de cada
-  renúncia e os CNPJs que compõem o grupo.
+- **Apresentação** — série anual e composição por tributo, corrigidas pelo IPCA.
+- **Metodologia** — cobertura, fontes, agrupamentos e correção monetária.
+- **Maiores Beneficiários** — concentração, maiores beneficiários e setores; tabela de todos os setores em todos os anos, de 2015 a 2024 (parcial).
+- **Ranking de beneficiários** — agrupamento por raiz do CNPJ, com busca e detalhes dos estabelecimentos, valores anuais e fundamentos legais.
 
 O banco guarda mais do que o artefato mostra: concentração por setor, matriz setor ×
 mecanismo e métricas de outlier estão em `mart_setor_regime` e `mart_grupo_ano`.
@@ -179,14 +176,13 @@ e depois regenere o HTML com `05_build_artifact.py`.
 
 ## Apresentação e bases de preços
 
-A primeira aba explica a base e apresenta a série anual e a composição por tipo em reais de
+A primeira aba explica a base e apresenta a série anual e a composição por tributo em reais de
 agosto/2026 (último IPCA mensal disponível na consulta de 17/09/2026). O gerador `scripts/11_export_apresentacao.py` consulta o banco, extrai os índices
 de origem do boletim oficial arquivado e lê a referência em `data/macro/referencia-ipca.json`; produz `artifact/apresentacao.json`, incorporado
-ao HTML por `05_build_artifact.py`. Fontes, fórmula, conciliação, diferenças para o Resumo e
+ao HTML por `05_build_artifact.py`. Fontes, fórmula, conciliação, diferenças para
 o ranking e limitações estão em [qa/apresentacao/metodologia.md](qa/apresentacao/metodologia.md).
 
-No Resumo, preços reais usam a média janeiro–dezembro do ano escolhido; no detalhe do ranking,
-a média janeiro–dezembro de 2023. O ranking principal permanece nominal. Esses rótulos são
+No detalhe do ranking, preços reais usam a média janeiro–dezembro de 2023. O ranking principal permanece nominal. Esses rótulos são
 explícitos na interface; a referência mais recente não foi aplicada às demais abas.
 
 ### Cobertura temporal do deflator
@@ -194,7 +190,7 @@ explícitos na interface; a referência mais recente não foi aplicada às demai
 Regra vigente em todas as visualizações reais: média de janeiro–dezembro na origem para
 2015–2023; média de janeiro–junho para 2024. A cobertura fica em
 `data/macro/cobertura-deflacao.json`; o exportador 11 gera os índices de origem e o
-conversor comum do site os aplica no Resumo e no detalhe do ranking. A referência
+conversor comum do site os aplica no detalhe do ranking. A referência
 monetária de apresentação é independente dessa cobertura. Não substituir a média
 anual de referência em `data/macro/ipca.csv` pela média semestral.
 
@@ -209,10 +205,10 @@ silenciosamente. A API alternativa oficial de agregados do IBGE fornece SIDRA 17
 
 ## Abas e maiores beneficiários
 
-Ordem: Apresentação, Metodologia, Maiores Beneficiários, Resumo e Ranking de empresas.
+Ordem: Apresentação, Metodologia, Maiores Beneficiários e Ranking de beneficiários.
 A Metodologia reúne a descrição da base, as fontes e os critérios em uma aba própria.
 Maiores Beneficiários usa o acumulado real de 2015–2024, incluindo 2024 parcial.
 Concentração por raiz do CNPJ, sem inferir controlador; inclui empresas e outras pessoas
 jurídicas. Os setores são somados por estabelecimento usando a classificação editorial,
-em vez de atribuir todo o grupo ao setor do estabelecimento principal. A série de seis
-setores destaca 2024 com linha tracejada. Detalhes em `qa/maiores-beneficiarios/metodologia.md`.
+em vez de atribuir todo o grupo ao setor do estabelecimento principal. A tabela anual mostra todos os setores nos dez anos, sem gráfico de evolução,
+com 2024 identificado como parcial e totais anuais para conferência. Detalhes em `qa/maiores-beneficiarios/metodologia.md`.
