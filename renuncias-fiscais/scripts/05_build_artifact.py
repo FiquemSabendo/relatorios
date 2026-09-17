@@ -45,16 +45,17 @@ def font_css():
 
 tpl = open(TPL, encoding="utf-8").read()
 pay = open(PAY, encoding="utf-8").read()
+apresentacao = open(os.path.join(ROOT, "artifact", "apresentacao.json"), encoding="utf-8").read()
 
 # Dentro de <script type="application/json"> o navegador ainda procura por "</script>"
 # e por "<!--". "\/" é escape válido de JSON, então neutralizar "</" mantém o JSON
 # íntegro e impede o fechamento prematuro da tag.
 pay = pay.replace("</", "<\\/").replace("<!--", "<\\u0021--")
 
-for marker in ("__PAYLOAD__", "__FONTS__"):
+for marker in ("__PAYLOAD__", "__FONTS__", "__APRESENTACAO__"):
     if marker not in tpl:
         sys.exit(f"template sem marcador {marker}")
-html = tpl.replace("__FONTS__", font_css()).replace("__PAYLOAD__", pay)
+html = tpl.replace("__FONTS__", font_css()).replace("__PAYLOAD__", pay).replace("__APRESENTACAO__", apresentacao.replace("</", "<\\/"))
 
 for out in OUTS:
     os.makedirs(os.path.dirname(out), exist_ok=True)

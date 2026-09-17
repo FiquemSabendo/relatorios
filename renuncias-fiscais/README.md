@@ -174,3 +174,15 @@ com origem e evidência acessíveis ao abrir a empresa. Regras, critérios de pr
 de lacunas e limites estão em [METODOLOGIA-SETORES.md](METODOLOGIA-SETORES.md).
 Para atualizar apenas a classificação, use `python3 scripts/04_export_payload.py --somente-setores`
 e depois regenere o HTML com `05_build_artifact.py`.
+
+## Apresentação e bases de preços
+
+A primeira aba explica a base e apresenta a série anual e a composição por tipo em reais de
+dezembro/2024. O gerador `scripts/11_export_apresentacao.py` consulta o banco e extrai o índice
+de referência do boletim oficial arquivado; produz `artifact/apresentacao.json`, incorporado
+ao HTML por `05_build_artifact.py`. Fontes, fórmula, conciliação, diferenças para o Resumo e
+o ranking e limitações estão em [qa/apresentacao/metodologia.md](qa/apresentacao/metodologia.md).
+
+No Resumo, preços reais usam a média janeiro–dezembro do ano escolhido; no detalhe do ranking,
+a média janeiro–dezembro de 2023. O ranking principal permanece nominal. Esses rótulos são
+explícitos na interface; a base dezembro/2024 não foi aplicada às demais abas.

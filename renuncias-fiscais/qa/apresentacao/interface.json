@@ -1,0 +1,66 @@
+{
+  "erros_js": [],
+  "fechamento_payload": [
+    {
+      "ano": 2015,
+      "nominal_export": 75130474306.9201,
+      "nominal_payload": 75130474298,
+      "diferenca": 8.92010498046875
+    },
+    {
+      "ano": 2016,
+      "nominal_export": 78293599047.64989,
+      "nominal_payload": 78293599041,
+      "diferenca": 6.6498870849609375
+    },
+    {
+      "ano": 2017,
+      "nominal_export": 70589542477.06003,
+      "nominal_payload": 70589542469,
+      "diferenca": 8.060028076171875
+    },
+    {
+      "ano": 2018,
+      "nominal_export": 100231849428.97006,
+      "nominal_payload": 100231849412,
+      "diferenca": 16.970062255859375
+    },
+    {
+      "ano": 2019,
+      "nominal_export": 119443351768.11014,
+      "nominal_payload": 119443351750,
+      "diferenca": 18.110137939453125
+    },
+    {
+      "ano": 2020,
+      "nominal_export": 159364427171.76987,
+      "nominal_payload": 159364427158,
+      "diferenca": 13.769866943359375
+    },
+    {
+      "ano": 2021,
+      "nominal_export": 204743993624.77994,
+      "nominal_payload": 204743993619,
+      "diferenca": 5.779937744140625
+    },
+    {
+      "ano": 2022,
+      "nominal_export": 194697890917.4298,
+      "nominal_payload": 194697890931,
+      "diferenca": -13.5701904296875
+    },
+    {
+      "ano": 2023,
+      "nominal_export": 179358723369.85004,
+      "nominal_payload": 179358723362,
+      "diferenca": 7.85003662109375
+    },
+    {
+      "ano": 2024,
+      "nominal_export": 70645367450,
+      "nominal_payload": 70645367450,
+      "diferenca": 0
+    }
+  ],
+  "apresentacao_independente_filtros": true
+}
