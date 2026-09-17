@@ -1,0 +1,12 @@
+{
+  "tributos": [
+    "COFINS",
+    "Imposto de Importação",
+    "IRPJ",
+    "IPI",
+    "PIS",
+    "CSLL"
+  ],
+  "erros_js": [],
+  "fechamento_total": true
+}

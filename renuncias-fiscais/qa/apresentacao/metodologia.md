@@ -61,11 +61,9 @@ A série anual apresenta rótulos fixos em R$ bilhões, com uma casa decimal, se
 2024 recebe a segunda linha “(parcial)”. A tabela visível mantém ano, valor nominal e
 valor corrigido; meses de origem e fatores permanecem no JSON e na documentação técnica.
 
-As barras horizontais permitem navegar por tipo → benefício fiscal → tributo, com todos
-os benefícios disponíveis, sem corte por top N. A soma usa 2015–2024 (2024 parcial),
-corrigindo cada ano antes de acumular, na referência agosto/2026. Exportação: agrupamento
-por ano e pelos três campos de dim_item, com vazios explicitados como “Sem informação”.
-A soma das folhas fecha com o total e com cada tipo; percentuais referem-se ao nível
-selecionado. A escala das barras é comum dentro de cada nível e recalculada ao navegar.
-A mudança é de apresentação: totais e série monetária permaneceram idênticos.
-Capturas e verificação dos caminhos completos em `../graficos-apresentacao/`.
+As barras horizontais mostram somente os tributos, somando os tipos e benefícios.
+A soma usa 2015–2024 (2024 parcial), corrigindo cada ano antes de acumular, na
+referência agosto/2026. O campo tributo é agregado a partir dos valores detalhados
+exportados do banco; as participações têm como denominador o acumulado de todos
+os tributos. A escala é comum e as barras são ordenadas por valor decrescente.
+A soma fecha com o total da série anual. Não há navegação por tipo ou benefício.

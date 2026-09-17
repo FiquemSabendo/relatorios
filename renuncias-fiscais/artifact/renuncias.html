@@ -320,11 +320,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 .intro-copy p { max-width: 95ch; line-height: 1.65; }
 .intro-copy h3 { margin-top: 22px; }
 .intro-tipo { margin: 24px 0; }
-.intro-drill { display: block; width: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; text-align: left; font: inherit; color: inherit; cursor: pointer; }
-.intro-drill:hover { background: var(--surface-2); }
-.intro-drill:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
 .bar-value { font-size: 12px; font-weight: 700; fill: var(--ink); }
-#intro-caminho button { white-space: normal; text-align: left; height: auto; }
 
 .intro-tipo > div:first-child { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px; margin-bottom: 8px; }
 .intro-tipo span { font-variant-numeric: tabular-nums; }
@@ -421,13 +417,10 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       </details>
     </div>
     <div class="card">
-      <h2>Como o valor se distribui por tipo, benefício e tributo?</h2>
+      <h2>Como o valor se distribui por tributo?</h2>
       <p class="sub">Acumulado de 2015–2024, incluindo 2024 parcial · reais de <span data-base-ipca></span> (IPCA)</p>
-      <nav id="intro-caminho" class="searchrow" aria-label="Níveis da composição" style="margin-top:18px"></nav>
-      <p class="sub" id="intro-instrucao"></p>
-      <div id="intro-tipos" aria-label="Composição por tipo, benefício e tributo"></div>
-      <p class="sub">Tipos da base, com rótulos abreviados. Clique em um tipo para abrir os benefícios e em um benefício para ver os tributos.
-        As porcentagens se referem ao total do nível selecionado, corrigido pelo IPCA;
+      <div id="intro-tipos" aria-label="Composição por tributo"></div>
+      <p class="sub">As porcentagens se referem ao acumulado de todos os tributos, corrigido pelo IPCA;
         descrevem este acervo, não o universo de todos os benefícios tributários.</p>
     </div>
     <div class="card intro-copy">
@@ -1425,31 +1418,15 @@ const AP = {
   "razao_base_media2024": 1.0979789243255957
 }
 ;
-let INTRO_CAMINHO = [];
 function renderComposicao() {
-  const campos = ["tipo", "beneficio", "tributo"], nomes = ["Tipo", "Benefício", "Tributo"];
-  const nivel = INTRO_CAMINHO.length;
-  const rows = AP.hierarquia.filter(r => INTRO_CAMINHO.every((v,i) => r[campos[i]] === v));
   const grupos = new Map();
-  for (const r of rows) grupos.set(r[campos[nivel]], (grupos.get(r[campos[nivel]]) || 0) + r.real);
+  for (const r of AP.hierarquia) grupos.set(r.tributo, (grupos.get(r.tributo) || 0) + r.real);
   const bars = [...grupos].sort((a,b) => b[1]-a[1]);
   const total = bars.reduce((s,[n,v]) => s+v,0), max = Math.max(...bars.map(([n,v])=>v),1);
-  $("#intro-caminho").innerHTML = `<button class="ghost" type="button" data-nivel="0">Todos os tipos</button>` +
-    INTRO_CAMINHO.map((n,i) => `<span aria-hidden="true">→</span><button class="ghost" type="button" data-nivel="${i+1}">${esc(n)}</button>`).join("");
-  $("#intro-caminho").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-    INTRO_CAMINHO = INTRO_CAMINHO.slice(0,+b.dataset.nivel); renderComposicao();
-  }));
-  $("#intro-instrucao").textContent = `${nomes[nivel]} · total da seleção: ${fmtV(total,"nominal")}` +
-    (nivel < 2 ? ` · selecione uma barra para ver ${nivel === 0 ? "os benefícios" : "os tributos"}.` : ".");
-  $("#intro-tipos").innerHTML = bars.map(([nome,v],i) => {
-    const conteudo = `<div><b>${esc(nome)}</b><span>${fmtV(v,"nominal")} · ${nf1.format(total ? v/total*100 : 0)}%</span></div>
-      <div class="intro-track" aria-hidden="true"><i style="width:${v/max*100}%;background:${corSlot(0)}"></i></div>`;
-    return nivel < 2 ? `<button class="intro-tipo intro-drill" type="button" data-item="${i}">${conteudo}</button>`
-      : `<div class="intro-tipo">${conteudo}</div>`;
-  }).join("");
-  $("#intro-tipos").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-    INTRO_CAMINHO.push(bars[+b.dataset.item][0]); renderComposicao();
-  }));
+  $("#intro-tipos").innerHTML = bars.map(([nome,v]) => `<div class="intro-tipo">
+    <div><b>${esc(nome)}</b><span>${fmtV(v,"nominal")} · ${nf1.format(total ? v/total*100 : 0)}%</span></div>
+    <div class="intro-track" aria-hidden="true"><i style="width:${v/max*100}%;background:${corSlot(0)}"></i></div>
+  </div>`).join("");
 }
 function renderApresentacao() {
   const moeda = v => fmtV(v, "nominal");
