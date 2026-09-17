@@ -1,10 +1,10 @@
-# Setor detalhado no ranking de empresas
+# Setor e atividade no ranking de empresas
 
-Versão: 2026-09-17.1. Classificação editorial da Fiquem Sabendo, não uma classificação oficial do IBGE nem uma identificação de grupo econômico.
+Versão: 2026-09-17.2. Classificação editorial da Fiquem Sabendo, não uma classificação oficial do IBGE nem uma identificação de grupo econômico.
 
 ## O que a coluna descreve
 
-A seção da CNAE original agrupa atividades muito diferentes: “Indústrias de transformação” inclui medicamentos, aviões, tabaco e automóveis. A coluna **Setor detalhado** oferece rótulos legíveis com base na atividade informada, como Aérea, Tabaco, Construção Civil, Farmacêutico, Fertilizantes, Automóveis e Indústria aeronáutica. A seção e a descrição da CNAE original são preservadas.
+A seção da CNAE original agrupa atividades muito diferentes: “Indústrias de transformação” inclui medicamentos, aviões, tabaco e automóveis. A coluna **Setor** reúne as atividades em categorias amplas, como Automotivo, Aviação, Farmacêutico, Construção Civil, Agroquímicos e Fertilizantes e Tabaco. A **atividade específica** é preservada no detalhe da empresa. A correspondência completa e versionada entre atividade e setor está em `data/classificacao-setorial/setores.json`. A seção e a descrição da CNAE original são preservadas.
 
 A classificação começa em cada CNPJ de estabelecimento. No ranking por raiz, a coluna acompanha o mesmo estabelecimento representativo já usado para nome e CNAE: aquele com maior renúncia nominal acumulada em todos os anos do snapshot (2015–2024, incluindo 2024 parcial). Não representa todas as atividades da raiz, não muda com os filtros e não junta empresas de raízes diferentes. Se a raiz for diversificada, seu rótulo pode esconder atividades secundárias; a auditoria exporta a quantidade de setores distintos por raiz.
 
@@ -15,19 +15,23 @@ A classificação começa em cada CNPJ de estabelecimento. No ranking por raiz, 
 3. **Inferência limitada à mesma raiz.** Se o estabelecimento não possui classificação e todos os rótulos obtidos das CNAEs conhecidas de outros estabelecimentos da mesma raiz concordam, pode receber esse rótulo. O resultado é explicitamente marcado “Inferido de outros CNPJs da mesma raiz”. Não se preenche nem altera o código CNAE original. Não há inferência transitiva a partir de outros rótulos inferidos.
 4. **Não identificado.** Sem código utilizável, sem fonte específica e sem concordância entre atividades conhecidas da raiz, a classificação permanece ausente. Essas linhas e seus valores não são descartados.
 
-As regras completas estão nos dicionários `ESPECIFICAS` e `DIVISOES` de `scripts/classificacao_setorial.py`. O resultado por classe, com descrição original e descrição IBGE, está em `qa/setores-detalhados/dicionario_cnae_setor.csv`. O resultado por CNPJ contém `setor_detalhado`, `regra`, `fonte` e `evidencia` em `classificacao_por_cnpj.csv`.
+As regras completas estão nos dicionários `ESPECIFICAS` e `DIVISOES` de `scripts/classificacao_setorial.py`. O resultado por classe, com descrição original e descrição IBGE, está em `qa/setores-detalhados/dicionario_cnae_setor.csv`. O resultado por CNPJ contém `setor`, `atividade`, `regra`, `fonte` e `evidencia` em `classificacao_por_cnpj.csv`.
 
 ## Fronteiras editoriais
 
-- **Aérea:** transporte aéreo; fabricação de aviões é “Indústria aeronáutica”, e manutenção identificável é “Manutenção aeronáutica”. Serviços aeroportuários não são tratados como companhia aérea.
-- **Tabaco:** fabricação de produtos do fumo e comércio atacadista específico. Uma classe varejista que mistura alimentos e fumo recebe “Comércio de alimentos e tabaco”; não se presume tabaco exclusivo. Cultivo agrícola não é automaticamente indústria de tabaco.
+- **Aviação:** transporte aéreo, fabricação de aeronaves, manutenção aeronáutica e serviços aeroportuários. As atividades específicas continuam separadas no detalhe; fabricar aviões não é apresentado como operar uma companhia aérea.
+- **Automotivo:** automóveis, caminhões e ônibus, motocicletas, carrocerias, autopeças e comércio/reparação de veículos. Máquinas agrícolas e máquinas de construção ficam em Máquinas e Equipamentos.
+- **Farmacêutico:** fabricação e comércio de medicamentos. Equipamentos médicos ficam em Saúde.
+- **Agroquímicos e Fertilizantes:** fabricação de defensivos e fertilizantes. Comércio de insumos agropecuários mistos permanece em Agropecuária quando a classe não permite restringir o produto.
+- **Tabaco:** fabricação de produtos do fumo e comércio atacadista específico. Uma classe varejista que mistura alimentos e fumo mantém a atividade “Comércio de alimentos e tabaco”, dentro de Alimentos e Bebidas; não se presume tabaco exclusivo. Cultivo agrícola não é automaticamente indústria de tabaco.
 - **Construção Civil:** construção de edifícios, infraestrutura e serviços especializados, além de casos documentados. Fabricantes de máquinas e vendedores de materiais de construção ficam em categorias próprias. Nem toda empresa que usa “construtora” no nome atua em construção civil.
+- **Materiais de Construção** reúne cimento, cerâmica, vidro, artefatos de concreto e comércio específico, separado de Construção Civil. **Eletrônicos e Eletrodomésticos** reúne informática, componentes, áudio e vídeo e eletrodomésticos.
 - Algumas cadeias, como farmacêutica ou tabaco, reúnem fabricação e comércio específico; outras mantêm rótulos separados. Os rótulos são instrumentos de leitura, não uma classificação de insumo-produto ou uma medida de participação no mercado.
 - Rótulos genéricos existentes na CNAE, como comércio não especializado e holdings, permanecem genéricos. Não se atribui uma atividade operacional específica sem evidência.
 
 ## Exibição
 
-A coluna nova aparece ao lado de **Setor (seção CNAE)**. A busca textual também encontra o setor detalhado. Ao abrir a linha, o leitor vê o método e a evidência utilizados para o estabelecimento representativo. Os filtros e os gráficos setoriais anteriores continuam baseados na seção CNAE; não foram recalculados com esta classificação.
+A coluna **Setor** substitui a anterior **Setor detalhado**, ao lado de **Setor (seção CNAE)**. A busca textual encontra tanto setor quanto atividade. Ao abrir a linha, o leitor vê o método e a evidência utilizados para o estabelecimento representativo. Os filtros e os gráficos setoriais anteriores continuam baseados na seção CNAE; não foram recalculados com esta classificação.
 
 ## Limitações e suposições
 
@@ -50,3 +54,7 @@ O modo `--somente-setores` verifica alinhamento de CNPJ e CNAE com o payload exi
 A auditoria mede cobertura por método, por setor e por valor, verifica uma saída para cada CNPJ e a igualdade da soma antes/depois. A interface foi conferida em navegador, com buscas, abertura de detalhes e viewport móvel. Arquivos e resultados em `qa/setores-detalhados/`.
 
 Fontes: [CNAE/IBGE](https://servicodados.ibge.gov.br/api/v2/cnae/classes), [Portal da Transparência](https://portaldatransparencia.gov.br/dicionario-de-dados/renuncias), [GE Celma](https://www.geaerospace.com/pt-br/facilities-latam-celma), [Construtora Ápia](https://www.grupoapia.com.br/) e publicação legal da Álya identificada no arquivo de curadoria.
+
+## Migração da primeira versão
+
+A versão 2 agrega os rótulos existentes sem ampliar a inferência entre estabelecimentos: a concordância continua sendo exigida no nível da atividade específica. Atividade, método, fonte e evidência são preservados para cada CNPJ. O arquivo `qa/setores-detalhados/migracao_setores.csv` registra a correspondência e as contagens da migração; não houve alteração de valores fiscais ou de cobertura das lacunas.

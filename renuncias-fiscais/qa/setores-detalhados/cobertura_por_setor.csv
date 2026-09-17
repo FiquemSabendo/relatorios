@@ -1,164 +1,40 @@
 setor,cnpjs,valor
-Petróleo e gás,348,182318451359.82
+"Petróleo, Gás e Combustíveis",3010,223510071970.96
+Automotivo,1015,133193033039.53
+Aviação,446,109273217786.79
 Não identificado,7688,94192141747.37
-Automóveis,74,68634228283.39
-Fertilizantes,506,47865233507.05
-Aérea,317,44465075365.41
-Manutenção aeronáutica,4,42317794697.55
-Áudio e vídeo,71,39012005465.61
-Mineração de ferro,54,32140142910.23
-Defensivos agrícolas,72,29717856628.52
-Navegação de apoio,123,27932804310.84
-Caminhões e ônibus,27,26410491866.50
-Refino e derivados de petróleo,73,23589766478.85
-Químico,1405,22651727398.89
-Armazenagem e serviços de transporte,882,22523153351.08
-Indústria aeronáutica,54,22318255956.30
-Máquinas para construção e mineração,200,22204450621.70
+Mineração e Metalurgia,1894,85286329567.11
+Agroquímicos e Fertilizantes,578,77583090135.57
+Eletrônicos e Eletrodomésticos,1904,76188664482.72
+Máquinas e Equipamentos,4360,73035495460.43
+Alimentos e Bebidas,7964,58703327285.85
+Transporte e Logística,3486,58001585623.99
+Químico,3028,41513822774.23
+Agropecuária,2226,22082372926.96
 Farmacêutico,813,21603840419.65
-Autopeças,764,20887465905.87
-Siderurgia,200,19563404162.84
-Construção naval,105,19545466190.94
-Máquinas e equipamentos,1379,17131252058.34
-Máquinas agrícolas,481,16562154863.30
-Administração pública,441,16363973844.22
-Comércio atacadista — diversos,2920,16206996416.90
-Insumos agropecuários,704,16179508017.67
-Motocicletas,66,16136682570.24
-Combustíveis,2482,15593790264.01
-Componentes eletrônicos,198,15452545402.08
-Plásticos,1170,15016099390.43
-Ensino superior,610,14786328890.82
-Comércio de alimentos,3274,13781465559.56
-Moagem e alimentos farináceos,770,12900803767.59
-Televisão,242,12880968196.22
-Informática,738,12558223112.96
-Metalurgia de metais não ferrosos,120,12432065252.60
-Mineração de outros metais,87,11422618896.25
-Engenharia e arquitetura,712,8865522552.05
-Produtos de metal,976,8126632053.97
-Bebidas não alcoólicas,99,8081412848.08
-Equipamentos médicos,2061,7967226418.05
-Equipamentos elétricos,683,7838797149.77
-Equipamentos para petróleo e gás,37,7247423105.20
-Serviços administrativos,2746,6849136592.35
-Equipamentos de comunicação,454,5322303275.94
-Outros alimentos,720,5003939661.40
-Papel e celulose,374,4985356412.53
-Holdings e participações,731,4934256094.04
-Calçados e artigos de couro,623,4678766107.21
-Hotéis e hospedagem,2176,4513999613.67
-Óleos e gorduras vegetais,131,4432749146.81
-Pesquisa e desenvolvimento,211,4239167953.04
-Outras indústrias,728,3276604399.14
-Têxtil,621,3230363125.24
-Borracha e pneus,218,3223677702.01
-Pescados,106,3079559698.12
-Comércio de matérias-primas agropecuárias,620,2985340764.47
-Limpeza e cosméticos,645,2728251140.72
-Transporte ferroviário,35,2705376654.88
+Naval,105,19545466190.94
+Serviços Profissionais,3387,18374357425.97
+"Mídia, Cultura e Entretenimento",3343,17487691800.71
+Comércio Diversificado,4108,17033639943.62
+Administração Pública,445,16364410886.22
+Educação,1211,15309750317.07
+Saúde,3461,10932519445.74
+Financeiro e Seguros,1990,10651909808.74
+"Têxtil, Vestuário e Calçados",2369,9075113738.43
+Serviços Administrativos e Operacionais,4063,7663053913.74
+"Turismo, Hotelaria e Alimentação",5708,7055285686.03
+Outras Indústrias,819,6055886665.43
+"Madeira, Papel e Celulose",760,5518150686.19
+Holdings e Participações,731,4934256094.04
+Locação de Bens,1053,2798790681.88
+Higiene e Cosméticos,645,2728251140.72
 Telecomunicações,345,2676836954.02
-Consultoria e sedes de empresas,661,2562705248.49
-Bancos,538,2458009076.19
-Instrumentos de medição,182,2393316028.39
-Outros serviços de saúde,40,2204183162.15
-Serviços auxiliares financeiros,612,2203349842.20
-Seguros e previdência,406,2184378249.21
-Agricultura,376,2077817112.85
-Comércio de máquinas e equipamentos,1580,2051417662.12
-Biocombustíveis,107,2008063868.28
-Supermercados,976,1993517560.69
-Transporte aquaviário,94,1972456157.90
-Crédito e financiamento,130,1947121183.83
-Carnes e frigoríficos,395,1848824487.65
-Açúcar,99,1792788902.49
-Transporte dutoviário,7,1754435174.34
-Materiais de construção,1664,1624111213.14
-Bebidas alcoólicas,152,1550314089.04
-Bicicletas,45,1478832588.12
-Comércio de bebidas,540,1476992845.43
-Laticínios,241,1429061712.74
-Eletrodomésticos,246,1300668583.99
-Artes e espetáculos,934,1286088689.55
-Locação de veículos,242,1167516652.13
-Arrendamento mercantil financeiro,12,1140477332.94
-Carrocerias e reboques,78,1124071491.92
-Outros serviços profissionais,779,1046511631.04
-Turismo e agências de viagens,641,1046180561.52
-Restaurantes e alimentação,2427,1004167463.78
-Rádio,313,932431666.76
-Locação de máquinas e equipamentos,669,831750462.65
-Comércio varejista — diversos,1188,826643526.72
-Publicidade e pesquisa de mercado,679,806697254.54
-Esporte e recreação,405,784887822.29
-Outros equipamentos de transporte,15,776468287.75
-Têxteis e vestuário,797,750999211.41
-Gestão de ativos intangíveis,84,720983967.23
-Frutas e vegetais processados,201,692034635.45
-Transporte rodoviário de cargas,974,661507108.19
+Materiais de Construção,1664,1624111213.14
 Imobiliário,539,636507020.17
-Tecnologia da informação,1579,620267517.36
+Tecnologia da Informação,1579,620267517.36
+Móveis e Decoração,498,609640115.89
 Tabaco,71,579359353.65
-Café,73,555103701.20
-Móveis,372,545425839.45
-Impressão e reprodução,222,526432718.03
-Material ferroviário,31,523981390.42
-Outros serviços financeiros,272,507690238.89
-Hospitais,527,500431105.00
-Mineração não metálica,44,496616960.93
-Testes e análises técnicas,138,483085149.91
-Alimentação coletiva e bufês,410,474465661.81
-Tintas e vernizes,201,464794397.28
-Transporte rodoviário de passageiros,1359,442345953.37
-Fundição,76,422241985.66
-Vestuário,328,414985294.57
-Pecuária,171,409274009.39
-"Mineração de pedra, areia e argila",158,373416033.38
-Serviços jurídicos e contábeis,207,370667636.90
-Audiovisual e música,543,360748075.31
-Segurança e vigilância,507,326635997.59
-Livros e papelaria,373,323212674.33
-Edição de livros e periódicos,287,322166787.93
-Apoio à educação,68,272581055.87
-Limpeza e serviços prediais,450,270906534.06
-Siderurgia e metalurgia,165,264522431.72
-Madeira,152,264441996.97
-Serviços agropecuários,199,220228573.81
-Seleção e locação de mão de obra,360,216374789.74
-Capitalização,18,207031561.48
-Outras atividades de ensino,252,183735939.31
-Sementes e mudas,114,180745078.93
-Papel e embalagens,147,179228841.16
-Serviços aeroportuários,71,172091767.53
-Gases industriais,34,157523885.62
-Óptica e fotografia,15,149602613.75
-Diagnóstico e terapias,323,128063730.72
-Silvicultura,87,89123435.53
-Comércio de alimentos e tabaco,187,84758669.60
-Locação de objetos pessoais,58,78539599.87
-Cultura e patrimônio,23,70743244.89
-Móveis e decoração,126,64214276.44
-Educação básica,266,63518154.57
-Gestão de saúde,35,54717442.13
-Consultórios e clínicas,391,33184219.51
-Profissionais de saúde,43,31516538.04
-Pesca e aquicultura,24,29161225.47
-Carvão mineral,4,27385620.78
-Serviços pessoais,92,25540409.03
-Serviços de mineração,10,17283258.75
-Outros alojamentos,54,16472385.25
+Serviços Pessoais,93,25541890.00
 Construção Civil,4,12983920.23
-Óptica,24,8673780.53
-Reciclagem e sucata,67,8273429.17
-Assistência social,27,7319048.68
-Correios e entregas,11,4898334.39
-Transporte espacial,1,4608579.00
-Atendimento móvel de saúde,17,4523049.61
-Serviços financeiros,2,3852324.00
-Educação profissional,15,3586276.50
-Cuidados e assistência com alojamento,26,2851453.60
-Organismos internacionais,4,437042.00
-Veterinária,18,298144.37
-Recondicionamento de motores,6,92921.61
-Jogos e apostas,1,11925.40
-Serviços domésticos,1,1480.97
+Assistência Social e Organizações,53,10170502.28
+Saneamento e Meio Ambiente,67,8273429.17

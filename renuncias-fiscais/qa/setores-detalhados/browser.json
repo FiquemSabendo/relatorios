@@ -3,18 +3,34 @@
   "casos": [
     {
       "busca": "GE CELMA",
-      "rotulo": "Manutenção aeronáutica",
+      "rotulo": "Aviação",
       "detalhe": [
         "33435231/…\n          · PETRÓPOLIS/RJ · Sem informação\n           · 4 estabelecimentos",
-        "Setor detalhado: Manutenção aeronáutica. Curadoria documentada.\n          Evidência: GE Celma: a página oficial descreve manutenção, reparo e revisão de motores de aeronaves. Identificação da raiz pela razão social GE CELMA LTDA. na base; não estendida a outras empresas GE..\n          Fonte da classificação"
+        "Setor: Aviação. Atividade: Manutenção aeronáutica. Curadoria documentada.\n          Evidência: GE Celma: a página oficial descreve manutenção, reparo e revisão de motores de aeronaves. Identificação da raiz pela razão social GE CELMA LTDA. na base; não estendida a outras empresas GE..\n          Fonte da classificação"
       ]
     },
     {
       "busca": "TAM LINHAS",
-      "rotulo": "Aérea",
+      "rotulo": "Aviação",
       "detalhe": [
         "02012862/…\n          · SÃO CARLOS/SP · Sem informação\n           · 12 estabelecimentos",
-        "Setor detalhado: Aérea. Inferido de outros CNPJs da mesma raiz.\n          Evidência: 51111.\n          CNAEs informadas em outros estabelecimentos da mesma raiz no snapshot"
+        "Setor: Aviação. Atividade: Aérea. Inferido de outros CNPJs da mesma raiz.\n          Evidência: 51111.\n          CNAEs informadas em outros estabelecimentos da mesma raiz no snapshot"
+      ]
+    },
+    {
+      "busca": "STELLANTIS",
+      "rotulo": "Automotivo",
+      "detalhe": [
+        "16701716/…\n          · GOIANA/PE · Fabricação de automóveis, camionetas e utilitários\n           · 7 estabelecimentos",
+        "Setor: Automotivo. Atividade: Automóveis. CNAE declarada.\n          Evidência: 29107.\n          CNAE declarada no Portal da Transparência"
+      ]
+    },
+    {
+      "busca": "SAMSUNG",
+      "rotulo": "Eletrônicos e Eletrodomésticos",
+      "detalhe": [
+        "00280273/…\n          · MANAUS/AM · Fabricação de aparelhos de recepção, reprodução, gravação e amplificação de áudio e vídeo\n           · 5 estabelecimentos",
+        "Setor: Eletrônicos e Eletrodomésticos. Atividade: Áudio e vídeo. CNAE declarada.\n          Evidência: 26400.\n          CNAE declarada no Portal da Transparência"
       ]
     },
     {
@@ -22,7 +38,7 @@
       "rotulo": "Tabaco",
       "detalhe": [
         "33009911/…\n          · RIO DE JANEIRO/RJ · Fabricação de produtos do fumo\n           · 6 estabelecimentos",
-        "Setor detalhado: Tabaco. CNAE declarada.\n          Evidência: 12204.\n          CNAE declarada no Portal da Transparência"
+        "Setor: Tabaco. Atividade: Tabaco. CNAE declarada.\n          Evidência: 12204.\n          CNAE declarada no Portal da Transparência"
       ]
     },
     {
@@ -30,7 +46,7 @@
       "rotulo": "Construção Civil",
       "detalhe": [
         "17155391/…\n          · BELO HORIZONTE/MG · Sem informação\n          ",
-        "Setor detalhado: Construção Civil. Curadoria documentada.\n          Evidência: Página oficial descreve obras de engenharia e infraestrutura e identifica CONSTRUTORA APIA S/A, CNPJ 17.155.391/0001-16..\n          Fonte da classificação"
+        "Setor: Construção Civil. Atividade: Construção Civil. Curadoria documentada.\n          Evidência: Página oficial descreve obras de engenharia e infraestrutura e identifica CONSTRUTORA APIA S/A, CNPJ 17.155.391/0001-16..\n          Fonte da classificação"
       ]
     }
   ]

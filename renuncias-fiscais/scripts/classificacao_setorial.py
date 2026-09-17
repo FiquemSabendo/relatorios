@@ -4,7 +4,8 @@ Não modifica CNAE, valores ou agrupamento por raiz. Fonte e regras exportadas p
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='2026-09-17.1'
+VERSION='2026-09-17.2'
+SETOR_POR_ATIVIDADE=json.loads((ROOT/'data/classificacao-setorial/setores.json').read_text())
 # Classes ou grupos que precisam de recorte mais informativo que a divisão.
 ESPECIFICAS={
  '011': 'Agricultura', '012':'Agricultura', '013':'Agricultura', '014':'Sementes e mudas', '015':'Pecuária', '016':'Serviços agropecuários',
@@ -69,5 +70,5 @@ def classificar_estabelecimentos(estabs):
                 o=overrides[root];label=o['setor'];rule='curadoria_raiz:'+root;source=o['fonte'];base=o['evidencia']
             elif len(root_known.get(root,{}))==1:
                 label=next(iter(root_known[root]));rule='inferencia_mesma_raiz';source='CNAEs informadas em outros estabelecimentos da mesma raiz no snapshot';base=', '.join(sorted(root_known[root][label]))
-        rows.append(dict(estab_id=eid,cnpj=cnpj,razao_social=razao,cnae_original=cnae,setor_detalhado=label,regra=rule,fonte=source,evidencia=base))
+        rows.append(dict(estab_id=eid,cnpj=cnpj,razao_social=razao,cnae_original=cnae,setor=SETOR_POR_ATIVIDADE[label],atividade=label,regra=rule,fonte=source,evidencia=base))
     return rows

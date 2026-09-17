@@ -154,9 +154,10 @@ carregamento no navegador leva cerca de 0,8 s depois do download.
 payload e as fontes e grava `artifact/renuncias.html` e `../docs/renuncias-fiscais/index.html`. Edite o template,
 nunca os arquivos gerados.
 
-## Setor detalhado
+## Setor e atividade
 
-O ranking também oferece uma classificação editorial mais específica que a seção CNAE,
+O ranking também oferece uma classificação editorial por setores, como Automotivo, Aviação e Farmacêutico,
+com a atividade específica no detalhe da empresa,
 com origem e evidência acessíveis ao abrir a empresa. Regras, critérios de preenchimento
 de lacunas e limites estão em [METODOLOGIA-SETORES.md](METODOLOGIA-SETORES.md).
 Para atualizar apenas a classificação, use `python3 scripts/04_export_payload.py --somente-setores`

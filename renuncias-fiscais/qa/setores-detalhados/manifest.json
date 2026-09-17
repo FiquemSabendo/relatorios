@@ -5,11 +5,11 @@
   },
   {
     "arquivo": "browser.json",
-    "sha256": "8f4ba0ba7fbad81c8644acd790d05690cdcd720563e18e1d32c91f4475f07494"
+    "sha256": "41a305f44c198d850b15594864c4605e22488123cfa83f7342ecdfe738b142a1"
   },
   {
     "arquivo": "classificacao_por_cnpj.csv",
-    "sha256": "146d9e9587c36aeac34d7209d63f6540c3a7e7be27aa0d2932e07139b2b9df25"
+    "sha256": "64ae443ad5dbdbcaba4d235b9ec0fddb92063cb05dd6d2ba453e23a41d60c97f"
   },
   {
     "arquivo": "cnae-ibge.json",
@@ -21,35 +21,39 @@
   },
   {
     "arquivo": "cobertura_por_setor.csv",
-    "sha256": "24b27f9c2d59bff5670e0eb035b86da1cc643de750b3e0c366288cabb4585d8e"
+    "sha256": "96ff81922f8d904565d604c54645ca6bc1dfd6d99bb9e5c1af3241aaa08cfdc4"
   },
   {
     "arquivo": "consistencia.md",
-    "sha256": "2ed56a67d919b8b731237369feeba0dc3856479884b07a480386cb5ecfe6464c"
+    "sha256": "e82831e901787330b7ce94a6e905710ad8c3250ccd2f7435f882265d4c7d5ef9"
   },
   {
     "arquivo": "dicionario_cnae_setor.csv",
-    "sha256": "932a566519782b2f070fb7311090fff7694db284b1f8c2aacee1c963c66747f7"
+    "sha256": "eab5846f77f69ce2e75a004233c16bc56327d8a98123d725dbe1c8cb2d6573fa"
   },
   {
     "arquivo": "execucao.log",
-    "sha256": "c803dd1edf09afcffcd427761b2b78bca0b0cc5a2815ac8b754ec89c5722f204"
+    "sha256": "6c469516ab287edeeec6f384282dc0290253bf106605c668921d4a044cb94097"
   },
   {
     "arquivo": "fonte-ibge.json",
     "sha256": "94a5e88ede283ae8758ab05a41b3b9f7ef715dde0e6f17a56e6e363f5423ec0d"
   },
   {
+    "arquivo": "migracao_setores.csv",
+    "sha256": "48abc3f8a81a8b20f6fc9a7d8e2f9a5ac00c4c3113ed4935d17fa8171fd4926a"
+  },
+  {
     "arquivo": "ranking-desktop.png",
-    "sha256": "4a3fff4412b2573ab8bde2d4232794dd805b6ce252602634feb53418f2e9b6b0"
+    "sha256": "7fbe3dd8994ab9b039e08251b349c307e7b8f92db72ef976657eac366bbf7f8b"
   },
   {
     "arquivo": "ranking-mobile.png",
-    "sha256": "24b25f1cf1a05705d21df557bd3eba78b49ce07b41e659def8fd4e535012c9f7"
+    "sha256": "93eb57ed4779f4de5b43ad3da45c70ad6f40d509d9ecc16d9307981a3a1e977c"
   },
   {
     "arquivo": "ranking_setores.csv",
-    "sha256": "be9ff6809cb4eac3cc387abc9628d3aa502f2f1851db8de890bd0a77db1d0c74"
+    "sha256": "64b6a8f17f590b18a484e4ed575a69895eb0b3364863f922a8c905dad45edd71"
   },
   {
     "arquivo": "reconhecimento.md",
@@ -57,11 +61,11 @@
   },
   {
     "arquivo": "regras.csv",
-    "sha256": "747245cae300debfc6dcf926d0b45c818ff746a3020dcd8892ce3396b242bb48"
+    "sha256": "ead8a65d291b04d3009721bc2c80bae0a286917eadc63655f285e5af76e9610c"
   },
   {
     "arquivo": "sumario.json",
-    "sha256": "44d7a360821d3d1b4c920b971e1408ec3b5a3d7577ecbc82ec8269f40df17946"
+    "sha256": "89c42c2700c2716e5c4e75b2de71f2ff4de991d9e96524d5b650adbf2dbd9f85"
   },
   {
     "arquivo": "suposicoes-e-riscos.md",

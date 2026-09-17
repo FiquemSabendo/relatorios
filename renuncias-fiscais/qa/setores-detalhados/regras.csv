@@ -1,243 +1,243 @@
-prioridade,prefixo,setor
-2,011,Agricultura
-2,012,Agricultura
-2,013,Agricultura
-2,014,Sementes e mudas
-2,015,Pecuária
-2,016,Serviços agropecuários
-2,071,Mineração de ferro
-2,072,Mineração de outros metais
-2,081,"Mineração de pedra, areia e argila"
-2,091,Petróleo e gás
-2,099,Serviços de mineração
-2,101,Carnes e frigoríficos
-2,102,Pescados
-2,103,Frutas e vegetais processados
-2,104,Óleos e gorduras vegetais
-2,105,Laticínios
-2,106,Moagem e alimentos farináceos
-2,107,Açúcar
-2,108,Café
-2,109,Outros alimentos
-2,111,Bebidas alcoólicas
-2,112,Bebidas não alcoólicas
-2,193,Biocombustíveis
-0,20126,Fertilizantes
-0,20134,Fertilizantes
-0,20142,Gases industriais
-0,20517,Defensivos agrícolas
-2,206,Limpeza e cosméticos
-2,207,Tintas e vernizes
-2,221,Borracha e pneus
-2,222,Plásticos
-2,231,Vidro
-2,232,Cimento
-2,233,Artefatos de concreto
-2,234,Cerâmica
-2,239,Outros minerais não metálicos
-2,241,Siderurgia
-2,242,Siderurgia
-2,243,Siderurgia
-2,244,Metalurgia de metais não ferrosos
-2,245,Fundição
-2,261,Componentes eletrônicos
-2,262,Informática
-2,263,Equipamentos de comunicação
-2,264,Áudio e vídeo
-2,265,Instrumentos de medição
-2,266,Equipamentos médicos
-2,267,Óptica e fotografia
-2,275,Eletrodomésticos
-2,283,Máquinas agrícolas
-2,285,Máquinas para construção e mineração
-0,28518,Equipamentos para petróleo e gás
-2,291,Automóveis
-2,292,Caminhões e ônibus
-2,293,Carrocerias e reboques
-2,294,Autopeças
-2,295,Recondicionamento de motores
-2,301,Construção naval
-2,303,Material ferroviário
-2,304,Indústria aeronáutica
-0,30911,Motocicletas
-0,30920,Bicicletas
-0,33163,Manutenção aeronáutica
-0,33171,Manutenção naval
-2,462,Comércio de matérias-primas agropecuárias
-2,463,Comércio de alimentos
-0,46354,Comércio de bebidas
-0,46362,Tabaco
-0,46419,Têxteis e vestuário
-0,46427,Têxteis e vestuário
-0,46435,Calçados e artigos de couro
-0,46443,Farmacêutico
-0,46451,Equipamentos médicos
-0,46460,Limpeza e cosméticos
-0,46478,Livros e papelaria
-0,46516,Informática
-0,46524,Equipamentos de comunicação
-2,466,Comércio de máquinas e equipamentos
-0,46613,Máquinas agrícolas
-0,46621,Máquinas para construção e mineração
-0,46648,Equipamentos médicos
-2,467,Materiais de construção
-0,46818,Combustíveis
-0,46826,Combustíveis
-0,46834,Insumos agropecuários
-0,46842,Químico
-0,46851,Siderurgia e metalurgia
-0,46869,Papel e embalagens
-0,46877,Reciclagem e sucata
-0,46915,Comércio de alimentos
-0,46923,Insumos agropecuários
-0,47113,Supermercados
-0,47121,Supermercados
-2,472,Comércio de alimentos
-0,47237,Comércio de bebidas
-0,47296,Comércio de alimentos e tabaco
-2,473,Combustíveis
-2,474,Materiais de construção
-0,47512,Informática
-0,47521,Equipamentos de comunicação
-0,47539,Eletrodomésticos
-0,47547,Móveis e decoração
-0,47555,Têxteis e vestuário
-0,47610,Livros e papelaria
-0,47717,Farmacêutico
-0,47725,Limpeza e cosméticos
-0,47733,Equipamentos médicos
-0,47741,Óptica
-0,47814,Têxteis e vestuário
-0,47822,Calçados e artigos de couro
-0,47849,Combustíveis
-2,491,Transporte ferroviário
-2,492,Transporte rodoviário de passageiros
-2,493,Transporte rodoviário de cargas
-2,494,Transporte dutoviário
-2,495,Outros transportes terrestres
-2,503,Navegação de apoio
-2,511,Aérea
-2,512,Aérea
-2,513,Transporte espacial
-0,52401,Serviços aeroportuários
-2,551,Hotéis e hospedagem
-2,559,Outros alojamentos
-2,561,Restaurantes e alimentação
-2,562,Alimentação coletiva e bufês
-2,601,Rádio
-2,602,Televisão
-2,631,Internet e processamento de dados
-2,639,Serviços de informação
-2,642,Bancos
-2,643,Crédito e financiamento
-2,644,Arrendamento mercantil financeiro
-2,645,Capitalização
-2,646,Holdings e participações
-2,647,Fundos de investimento
-2,649,Outros serviços financeiros
-2,711,Engenharia e arquitetura
-2,712,Testes e análises técnicas
-2,771,Locação de veículos
-2,772,Locação de objetos pessoais
-2,773,Locação de máquinas e equipamentos
-2,774,Gestão de ativos intangíveis
-2,851,Educação básica
-2,852,Educação básica
-2,853,Ensino superior
-2,854,Educação profissional
-2,855,Apoio à educação
-2,859,Outras atividades de ensino
-2,861,Hospitais
-2,862,Atendimento móvel de saúde
-2,863,Consultórios e clínicas
-2,864,Diagnóstico e terapias
-2,865,Profissionais de saúde
-2,866,Gestão de saúde
-2,869,Outros serviços de saúde
-3,01,Agropecuária
-3,02,Silvicultura
-3,03,Pesca e aquicultura
-3,05,Carvão mineral
-3,06,Petróleo e gás
-3,07,Mineração de metais
-3,08,Mineração não metálica
-3,09,Serviços de extração mineral
-3,10,Alimentos
-3,11,Bebidas
-3,12,Tabaco
-3,13,Têxtil
-3,14,Vestuário
-3,15,Calçados e artigos de couro
-3,16,Madeira
-3,17,Papel e celulose
-3,18,Impressão e reprodução
-3,19,Refino e derivados de petróleo
-3,20,Químico
-3,21,Farmacêutico
-3,22,Borracha e plástico
-3,23,Minerais não metálicos
-3,24,Metalurgia
-3,25,Produtos de metal
-3,26,Eletrônicos e informática
-3,27,Equipamentos elétricos
-3,28,Máquinas e equipamentos
-3,29,Automotivo
-3,30,Outros equipamentos de transporte
-3,31,Móveis
-3,32,Outras indústrias
-3,33,Manutenção e instalação industrial
-3,35,Energia elétrica e gás
-3,36,Abastecimento de água
-3,37,Esgoto
-3,38,Resíduos e reciclagem
-3,39,Descontaminação ambiental
-3,41,Construção Civil
-3,42,Construção Civil
-3,43,Construção Civil
-3,45,Comércio e reparação de veículos
-3,46,Comércio atacadista — diversos
-3,47,Comércio varejista — diversos
-3,49,Transporte terrestre
-3,50,Transporte aquaviário
-3,51,Aérea
-3,52,Armazenagem e serviços de transporte
-3,53,Correios e entregas
-3,55,Hospedagem
-3,56,Alimentação
-3,58,Edição de livros e periódicos
-3,59,Audiovisual e música
-3,60,Rádio e televisão
-3,61,Telecomunicações
-3,62,Tecnologia da informação
-3,63,Serviços de informação
-3,64,Serviços financeiros
-3,65,Seguros e previdência
-3,66,Serviços auxiliares financeiros
-3,68,Imobiliário
-3,69,Serviços jurídicos e contábeis
-3,70,Consultoria e sedes de empresas
-3,71,Engenharia e serviços técnicos
-3,72,Pesquisa e desenvolvimento
-3,73,Publicidade e pesquisa de mercado
-3,74,Outros serviços profissionais
-3,75,Veterinária
-3,77,Locação de bens
-3,78,Seleção e locação de mão de obra
-3,79,Turismo e agências de viagens
-3,80,Segurança e vigilância
-3,81,Limpeza e serviços prediais
-3,82,Serviços administrativos
-3,84,Administração pública
-3,85,Educação
-3,86,Saúde
-3,87,Cuidados e assistência com alojamento
-3,88,Assistência social
-3,90,Artes e espetáculos
-3,91,Cultura e patrimônio
-3,92,Jogos e apostas
-3,93,Esporte e recreação
-3,94,Associações e organizações
-3,95,Reparação de bens pessoais e informática
-3,96,Serviços pessoais
-3,97,Serviços domésticos
-3,99,Organismos internacionais
+prioridade,prefixo,atividade,setor
+2,011,Agricultura,Agropecuária
+2,012,Agricultura,Agropecuária
+2,013,Agricultura,Agropecuária
+2,014,Sementes e mudas,Agropecuária
+2,015,Pecuária,Agropecuária
+2,016,Serviços agropecuários,Agropecuária
+2,071,Mineração de ferro,Mineração e Metalurgia
+2,072,Mineração de outros metais,Mineração e Metalurgia
+2,081,"Mineração de pedra, areia e argila",Mineração e Metalurgia
+2,091,Petróleo e gás,"Petróleo, Gás e Combustíveis"
+2,099,Serviços de mineração,Mineração e Metalurgia
+2,101,Carnes e frigoríficos,Alimentos e Bebidas
+2,102,Pescados,Alimentos e Bebidas
+2,103,Frutas e vegetais processados,Alimentos e Bebidas
+2,104,Óleos e gorduras vegetais,Alimentos e Bebidas
+2,105,Laticínios,Alimentos e Bebidas
+2,106,Moagem e alimentos farináceos,Alimentos e Bebidas
+2,107,Açúcar,Alimentos e Bebidas
+2,108,Café,Alimentos e Bebidas
+2,109,Outros alimentos,Alimentos e Bebidas
+2,111,Bebidas alcoólicas,Alimentos e Bebidas
+2,112,Bebidas não alcoólicas,Alimentos e Bebidas
+2,193,Biocombustíveis,"Petróleo, Gás e Combustíveis"
+0,20126,Fertilizantes,Agroquímicos e Fertilizantes
+0,20134,Fertilizantes,Agroquímicos e Fertilizantes
+0,20142,Gases industriais,Químico
+0,20517,Defensivos agrícolas,Agroquímicos e Fertilizantes
+2,206,Limpeza e cosméticos,Higiene e Cosméticos
+2,207,Tintas e vernizes,Químico
+2,221,Borracha e pneus,Químico
+2,222,Plásticos,Químico
+2,231,Vidro,Materiais de Construção
+2,232,Cimento,Materiais de Construção
+2,233,Artefatos de concreto,Materiais de Construção
+2,234,Cerâmica,Materiais de Construção
+2,239,Outros minerais não metálicos,Mineração e Metalurgia
+2,241,Siderurgia,Mineração e Metalurgia
+2,242,Siderurgia,Mineração e Metalurgia
+2,243,Siderurgia,Mineração e Metalurgia
+2,244,Metalurgia de metais não ferrosos,Mineração e Metalurgia
+2,245,Fundição,Mineração e Metalurgia
+2,261,Componentes eletrônicos,Eletrônicos e Eletrodomésticos
+2,262,Informática,Eletrônicos e Eletrodomésticos
+2,263,Equipamentos de comunicação,Eletrônicos e Eletrodomésticos
+2,264,Áudio e vídeo,Eletrônicos e Eletrodomésticos
+2,265,Instrumentos de medição,Eletrônicos e Eletrodomésticos
+2,266,Equipamentos médicos,Saúde
+2,267,Óptica e fotografia,Eletrônicos e Eletrodomésticos
+2,275,Eletrodomésticos,Eletrônicos e Eletrodomésticos
+2,283,Máquinas agrícolas,Máquinas e Equipamentos
+2,285,Máquinas para construção e mineração,Máquinas e Equipamentos
+0,28518,Equipamentos para petróleo e gás,Máquinas e Equipamentos
+2,291,Automóveis,Automotivo
+2,292,Caminhões e ônibus,Automotivo
+2,293,Carrocerias e reboques,Automotivo
+2,294,Autopeças,Automotivo
+2,295,Recondicionamento de motores,Automotivo
+2,301,Construção naval,Naval
+2,303,Material ferroviário,Outras Indústrias
+2,304,Indústria aeronáutica,Aviação
+0,30911,Motocicletas,Automotivo
+0,30920,Bicicletas,Outras Indústrias
+0,33163,Manutenção aeronáutica,Aviação
+0,33171,Manutenção naval,Naval
+2,462,Comércio de matérias-primas agropecuárias,Agropecuária
+2,463,Comércio de alimentos,Alimentos e Bebidas
+0,46354,Comércio de bebidas,Alimentos e Bebidas
+0,46362,Tabaco,Tabaco
+0,46419,Têxteis e vestuário,"Têxtil, Vestuário e Calçados"
+0,46427,Têxteis e vestuário,"Têxtil, Vestuário e Calçados"
+0,46435,Calçados e artigos de couro,"Têxtil, Vestuário e Calçados"
+0,46443,Farmacêutico,Farmacêutico
+0,46451,Equipamentos médicos,Saúde
+0,46460,Limpeza e cosméticos,Higiene e Cosméticos
+0,46478,Livros e papelaria,"Mídia, Cultura e Entretenimento"
+0,46516,Informática,Eletrônicos e Eletrodomésticos
+0,46524,Equipamentos de comunicação,Eletrônicos e Eletrodomésticos
+2,466,Comércio de máquinas e equipamentos,Máquinas e Equipamentos
+0,46613,Máquinas agrícolas,Máquinas e Equipamentos
+0,46621,Máquinas para construção e mineração,Máquinas e Equipamentos
+0,46648,Equipamentos médicos,Saúde
+2,467,Materiais de construção,Materiais de Construção
+0,46818,Combustíveis,"Petróleo, Gás e Combustíveis"
+0,46826,Combustíveis,"Petróleo, Gás e Combustíveis"
+0,46834,Insumos agropecuários,Agropecuária
+0,46842,Químico,Químico
+0,46851,Siderurgia e metalurgia,Mineração e Metalurgia
+0,46869,Papel e embalagens,"Madeira, Papel e Celulose"
+0,46877,Reciclagem e sucata,Saneamento e Meio Ambiente
+0,46915,Comércio de alimentos,Alimentos e Bebidas
+0,46923,Insumos agropecuários,Agropecuária
+0,47113,Supermercados,Alimentos e Bebidas
+0,47121,Supermercados,Alimentos e Bebidas
+2,472,Comércio de alimentos,Alimentos e Bebidas
+0,47237,Comércio de bebidas,Alimentos e Bebidas
+0,47296,Comércio de alimentos e tabaco,Alimentos e Bebidas
+2,473,Combustíveis,"Petróleo, Gás e Combustíveis"
+2,474,Materiais de construção,Materiais de Construção
+0,47512,Informática,Eletrônicos e Eletrodomésticos
+0,47521,Equipamentos de comunicação,Eletrônicos e Eletrodomésticos
+0,47539,Eletrodomésticos,Eletrônicos e Eletrodomésticos
+0,47547,Móveis e decoração,Móveis e Decoração
+0,47555,Têxteis e vestuário,"Têxtil, Vestuário e Calçados"
+0,47610,Livros e papelaria,"Mídia, Cultura e Entretenimento"
+0,47717,Farmacêutico,Farmacêutico
+0,47725,Limpeza e cosméticos,Higiene e Cosméticos
+0,47733,Equipamentos médicos,Saúde
+0,47741,Óptica,Saúde
+0,47814,Têxteis e vestuário,"Têxtil, Vestuário e Calçados"
+0,47822,Calçados e artigos de couro,"Têxtil, Vestuário e Calçados"
+0,47849,Combustíveis,"Petróleo, Gás e Combustíveis"
+2,491,Transporte ferroviário,Transporte e Logística
+2,492,Transporte rodoviário de passageiros,Transporte e Logística
+2,493,Transporte rodoviário de cargas,Transporte e Logística
+2,494,Transporte dutoviário,Transporte e Logística
+2,495,Outros transportes terrestres,Transporte e Logística
+2,503,Navegação de apoio,Transporte e Logística
+2,511,Aérea,Aviação
+2,512,Aérea,Aviação
+2,513,Transporte espacial,Transporte e Logística
+0,52401,Serviços aeroportuários,Aviação
+2,551,Hotéis e hospedagem,"Turismo, Hotelaria e Alimentação"
+2,559,Outros alojamentos,"Turismo, Hotelaria e Alimentação"
+2,561,Restaurantes e alimentação,"Turismo, Hotelaria e Alimentação"
+2,562,Alimentação coletiva e bufês,"Turismo, Hotelaria e Alimentação"
+2,601,Rádio,"Mídia, Cultura e Entretenimento"
+2,602,Televisão,"Mídia, Cultura e Entretenimento"
+2,631,Internet e processamento de dados,Tecnologia da Informação
+2,639,Serviços de informação,Tecnologia da Informação
+2,642,Bancos,Financeiro e Seguros
+2,643,Crédito e financiamento,Financeiro e Seguros
+2,644,Arrendamento mercantil financeiro,Financeiro e Seguros
+2,645,Capitalização,Financeiro e Seguros
+2,646,Holdings e participações,Holdings e Participações
+2,647,Fundos de investimento,Financeiro e Seguros
+2,649,Outros serviços financeiros,Financeiro e Seguros
+2,711,Engenharia e arquitetura,Serviços Profissionais
+2,712,Testes e análises técnicas,Serviços Profissionais
+2,771,Locação de veículos,Locação de Bens
+2,772,Locação de objetos pessoais,Locação de Bens
+2,773,Locação de máquinas e equipamentos,Locação de Bens
+2,774,Gestão de ativos intangíveis,Locação de Bens
+2,851,Educação básica,Educação
+2,852,Educação básica,Educação
+2,853,Ensino superior,Educação
+2,854,Educação profissional,Educação
+2,855,Apoio à educação,Educação
+2,859,Outras atividades de ensino,Educação
+2,861,Hospitais,Saúde
+2,862,Atendimento móvel de saúde,Saúde
+2,863,Consultórios e clínicas,Saúde
+2,864,Diagnóstico e terapias,Saúde
+2,865,Profissionais de saúde,Saúde
+2,866,Gestão de saúde,Saúde
+2,869,Outros serviços de saúde,Saúde
+3,01,Agropecuária,Agropecuária
+3,02,Silvicultura,"Madeira, Papel e Celulose"
+3,03,Pesca e aquicultura,Agropecuária
+3,05,Carvão mineral,Mineração e Metalurgia
+3,06,Petróleo e gás,"Petróleo, Gás e Combustíveis"
+3,07,Mineração de metais,Mineração e Metalurgia
+3,08,Mineração não metálica,Mineração e Metalurgia
+3,09,Serviços de extração mineral,Mineração e Metalurgia
+3,10,Alimentos,Alimentos e Bebidas
+3,11,Bebidas,Alimentos e Bebidas
+3,12,Tabaco,Tabaco
+3,13,Têxtil,"Têxtil, Vestuário e Calçados"
+3,14,Vestuário,"Têxtil, Vestuário e Calçados"
+3,15,Calçados e artigos de couro,"Têxtil, Vestuário e Calçados"
+3,16,Madeira,"Madeira, Papel e Celulose"
+3,17,Papel e celulose,"Madeira, Papel e Celulose"
+3,18,Impressão e reprodução,"Mídia, Cultura e Entretenimento"
+3,19,Refino e derivados de petróleo,"Petróleo, Gás e Combustíveis"
+3,20,Químico,Químico
+3,21,Farmacêutico,Farmacêutico
+3,22,Borracha e plástico,Químico
+3,23,Minerais não metálicos,Mineração e Metalurgia
+3,24,Metalurgia,Mineração e Metalurgia
+3,25,Produtos de metal,Mineração e Metalurgia
+3,26,Eletrônicos e informática,Eletrônicos e Eletrodomésticos
+3,27,Equipamentos elétricos,Máquinas e Equipamentos
+3,28,Máquinas e equipamentos,Máquinas e Equipamentos
+3,29,Automotivo,Automotivo
+3,30,Outros equipamentos de transporte,Outras Indústrias
+3,31,Móveis,Móveis e Decoração
+3,32,Outras indústrias,Outras Indústrias
+3,33,Manutenção e instalação industrial,Máquinas e Equipamentos
+3,35,Energia elétrica e gás,Energia
+3,36,Abastecimento de água,Saneamento e Meio Ambiente
+3,37,Esgoto,Saneamento e Meio Ambiente
+3,38,Resíduos e reciclagem,Saneamento e Meio Ambiente
+3,39,Descontaminação ambiental,Saneamento e Meio Ambiente
+3,41,Construção Civil,Construção Civil
+3,42,Construção Civil,Construção Civil
+3,43,Construção Civil,Construção Civil
+3,45,Comércio e reparação de veículos,Automotivo
+3,46,Comércio atacadista — diversos,Comércio Diversificado
+3,47,Comércio varejista — diversos,Comércio Diversificado
+3,49,Transporte terrestre,Transporte e Logística
+3,50,Transporte aquaviário,Transporte e Logística
+3,51,Aérea,Aviação
+3,52,Armazenagem e serviços de transporte,Transporte e Logística
+3,53,Correios e entregas,Transporte e Logística
+3,55,Hospedagem,"Turismo, Hotelaria e Alimentação"
+3,56,Alimentação,"Turismo, Hotelaria e Alimentação"
+3,58,Edição de livros e periódicos,"Mídia, Cultura e Entretenimento"
+3,59,Audiovisual e música,"Mídia, Cultura e Entretenimento"
+3,60,Rádio e televisão,"Mídia, Cultura e Entretenimento"
+3,61,Telecomunicações,Telecomunicações
+3,62,Tecnologia da informação,Tecnologia da Informação
+3,63,Serviços de informação,Tecnologia da Informação
+3,64,Serviços financeiros,Financeiro e Seguros
+3,65,Seguros e previdência,Financeiro e Seguros
+3,66,Serviços auxiliares financeiros,Financeiro e Seguros
+3,68,Imobiliário,Imobiliário
+3,69,Serviços jurídicos e contábeis,Serviços Profissionais
+3,70,Consultoria e sedes de empresas,Serviços Profissionais
+3,71,Engenharia e serviços técnicos,Serviços Profissionais
+3,72,Pesquisa e desenvolvimento,Serviços Profissionais
+3,73,Publicidade e pesquisa de mercado,Serviços Profissionais
+3,74,Outros serviços profissionais,Serviços Profissionais
+3,75,Veterinária,Agropecuária
+3,77,Locação de bens,Locação de Bens
+3,78,Seleção e locação de mão de obra,Serviços Administrativos e Operacionais
+3,79,Turismo e agências de viagens,"Turismo, Hotelaria e Alimentação"
+3,80,Segurança e vigilância,Serviços Administrativos e Operacionais
+3,81,Limpeza e serviços prediais,Serviços Administrativos e Operacionais
+3,82,Serviços administrativos,Serviços Administrativos e Operacionais
+3,84,Administração pública,Administração Pública
+3,85,Educação,Educação
+3,86,Saúde,Saúde
+3,87,Cuidados e assistência com alojamento,Assistência Social e Organizações
+3,88,Assistência social,Assistência Social e Organizações
+3,90,Artes e espetáculos,"Mídia, Cultura e Entretenimento"
+3,91,Cultura e patrimônio,"Mídia, Cultura e Entretenimento"
+3,92,Jogos e apostas,"Mídia, Cultura e Entretenimento"
+3,93,Esporte e recreação,"Mídia, Cultura e Entretenimento"
+3,94,Associações e organizações,Assistência Social e Organizações
+3,95,Reparação de bens pessoais e informática,Serviços Pessoais
+3,96,Serviços pessoais,Serviços Pessoais
+3,97,Serviços domésticos,Serviços Pessoais
+3,99,Organismos internacionais,Administração Pública

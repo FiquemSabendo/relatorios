@@ -72,14 +72,16 @@ def main():
     ).fetchall()
     n_estab = len(estabs)
     classificacoes = classificar_estabelecimentos(estabs)
-    setores_detalhados = sorted({r['setor_detalhado'] for r in classificacoes})
+    setores_detalhados = sorted({r['setor'] for r in classificacoes})
     setor_id = {s: i for i, s in enumerate(setores_detalhados)}
     evidencias_setor = sorted({(r['regra'], r['fonte'], r['evidencia']) for r in classificacoes})
     evidencia_id = {s: i for i, s in enumerate(evidencias_setor)}
-    setores_estab = [[setor_id[r['setor_detalhado']],
-                     evidencia_id[(r['regra'], r['fonte'], r['evidencia'])]]
+    atividades = sorted({r['atividade'] for r in classificacoes})
+    atividade_id = {s: i for i, s in enumerate(atividades)}
+    setores_estab = [[setor_id[r['setor']],
+                     evidencia_id[(r['regra'], r['fonte'], r['evidencia'])], atividade_id[r['atividade']]]
                     for r in classificacoes]
-    classificacao = {"versao": VERSION, "setores": setores_detalhados,
+    classificacao = {"versao": VERSION, "setores": setores_detalhados, "atividades": atividades,
                      "evidencias": evidencias_setor, "estabelecimentos": setores_estab}
     if "--somente-setores" in sys.argv:
         # Edição cadastral: preservar integralmente os dados fiscais já publicados.
