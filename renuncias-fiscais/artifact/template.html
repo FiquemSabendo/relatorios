@@ -399,7 +399,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
   <section id="view-ranking" role="tabpanel" class="hidden">
     <div class="card">
       <div class="searchrow">
-        <input type="search" id="busca" placeholder="Buscar por razão social, nome fantasia ou CNPJ — ex.: petrobras, 33592510, embraer"
+        <input type="search" id="busca" placeholder="Buscar por empresa, CNPJ ou setor detalhado — ex.: petrobras, tabaco, aérea"
                autocomplete="off" spellcheck="false" aria-label="Buscar empresa">
         <span class="hits" id="busca-hits"></span>
       </div>
@@ -454,6 +454,15 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         <p><b>2024 é parcial.</b> <span id="foot-2024"></span></p>
         <p><b>Sem CNAE.</b> <span id="foot-cnae"></span> do valor da série está sob o código
           <span class="mono">00000</span> na origem e aparece como “Sem informação”, não é descartado.</p>
+        <p><b>Setor detalhado.</b> Classificação editorial, não oficial, baseada em classes,
+          grupos e divisões da CNAE. Se o código estiver ausente, usamos uma fonte documentada
+          da empresa ou, quando houver concordância, as atividades conhecidas de outros CNPJs
+          da mesma raiz. Sem evidência suficiente: “Não identificado”. Ao abrir a empresa,
+          aparecem a origem e a evidência da classificação.</p>
+        <p>O rótulo da raiz acompanha o estabelecimento de maior renúncia acumulada em
+          2015–2024, incluindo o ano parcial; não descreve necessariamente todas as suas
+          atividades. É uma classificação do cadastro disponível, não uma série histórica
+          de mudanças de atividade. Os filtros de setor continuam usando a seção CNAE original.</p>
         <p><b>Arredondamento.</b> Os valores embutidos nesta página estão arredondados para reais
           inteiros; o banco DuckDB que a gera guarda os centavos.</p>
       </div>
@@ -487,6 +496,15 @@ P.macro.forEach(([ano, ipca, pib]) => { IPCA[ano - ANO0] = ipca; PIB[ano - ANO0]
 
 const SECOES = P.secoes;                       // {A: "Agropecuária…", …}
 const CNAE   = new Map(P.cnae.map(r => [r[0], { desc: r[1], secao: r[2] }]));
+const SETORES_DET = P.classificacao_setorial;
+function setorDetalhado(e) {
+  const [s, p] = SETORES_DET.estabelecimentos[e];
+  const [regra, fonte, evidencia] = SETORES_DET.evidencias[p];
+  const origem = regra.startsWith("cnae_") ? "CNAE declarada" :
+    regra === "inferencia_mesma_raiz" ? "Inferido de outros CNPJs da mesma raiz" :
+    regra.startsWith("curadoria_raiz:") ? "Curadoria documentada" : "Sem evidência suficiente";
+  return { nome: SETORES_DET.setores[s], origem, fonte, evidencia };
+}
 const MUN    = P.mun;                          // [[municipio, uf], …]
 
 /* Cada "item" é um par benefício fiscal × fundamento legal — o grão mais fino
@@ -667,7 +685,8 @@ function entidades(nivel) {
     uf[g]    = D.ufDe[melhor];
     mun[g]   = MUN[D.mun[melhor]][0];
     const uniq = [...new Set(nomes)].join(" ");
-    busca[g] = norm(uniq.length > 400 ? uniq.slice(0, 400) : uniq) + " " + chaveDe[g];
+    busca[g] = norm(uniq.length > 400 ? uniq.slice(0, 400) : uniq) + " " + chaveDe[g] +
+      " " + norm(setorDetalhado(melhor).nome);
   }
 
   return (cacheEnt[nivel] = { n, chave: chaveDe, membros, dono, vals, total, nome, busca,
@@ -1125,7 +1144,8 @@ function renderRanking() {
   $("#res-table").innerHTML = `<table><thead><tr>
       <th class="n" style="width:64px">#</th>
       <th>Empresa</th>
-      <th style="width:190px">Setor</th>
+      <th style="width:170px">Setor detalhado</th>
+      <th style="width:190px">Setor (seção CNAE)</th>
       <th style="width:64px">${ANOS[0]}–${ANOS[F.na - 1]}</th>
       <th class="n">${S.medida === "pib" ? "Média anual" : "Acumulado"}</th>
       <th class="n">${ANOS[ULTIMO_COMPLETO]}</th>
@@ -1139,11 +1159,13 @@ function renderRanking() {
 function linhaHTML(g, i, F) {
   const vals = Array.from({ length: F.na }, (_, a) => conv(F.vals[g * NA + a], a));
   const setor = SECOES[F.E.secao[g]] || "Sem informação";
+  const detalhado = setorDetalhado(F.E.principal[g]);
   return `<tr class="clickable" data-g="${g}" aria-expanded="false">
     <td class="n"><span class="caret">&#9656;</span> ${nfInt.format(i + 1)}</td>
     <td><span class="nm">${esc(F.E.nome[g])}</span>
         <span class="meta">${esc(F.E.uf[g])} · ${esc(F.E.mun[g])}${
           F.E.nEstab[g] > 1 ? ` · ${F.E.nEstab[g]} CNPJs` : ""}</span></td>
+    <td><span class="setor" title="${esc(detalhado.origem)}">${esc(detalhado.nome)}</span></td>
     <td><span class="setor" title="${esc(setor)}">${esc(setor)}</span></td>
     <td>${sparkline(vals, 60, 20, css("--s1"))}</td>
     <td class="n">${esc(fmtV(agrega(vals)))}</td>
@@ -1203,7 +1225,7 @@ function alternarDetalhe(tr, g) {
   if (eraEsta) { S.aberta = null; return; }
   S.aberta = g;
   tr.setAttribute("aria-expanded", "true");
-  tr.insertAdjacentHTML("afterend", `<tr class="det"><td colspan="6">${detalheHTML(g)}</td></tr>`);
+  tr.insertAdjacentHTML("afterend", `<tr class="det"><td colspan="7">${detalheHTML(g)}</td></tr>`);
   montarDetalhe(g);
   tr.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
@@ -1241,6 +1263,7 @@ function detalheHTML(g) {
   const rank = F.idx.filter(o => F.vals[o * NA + a23] > noAno).length + 1;
   const share = F.totalAno[a23] ? noAno / F.totalAno[a23] * 100 : 0;
   const info = CNAE.get(E.cnae[g]) || { desc: "Sem informação" };
+  const setor = setorDetalhado(E.principal[g]);
 
   return `<div class="detbox">
     <div class="cardhead">
@@ -1249,6 +1272,9 @@ function detalheHTML(g) {
         <div class="dmeta"><span class="mono">${esc(E.chave[g])}/…</span>
           · ${esc(E.mun[g])}/${esc(E.uf[g])} · ${esc(info.desc)}
           ${E.nEstab[g] > 1 ? ` · <b>${E.nEstab[g]} estabelecimentos</b>` : ""}</div>
+        <p class="dmeta"><b>Setor detalhado: ${esc(setor.nome)}.</b> ${esc(setor.origem)}.
+          Evidência: ${esc(setor.evidencia)}.
+          ${setor.fonte.startsWith("https://") ? `<a href="${esc(setor.fonte)}" target="_blank" rel="noopener">Fonte da classificação</a>` : esc(setor.fonte)}</p>
       </div>
     </div>
 

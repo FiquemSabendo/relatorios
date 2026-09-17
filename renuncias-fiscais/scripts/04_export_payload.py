@@ -23,8 +23,10 @@ import gzip
 import io
 import json
 import os
+import sys
 
 import duckdb
+from classificacao_setorial import classificar_estabelecimentos, VERSION
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(ROOT, "renuncias.duckdb")
@@ -69,6 +71,29 @@ def main():
         "FROM dim_estab ORDER BY estab_id"
     ).fetchall()
     n_estab = len(estabs)
+    classificacoes = classificar_estabelecimentos(estabs)
+    setores_detalhados = sorted({r['setor_detalhado'] for r in classificacoes})
+    setor_id = {s: i for i, s in enumerate(setores_detalhados)}
+    evidencias_setor = sorted({(r['regra'], r['fonte'], r['evidencia']) for r in classificacoes})
+    evidencia_id = {s: i for i, s in enumerate(evidencias_setor)}
+    setores_estab = [[setor_id[r['setor_detalhado']],
+                     evidencia_id[(r['regra'], r['fonte'], r['evidencia'])]]
+                    for r in classificacoes]
+    classificacao = {"versao": VERSION, "setores": setores_detalhados,
+                     "evidencias": evidencias_setor, "estabelecimentos": setores_estab}
+    if "--somente-setores" in sys.argv:
+        # Edição cadastral: preservar integralmente os dados fiscais já publicados.
+        with open(OUT, encoding="utf-8") as f:
+            payload = json.load(f)
+        dim_existente = gzip.decompress(base64.b64decode(payload["dim"])).decode().splitlines()
+        assert len(dim_existente) == n_estab
+        assert all(l.split("\t")[0] == e[1] and l.split("\t")[3] == e[4]
+                   for l, e in zip(dim_existente, estabs)), "Cadastro do payload difere do banco"
+        payload["classificacao_setorial"] = classificacao
+        with open(OUT, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))
+        print(f"Classificação atualizada para {n_estab} CNPJs; dados fiscais preservados.")
+        return
     dim = []
     for eid, cnpj, razao, fant, cnae, mun, uf in estabs:
         assert eid == len(dim), "estab_id precisa ser contíguo e começar em 0"
@@ -145,6 +170,7 @@ def main():
         },
         "macro": [[a, round(i, 4), p] for a, i, p in macro],
         "secoes": secoes,
+        "classificacao_setorial": classificacao,
         "cnae": [[c, d, s] for c, d, s, _ in cnaes],
         "mun": [[m, u] for m, u in muns],
         "item": [[t, b, tr, f, r] for _, t, b, tr, f, r in itens],

@@ -153,3 +153,11 @@ carregamento no navegador leva cerca de 0,8 s depois do download.
 `artifact/template.html` é a fonte editável do explorador; `05_build_artifact.py` injeta o
 payload e as fontes e grava `artifact/renuncias.html` e `../docs/renuncias-fiscais/index.html`. Edite o template,
 nunca os arquivos gerados.
+
+## Setor detalhado
+
+O ranking também oferece uma classificação editorial mais específica que a seção CNAE,
+com origem e evidência acessíveis ao abrir a empresa. Regras, critérios de preenchimento
+de lacunas e limites estão em [METODOLOGIA-SETORES.md](METODOLOGIA-SETORES.md).
+Para atualizar apenas a classificação, use `python3 scripts/04_export_payload.py --somente-setores`
+e depois regenere o HTML com `05_build_artifact.py`.

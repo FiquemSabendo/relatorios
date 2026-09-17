@@ -1,0 +1,70 @@
+[
+  {
+    "arquivo": "alya-fonte.pdf",
+    "sha256": "e974996e1b06c93f04cbdca78a6c3585617fe2c9fff0c2eb4d0258d9b3e25f97"
+  },
+  {
+    "arquivo": "browser.json",
+    "sha256": "8f4ba0ba7fbad81c8644acd790d05690cdcd720563e18e1d32c91f4475f07494"
+  },
+  {
+    "arquivo": "classificacao_por_cnpj.csv",
+    "sha256": "146d9e9587c36aeac34d7209d63f6540c3a7e7be27aa0d2932e07139b2b9df25"
+  },
+  {
+    "arquivo": "cnae-ibge.json",
+    "sha256": "05656f74ff3db4191677d1619330ab0c667e243c1dbb8a250ea8cd6e468cd27a"
+  },
+  {
+    "arquivo": "cobertura_por_metodo.csv",
+    "sha256": "991cf4e5b16af48d46f5af991a0a510131ba898d19ceaefcab14f2e0c3639e89"
+  },
+  {
+    "arquivo": "cobertura_por_setor.csv",
+    "sha256": "24b27f9c2d59bff5670e0eb035b86da1cc643de750b3e0c366288cabb4585d8e"
+  },
+  {
+    "arquivo": "consistencia.md",
+    "sha256": "2ed56a67d919b8b731237369feeba0dc3856479884b07a480386cb5ecfe6464c"
+  },
+  {
+    "arquivo": "dicionario_cnae_setor.csv",
+    "sha256": "932a566519782b2f070fb7311090fff7694db284b1f8c2aacee1c963c66747f7"
+  },
+  {
+    "arquivo": "execucao.log",
+    "sha256": "c803dd1edf09afcffcd427761b2b78bca0b0cc5a2815ac8b754ec89c5722f204"
+  },
+  {
+    "arquivo": "fonte-ibge.json",
+    "sha256": "94a5e88ede283ae8758ab05a41b3b9f7ef715dde0e6f17a56e6e363f5423ec0d"
+  },
+  {
+    "arquivo": "ranking-desktop.png",
+    "sha256": "4a3fff4412b2573ab8bde2d4232794dd805b6ce252602634feb53418f2e9b6b0"
+  },
+  {
+    "arquivo": "ranking-mobile.png",
+    "sha256": "24b25f1cf1a05705d21df557bd3eba78b49ce07b41e659def8fd4e535012c9f7"
+  },
+  {
+    "arquivo": "ranking_setores.csv",
+    "sha256": "be9ff6809cb4eac3cc387abc9628d3aa502f2f1851db8de890bd0a77db1d0c74"
+  },
+  {
+    "arquivo": "reconhecimento.md",
+    "sha256": "720deec842ade831be8beed6fe8c3da3be0d1e87870cc6b43c35de9d126f4fb0"
+  },
+  {
+    "arquivo": "regras.csv",
+    "sha256": "747245cae300debfc6dcf926d0b45c818ff746a3020dcd8892ce3396b242bb48"
+  },
+  {
+    "arquivo": "sumario.json",
+    "sha256": "44d7a360821d3d1b4c920b971e1408ec3b5a3d7577ecbc82ec8269f40df17946"
+  },
+  {
+    "arquivo": "suposicoes-e-riscos.md",
+    "sha256": "be61f30d3fbaf0401b203cf0e947c2ef6f315272f31af690bd4abd5596d43f7d"
+  }
+]

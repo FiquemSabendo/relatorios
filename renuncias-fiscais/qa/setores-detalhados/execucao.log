@@ -1,0 +1,30 @@
+{
+  "versao": "2026-09-17.1",
+  "cnpjs": 77523,
+  "classes": 568,
+  "setores": 163,
+  "total": "1252499219562.54",
+  "sem_classificacao": {
+    "cnpjs": 7688,
+    "valor": "94192141747.37"
+  },
+  "por_metodo": {
+    "sem_cnae": {
+      "cnpjs": 7688,
+      "valor": "94192141747.37"
+    },
+    "cnae": {
+      "cnpjs": 69491,
+      "valor": "1081448143765.58"
+    },
+    "inferencia_mesma_raiz": {
+      "cnpjs": 336,
+      "valor": "34528155431.81"
+    },
+    "curadoria_raiz": {
+      "cnpjs": 8,
+      "valor": "42330778617.78"
+    }
+  },
+  "classes_fora_catalogo": []
+}
