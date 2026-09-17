@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exporta a apresentação em preços de dezembro/2024, sem alterar o payload histórico."""
+"""Exporta a apresentação na referência IPCA documentada, preservando o snapshot fiscal."""
 import json
 import re
 import hashlib
@@ -22,7 +22,9 @@ for line in text.splitlines():
         if m[1]: year = int(m[1])
         monthly[year].append(float(m[3].replace(',', '.')))
 assert all(len(monthly[y]) == 12 for y in range(2020, 2025))
-base = monthly[2024][-1]
+reference = json.loads((ROOT/'data/macro/referencia-ipca.json').read_text())
+assert reference['indice'] == 'IPCA'
+base = reference['indice_base']
 con = duckdb.connect(str(ROOT / 'renuncias.duckdb'), read_only=True)
 macro = con.execute('SELECT ano, valor, ipca_indice_medio FROM mart_ano ORDER BY ano').fetchall()
 assert [r[0] for r in macro] == list(range(2015,2025))
@@ -56,13 +58,13 @@ for y, nominal, idx in macro:
     annual.append(dict(ano=y,nominal=nominal,real=nominal*base/origins[y],fator=base/origins[y],indice_medio=idx,indice_origem=origins[y],meses_origem=coverage[str(y)],parcial=y==2024))
 total = sum(r['real'] for r in annual)
 assert abs(sum(by_type.values())-total)<0.05
-out = dict(base='dezembro de 2024',base_mes='2024-12',indice_base=base,
+out = dict(base=reference['base'],base_mes=reference['base_mes'],indice_base=base,referencia=reference,
  fonte_ipca=URL,fonte_ipca_pagina=18,fonte_ipca_sha256=hashlib.sha256(PDF.read_bytes()).hexdigest(),
- formula='nominal do período × IPCA dezembro/2024 ÷ média dos índices dos meses cobertos (jan–dez/2015–2023; jan–jun/2024)',
+ formula=f"nominal do período × IPCA {reference['base_mes']} ÷ média dos índices dos meses cobertos (jan–dez/2015–2023; jan–jun/2024)",
  anos=annual,total_real=total,total_nominal=sum(r['nominal'] for r in annual),
  tipos=[dict(tipo=t,real=v,participacao=v/total) for t,v in sorted(by_type.items(),key=lambda x:-x[1])],
  cnpjs=con.execute('select count(*) from dim_estab').fetchone()[0],
- razao_dez2024_media2023=base/means[2023],razao_dez2024_media2024=base/means[2024])
+ razao_base_media2023=base/means[2023],razao_base_media2024=base/means[2024])
 (ROOT/'artifact/apresentacao.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
 (QA/'validacao.json').write_text(json.dumps(dict(total_real=total,soma_tipos=sum(by_type.values()),indice_base=base, medias_2020_2024_conferidas=True,tipos=out['tipos'],fatores=[{'ano':r['ano'],'fator':r['fator']} for r in annual]),ensure_ascii=False,indent=2)+'\n')
-print(json.dumps({k:out[k] for k in ['total_real','indice_base','razao_dez2024_media2023','razao_dez2024_media2024','tipos']},ensure_ascii=False,indent=2))
+print(json.dumps({k:out[k] for k in ['total_real','indice_base','razao_base_media2023','razao_base_media2024','tipos']},ensure_ascii=False,indent=2))

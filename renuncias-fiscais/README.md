@@ -27,6 +27,7 @@ bash   scripts/01_download.sh      # baixa e extrai os ZIPs de 2015 a 2024
 python3 scripts/02_macro.py        # IPCA e PIB via API do SIDRA/IBGE
 duckdb renuncias.duckdb < scripts/03_build_db.sql
 python3 scripts/04_export_payload.py   # artifact/payload.json
+python3 scripts/12_atualizar_referencia_ipca.py # consulta último IPCA mensal oficial
 python3 scripts/11_export_apresentacao.py # apresentação e índices dos períodos cobertos
 python3 scripts/05_build_artifact.py   # artifact/renuncias.html e ../docs/renuncias-fiscais/index.html
 ```
@@ -34,7 +35,7 @@ python3 scripts/05_build_artifact.py   # artifact/renuncias.html e ../docs/renun
 O GitHub Pages serve a pasta `docs/` da raiz do repositório a partir da branch `main`;
 publicar é fazer commit do arquivo gerado.
 
-Requisitos: `curl`, `unzip`, `duckdb` (CLI) e os módulos Python `duckdb` e `pypdf`. Sem pandas.
+Requisitos: `curl`, `unzip`, `duckdb` (CLI) e os módulos Python `duckdb`, `pypdf` e `requests`. Sem pandas.
 
 Para atualizar quando o Portal publicar um novo ano: apague `data/raw/zips/`, rode tudo
 de novo e ajuste `ANO_PARCIAL` em `scripts/04_export_payload.py` se o ano mais recente
@@ -179,14 +180,14 @@ e depois regenere o HTML com `05_build_artifact.py`.
 ## Apresentação e bases de preços
 
 A primeira aba explica a base e apresenta a série anual e a composição por tipo em reais de
-dezembro/2024. O gerador `scripts/11_export_apresentacao.py` consulta o banco e extrai o índice
-de referência do boletim oficial arquivado; produz `artifact/apresentacao.json`, incorporado
+agosto/2026 (último IPCA mensal disponível na consulta de 17/09/2026). O gerador `scripts/11_export_apresentacao.py` consulta o banco, extrai os índices
+de origem do boletim oficial arquivado e lê a referência em `data/macro/referencia-ipca.json`; produz `artifact/apresentacao.json`, incorporado
 ao HTML por `05_build_artifact.py`. Fontes, fórmula, conciliação, diferenças para o Resumo e
 o ranking e limitações estão em [qa/apresentacao/metodologia.md](qa/apresentacao/metodologia.md).
 
 No Resumo, preços reais usam a média janeiro–dezembro do ano escolhido; no detalhe do ranking,
 a média janeiro–dezembro de 2023. O ranking principal permanece nominal. Esses rótulos são
-explícitos na interface; a base dezembro/2024 não foi aplicada às demais abas.
+explícitos na interface; a referência mais recente não foi aplicada às demais abas.
 
 ### Cobertura temporal do deflator
 
@@ -200,3 +201,8 @@ anual de referência em `data/macro/ipca.csv` pela média semestral.
 Depois de alterar cobertura ou dados fiscais: executar `11_export_apresentacao.py` antes
 de `05_build_artifact.py`. A construção do HTML verifica a compatibilidade da cobertura
 com o JSON gerado. Revalidar a configuração se o snapshot fiscal for atualizado.
+
+Para atualizar a referência de “dinheiro de hoje”, rodar `12_atualizar_referencia_ipca.py`,
+`11_export_apresentacao.py` e `05_build_artifact.py`, nessa ordem. A resposta oficial fica
+arquivada em `qa/referencia-ipca/`; o build não consulta a internet nem muda a referência
+silenciosamente. A API alternativa oficial de agregados do IBGE fornece SIDRA 1737/2266.

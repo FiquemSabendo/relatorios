@@ -1,0 +1,12 @@
+{
+  "base": "agosto de 2026",
+  "base_mes": "2026-08",
+  "indice_base": 7633.23,
+  "indice": "IPCA",
+  "variavel": "IPCA - Número-índice (base: dezembro de 1993 = 100)",
+  "fonte": "https://servicodados.ibge.gov.br/api/v3/agregados/1737/periodos/-1/variaveis/2266?localidades=N1[all]",
+  "fonte_periodo": "https://servicodados.ibge.gov.br/api/v3/agregados/1737/periodos/202608/variaveis/2266?localidades=N1[all]",
+  "consultado_em": "2026-09-17T21:49:53.269135+00:00",
+  "fonte_sha256": "bd41631cf89309ce5fc8acf13259b8971e537638af2060cd6e08292adaf5cb3e",
+  "criterio": "Último período disponível do IPCA mensal Brasil, SIDRA 1737, variável 2266; não IPCA-15 nem projeção."
+}

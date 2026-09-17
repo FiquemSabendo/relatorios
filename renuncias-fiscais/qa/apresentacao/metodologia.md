@@ -1,6 +1,6 @@
 # Apresentação — fontes, cálculo e validação
 
-Implementação em 17/09/2026. Pedido: primeira aba explicativa com evolução anual e composição por tipo, em preços de 2024. Referência operacional escolhida: dezembro/2024, indicada nos gráficos e na metodologia. Snapshot fiscal preservado, arquivos atualizados em 05/12/2024 e extraídos em agosto/2026; nenhuma atualização silenciosa da base fiscal.
+Implementação em 17/09/2026. Pedido: primeira aba explicativa com evolução anual e composição por tipo, em preços de 2024. Referência atual: agosto/2026, último IPCA mensal oficial disponível em 17/09/2026, indicada nos gráficos e na metodologia. Snapshot fiscal preservado, arquivos atualizados em 05/12/2024 e extraídos em agosto/2026; nenhuma atualização silenciosa da base fiscal.
 
 ## Fontes e conceitos
 
@@ -14,10 +14,10 @@ Dicionário e documentação da base já auditados em qa/2026-09-17/reconhecimen
 
 ## Cálculo
 
-`real_período = nominal_período × índice_dez2024 / média_índices_meses_cobertos`.
+`real_período = nominal_período × índice_agosto2026 / média_índices_meses_cobertos`.
 
 Cobertura explícita em `data/macro/cobertura-deflacao.json`: janeiro–dezembro para 2015–2023; janeiro–junho para 2024. A média de origem de 2024 é 6882,123333333333. A média dos 12 meses de 2024 continua válida como uma referência de apresentação selecionável no Resumo, mas não é mais o denominador do fluxo parcial. O build bloqueia uma configuração de cobertura incompatível com os deflatores exportados.
-Índice dezembro/2024 = 7100,50 (dezembro/1993 = 100), extraído por script da tabela IPCA do PDF. Médias de 2020–2024 conferidas contra os 12 índices do mesmo boletim; anos anteriores mantêm a série SIDRA já validada do pipeline. Não usamos IPCA-15, inflação anual arredondada, nem corrigimos novamente valores já reais.
+Índice de referência agosto/2026 = 7633,23 (dezembro/1993 = 100), obtido da API oficial de agregados do IBGE, tabela 1737, variável 2266, último período; conferido com o boletim agosto/2026, página 15, publicado em 11/09/2026. A resposta e o boletim estão em `../referencia-ipca/`. O boletim dezembro/2024 fornece os índices históricos de origem. Médias de 2020–2024 conferidas contra os 12 índices do mesmo boletim; anos anteriores mantêm a série SIDRA já validada do pipeline. Não usamos IPCA-15, inflação anual arredondada, nem corrigimos novamente valores já reais.
 
 O exportador 11_export_apresentacao.py consulta mart_ano e fato_item_ano + dim_item no DuckDB. Corrige cada ano antes de acumular por tipo. Totais dos tipos reconciliados com mart_ano em cada ano (tolerância numérica de R$ 0,05, pois o banco usa DOUBLE), e soma real dos tipos reconciliada com soma da série. O detalhe da auditoria anterior reconciliou os brutos em centavos.
 
@@ -25,13 +25,13 @@ Acumulado dos dois gráficos: 2015–2024, com 2024 parcial, sem filtros do dash
 
 ## Comparação com o restante do site
 
-- Apresentação: base dezembro/2024, índice 7100,50.
+- Apresentação: base agosto/2026, índice 7633,23.
 - Resumo: nominal por padrão; Real usa média de janeiro–dezembro do ano selecionado, inicialmente 2023. Selecionar 2024 significa média de 2024, não dezembro/2024. Rótulos agora explicitam isso.
 - Ranking principal: nominal de 2015–2023, sem deflação. A coluna 2023 é o período, não uma conversão do acumulado para preços de 2023.
 - Detalhe da empresa: nominal por padrão; opção Real em média janeiro–dezembro/2023; inclui 2024 parcial.
 - % PIB: renúncia nominal / PIB nominal do mesmo ano, sem correção isolada do numerador.
 
-Mantendo o recorte e o período, dezembro/2024 supera a base média/2023 em 6,595707948% e a base média/2024 em 2,134998581%. Isso é diferença de referência monetária, não erro de soma. Não uniformizamos as bases das abas sem pedido; explicitamos a diferença. O recorte temporal também difere: ranking 2015–2023 versus apresentação/detalhe 2015–2024 parcial.
+Mantendo o recorte e o período, agosto/2026 supera a base média/2023 em 14,593275936% e a base média/2024 em 9,797892433%. Isso é diferença de referência monetária, não erro de soma. Não uniformizamos as bases das abas sem pedido; explicitamos a diferença. O recorte temporal também difere: ranking 2015–2023 versus apresentação/detalhe 2015–2024 parcial.
 
 O payload do explorador arredonda valores para reais inteiros. Ao confrontar o cubo AGG com os novos totais do banco, a maior diferença nominal anual é R$ 18,11, documentada em interface.json. Não confundimos esse arredondamento com diferença de deflator.
 
@@ -47,6 +47,10 @@ JavaScript validado com node --check. Navegador: aba inicial, dez anos, três ti
 
 Reprodução: `python3 renuncias-fiscais/scripts/11_export_apresentacao.py` e `python3 renuncias-fiscais/scripts/05_build_artifact.py`.
 
-## Revisão dos valores
+## Histórico da revisão dos valores em dezembro/2024
 
 A revisão e os valores antes/depois de todos os anos estão em `../revisao-deflacao/revisao-anual.csv`. A série 2015–2023 não muda na Apresentação. 2024 passa de R$ 72.153.645.042,50 a R$ 72.887.015.719,29 em preços de dezembro/2024 (+1,0164%). O acumulado real passa a R$ 1.590.934.008.631,30. Valores nominais e razões nominais/PIB não mudam. O snapshot anterior está preservado em `../revisao-deflacao/antes.json`; não é dado vigente.
+
+## Atualização para agosto/2026
+
+Consulta oficial e reprodução em `12_atualizar_referencia_ipca.py`. Confirmado IPCA mensal, não IPCA-15; mês máximo 202608. Arquivo oficial de conferência: https://www.ibge.gov.br/biblioteca/visualizacao/periodicos/236/inpc_ipca_2026_ago.pdf, página 15, publicado em 11/09/2026. IPCA escolhido para comparar poder de compra pela inflação ao consumidor, não para medir volume ou retorno da política. O índice 7633,23 é um nível acumulado, não uma taxa percentual. A série nominal e os denominadores de origem permanecem inalterados. A revisão anual está em `../referencia-ipca/revisao-anual.csv`. A referência de preços é congelada na extração e explicitada em todos os rótulos. Não há suposição de inflação futura.

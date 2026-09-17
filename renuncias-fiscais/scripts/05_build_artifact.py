@@ -54,6 +54,10 @@ for row in json.loads(apresentacao)["anos"]:
     if row.get("meses_origem") != coverage.get(str(row["ano"])) or not row.get("indice_origem"):
         sys.exit("Deflatores desatualizados: execute scripts/11_export_apresentacao.py")
 
+reference = json.load(open(os.path.join(ROOT, "data", "macro", "referencia-ipca.json"), encoding="utf-8"))
+if json.loads(apresentacao).get("referencia") != reference:
+    sys.exit("Referência IPCA desatualizada: execute scripts/11_export_apresentacao.py")
+
 # Dentro de <script type="application/json"> o navegador ainda procura por "</script>"
 # e por "<!--". "\/" é escape válido de JSON, então neutralizar "</" mantém o JSON
 # íntegro e impede o fechamento prematuro da tag.

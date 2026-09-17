@@ -401,7 +401,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     </div>
     <div class="card">
       <h2>Quanto foi registrado em renúncias por ano?</h2>
-      <p class="sub">2015–2024 · IPCA · valores em reais de dezembro de 2024</p>
+      <p class="sub">2015–2024 · IPCA · valores em reais de <span data-base-ipca></span></p>
       <p id="intro-total"></p>
       <div class="chartbox" id="intro-chart"></div>
       <p class="note"><b>2024 é parcial.</b> Neste acervo, os dados de importação vão até o primeiro semestre de 2024;
@@ -412,19 +412,20 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     </div>
     <div class="card">
       <h2>Como o valor se distribui por tipo de renúncia?</h2>
-      <p class="sub">Acumulado de 2015–2024, incluindo 2024 parcial · reais de dezembro de 2024 (IPCA)</p>
+      <p class="sub">Acumulado de 2015–2024, incluindo 2024 parcial · reais de <span data-base-ipca></span> (IPCA)</p>
       <div id="intro-tipos" aria-label="Composição por tipo de renúncia"></div>
       <p class="sub">Tipos da base, com rótulos abreviados. As participações usam o acumulado corrigido pelo IPCA;
         descrevem este acervo, não o universo de todos os benefícios tributários.</p>
     </div>
     <div class="card intro-copy">
       <h2>Como corrigimos os valores pela inflação?</h2>
-      <p>Nos dois gráficos desta aba, a referência é <b>dezembro de 2024</b>.
-        Multiplicamos o valor nominal de cada ano pelo número-índice do IPCA de dezembro de 2024,
+      <p>Nos dois gráficos desta aba, a referência é <b><span data-base-ipca></span></b>.
+        Multiplicamos o valor nominal de cada ano pelo número-índice do IPCA de <span data-base-ipca></span>,
         dividido pela média dos índices dos meses cobertos: <b>janeiro a dezembro para 2015–2023</b>
         e <b>janeiro a junho para 2024</b>. Depois, somamos os valores corrigidos.
-        Fonte: <a href="https://sidra.ibge.gov.br/tabela/1737" target="_blank" rel="noopener">IBGE/SIDRA, tabela 1737</a> e
-        <a id="intro-ipca-fonte" target="_blank" rel="noopener">boletim IPCA de dezembro de 2024, página 18</a>.</p>
+        Fonte da referência: <a id="intro-base-fonte" target="_blank" rel="noopener">IPCA mensal mais recente consultado no IBGE</a>.
+        Índices históricos: <a href="https://sidra.ibge.gov.br/tabela/1737" target="_blank" rel="noopener">IBGE/SIDRA, tabela 1737</a> e
+        <a id="intro-ipca-fonte" target="_blank" rel="noopener">boletim IPCA de dezembro de 2024, página 18 (índices de origem)</a>.</p>
       <p>Como não temos os valores fiscais mensais, a média do índice aproxima a distribuição ao longo
         do período coberto. Para 2024, usamos somente os seis meses do primeiro semestre.
         A correção não recupera a data de cada operação nem os tributos e meses ausentes. O IPCA compara poder de compra pela inflação ao consumidor;
@@ -513,7 +514,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
           importação, o mecanismo só aparece no fundamento. O agrupamento em
           <span id="foot-reg"></span> mecanismos é nosso, por regra explícita sobre esse texto;
           o fundamento original aparece sempre ao lado, sem interpretação.</p>
-        <p><b>Deflator.</b> A Apresentação expressa os valores em preços de <b>dezembro de 2024</b>.
+        <p><b>Deflator.</b> A Apresentação expressa os valores em preços de <b><span data-base-ipca></span></b>.
           No Resumo, a referência é a <b>média de janeiro a dezembro do ano selecionado</b>;
           no detalhe do ranking, é a <b>média de janeiro a dezembro de 2023</b>.
           Usamos o número-índice do IPCA (IBGE), dividido pela média dos índices dos meses cobertos na origem:
@@ -1059,24 +1060,26 @@ const rotuloFiltro = () => contexto().secao ? SECOES[contexto().secao] : "todos 
 const AP = __APRESENTACAO__;
 function renderApresentacao() {
   const moeda = v => fmtV(v, "nominal");
+  document.querySelectorAll("[data-base-ipca]").forEach(el => { el.textContent = AP.base; });
+  $("#intro-base-fonte").href = AP.referencia.fonte_periodo;
   $("#intro-cobertura").textContent = `O acervo reúne ${nfInt.format(AP.cnpjs)} CNPJs de ${ANOS[0]} a ${ANOS[NA-1]}, ` +
     `em arquivos atualizados em ${dataBR(P.meta.arquivo_atualizado_em)} e extraídos em ${dataBR(P.meta.extraido_em)}.`;
   $("#intro-total").innerHTML = `O acumulado do período é de <b>${esc(moeda(AP.total_real))}</b> em preços de ${esc(AP.base)}, ` +
     `incluindo o ano parcial. Em valores nominais, a soma é ${esc(moeda(AP.total_nominal))}.`;
   chartColunas($("#intro-chart"), {
     anos: AP.anos.map(r => r.ano - ANO0),
-    series: [{ nome: "Renúncias — R$ de dezembro/2024", cor: corSlot(0), vals: AP.anos.map(r => r.real) }],
+    series: [{ nome: `Renúncias — R$ de ${AP.base}`, cor: corSlot(0), vals: AP.anos.map(r => r.real) }],
     altura: 360, larguraMin: 620, parcial: IDX_PARCIAL, fmtEixo: (v,ref) => fmtEixo(v,ref,"nominal"), fmtTip: moeda,
-    aria: "Renúncias anuais de 2015 a 2024 em reais de dezembro de 2024. O ano de 2024 é parcial.",
+    aria: `Renúncias anuais de 2015 a 2024 em reais de ${AP.base}. O ano de 2024 é parcial.`,
   });
-  $("#intro-table").innerHTML = `<table><thead><tr><th>Ano</th><th class="n">Nominal</th><th class="n">Reais de dez/2024</th><th>Meses na origem</th><th class="n">Fator IPCA</th></tr></thead><tbody>` +
+  $("#intro-table").innerHTML = `<table><thead><tr><th>Ano</th><th class="n">Nominal</th><th class="n">Reais de ${esc(AP.base)}</th><th>Meses na origem</th><th class="n">Fator IPCA</th></tr></thead><tbody>` +
     AP.anos.map(r => `<tr><td>${r.ano}${r.parcial ? " (parcial)" : ""}</td><td class="n">${moeda(r.nominal)}</td><td class="n">${moeda(r.real)}</td><td>${r.meses_origem[1] === 6 ? "Jan–jun" : "Jan–dez"}/${r.ano}</td><td class="n">${r.fator.toLocaleString("pt-BR", {minimumFractionDigits:6,maximumFractionDigits:6})}</td></tr>`).join("") + `</tbody></table>`;
   const max = Math.max(...AP.tipos.map(r => r.real));
   $("#intro-tipos").innerHTML = AP.tipos.map(r => `<div class="intro-tipo">
     <div><b>${esc(r.tipo)}</b><span>${moeda(r.real)} · ${nf1.format(r.participacao*100)}%</span></div>
     <div class="intro-track"><i style="width:${r.real/max*100}%;background:${corSlot(0)}"></i></div></div>`).join("");
   $("#intro-ipca-fonte").href = AP.fonte_ipca;
-  $("#intro-diferenca").textContent = `Para o mesmo período e recorte, preços de dezembro de 2024 produzem valores ${nf2.format((AP.razao_dez2024_media2023-1)*100)}% maiores que preços médios de 2023.`;
+  $("#intro-diferenca").textContent = `Para o mesmo período e recorte, preços de ${AP.base} produzem valores ${nf2.format((AP.razao_base_media2023-1)*100)}% maiores que preços médios de 2023.`;
 }
 
 /* ---------------------------------------------------------- panorama -- */
@@ -1539,6 +1542,7 @@ function segLigar(sel, prop, depois) {
 
 function init() {
   montarNota2024();
+  document.querySelectorAll("[data-base-ipca]").forEach(el => { el.textContent = AP.base; });
 
   $("#sel-base").innerHTML = ANOS.map(a =>
     `<option value="${a}"${a === S.anoBase ? " selected" : ""}>Jan–dez/${a} (média)</option>`).join("");

@@ -1,17 +1,29 @@
 {
-  "base": "dezembro de 2024",
-  "base_mes": "2024-12",
-  "indice_base": 7100.5,
+  "base": "agosto de 2026",
+  "base_mes": "2026-08",
+  "indice_base": 7633.23,
+  "referencia": {
+    "base": "agosto de 2026",
+    "base_mes": "2026-08",
+    "indice_base": 7633.23,
+    "indice": "IPCA",
+    "variavel": "IPCA - Número-índice (base: dezembro de 1993 = 100)",
+    "fonte": "https://servicodados.ibge.gov.br/api/v3/agregados/1737/periodos/-1/variaveis/2266?localidades=N1[all]",
+    "fonte_periodo": "https://servicodados.ibge.gov.br/api/v3/agregados/1737/periodos/202608/variaveis/2266?localidades=N1[all]",
+    "consultado_em": "2026-09-17T21:49:53.269135+00:00",
+    "fonte_sha256": "bd41631cf89309ce5fc8acf13259b8971e537638af2060cd6e08292adaf5cb3e",
+    "criterio": "Último período disponível do IPCA mensal Brasil, SIDRA 1737, variável 2266; não IPCA-15 nem projeção."
+  },
   "fonte_ipca": "https://ftp.ibge.gov.br/Precos_Indices_de_Precos_ao_Consumidor/IPCA/Fasciculo_Indicadores_IBGE/2024/ipca-inpc_202412caderno.pdf",
   "fonte_ipca_pagina": 18,
   "fonte_ipca_sha256": "7adc4242ffcd4a113c5f76276074164fe5190d6a6f39c5a28f168326bf055a07",
-  "formula": "nominal do período × IPCA dezembro/2024 ÷ média dos índices dos meses cobertos (jan–dez/2015–2023; jan–jun/2024)",
+  "formula": "nominal do período × IPCA 2026-08 ÷ média dos índices dos meses cobertos (jan–dez/2015–2023; jan–jun/2024)",
   "anos": [
     {
       "ano": 2015,
       "nominal": 75130474306.9201,
-      "real": 123770112181.7466,
-      "fator": 1.6474022468715654,
+      "real": 133056226098.03163,
+      "fator": 1.7710020777251516,
       "indice_medio": 4310.119167,
       "indice_origem": 4310.119167,
       "meses_origem": [
@@ -23,8 +35,8 @@
     {
       "ano": 2016,
       "nominal": 78293599047.64989,
-      "real": 118615106582.96791,
-      "fator": 1.515003883149862,
+      "real": 127514455323.18965,
+      "fator": 1.6286702473031507,
       "indice_medio": 4686.786667,
       "indice_origem": 4686.786667,
       "meses_origem": [
@@ -36,8 +48,8 @@
     {
       "ano": 2017,
       "nominal": 70589542477.06003,
-      "real": 103380551211.11597,
-      "fator": 1.4645306880224114,
+      "real": 111136895277.9701,
+      "fator": 1.574410194174116,
       "indice_medio": 4848.310833,
       "indice_origem": 4848.310833,
       "meses_origem": [
@@ -49,8 +61,8 @@
     {
       "ano": 2018,
       "nominal": 100231849428.97006,
-      "real": 141603078559.72128,
-      "fator": 1.4127553204539962,
+      "real": 152227148419.74808,
+      "fator": 1.518750270368151,
       "indice_medio": 5025.994167,
       "indice_origem": 5025.994167,
       "meses_origem": [
@@ -62,8 +74,8 @@
     {
       "ano": 2019,
       "nominal": 119443351768.11014,
-      "real": 162671733605.80823,
-      "fator": 1.361915344787231,
+      "real": 174876523781.68628,
+      "fator": 1.4640959182156517,
       "indice_medio": 5213.613333,
       "indice_origem": 5213.613333,
       "meses_origem": [
@@ -75,8 +87,8 @@
     {
       "ano": 2020,
       "nominal": 159364427171.76987,
-      "real": 210286930347.52002,
-      "fator": 1.3195349431455219,
+      "real": 226064151163.5237,
+      "fator": 1.4185358374856265,
       "indice_medio": 5381.0625,
       "indice_origem": 5381.0625,
       "meses_origem": [
@@ -88,8 +100,8 @@
     {
       "ano": 2021,
       "nominal": 204743993624.77994,
-      "real": 249457722620.40607,
-      "fator": 1.218388477258922,
+      "real": 268173814807.0927,
+      "fator": 1.3098006444992776,
       "indice_medio": 5827.78,
       "indice_origem": 5827.78,
       "meses_origem": [
@@ -101,8 +113,8 @@
     {
       "ano": 2022,
       "nominal": 194697890917.4298,
-      "real": 217073056859.55817,
-      "fator": 1.1149224875354071,
+      "real": 233359421141.05844,
+      "fator": 1.198571900504175,
       "indice_medio": 6368.604167,
       "indice_origem": 6368.604167,
       "meses_origem": [
@@ -114,8 +126,8 @@
     {
       "ano": 2023,
       "nominal": 179358723369.85004,
-      "real": 191188700943.17352,
-      "fator": 1.0659570794832725,
+      "real": 205533036786.20663,
+      "fator": 1.145932759358369,
       "indice_medio": 6661.15,
       "indice_origem": 6661.15,
       "meses_origem": [
@@ -127,8 +139,8 @@
     {
       "ano": 2024,
       "nominal": 70645367450.0,
-      "real": 72887015719.28503,
-      "fator": 1.0317310016240144,
+      "real": 78355517921.12079,
+      "fator": 1.1091387977644496,
       "indice_medio": 6952.073333,
       "indice_origem": 6882.123333333333,
       "meses_origem": [
@@ -138,26 +150,26 @@
       "parcial": true
     }
   ],
-  "total_real": 1590934008631.3027,
+  "total_real": 1710297190719.628,
   "total_nominal": 1252499219562.5398,
   "tipos": [
     {
       "tipo": "Importação: PIS/Cofins",
-      "real": 776675545663.6316,
-      "participacao": 0.488188410989978
+      "real": 834947267858.0386,
+      "participacao": 0.48818841098997806
     },
     {
       "tipo": "Importação: II e IPI",
-      "real": 550907528306.4854,
-      "participacao": 0.3462793084550609
+      "real": 592240528455.026,
+      "participacao": 0.34627930845506083
     },
     {
       "tipo": "IRPJ/CSLL declarado",
-      "real": 263350934661.18597,
-      "participacao": 0.16553228055496128
+      "real": 283109394406.56354,
+      "participacao": 0.16553228055496125
     }
   ],
   "cnpjs": 77523,
-  "razao_dez2024_media2023": 1.0659570794832725,
-  "razao_dez2024_media2024": 1.0213499858086148
+  "razao_base_media2023": 1.145932759358369,
+  "razao_base_media2024": 1.0979789243255957
 }
