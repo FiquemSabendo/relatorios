@@ -1,0 +1,11 @@
+{
+  "descricao": "Meses cobertos pelo valor fiscal agregado, distintos da referência monetária de apresentação.",
+  "anos": {
+    "2015": [1, 12], "2016": [1, 12], "2017": [1, 12],
+    "2018": [1, 12], "2019": [1, 12], "2020": [1, 12],
+    "2021": [1, 12], "2022": [1, 12], "2023": [1, 12],
+    "2024": [1, 6]
+  },
+  "fonte": "https://portaldatransparencia.gov.br/entenda-a-gestao-publica/renuncias-fiscais",
+  "snapshot": "Arquivos atualizados em 05/12/2024; 2024 contém apenas importações do primeiro semestre. Rever a cobertura se a base fiscal for atualizada."
+}

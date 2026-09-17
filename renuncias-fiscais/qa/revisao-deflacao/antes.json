@@ -5,7 +5,7 @@
   "fonte_ipca": "https://ftp.ibge.gov.br/Precos_Indices_de_Precos_ao_Consumidor/IPCA/Fasciculo_Indicadores_IBGE/2024/ipca-inpc_202412caderno.pdf",
   "fonte_ipca_pagina": 18,
   "fonte_ipca_sha256": "7adc4242ffcd4a113c5f76276074164fe5190d6a6f39c5a28f168326bf055a07",
-  "formula": "nominal do período × IPCA dezembro/2024 ÷ média dos índices dos meses cobertos (jan–dez/2015–2023; jan–jun/2024)",
+  "formula": "nominal anual × IPCA dezembro/2024 ÷ média dos 12 índices mensais do ano de origem",
   "anos": [
     {
       "ano": 2015,
@@ -13,11 +13,6 @@
       "real": 123770112181.7466,
       "fator": 1.6474022468715654,
       "indice_medio": 4310.119167,
-      "indice_origem": 4310.119167,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
@@ -26,11 +21,6 @@
       "real": 118615106582.96791,
       "fator": 1.515003883149862,
       "indice_medio": 4686.786667,
-      "indice_origem": 4686.786667,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
@@ -39,11 +29,6 @@
       "real": 103380551211.11597,
       "fator": 1.4645306880224114,
       "indice_medio": 4848.310833,
-      "indice_origem": 4848.310833,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
@@ -52,11 +37,6 @@
       "real": 141603078559.72128,
       "fator": 1.4127553204539962,
       "indice_medio": 5025.994167,
-      "indice_origem": 5025.994167,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
@@ -65,11 +45,6 @@
       "real": 162671733605.80823,
       "fator": 1.361915344787231,
       "indice_medio": 5213.613333,
-      "indice_origem": 5213.613333,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
@@ -78,11 +53,6 @@
       "real": 210286930347.52002,
       "fator": 1.3195349431455219,
       "indice_medio": 5381.0625,
-      "indice_origem": 5381.0625,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
@@ -91,11 +61,6 @@
       "real": 249457722620.40607,
       "fator": 1.218388477258922,
       "indice_medio": 5827.78,
-      "indice_origem": 5827.78,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
@@ -104,11 +69,6 @@
       "real": 217073056859.55817,
       "fator": 1.1149224875354071,
       "indice_medio": 6368.604167,
-      "indice_origem": 6368.604167,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
@@ -117,44 +77,34 @@
       "real": 191188700943.17352,
       "fator": 1.0659570794832725,
       "indice_medio": 6661.15,
-      "indice_origem": 6661.15,
-      "meses_origem": [
-        1,
-        12
-      ],
       "parcial": false
     },
     {
       "ano": 2024,
       "nominal": 70645367450.0,
-      "real": 72887015719.28503,
-      "fator": 1.0317310016240144,
+      "real": 72153645042.50188,
+      "fator": 1.0213499858086148,
       "indice_medio": 6952.073333,
-      "indice_origem": 6882.123333333333,
-      "meses_origem": [
-        1,
-        6
-      ],
       "parcial": true
     }
   ],
-  "total_real": 1590934008631.3027,
+  "total_real": 1590200637954.5198,
   "total_nominal": 1252499219562.5398,
   "tipos": [
     {
       "tipo": "Importação: PIS/Cofins",
-      "real": 776675545663.6316,
-      "participacao": 0.488188410989978
+      "real": 776219953528.1453,
+      "participacao": 0.4881270545373441
     },
     {
       "tipo": "Importação: II e IPI",
-      "real": 550907528306.4854,
-      "participacao": 0.3462793084550609
+      "real": 550629749765.1886,
+      "participacao": 0.3462643245279196
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "real": 263350934661.18597,
-      "participacao": 0.16553228055496128
+      "participacao": 0.16560862093473636
     }
   ],
   "cnpjs": 77523,

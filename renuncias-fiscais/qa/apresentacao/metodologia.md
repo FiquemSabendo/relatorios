@@ -8,14 +8,15 @@ Implementação em 17/09/2026. Pedido: primeira aba explicativa com evolução a
 - Dicionário: https://portaldatransparencia.gov.br/dicionario-de-dados/renuncias
 - Cobertura: https://portaldatransparencia.gov.br/entenda-a-gestao-publica/renuncias-fiscais
 - LRF, art. 14: https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm#art14
-- Exemplo histórico, não data inaugural universal: Decreto-Lei 288/1967, https://www.planalto.gov.br/ccivil_03/decreto-lei/del0288.htm
 - IPCA: SIDRA 1737, variável 2266; boletim oficial https://ftp.ibge.gov.br/Precos_Indices_de_Precos_ao_Consumidor/IPCA/Fasciculo_Indicadores_IBGE/2024/ipca-inpc_202412caderno.pdf, página 18. PDF arquivado e hash no JSON de saída. A API SIDRA devolveu HTTP 403 nesta consulta; usamos o boletim primário, sem estimar índices ausentes.
 
 Dicionário e documentação da base já auditados em qa/2026-09-17/reconhecimento.md; dicionário e download reabertos nesta execução. O texto de cobertura reaproveita a documentação arquivada, pois a página explicativa respondeu 405 na ferramenta web. O ano é o fato gerador, segundo a explicação oficial; o dicionário tem descrição imprecisa sobre ano da declaração. Cadastro/habilitação não é renúncia usufruída. Os tipos usados são os três rótulos abreviados de dim_item.tipo_curto, preservando todos os registros do banco.
 
 ## Cálculo
 
-`real_ano = nominal_ano × índice_dez2024 / média_índices_mensais_ano`.
+`real_período = nominal_período × índice_dez2024 / média_índices_meses_cobertos`.
+
+Cobertura explícita em `data/macro/cobertura-deflacao.json`: janeiro–dezembro para 2015–2023; janeiro–junho para 2024. A média de origem de 2024 é 6882,123333333333. A média dos 12 meses de 2024 continua válida como uma referência de apresentação selecionável no Resumo, mas não é mais o denominador do fluxo parcial. O build bloqueia uma configuração de cobertura incompatível com os deflatores exportados.
 Índice dezembro/2024 = 7100,50 (dezembro/1993 = 100), extraído por script da tabela IPCA do PDF. Médias de 2020–2024 conferidas contra os 12 índices do mesmo boletim; anos anteriores mantêm a série SIDRA já validada do pipeline. Não usamos IPCA-15, inflação anual arredondada, nem corrigimos novamente valores já reais.
 
 O exportador 11_export_apresentacao.py consulta mart_ano e fato_item_ano + dim_item no DuckDB. Corrige cada ano antes de acumular por tipo. Totais dos tipos reconciliados com mart_ano em cada ano (tolerância numérica de R$ 0,05, pois o banco usa DOUBLE), e soma real dos tipos reconciliada com soma da série. O detalhe da auditoria anterior reconciliou os brutos em centavos.
@@ -36,12 +37,16 @@ O payload do explorador arredonda valores para reais inteiros. Ao confrontar o c
 
 ## Suposições e limites
 
-A média anual aproxima a distribuição temporal dos valores anuais. Também foi mantida para 2024, cuja cobertura é parcial; isso é explicitado na página. Sem os valores mensais, não é possível corrigir cada operação no mês exato. Concentração dos valores em meses específicos pode mudar o resultado da correção. A verificação exigiria microdados mensais e os índices dos meses correspondentes.
+A média dos meses cobertos aproxima a distribuição temporal dos valores. Para 2024, corrigimos a implementação anterior: agora usa janeiro–junho, conforme a cobertura documentada do snapshot. O mesmo índice de origem é usado na Apresentação, no Resumo e no detalhe das empresas; a referência monetária de cada aba é preservada. Sem os valores mensais, não é possível corrigir cada operação no mês exato. Concentração dos valores em meses específicos pode mudar o resultado da correção. A verificação exigiria microdados mensais e os índices dos meses correspondentes.
 
-Os registros de origem, inclusive negativos, repetições preservadas na auditoria anterior e identificação inválida, não foram descartados. A reconciliação não confirma a ausência de erros na fonte. Os conceitos não autorizam generalizar este total para todas as renúncias brasileiras, nem inferir que benefícios históricos continuam vigentes. O IPCA mede inflação ao consumidor, não eficácia dos incentivos.
+Os registros de origem, inclusive negativos, repetições preservadas na auditoria anterior e identificação inválida, não foram descartados. A reconciliação não confirma a ausência de erros na fonte. Os conceitos não autorizam generalizar este total para todas as renúncias brasileiras, nem inferir a vigência atual de benefícios históricos. O IPCA mede inflação ao consumidor, não eficácia dos incentivos.
 
 ## Interface
 
 JavaScript validado com node --check. Navegador: aba inicial, dez anos, três tipos, indicação de parcial, independência dos filtros, navegação entre três abas, preservação de ranking nominal, detalhe em média/2023, todos os 62 estabelecimentos da Petrobras e ausência de erros JS. Capturas em 1300 e 420 px. Gráfico anual com rolagem horizontal em telas estreitas para manter os anos legíveis.
 
 Reprodução: `python3 renuncias-fiscais/scripts/11_export_apresentacao.py` e `python3 renuncias-fiscais/scripts/05_build_artifact.py`.
+
+## Revisão dos valores
+
+A revisão e os valores antes/depois de todos os anos estão em `../revisao-deflacao/revisao-anual.csv`. A série 2015–2023 não muda na Apresentação. 2024 passa de R$ 72.153.645.042,50 a R$ 72.887.015.719,29 em preços de dezembro/2024 (+1,0164%). O acumulado real passa a R$ 1.590.934.008.631,30. Valores nominais e razões nominais/PIB não mudam. O snapshot anterior está preservado em `../revisao-deflacao/antes.json`; não é dado vigente.

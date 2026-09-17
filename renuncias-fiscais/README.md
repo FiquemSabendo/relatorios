@@ -27,13 +27,14 @@ bash   scripts/01_download.sh      # baixa e extrai os ZIPs de 2015 a 2024
 python3 scripts/02_macro.py        # IPCA e PIB via API do SIDRA/IBGE
 duckdb renuncias.duckdb < scripts/03_build_db.sql
 python3 scripts/04_export_payload.py   # artifact/payload.json
+python3 scripts/11_export_apresentacao.py # apresentação e índices dos períodos cobertos
 python3 scripts/05_build_artifact.py   # artifact/renuncias.html e ../docs/renuncias-fiscais/index.html
 ```
 
 O GitHub Pages serve a pasta `docs/` da raiz do repositório a partir da branch `main`;
 publicar é fazer commit do arquivo gerado.
 
-Requisitos: `curl`, `unzip`, `duckdb` (CLI) e o módulo Python `duckdb`. Sem pandas.
+Requisitos: `curl`, `unzip`, `duckdb` (CLI) e os módulos Python `duckdb` e `pypdf`. Sem pandas.
 
 Para atualizar quando o Portal publicar um novo ano: apague `data/raw/zips/`, rode tudo
 de novo e ajuste `ANO_PARCIAL` em `scripts/04_export_payload.py` se o ano mais recente
@@ -186,3 +187,16 @@ o ranking e limitações estão em [qa/apresentacao/metodologia.md](qa/apresenta
 No Resumo, preços reais usam a média janeiro–dezembro do ano escolhido; no detalhe do ranking,
 a média janeiro–dezembro de 2023. O ranking principal permanece nominal. Esses rótulos são
 explícitos na interface; a base dezembro/2024 não foi aplicada às demais abas.
+
+### Cobertura temporal do deflator
+
+Regra vigente em todas as visualizações reais: média de janeiro–dezembro na origem para
+2015–2023; média de janeiro–junho para 2024. A cobertura fica em
+`data/macro/cobertura-deflacao.json`; o exportador 11 gera os índices de origem e o
+conversor comum do site os aplica no Resumo e no detalhe do ranking. A referência
+monetária de apresentação é independente dessa cobertura. Não substituir a média
+anual de referência em `data/macro/ipca.csv` pela média semestral.
+
+Depois de alterar cobertura ou dados fiscais: executar `11_export_apresentacao.py` antes
+de `05_build_artifact.py`. A construção do HTML verifica a compatibilidade da cobertura
+com o JSON gerado. Revalidar a configuração se o snapshot fiscal for atualizado.

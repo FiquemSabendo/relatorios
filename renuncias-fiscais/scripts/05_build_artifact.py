@@ -6,6 +6,7 @@ Saídas (idênticas):
   ../docs/renuncias-fiscais/index.html — o que o GitHub Pages serve
 """
 import base64
+import json
 import os
 import sys
 
@@ -46,6 +47,12 @@ def font_css():
 tpl = open(TPL, encoding="utf-8").read()
 pay = open(PAY, encoding="utf-8").read()
 apresentacao = open(os.path.join(ROOT, "artifact", "apresentacao.json"), encoding="utf-8").read()
+
+# Impede publicar a configuração de cobertura com deflatores antigos.
+coverage = json.load(open(os.path.join(ROOT, "data", "macro", "cobertura-deflacao.json"), encoding="utf-8"))["anos"]
+for row in json.loads(apresentacao)["anos"]:
+    if row.get("meses_origem") != coverage.get(str(row["ano"])) or not row.get("indice_origem"):
+        sys.exit("Deflatores desatualizados: execute scripts/11_export_apresentacao.py")
 
 # Dentro de <script type="application/json"> o navegador ainda procura por "</script>"
 # e por "<!--". "\/" é escape válido de JSON, então neutralizar "</" mantém o JSON

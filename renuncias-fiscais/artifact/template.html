@@ -388,12 +388,6 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         atividades, regiões ou objetivos de política pública. Não são transferências de dinheiro às empresas.
         A <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm#art14" target="_blank" rel="noopener">Lei de Responsabilidade Fiscal, de 2000 (art. 14)</a>
         trata da concessão e ampliação desses benefícios.</p>
-      <h3>Desde quando existem?</h3>
-      <p>Não há uma data única: cada benefício tem sua própria lei, condições e prazo de vigência.
-        Há incentivos anteriores ao período deste levantamento — por exemplo, o
-        <a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del0288.htm" target="_blank" rel="noopener">Decreto-Lei 288, de 1967</a>
-        regulou incentivos da Zona Franca de Manaus. O início da série em 2015 não é a data de criação das renúncias,
-        nem indica que todos os benefícios apresentados continuam vigentes hoje.</p>
       <h3>O que esta base reúne?</h3>
       <p>São registros da Receita Federal divulgados pelo Portal da Transparência, por CNPJ e ano-calendário,
         com valores, tipos de renúncia, tributos, benefícios e fundamentos legais. O ano se refere ao fato gerador,
@@ -427,12 +421,13 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <h2>Como corrigimos os valores pela inflação?</h2>
       <p>Nos dois gráficos desta aba, a referência é <b>dezembro de 2024</b>.
         Multiplicamos o valor nominal de cada ano pelo número-índice do IPCA de dezembro de 2024,
-        dividido pela média dos 12 índices mensais do ano de origem. Depois, somamos os valores corrigidos.
+        dividido pela média dos índices dos meses cobertos: <b>janeiro a dezembro para 2015–2023</b>
+        e <b>janeiro a junho para 2024</b>. Depois, somamos os valores corrigidos.
         Fonte: <a href="https://sidra.ibge.gov.br/tabela/1737" target="_blank" rel="noopener">IBGE/SIDRA, tabela 1737</a> e
         <a id="intro-ipca-fonte" target="_blank" rel="noopener">boletim IPCA de dezembro de 2024, página 18</a>.</p>
-      <p>Como os valores fiscais são anuais, a média do índice aproxima a distribuição ao longo do ano.
-        A correção não recupera a data de cada operação. Em 2024, também usamos a média anual: é uma aproximação
-        adicional para registros que cobrem apenas parte do ano. O IPCA compara poder de compra pela inflação ao consumidor;
+      <p>Como não temos os valores fiscais mensais, a média do índice aproxima a distribuição ao longo
+        do período coberto. Para 2024, usamos somente os seis meses do primeiro semestre.
+        A correção não recupera a data de cada operação nem os tributos e meses ausentes. O IPCA compara poder de compra pela inflação ao consumidor;
         não mede o retorno econômico dos incentivos.</p>
       <p><b>As bases de preços variam entre as abas.</b> No Resumo, “Real” usa a média de janeiro a dezembro
         do ano escolhido. No ranking, os valores são nominais; ao abrir uma empresa, “Real” usa a média de
@@ -521,8 +516,8 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         <p><b>Deflator.</b> A Apresentação expressa os valores em preços de <b>dezembro de 2024</b>.
           No Resumo, a referência é a <b>média de janeiro a dezembro do ano selecionado</b>;
           no detalhe do ranking, é a <b>média de janeiro a dezembro de 2023</b>.
-          Usamos o número-índice do IPCA (IBGE), dividido pela média anual do índice no ano de origem,
-          como aproximação para os fluxos anuais. O ranking principal usa valores nominais.</p>
+          Usamos o número-índice do IPCA (IBGE), dividido pela média dos índices dos meses cobertos na origem:
+          janeiro–dezembro para 2015–2023 e janeiro–junho para 2024, em todas as abas. O ranking principal usa valores nominais.</p>
         <p><b>% do PIB.</b> PIB nominal anual = soma dos quatro trimestres a preços correntes
           (IBGE, tabela SIDRA 1846). Nessa medida o resumo do período é a <b>média anual</b>,
           não a soma: somar percentuais de anos diferentes não significa nada.</p>
@@ -806,7 +801,7 @@ const DET = { medida: "nominal", anoBase: 2023 };
 const anosAtivos = () => contexto().incluir2024 ? NA : IDX_PARCIAL;
 
 function conv(v, a, medida = contexto().medida, anoBase = contexto().anoBase) {
-  if (medida === "real") return v * IPCA[anoBase - ANO0] / IPCA[a];
+  if (medida === "real") return v * IPCA[anoBase - ANO0] / AP.anos[a].indice_origem;
   if (medida === "pib")  return PIB[a] ? v / PIB[a] * 100 : 0;
   return v;
 }
@@ -1074,8 +1069,8 @@ function renderApresentacao() {
     altura: 360, larguraMin: 620, parcial: IDX_PARCIAL, fmtEixo: (v,ref) => fmtEixo(v,ref,"nominal"), fmtTip: moeda,
     aria: "Renúncias anuais de 2015 a 2024 em reais de dezembro de 2024. O ano de 2024 é parcial.",
   });
-  $("#intro-table").innerHTML = `<table><thead><tr><th>Ano</th><th class="n">Nominal</th><th class="n">Reais de dez/2024</th><th class="n">Fator IPCA</th></tr></thead><tbody>` +
-    AP.anos.map(r => `<tr><td>${r.ano}${r.parcial ? " (parcial)" : ""}</td><td class="n">${moeda(r.nominal)}</td><td class="n">${moeda(r.real)}</td><td class="n">${r.fator.toLocaleString("pt-BR", {minimumFractionDigits:6,maximumFractionDigits:6})}</td></tr>`).join("") + `</tbody></table>`;
+  $("#intro-table").innerHTML = `<table><thead><tr><th>Ano</th><th class="n">Nominal</th><th class="n">Reais de dez/2024</th><th>Meses na origem</th><th class="n">Fator IPCA</th></tr></thead><tbody>` +
+    AP.anos.map(r => `<tr><td>${r.ano}${r.parcial ? " (parcial)" : ""}</td><td class="n">${moeda(r.nominal)}</td><td class="n">${moeda(r.real)}</td><td>${r.meses_origem[1] === 6 ? "Jan–jun" : "Jan–dez"}/${r.ano}</td><td class="n">${r.fator.toLocaleString("pt-BR", {minimumFractionDigits:6,maximumFractionDigits:6})}</td></tr>`).join("") + `</tbody></table>`;
   const max = Math.max(...AP.tipos.map(r => r.real));
   $("#intro-tipos").innerHTML = AP.tipos.map(r => `<div class="intro-tipo">
     <div><b>${esc(r.tipo)}</b><span>${moeda(r.real)} · ${nf1.format(r.participacao*100)}%</span></div>

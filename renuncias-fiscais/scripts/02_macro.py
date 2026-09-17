@@ -2,8 +2,10 @@
 """Baixa as séries macro usadas para deflacionar e normalizar as renúncias.
 
 IPCA  : SIDRA tabela 1737, variável 2266 — número-índice mensal (dez/1993 = 100).
-        Consolidado pela MÉDIA ANUAL do índice, que é o deflator correto para um
-        fluxo distribuído ao longo do ano (usar dezembro superestima a correção).
+        Consolidado pela MÉDIA ANUAL para referências de preços anuais.
+        O denominador dos fluxos respeita os meses cobertos: ver
+        data/macro/cobertura-deflacao.json e 11_export_apresentacao.py.
+        Não usar a média anual como denominador de um agregado semestral.
 PIB   : SIDRA tabela 1846, variável 585, categoria 90707 — PIB a preços de mercado,
         valores correntes, trimestral, em R$ milhões. Consolidado pela soma dos
         4 trimestres do ano.

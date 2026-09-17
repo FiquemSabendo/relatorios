@@ -29,22 +29,36 @@ assert [r[0] for r in macro] == list(range(2015,2025))
 for y, _, idx in macro:
     if y in monthly: assert abs(sum(monthly[y])/12-idx) < 0.0001
 means = {y:idx for y,_,idx in macro}
+coverage = json.loads((ROOT/'data/macro/cobertura-deflacao.json').read_text())['anos']
+assert set(coverage) == {str(y) for y in means}, 'Cobertura precisa ser explícita para todos os anos'
+origins = {}
+for y, idx in means.items():
+    first, last = coverage[str(y)]
+    assert 1 <= first <= last <= 12
+    if (first, last) == (1, 12):
+        origins[y] = idx
+    else:
+        assert y in monthly, f'Faltam índices mensais para o período parcial {y}'
+        covered = monthly[y][first-1:last]
+        assert len(covered) == last-first+1
+        origins[y] = sum(covered)/len(covered)
+
 rows = con.execute('''SELECT f.ano, i.tipo_curto, sum(f.valor) FROM fato_item_ano f
  JOIN dim_item i USING(item_id) GROUP BY 1,2 ORDER BY 1,2''').fetchall()
 by_type = defaultdict(float)
 by_year = defaultdict(float)
 for y, tipo, nominal in rows:
-    by_type[tipo] += nominal * base / means[y]
+    by_type[tipo] += nominal * base / origins[y]
     by_year[y] += nominal
 annual = []
 for y, nominal, idx in macro:
     assert abs(by_year[y]-nominal) < 0.05, (y, by_year[y]-nominal)
-    annual.append(dict(ano=y,nominal=nominal,real=nominal*base/idx,fator=base/idx,indice_medio=idx,parcial=y==2024))
+    annual.append(dict(ano=y,nominal=nominal,real=nominal*base/origins[y],fator=base/origins[y],indice_medio=idx,indice_origem=origins[y],meses_origem=coverage[str(y)],parcial=y==2024))
 total = sum(r['real'] for r in annual)
 assert abs(sum(by_type.values())-total)<0.05
 out = dict(base='dezembro de 2024',base_mes='2024-12',indice_base=base,
  fonte_ipca=URL,fonte_ipca_pagina=18,fonte_ipca_sha256=hashlib.sha256(PDF.read_bytes()).hexdigest(),
- formula='nominal anual × IPCA dezembro/2024 ÷ média dos 12 índices mensais do ano de origem',
+ formula='nominal do período × IPCA dezembro/2024 ÷ média dos índices dos meses cobertos (jan–dez/2015–2023; jan–jun/2024)',
  anos=annual,total_real=total,total_nominal=sum(r['nominal'] for r in annual),
  tipos=[dict(tipo=t,real=v,participacao=v/total) for t,v in sorted(by_type.items(),key=lambda x:-x[1])],
  cnpjs=con.execute('select count(*) from dim_estab').fetchone()[0],
