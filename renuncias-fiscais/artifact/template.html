@@ -1283,19 +1283,13 @@ function detalheHTML(g) {
   const noAno = F.vals[g * NA + a23];
   const rank = F.idx.filter(o => F.vals[o * NA + a23] > noAno).length + 1;
   const share = F.totalAno[a23] ? noAno / F.totalAno[a23] * 100 : 0;
-  const info = CNAE.get(E.cnae[g]) || { desc: "Sem informação" };
   const setor = setorDetalhado(E.principal[g]);
 
   return `<div class="detbox">
     <div class="cardhead">
       <div>
         <h3 class="dtitle">${esc(E.nome[g])}</h3>
-        <div class="dmeta"><span class="mono">${esc(E.chave[g])}/…</span>
-          · ${esc(E.mun[g])}/${esc(E.uf[g])} · ${esc(info.desc)}
-          ${E.nEstab[g] > 1 ? ` · <b>${E.nEstab[g]} estabelecimentos</b>` : ""}</div>
-        <p class="dmeta"><b>Setor: ${esc(setor.nome)}.</b> Atividade: ${esc(setor.atividade)}. ${esc(setor.origem)}.
-          Evidência: ${esc(setor.evidencia)}.
-          ${setor.fonte.startsWith("https://") ? `<a href="${esc(setor.fonte)}" target="_blank" rel="noopener">Fonte da classificação</a>` : esc(setor.fonte)}</p>
+        <div class="dmeta"><b>${E.nEstab[g]} ${E.nEstab[g] === 1 ? "estabelecimento" : "estabelecimentos"}</b></div>
       </div>
     </div>
 
@@ -1327,6 +1321,10 @@ function detalheHTML(g) {
     </div>
     <h4>Origem: o fundamento legal de cada renúncia</h4>
     <div class="tablewrap" id="det-fund"></div>
+    <h4>Estabelecimentos do grupo</h4>
+        <p class="dmeta"><b>Setor: ${esc(setor.nome)}.</b> Atividade: ${esc(setor.atividade)}. ${esc(setor.origem)}.
+          Evidência: ${esc(setor.evidencia)}.
+          ${setor.fonte.startsWith("https://") ? `<a href="${esc(setor.fonte)}" target="_blank" rel="noopener">Fonte da classificação</a>` : esc(setor.fonte)}</p>
     <div id="det-estabs"></div>
   </div>`;
 }
@@ -1372,13 +1370,12 @@ function montarDetalhe(g) {
       <td class="n">${esc(fmtV(l.v))}</td>
       <td class="n">${nfInt.format(l.v / totalEmp * 100)}%</td></tr>`).join("") + `</tbody></table>`;
 
-  if (E.nEstab[g] > 1) {
-    const ms = E.membros[g].filter(passaEstab).map(e => {
+  {
+    const ms = (E.membros ? E.membros[g] : [g]).filter(passaEstab).map(e => {
       const vs = anos.map(a => conv(D.vals[e * NA + a], a));
       return { e, t: agrega(vs) };
     }).sort((a, b) => b.t - a.t);
-    $("#det-estabs").innerHTML = `<h4>Estabelecimentos do grupo</h4>
-      <div class="tablewrap"><table><thead><tr><th>CNPJ</th><th>Município</th><th>UF</th>
+    $("#det-estabs").innerHTML = `<div class="tablewrap"><table><thead><tr><th>CNPJ</th><th>Município</th><th>UF</th>
       <th class="n">Acumulado 2015–2024 (inclui parcial)</th></tr></thead><tbody>` +
       ms.slice(0, 15).map(o => `<tr>
         <td><span class="mono" style="font-size:12px">${esc(cnpjFmt(D.cnpj[o.e]))}</span>
