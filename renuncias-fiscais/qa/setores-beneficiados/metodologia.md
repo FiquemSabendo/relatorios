@@ -9,3 +9,9 @@ Há 39 categorias editoriais e 19 seções/categorias CNAE presentes no acervo. 
 Maiores Beneficiários mantém os indicadores de concentração em valores corrigidos e passa a conter o ranking completo nominal, com busca e expansão. A tabela estática de top 20 e a aba Ranking foram removidas. Links antigos #ranking abrem #beneficiarios.
 
 Verificação no navegador: seletor altera gráfico e tabela; busca por raiz retorna Petrobras; expansão mantém rótulos anuais e gráficos lado a lado; todas as abas abrem sem erro JavaScript. Inspeção visual desktop 1300 px e celular 420 px.
+
+## Evolução anual interativa
+
+A seção anual exibe linhas para os cinco maiores setores identificados pelo acumulado, inicialmente. Menu com seleção múltipla permite incluir/remover qualquer categoria, inclusive sem informação. Editorial e CNAE guardam seleções independentes durante a sessão. As séries usam os valores anuais já conciliados; não há nova agregação nem deflação. O segmento de 2023 para 2024 é tracejado para sinalizar o período parcial. Tabela de todas as categorias preservada em “Ver todos os valores por ano”.
+
+QA: cinco séries iniciais e dez pontos por série; inclusão/remoção; seleção vazia; troca entre classificações; preservação da seleção; ausência de erros JS; inspeção visual desktop e celular.

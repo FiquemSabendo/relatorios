@@ -311,6 +311,12 @@ tr.det > td { padding: 0; border-bottom: 1px solid var(--line); }
 .detcols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; }
 #det-chart { overflow-x: auto; }
 #det-chart svg { max-width: none; }
+#setores-evolucao-chart { overflow-x: auto; }
+#setores-evolucao-chart svg { max-width: none; }
+.setores-menu { margin: 16px 0; max-width: 480px; border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+.setores-menu summary { cursor: pointer; }
+#setores-opcoes { max-height: 280px; overflow-y: auto; padding-top: 8px; }
+#setores-opcoes label { display: flex; gap: 8px; align-items: center; padding: 6px 0; }
 .detbox table { font-size: 13px; }
 .detbox .tablewrap { max-height: 460px; overflow: auto; }
 .detbox th { position: sticky; top: 0; background: var(--surface-2); z-index: 1; }
@@ -648,9 +654,15 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     </div>
     <div class="card">
       <h2>Renúncias por setor e ano</h2>
-      <p class="sub">Todos os setores · valores em reais de <span data-base-ipca></span> (IPCA) · ordenados pelo acumulado de 2015–2024</p>
-      <p class="note">2024 é parcial: cobre apenas a importação no primeiro semestre e não é diretamente comparável aos anos completos. Deslize a tabela horizontalmente para consultar todos os anos.</p>
-      <div class="tablewrap" id="ben-evolucao-table"></div>
+      <p class="sub">Cinco maiores setores identificados selecionados inicialmente, pelo acumulado 2015–2024 · valores em reais de <span data-base-ipca></span> (IPCA)</p>
+      <details class="setores-menu" id="setores-menu">
+        <summary>Selecionar setores <span id="setores-contagem"></span></summary>
+        <div id="setores-opcoes"></div>
+      </details>
+      <div class="chartbox" id="setores-evolucao-chart"></div>
+      <div class="legend" id="setores-evolucao-legenda"></div>
+      <p class="note">2024 é parcial: cobre apenas a importação no primeiro semestre e não é diretamente comparável aos anos completos. O trecho tracejado indica essa cobertura parcial.</p>
+      <details><summary>Ver todos os valores por ano</summary><div class="tablewrap" id="ben-evolucao-table"></div></details>
     </div>
   </section>
 
@@ -2773,9 +2785,48 @@ function renderConcentracao() {
   $("#ben-concentracao-table").innerHTML = `<table><thead><tr><th>Grupo</th><th class="n">Beneficiários<br>${incluir ? "Com" : "Sem"} Petrobras</th><th class="n">Renúncias do grupo<br>${incluir ? "Com" : "Sem"} Petrobras</th><th class="n">% do total<br>Com Petrobras${incluir ? " ✓" : ""}</th><th class="n">% do total<br>Sem Petrobras${incluir ? "" : " ✓"}</th></tr></thead><tbody>` + atual.faixas.map((r,i) => `<tr><td>Maiores ${faixa(r.percentual_beneficiarios)}</td><td class="n">${nfInt.format(r.quantidade)}</td><td class="n">${moeda(r.valor)}</td><td class="n">${nf1.format(C.com_petrobras.faixas[i].percentual_renuncias)}%</td><td class="n">${nf1.format(C.sem_petrobras.faixas[i].percentual_renuncias)}%</td></tr>`).join("") + `</tbody></table>`;
 }
 
+const selecaoSetores = new Map();
+function dadosSetores() {
+  return $("#setores-classificacao").value === "cnae" ? AP.beneficiarios.setores_cnae : AP.beneficiarios.setores;
+}
+function renderEvolucaoSetores() {
+  const tipo = $("#setores-classificacao").value, todos = dadosSetores();
+  if (!selecaoSetores.has(tipo)) selecaoSetores.set(tipo, new Set(todos.filter(r => !["Não identificado","Sem informação"].includes(r.setor)).slice(0,5).map(r=>r.setor)));
+  const selecionados = selecaoSetores.get(tipo);
+  $("#setores-contagem").textContent = `(${selecionados.size})`;
+  $("#setores-opcoes").innerHTML = todos.map((r,i)=>`<label><input type="checkbox" data-setor="${i}" ${selecionados.has(r.setor)?"checked":""}> ${esc(r.setor)}</label>`).join("");
+  const rows = todos.filter(r=>selecionados.has(r.setor));
+  const box = $("#setores-evolucao-chart"); box.innerHTML = "";
+  $("#setores-evolucao-legenda").innerHTML = "";
+  if (!rows.length) { box.innerHTML = `<p class="empty">Selecione pelo menos um setor para visualizar a evolução.</p>`; return; }
+  const W = Math.max(700,box.clientWidth), H = 360, M = {l:80,r:28,t:20,b:42};
+  const valores = rows.flatMap(r=>r.valores), minimo = Math.min(0,...valores), maximo = Math.max(1,...valores)*1.08;
+  const x = i=>M.l+(W-M.l-M.r)*i/(ANOS.length-1);
+  const y = v=>M.t+(H-M.t-M.b)*(maximo-v)/(maximo-minimo);
+  const svg = sv("svg",{width:W,height:H,role:"img","aria-label":`Evolução anual de ${rows.length} setores selecionados, 2015 a 2024; 2024 parcial.`},box);
+  for (let i=0;i<=5;i++) {
+    const v=minimo+(maximo-minimo)*i/5;
+    sv("line",{class:"gridline",x1:M.l,x2:W-M.r,y1:y(v),y2:y(v)},svg);
+    sv("text",{class:"axis-txt",x:M.l-10,y:y(v)+4,"text-anchor":"end"},svg).textContent=fmtV(v,"nominal");
+  }
+  ANOS.forEach((ano,i)=>sv("text",{class:"axis-txt",x:x(i),y:H-12,"text-anchor":"middle"},svg).textContent=ano===ANO_PARCIAL?`${ano}*`:ano);
+  rows.forEach((r,k)=>{
+    const cor=corSlot(k), dash=k<CORES.length?"":k<CORES.length*2?"8 3":"2 3";
+    const caminho = indices=>indices.map((i,j)=>`${j?"L":"M"}${x(i)},${y(r.valores[i])}`).join(" ");
+    sv("path",{d:caminho(ANOS.map((_,i)=>i).filter(i=>i<IDX_PARCIAL)),fill:"none",stroke:cor,"stroke-width":2.5,"stroke-dasharray":dash},svg);
+    sv("path",{d:caminho([IDX_PARCIAL-1,IDX_PARCIAL]),fill:"none",stroke:cor,"stroke-width":2.5,"stroke-dasharray":"5 5"},svg);
+    r.valores.forEach((v,i)=>{
+      const dot=sv("circle",{cx:x(i),cy:y(v),r:3,fill:cor},svg);
+      sv("title",{},dot).textContent=`${r.setor} · ${ANOS[i]}${i===IDX_PARCIAL?" (parcial)":""}: ${fmtV(v,"nominal")}`;
+    });
+    $("#setores-evolucao-legenda").insertAdjacentHTML("beforeend",`<span class="li"><svg width="24" height="12" aria-hidden="true"><line x1="0" x2="24" y1="6" y2="6" stroke="${cor}" stroke-width="3" stroke-dasharray="${dash}"/></svg>${esc(r.setor)}</span>`);
+  });
+}
+
 function renderSetores() {
   const moeda = v => fmtV(v,"nominal");
-  const setores = $("#setores-classificacao").value === "cnae" ? AP.beneficiarios.setores_cnae : AP.beneficiarios.setores;
+  const setores = dadosSetores();
+  renderEvolucaoSetores();
   const identificados = setores.filter(r=>!["Não identificado","Sem informação"].includes(r.setor)), top=identificados.slice(0,10), max=Math.max(...top.map(r=>r.real),1);
   $("#ben-setores").innerHTML = top.map(r=>`<div class="intro-tipo"><div><b>${esc(r.setor)}</b><span>${moeda(r.real)} · ${nf1.format(r.participacao*100)}%</span></div><div class="intro-track"><i style="width:${r.real/max*100}%;background:${corSlot(0)}"></i></div></div>`).join("");
   const sem = setores.find(r=>["Não identificado","Sem informação"].includes(r.setor));
@@ -3823,6 +3874,15 @@ function init() {
     b.addEventListener("click", () => irParaAba(b.dataset.v)));
 
   $("#ben-incluir-petrobras").addEventListener("change", renderConcentracao);
+  $("#setores-opcoes").addEventListener("change", e => {
+    const i = e.target.dataset.setor;
+    if (i === undefined) return;
+    const selecionados = selecaoSetores.get($("#setores-classificacao").value);
+    const nome = dadosSetores()[Number(i)].setor;
+    if (e.target.checked) selecionados.add(nome); else selecionados.delete(nome);
+    renderEvolucaoSetores();
+    $("#setores-opcoes").querySelector(`[data-setor="${i}"]`).focus({preventScroll:true});
+  });
   $("#setores-classificacao").addEventListener("change", renderSetores);
 
   $("#busca").addEventListener("input", debounce(e => {
@@ -3845,6 +3905,7 @@ function init() {
   const redesenhar = debounce(() => {
     if (S.view === "apresentacao") renderApresentacao();
     else if (S.view === "beneficiarios" && S.aberta !== null) montarDetalhe(S.aberta);
+    else if (S.view === "setores") renderEvolucaoSetores();
   }, 160);
   window.addEventListener("resize", redesenhar);
 
