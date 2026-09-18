@@ -304,7 +304,7 @@ tr.det > td { padding: 0; border-bottom: 1px solid var(--line); }
 .detbox h4 { font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
   color: var(--muted); margin: 22px 0 0; }
 .detbox h4:first-of-type { margin-top: 14px; }
-.detcols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.detcols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; }
 #det-chart { overflow-x: auto; }
 #det-chart svg { max-width: none; }
 .detbox table { font-size: 13px; }
@@ -1579,7 +1579,7 @@ function montarDetalhe(g) {
   $("#det-chart-unidade").textContent = unidade === 1e9 ? "(R$ bilhões)" : unidade === 1e6 ? "(R$ milhões)" : unidade === 1e3 ? "(R$ mil)" : "(R$)";
   chartColunas($("#det-chart"), {
     anos, series: [{ nome: E.nome[g], cor: corSlot(0), vals }], altura: 300,
-    larguraMin: 700, hover: false,
+    larguraMin: 500, hover: false,
     rotuloValor: v => nf1.format(v / unidade),
     parcial: IDX_PARCIAL, fmtEixo, fmtTip: fmtV,
     aria: `Renúncia anual de ${E.nome[g]}`,
