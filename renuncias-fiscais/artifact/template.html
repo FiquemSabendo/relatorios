@@ -1,9 +1,9 @@
 <meta charset="utf-8">
-<title>Renúncias Fiscais Federais · Fiquem Sabendo</title>
+<title>Benefícios tributários por beneficiário · Fiquem Sabendo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Quanto cada empresa deixou de recolher em tributos federais por incentivos, isenções e regimes especiais — CNPJ a CNPJ, com o fundamento legal, de 2015 a 2024. Uma ferramenta da Fiquem Sabendo com dados do Portal da Transparência.">
-<meta property="og:title" content="Renúncias Fiscais Federais · Fiquem Sabendo">
-<meta property="og:description" content="Quem deixa de pagar tributos federais, quanto e com base em qual lei — 77 mil CNPJs, 2015 a 2024.">
+<meta name="description" content="Benefícios tributários registrados no Portal da Transparência, por beneficiário e fundamento legal, de 2015 a 2024. Uma ferramenta da Fiquem Sabendo com dados do Portal da Transparência.">
+<meta property="og:title" content="Benefícios tributários por beneficiário · Fiquem Sabendo">
+<meta property="og:description" content="Benefícios tributários registrados no Portal da Transparência, por beneficiário e fundamento legal, de 2015 a 2024.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 51 26'%3E%3Crect width='51' height='26' fill='%23000'/%3E%3Cpath fill='%23ffe706' d='M12.12 0H.433v25.998h11.685z'/%3E%3Cpath fill='%23fff' d='M16.695.387h13.689V3.57H21.63v7.412h8.302v3.19H21.63v11.832h-4.924zM39.388 17.97v1.719c0 1.634.582 2.392 2.148 2.392s1.952-1.123 1.952-2.296c0-2.345-.633-3.023-4.277-5.154-4.027-2.362-6.084-3.773-6.084-7.432 0-3.548 1.687-6.812 8.445-6.812 7.179 0 8.237 3.408 8.237 6.251v1.43h-6.49V6.58c0-1.503-.355-2.253-1.711-2.253-1.266 0-1.676.76-1.676 2.167 0 1.504.392 2.234 3.34 3.838 5.26 2.869 7.142 4.486 7.142 8.566 0 3.892-1.91 7.087-8.998 7.087-6.808 0-8.75-2.858-8.75-6.541V17.97z'/%3E%3C/svg%3E">
 
@@ -374,9 +374,9 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <span class="sep" aria-hidden="true"></span>
       <span class="eyebrow">Dados abertos · Portal da Transparência · Receita Federal</span>
     </div>
-    <h1>Quem deixa de pagar <mark>tributos federais</mark></h1>
-    <p class="dek">Quanto cada empresa deixou de recolher por conta de incentivos, isenções e
-      regimes especiais — CNPJ a CNPJ, com o fundamento legal de cada renúncia, de 2015 a 2024.</p>
+    <h1>Benefícios tributários <mark>por beneficiário</mark></h1>
+    <p class="dek">Incentivos, isenções e regimes especiais registrados no Portal da Transparência —
+      beneficiários agrupados por raiz do CNPJ, com os fundamentos legais, de 2015 a 2024.</p>
   </div>
 </header>
 
@@ -491,9 +491,9 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         do período coberto. Para 2024, usamos somente os seis meses do primeiro semestre.
         A correção não recupera a data de cada operação nem os tributos e meses ausentes. O IPCA compara poder de compra pela inflação ao consumidor;
         não mede o retorno econômico dos incentivos.</p>
-      <p><b>As bases de preços variam entre as abas.</b> No ranking, os valores são nominais; ao abrir uma empresa, “Real” usa a média de
-        janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos da Apresentação sem converter a base.
-        <span id="intro-diferenca"></span></p>
+      <p><b>Todos os valores corrigidos pelo IPCA usam preços de <span data-base-ipca></span>.</b>
+        Isso inclui a opção “Real” no detalhe dos beneficiários e os valores da Apresentação, da concentração,
+        dos setores e da composição. O ranking e a opção “Nominal” mostram valores correntes dos respectivos anos.</p>
 
       <h3>Concentração em Maiores Beneficiários e classificação em Setores beneficiados</h3>
       <p>O recorte é 2015–2024, incluindo 2024 parcial, em preços de <span data-base-ipca></span>.
@@ -883,10 +883,10 @@ function entidades(nivel) {
 }
 
 /* ------------------------------------------------------------ estado -- */
-/* O nível é sempre o grupo econômico (raiz do CNPJ); uf e regime existem só
+/* O nível é sempre o beneficiário agrupado por raiz do CNPJ; uf e regime existem só
    como pontos de extensão — não há controle para eles nesta versão. */
 const S = {
-  view: "apresentacao", medida: "nominal", anoBase: 2023, nivel: "grupo",
+  view: "apresentacao", medida: "nominal", nivel: "grupo",
   incluir2024: false, uf: "", secao: "", regime: "", dim: "secao",
   panTabela: false, busca: "", aberta: null,
 };
@@ -894,13 +894,13 @@ const S = {
 const LS = "renuncias.v3";
 try {
   const g = JSON.parse(localStorage.getItem(LS) || "{}");
-  for (const k of ["medida", "anoBase", "secao", "incluir2024", "dim"])
+  for (const k of ["medida", "secao", "incluir2024", "dim"])
     if (g[k] !== undefined) S[k] = g[k];
 } catch (e) { /* armazenamento indisponível — segue com os padrões */ }
 const salvar = debounce(() => {
   try {
     localStorage.setItem(LS, JSON.stringify({
-      medida: S.medida, anoBase: S.anoBase, secao: S.secao,
+      medida: S.medida, secao: S.secao,
       incluir2024: S.incluir2024, dim: S.dim }));
   } catch (e) { /* idem */ }
 }, 400);
@@ -908,13 +908,13 @@ const salvar = debounce(() => {
 /* ------------------------------------------------------- transformação -- */
 // O ranking inclui 2024 parcial e mantém valores nominais, sem filtros do dashboard.
 const contexto = () => S.view === "beneficiarios"
-  ? { medida: "nominal", anoBase: 2023, incluir2024: true, secao: "", uf: "", regime: "" }
+  ? { medida: "nominal", incluir2024: true, secao: "", uf: "", regime: "" }
   : S;
-const DET = { medida: "nominal", anoBase: 2023 };
+const DET = { medida: "nominal" };
 const anosAtivos = () => contexto().incluir2024 ? NA : IDX_PARCIAL;
 
-function conv(v, a, medida = contexto().medida, anoBase = contexto().anoBase) {
-  if (medida === "real") return v * IPCA[anoBase - ANO0] / AP.anos[a].indice_origem;
+function conv(v, a, medida = contexto().medida) {
+  if (medida === "real") return v * AP.indice_base / AP.anos[a].indice_origem;
   if (medida === "pib")  return PIB[a] ? v / PIB[a] * 100 : 0;
   return v;
 }
@@ -948,7 +948,7 @@ function fmtVar(p) {
   return (p >= 0 ? "+" : "") + nfInt.format(p * 100) + "%";
 }
 const rotuloMedida = () => contexto().medida === "nominal" ? "R$ correntes"
-  : contexto().medida === "real" ? `R$ médios de jan–dez/${contexto().anoBase} (IPCA)` : "% do PIB";
+  : contexto().medida === "real" ? `R$ de ${AP.base} (IPCA)` : "% do PIB";
 
 /* ----------------------------------------------------- fatia filtrada -- */
 /* Os filtros (UF, setor, mecanismo) valem no nível do ESTABELECIMENTO: um grupo
@@ -984,7 +984,7 @@ function valsFiltrados(E) {
 function fatia(detalhe = false) {
   const C = contexto();
   const E = entidades(S.nivel);
-  const chave = [S.nivel, C.uf, C.secao, C.regime, C.incluir2024, C.medida, C.anoBase, detalhe].join("|");
+  const chave = [S.nivel, C.uf, C.secao, C.regime, C.incluir2024, C.medida, detalhe].join("|");
   if (FATIA && FATIA.chave === chave) return FATIA;
   const na = detalhe ? NA : anosAtivos();
   const vals = valsFiltrados(E);
@@ -1308,7 +1308,6 @@ function renderMetodologia() {
   $("#intro-cobertura").textContent = `O acervo reúne ${nfInt.format(AP.cnpjs)} CNPJs de ${ANOS[0]} a ${ANOS[NA-1]}, ` +
     `em arquivos atualizados em ${dataBR(P.meta.arquivo_atualizado_em)} e extraídos em ${dataBR(P.meta.extraido_em)}.`;
   $("#intro-ipca-fonte").href = AP.fonte_ipca;
-  $("#intro-diferenca").textContent = `Para o mesmo período e recorte, preços de ${AP.base} produzem valores ${nf2.format((AP.razao_base_media2023-1)*100)}% maiores que preços médios de 2023.`;
   const B = AP.beneficiarios;
   $("#ben-qualidade").textContent = `${B.n_raizes_negativas} raízes têm saldo acumulado negativo (${fmtV(B.saldo_negativo,"nominal")}); o identificador inválido soma ${fmtV(B.valor_identificador_invalido,"nominal")}.`;
 }
@@ -1417,7 +1416,7 @@ function seriesPanorama() {
 <script>
 "use strict";
 /* ===================================================================== *
- *  Ranking — todos os grupos econômicos, carregados por rolagem
+ *  Ranking — todos os beneficiários agrupados por raiz do CNPJ, carregados por rolagem
  * ===================================================================== */
 const LOTE = 120;
 let LISTA = [];        // índices de entidade, do maior para o menor
@@ -1443,7 +1442,7 @@ function renderRanking() {
 
   $("#busca-hits").textContent = S.busca.trim()
     ? `${nfInt.format(LISTA.length)} ${LISTA.length === 1 ? "resultado" : "resultados"}`
-    : `${nfInt.format(LISTA.length)} grupos econômicos na seleção`;
+    : `${nfInt.format(LISTA.length)} beneficiários agrupados por raiz do CNPJ na seleção`;
   $("#res-title").textContent = S.busca.trim() ? "Resultados da busca" : "Ranking de beneficiários";
   $("#res-sub").textContent =
     `Clique em uma linha para abrir a série anual e o fundamento legal de cada renúncia. ` +
@@ -1507,7 +1506,7 @@ function proximoLote() {
   $("#res-mais").innerHTML = MOSTRADOS < LISTA.length
     ? `<div class="empty" id="sentinela">Mostrando ${nfInt.format(MOSTRADOS)} de
        ${nfInt.format(LISTA.length)} — role para carregar mais</div>`
-    : `<div class="empty">Fim da lista: ${nfInt.format(LISTA.length)} grupos.</div>`;
+    : `<div class="empty">Fim da lista: ${nfInt.format(LISTA.length)} beneficiários agrupados por raiz do CNPJ.</div>`;
 }
 
 /* Carrega por rolagem: 69 mil linhas de uma vez travariam a página. */
@@ -1546,9 +1545,9 @@ function alternarDetalhe(tr, g) {
 
 // Formatação própria do detalhe: inclui o ano parcial e nunca herda % do PIB.
 function formatadoresDetalhe() {
-  const medida = DET.medida, base = DET.anoBase;
+  const medida = DET.medida;
   return {
-    conv: (v, a) => conv(v, a, medida, base),
+    conv: (v, a) => conv(v, a, medida),
     fmtV: v => fmtV(v, medida),
     fmtEixo: (v, ref) => fmtEixo(v, ref, medida),
     agrega: vs => vs.reduce((x, y) => x + y, 0),
@@ -1605,7 +1604,7 @@ function detalheHTML(g) {
     <div class="searchrow" style="margin:12px 0">
       <div class="seg" id="det-medida" role="group" aria-label="Medida dos valores da empresa">
         <button type="button" data-medida="nominal" aria-pressed="${DET.medida === 'nominal'}">Nominal</button>
-        <button type="button" data-medida="real" aria-pressed="${DET.medida === 'real'}">Real (IPCA, média jan–dez/${DET.anoBase})</button>
+        <button type="button" data-medida="real" aria-pressed="${DET.medida === 'real'}">Real (IPCA, ${AP.base})</button>
       </div>
     </div>
     <div class="kv">
@@ -1628,7 +1627,7 @@ function detalheHTML(g) {
     </div>
     <h4>Origem: o fundamento legal de cada renúncia</h4>
     <div class="tablewrap" id="det-fund"></div>
-    <h4>Estabelecimentos do grupo</h4>
+    <h4>Estabelecimentos da mesma raiz do CNPJ</h4>
 
     <div id="det-estabs"></div>
   </div>`;
@@ -1712,7 +1711,7 @@ function montarNota2024() {
     if (b > 0) { v23 += b; n23++; }
   }
   NOTA2024 = `O arquivo do Portal, atualizado em ${dataBR(P.meta.arquivo_atualizado_em)}, ` +
-    `traz para 2024 apenas R$ ${compacto(v24)} e ${nfInt.format(n24)} grupos, contra R$ ${compacto(v23)} e ` +
+    `traz para 2024 apenas R$ ${compacto(v24)} e ${nfInt.format(n24)} beneficiários agrupados por raiz do CNPJ, contra R$ ${compacto(v23)} e ` +
     `${nfInt.format(n23)} em 2023. A cobertura de 2024 se limita à importação no primeiro semestre; IRPJ/CSLL vai até 2023.`;
 }
 

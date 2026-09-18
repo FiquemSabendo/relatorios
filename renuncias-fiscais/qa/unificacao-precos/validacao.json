@@ -1,0 +1,74 @@
+{
+  "anos": [
+    {
+      "ano": 2015,
+      "calculado": 133056226098.03163,
+      "esperado": 133056226098.03163,
+      "diferenca": 0
+    },
+    {
+      "ano": 2016,
+      "calculado": 127514455323.18965,
+      "esperado": 127514455323.18965,
+      "diferenca": 0
+    },
+    {
+      "ano": 2017,
+      "calculado": 111136895277.9701,
+      "esperado": 111136895277.9701,
+      "diferenca": 0
+    },
+    {
+      "ano": 2018,
+      "calculado": 152227148419.74808,
+      "esperado": 152227148419.74808,
+      "diferenca": 0
+    },
+    {
+      "ano": 2019,
+      "calculado": 174876523781.68628,
+      "esperado": 174876523781.68628,
+      "diferenca": 0
+    },
+    {
+      "ano": 2020,
+      "calculado": 226064151163.5237,
+      "esperado": 226064151163.5237,
+      "diferenca": 0
+    },
+    {
+      "ano": 2021,
+      "calculado": 268173814807.0927,
+      "esperado": 268173814807.0927,
+      "diferenca": 0
+    },
+    {
+      "ano": 2022,
+      "calculado": 233359421141.05844,
+      "esperado": 233359421141.05844,
+      "diferenca": 0
+    },
+    {
+      "ano": 2023,
+      "calculado": 205533036786.20663,
+      "esperado": 205533036786.20663,
+      "diferenca": 0
+    },
+    {
+      "ano": 2024,
+      "calculado": 78355517921.12079,
+      "esperado": 78355517921.12079,
+      "diferenca": 0
+    }
+  ],
+  "petrobras": {
+    "nome": "PETROLEO BRASILEIRO S A PETROBRAS",
+    "total": 171352141988.0198,
+    "referencia": 171352141988.1825,
+    "diferenca": -0.162689208984375,
+    "formatado": "R$ 171,35 bi"
+  },
+  "nominal": "R$ 122,43 bi",
+  "erros_js": [],
+  "base": "agosto de 2026"
+}
