@@ -23,7 +23,7 @@
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Atividade Audiovisual - Dedução do Imposto de Renda",
       "tributo": "IRPJ",
-      "real": 937285420.4014102
+      "real": 937285420.4014101
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -35,7 +35,7 @@
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Finam - Fundo de Investimentos da Amazônia",
       "tributo": "IRPJ",
-      "real": 564081.7605844471
+      "real": 564081.7605844472
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -47,31 +47,31 @@
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Fundos de Direitos da Criança e do Adolescente",
       "tributo": "IRPJ",
-      "real": 4142211439.4005013
+      "real": 4142211439.4005003
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Fundos do Idoso",
       "tributo": "IRPJ",
-      "real": 3569233129.997728
+      "real": 3569233129.9977283
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Horário Eleitoral",
       "tributo": "IRPJ",
-      "real": 20028046714.810986
+      "real": 20028046714.81099
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Incentivo ao Desporto",
       "tributo": "IRPJ",
-      "real": 4303093814.019758
+      "real": 4303093814.019759
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Padis - Programa de Apoio ao Desenvolvimento Tecnológico da Indústria de Semicondutores",
       "tributo": "IRPJ",
-      "real": 632559559.1693953
+      "real": 632559559.1693956
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -101,19 +101,19 @@
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Programa de Alimentação do Trabalhador",
       "tributo": "IRPJ",
-      "real": 18182625843.15064
+      "real": 18182625843.15063
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Pronac - Programa Nacional de Apoio à Cultura - Dedução do Imposto de Renda",
       "tributo": "IRPJ",
-      "real": 17530858383.740612
+      "real": 17530858383.74061
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Pronas/PCD - Programa Nacional de Apoio à Atenção da Saúde da Pessoa com Deficiência",
       "tributo": "IRPJ",
-      "real": 868625378.5954986
+      "real": 868625378.5954984
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -125,13 +125,13 @@
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Prouni - Programa Universidade para Todos",
       "tributo": "IRPJ",
-      "real": 15282723697.909548
+      "real": 15282723697.909546
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Prouni - Programa Universidade para Todos CSLL",
       "tributo": "CSLL",
-      "real": 5262637401.347282
+      "real": 5262637401.347281
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -149,13 +149,13 @@
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Sudam/Sudene - Redução 75% Projeto Setor Prioritário",
       "tributo": "IRPJ",
-      "real": 164318003555.6486
+      "real": 164318003555.64862
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Sudam/Sudene - Redução Escalonada Setor Prioritário, Projeto Industrial / Agrícola",
       "tributo": "IRPJ",
-      "real": 1278333.3274803138
+      "real": 1278333.327480314
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -179,13 +179,13 @@
       "tipo": "Importação: PIS/Cofins",
       "beneficio": "COFINS",
       "tributo": "COFINS",
-      "real": 688462753942.2281
+      "real": 688462753942.228
     },
     {
       "tipo": "Importação: PIS/Cofins",
       "beneficio": "PIS",
       "tributo": "PIS",
-      "real": 146484513915.8106
+      "real": 146484513915.81058
     }
   ],
   "anos": [
@@ -343,6 +343,77 @@
   "razao_base_media2023": 1.145932759358369,
   "razao_base_media2024": 1.0979789243255957,
   "beneficiarios": {
+    "concentracao": {
+      "com_petrobras": {
+        "n_beneficiarios": 69462,
+        "total": 1710297190719.628,
+        "faixas": [
+          {
+            "percentual_beneficiarios": 0.1,
+            "quantidade": 70,
+            "percentual_efetivo": 0.10077452420028217,
+            "valor": 855291802602.1051,
+            "percentual_renuncias": 50.008373237298656
+          },
+          {
+            "percentual_beneficiarios": 1.0,
+            "quantidade": 695,
+            "percentual_efetivo": 1.0005470617028016,
+            "valor": 1417694244004.112,
+            "percentual_renuncias": 82.89168991779728
+          },
+          {
+            "percentual_beneficiarios": 5.0,
+            "quantidade": 3474,
+            "percentual_efetivo": 5.001295672454003,
+            "valor": 1629801070739.454,
+            "percentual_renuncias": 95.2934425422108
+          },
+          {
+            "percentual_beneficiarios": 10.0,
+            "quantidade": 6947,
+            "percentual_efetivo": 10.001151708848004,
+            "valor": 1673384041386.654,
+            "percentual_renuncias": 97.84171139768742
+          }
+        ]
+      },
+      "sem_petrobras": {
+        "n_beneficiarios": 69461,
+        "total": 1538945048731.4453,
+        "faixas": [
+          {
+            "percentual_beneficiarios": 0.1,
+            "quantidade": 70,
+            "percentual_efetivo": 0.1007759750075582,
+            "valor": 687765172635.8772,
+            "percentual_renuncias": 44.69069075616463
+          },
+          {
+            "percentual_beneficiarios": 1.0,
+            "quantidade": 695,
+            "percentual_efetivo": 1.0005614661464708,
+            "valor": 1246617144866.9963,
+            "percentual_renuncias": 81.00465613730553
+          },
+          {
+            "percentual_beneficiarios": 5.0,
+            "quantidade": 3474,
+            "percentual_efetivo": 5.001367673946531,
+            "valor": 1458471830944.3826,
+            "percentual_renuncias": 94.77088425909704
+          },
+          {
+            "percentual_beneficiarios": 10.0,
+            "quantidade": 6947,
+            "percentual_efetivo": 10.00129569110724,
+            "valor": 1502038871358.4785,
+            "percentual_renuncias": 97.6018521646768
+          }
+        ]
+      }
+    },
+    "valor_petrobras": 171352141988.1825,
     "n_raizes": 69462,
     "n_raizes_negativas": 3,
     "saldo_negativo": -10335.462176337805,
@@ -1238,7 +1309,7 @@
           17086242845.357407,
           14728886659.141544,
           17767044970.905533,
-          14884815065.773867,
+          14884815065.773869,
           10485208820.20582,
           4802080781.590786
         ],
@@ -1290,7 +1361,7 @@
           2529933153.902061,
           4996519698.008616,
           2946564466.1364446,
-          2495502947.9404345,
+          2495502947.940434,
           957447184.9685204
         ],
         "real": 22303231473.4762,
@@ -1375,7 +1446,7 @@
           463145028.2855751,
           1303263615.710037,
           346485618.0429415,
-          329649975.9744941,
+          329649975.97449416,
           103105727.86636245
         ],
         "real": 4074780585.294449,
@@ -1392,7 +1463,7 @@
           413452504.2843033,
           723004219.1511306,
           805060076.6756594,
-          627059527.5642335,
+          627059527.5642337,
           150698119.4640525
         ],
         "real": 3963849955.592006,
@@ -1442,7 +1513,7 @@
           1262549.7478775342,
           1420712.5949136068,
           3187537.6987108127,
-          3951954.1630656654,
+          3951954.1630656663,
           2062513.3795613365,
           1659.2716414556166
         ],

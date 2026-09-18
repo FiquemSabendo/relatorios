@@ -577,8 +577,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 
       <h3>Concentração em Maiores Beneficiários e classificação em Setores beneficiados</h3>
       <p>O recorte é 2015–2024, incluindo 2024 parcial, em preços de <span data-base-ipca></span>.
-        A concentração usa os oito primeiros dígitos dos CNPJs com 14 dígitos. O grupo dos maiores 1% é arredondado
-        para cima em número de empresas. Os percentuais de valor usam o saldo total da base, preservando registros negativos
+        A concentração usa os oito primeiros dígitos dos CNPJs com 14 dígitos. Os grupos dos maiores 0,1%, 1%, 5% e 10% são cumulativos, com quantidade de beneficiários arredondada para cima. A opção sem Petrobras exclui a raiz 33000167 do universo de beneficiários e seus valores do denominador; não exclui outras raízes do grupo econômico. Os percentuais de valor usam o saldo total da base, preservando registros negativos
         e o valor do identificador inválido; este último não conta como empresa. <span id="ben-qualidade"></span></p>
       <p>Na aba Setores beneficiados, o seletor alterna entre a classificação editorial e a seção CNAE declarada no cadastro. Gráfico e tabela usam a mesma seleção; cada estabelecimento leva seus valores para o seu próprio setor. Registros sem classificação permanecem nos totais e nas tabelas.
         Isso difere do rótulo resumido da raiz no ranking, que acompanha o estabelecimento de maior valor acumulado.
@@ -609,8 +608,11 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     <div class="card intro-copy">
       <h2>Quem concentra as renúncias registradas?</h2>
       <p class="sub">2015–2024, com 2024 parcial · reais de <span data-base-ipca></span> (IPCA) · beneficiários por raiz do CNPJ</p>
-      <p class="dek" id="ben-concentracao"></p>
-      <div class="kv" id="ben-kpis"></div>
+      <label><input type="checkbox" id="ben-incluir-petrobras" checked> Incluir Petrobras nesta análise</label>
+      <p class="dek" id="ben-concentracao" aria-live="polite"></p>
+      <div id="ben-concentracao-chart"></div>
+      <div class="tablewrap" id="ben-concentracao-table"></div>
+      <p class="note">Os grupos são cumulativos: os maiores 0,1% também fazem parte dos maiores 1%, 5% e 10%. A quantidade de beneficiários é arredondada para cima. Ao excluir a Petrobras (raiz 33000167), retiramos seus valores do total e recalculamos os grupos entre os beneficiários restantes. Esta opção afeta apenas a análise de concentração.</p>
       <p class="note">Aqui, cada beneficiário reúne matriz e filiais com a mesma raiz do CNPJ, incluindo empresas e outras pessoas jurídicas. Raízes diferentes
         podem ter o mesmo controlador, mas não são reunidas. A concentração acima usa valores corrigidos pela inflação; o ranking abaixo usa valores nominais. Ambos incluem 2024 parcial.</p>
     </div>
@@ -1209,7 +1211,7 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Atividade Audiovisual - Dedução do Imposto de Renda",
       "tributo": "IRPJ",
-      "real": 937285420.4014102
+      "real": 937285420.4014101
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1221,7 +1223,7 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Finam - Fundo de Investimentos da Amazônia",
       "tributo": "IRPJ",
-      "real": 564081.7605844471
+      "real": 564081.7605844472
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1233,31 +1235,31 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Fundos de Direitos da Criança e do Adolescente",
       "tributo": "IRPJ",
-      "real": 4142211439.4005013
+      "real": 4142211439.4005003
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Fundos do Idoso",
       "tributo": "IRPJ",
-      "real": 3569233129.997728
+      "real": 3569233129.9977283
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Horário Eleitoral",
       "tributo": "IRPJ",
-      "real": 20028046714.810986
+      "real": 20028046714.81099
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Incentivo ao Desporto",
       "tributo": "IRPJ",
-      "real": 4303093814.019758
+      "real": 4303093814.019759
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Padis - Programa de Apoio ao Desenvolvimento Tecnológico da Indústria de Semicondutores",
       "tributo": "IRPJ",
-      "real": 632559559.1693953
+      "real": 632559559.1693956
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1287,19 +1289,19 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Programa de Alimentação do Trabalhador",
       "tributo": "IRPJ",
-      "real": 18182625843.15064
+      "real": 18182625843.15063
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Pronac - Programa Nacional de Apoio à Cultura - Dedução do Imposto de Renda",
       "tributo": "IRPJ",
-      "real": 17530858383.740612
+      "real": 17530858383.74061
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Pronas/PCD - Programa Nacional de Apoio à Atenção da Saúde da Pessoa com Deficiência",
       "tributo": "IRPJ",
-      "real": 868625378.5954986
+      "real": 868625378.5954984
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1311,13 +1313,13 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Prouni - Programa Universidade para Todos",
       "tributo": "IRPJ",
-      "real": 15282723697.909548
+      "real": 15282723697.909546
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Prouni - Programa Universidade para Todos CSLL",
       "tributo": "CSLL",
-      "real": 5262637401.347282
+      "real": 5262637401.347281
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1335,13 +1337,13 @@ const AP = {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Sudam/Sudene - Redução 75% Projeto Setor Prioritário",
       "tributo": "IRPJ",
-      "real": 164318003555.6486
+      "real": 164318003555.64862
     },
     {
       "tipo": "IRPJ/CSLL declarado",
       "beneficio": "Sudam/Sudene - Redução Escalonada Setor Prioritário, Projeto Industrial / Agrícola",
       "tributo": "IRPJ",
-      "real": 1278333.3274803138
+      "real": 1278333.327480314
     },
     {
       "tipo": "IRPJ/CSLL declarado",
@@ -1365,13 +1367,13 @@ const AP = {
       "tipo": "Importação: PIS/Cofins",
       "beneficio": "COFINS",
       "tributo": "COFINS",
-      "real": 688462753942.2281
+      "real": 688462753942.228
     },
     {
       "tipo": "Importação: PIS/Cofins",
       "beneficio": "PIS",
       "tributo": "PIS",
-      "real": 146484513915.8106
+      "real": 146484513915.81058
     }
   ],
   "anos": [
@@ -1529,6 +1531,77 @@ const AP = {
   "razao_base_media2023": 1.145932759358369,
   "razao_base_media2024": 1.0979789243255957,
   "beneficiarios": {
+    "concentracao": {
+      "com_petrobras": {
+        "n_beneficiarios": 69462,
+        "total": 1710297190719.628,
+        "faixas": [
+          {
+            "percentual_beneficiarios": 0.1,
+            "quantidade": 70,
+            "percentual_efetivo": 0.10077452420028217,
+            "valor": 855291802602.1051,
+            "percentual_renuncias": 50.008373237298656
+          },
+          {
+            "percentual_beneficiarios": 1.0,
+            "quantidade": 695,
+            "percentual_efetivo": 1.0005470617028016,
+            "valor": 1417694244004.112,
+            "percentual_renuncias": 82.89168991779728
+          },
+          {
+            "percentual_beneficiarios": 5.0,
+            "quantidade": 3474,
+            "percentual_efetivo": 5.001295672454003,
+            "valor": 1629801070739.454,
+            "percentual_renuncias": 95.2934425422108
+          },
+          {
+            "percentual_beneficiarios": 10.0,
+            "quantidade": 6947,
+            "percentual_efetivo": 10.001151708848004,
+            "valor": 1673384041386.654,
+            "percentual_renuncias": 97.84171139768742
+          }
+        ]
+      },
+      "sem_petrobras": {
+        "n_beneficiarios": 69461,
+        "total": 1538945048731.4453,
+        "faixas": [
+          {
+            "percentual_beneficiarios": 0.1,
+            "quantidade": 70,
+            "percentual_efetivo": 0.1007759750075582,
+            "valor": 687765172635.8772,
+            "percentual_renuncias": 44.69069075616463
+          },
+          {
+            "percentual_beneficiarios": 1.0,
+            "quantidade": 695,
+            "percentual_efetivo": 1.0005614661464708,
+            "valor": 1246617144866.9963,
+            "percentual_renuncias": 81.00465613730553
+          },
+          {
+            "percentual_beneficiarios": 5.0,
+            "quantidade": 3474,
+            "percentual_efetivo": 5.001367673946531,
+            "valor": 1458471830944.3826,
+            "percentual_renuncias": 94.77088425909704
+          },
+          {
+            "percentual_beneficiarios": 10.0,
+            "quantidade": 6947,
+            "percentual_efetivo": 10.00129569110724,
+            "valor": 1502038871358.4785,
+            "percentual_renuncias": 97.6018521646768
+          }
+        ]
+      }
+    },
+    "valor_petrobras": 171352141988.1825,
     "n_raizes": 69462,
     "n_raizes_negativas": 3,
     "saldo_negativo": -10335.462176337805,
@@ -2424,7 +2497,7 @@ const AP = {
           17086242845.357407,
           14728886659.141544,
           17767044970.905533,
-          14884815065.773867,
+          14884815065.773869,
           10485208820.20582,
           4802080781.590786
         ],
@@ -2476,7 +2549,7 @@ const AP = {
           2529933153.902061,
           4996519698.008616,
           2946564466.1364446,
-          2495502947.9404345,
+          2495502947.940434,
           957447184.9685204
         ],
         "real": 22303231473.4762,
@@ -2561,7 +2634,7 @@ const AP = {
           463145028.2855751,
           1303263615.710037,
           346485618.0429415,
-          329649975.9744941,
+          329649975.97449416,
           103105727.86636245
         ],
         "real": 4074780585.294449,
@@ -2578,7 +2651,7 @@ const AP = {
           413452504.2843033,
           723004219.1511306,
           805060076.6756594,
-          627059527.5642335,
+          627059527.5642337,
           150698119.4640525
         ],
         "real": 3963849955.592006,
@@ -2628,7 +2701,7 @@ const AP = {
           1262549.7478775342,
           1420712.5949136068,
           3187537.6987108127,
-          3951954.1630656654,
+          3951954.1630656663,
           2062513.3795613365,
           1659.2716414556166
         ],
@@ -2684,11 +2757,20 @@ function renderComposicao() {
   </div>`).join("");
 }
 function renderBeneficiarios() {
-  const B = AP.beneficiarios, moeda = v => fmtV(v,"nominal");
   renderMetodologia();
-  $("#ben-concentracao").innerHTML = `<b>${nf2.format(B.pct_empresas_top1)}% dos beneficiários concentram ${nf1.format(B.pct_valor_top1)}% das renúncias registradas.</b> São as ${nfInt.format(B.n_top1)} maiores entre ${nfInt.format(B.n_raizes)} raízes de CNPJ presentes no acervo.`;
-  $("#ben-kpis").innerHTML = [[nf1.format(B.pct_top10)+"%","nos 10 maiores"],[nf1.format(B.pct_top100)+"%","nos 100 maiores"],[moeda(AP.total_real),"acumulado, com 2024 parcial"]].map(([v,k])=>`<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+  renderConcentracao();
   renderRanking();
+}
+
+function renderConcentracao() {
+  const C = AP.beneficiarios.concentracao;
+  const incluir = $("#ben-incluir-petrobras").checked;
+  const atual = incluir ? C.com_petrobras : C.sem_petrobras;
+  const moeda = v => fmtV(v,"nominal");
+  const faixa = p => p === 0.1 ? "0,1%" : p + "%";
+  $("#ben-concentracao").textContent = `${incluir ? "Com" : "Sem"} Petrobras: ${nfInt.format(atual.n_beneficiarios)} beneficiários e ${moeda(atual.total)} em renúncias registradas.`;
+  $("#ben-concentracao-chart").innerHTML = atual.faixas.map(r => `<div class="intro-tipo"><div><b>Maiores ${faixa(r.percentual_beneficiarios)} dos beneficiários</b><span>${nf1.format(r.percentual_renuncias)}% das renúncias</span></div><div class="intro-track" aria-hidden="true"><i style="width:${Math.min(100,Math.max(0,r.percentual_renuncias))}%;background:${corSlot(0)}"></i></div></div>`).join("");
+  $("#ben-concentracao-table").innerHTML = `<table><thead><tr><th>Grupo</th><th class="n">Beneficiários<br>${incluir ? "Com" : "Sem"} Petrobras</th><th class="n">Renúncias do grupo<br>${incluir ? "Com" : "Sem"} Petrobras</th><th class="n">% do total<br>Com Petrobras${incluir ? " ✓" : ""}</th><th class="n">% do total<br>Sem Petrobras${incluir ? "" : " ✓"}</th></tr></thead><tbody>` + atual.faixas.map((r,i) => `<tr><td>Maiores ${faixa(r.percentual_beneficiarios)}</td><td class="n">${nfInt.format(r.quantidade)}</td><td class="n">${moeda(r.valor)}</td><td class="n">${nf1.format(C.com_petrobras.faixas[i].percentual_renuncias)}%</td><td class="n">${nf1.format(C.sem_petrobras.faixas[i].percentual_renuncias)}%</td></tr>`).join("") + `</tbody></table>`;
 }
 
 function renderSetores() {
@@ -3740,6 +3822,7 @@ function init() {
   document.querySelectorAll("#tabs button").forEach(b =>
     b.addEventListener("click", () => irParaAba(b.dataset.v)));
 
+  $("#ben-incluir-petrobras").addEventListener("change", renderConcentracao);
   $("#setores-classificacao").addEventListener("change", renderSetores);
 
   $("#busca").addEventListener("input", debounce(e => {

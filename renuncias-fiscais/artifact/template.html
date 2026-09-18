@@ -573,8 +573,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
 
       <h3>Concentração em Maiores Beneficiários e classificação em Setores beneficiados</h3>
       <p>O recorte é 2015–2024, incluindo 2024 parcial, em preços de <span data-base-ipca></span>.
-        A concentração usa os oito primeiros dígitos dos CNPJs com 14 dígitos. O grupo dos maiores 1% é arredondado
-        para cima em número de empresas. Os percentuais de valor usam o saldo total da base, preservando registros negativos
+        A concentração usa os oito primeiros dígitos dos CNPJs com 14 dígitos. Os grupos dos maiores 0,1%, 1%, 5% e 10% são cumulativos, com quantidade de beneficiários arredondada para cima. A opção sem Petrobras exclui a raiz 33000167 do universo de beneficiários e seus valores do denominador; não exclui outras raízes do grupo econômico. Os percentuais de valor usam o saldo total da base, preservando registros negativos
         e o valor do identificador inválido; este último não conta como empresa. <span id="ben-qualidade"></span></p>
       <p>Na aba Setores beneficiados, o seletor alterna entre a classificação editorial e a seção CNAE declarada no cadastro. Gráfico e tabela usam a mesma seleção; cada estabelecimento leva seus valores para o seu próprio setor. Registros sem classificação permanecem nos totais e nas tabelas.
         Isso difere do rótulo resumido da raiz no ranking, que acompanha o estabelecimento de maior valor acumulado.
@@ -605,8 +604,11 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     <div class="card intro-copy">
       <h2>Quem concentra as renúncias registradas?</h2>
       <p class="sub">2015–2024, com 2024 parcial · reais de <span data-base-ipca></span> (IPCA) · beneficiários por raiz do CNPJ</p>
-      <p class="dek" id="ben-concentracao"></p>
-      <div class="kv" id="ben-kpis"></div>
+      <label><input type="checkbox" id="ben-incluir-petrobras" checked> Incluir Petrobras nesta análise</label>
+      <p class="dek" id="ben-concentracao" aria-live="polite"></p>
+      <div id="ben-concentracao-chart"></div>
+      <div class="tablewrap" id="ben-concentracao-table"></div>
+      <p class="note">Os grupos são cumulativos: os maiores 0,1% também fazem parte dos maiores 1%, 5% e 10%. A quantidade de beneficiários é arredondada para cima. Ao excluir a Petrobras (raiz 33000167), retiramos seus valores do total e recalculamos os grupos entre os beneficiários restantes. Esta opção afeta apenas a análise de concentração.</p>
       <p class="note">Aqui, cada beneficiário reúne matriz e filiais com a mesma raiz do CNPJ, incluindo empresas e outras pessoas jurídicas. Raízes diferentes
         podem ter o mesmo controlador, mas não são reunidas. A concentração acima usa valores corrigidos pela inflação; o ranking abaixo usa valores nominais. Ambos incluem 2024 parcial.</p>
     </div>
@@ -1192,11 +1194,20 @@ function renderComposicao() {
   </div>`).join("");
 }
 function renderBeneficiarios() {
-  const B = AP.beneficiarios, moeda = v => fmtV(v,"nominal");
   renderMetodologia();
-  $("#ben-concentracao").innerHTML = `<b>${nf2.format(B.pct_empresas_top1)}% dos beneficiários concentram ${nf1.format(B.pct_valor_top1)}% das renúncias registradas.</b> São as ${nfInt.format(B.n_top1)} maiores entre ${nfInt.format(B.n_raizes)} raízes de CNPJ presentes no acervo.`;
-  $("#ben-kpis").innerHTML = [[nf1.format(B.pct_top10)+"%","nos 10 maiores"],[nf1.format(B.pct_top100)+"%","nos 100 maiores"],[moeda(AP.total_real),"acumulado, com 2024 parcial"]].map(([v,k])=>`<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+  renderConcentracao();
   renderRanking();
+}
+
+function renderConcentracao() {
+  const C = AP.beneficiarios.concentracao;
+  const incluir = $("#ben-incluir-petrobras").checked;
+  const atual = incluir ? C.com_petrobras : C.sem_petrobras;
+  const moeda = v => fmtV(v,"nominal");
+  const faixa = p => p === 0.1 ? "0,1%" : p + "%";
+  $("#ben-concentracao").textContent = `${incluir ? "Com" : "Sem"} Petrobras: ${nfInt.format(atual.n_beneficiarios)} beneficiários e ${moeda(atual.total)} em renúncias registradas.`;
+  $("#ben-concentracao-chart").innerHTML = atual.faixas.map(r => `<div class="intro-tipo"><div><b>Maiores ${faixa(r.percentual_beneficiarios)} dos beneficiários</b><span>${nf1.format(r.percentual_renuncias)}% das renúncias</span></div><div class="intro-track" aria-hidden="true"><i style="width:${Math.min(100,Math.max(0,r.percentual_renuncias))}%;background:${corSlot(0)}"></i></div></div>`).join("");
+  $("#ben-concentracao-table").innerHTML = `<table><thead><tr><th>Grupo</th><th class="n">Beneficiários<br>${incluir ? "Com" : "Sem"} Petrobras</th><th class="n">Renúncias do grupo<br>${incluir ? "Com" : "Sem"} Petrobras</th><th class="n">% do total<br>Com Petrobras${incluir ? " ✓" : ""}</th><th class="n">% do total<br>Sem Petrobras${incluir ? "" : " ✓"}</th></tr></thead><tbody>` + atual.faixas.map((r,i) => `<tr><td>Maiores ${faixa(r.percentual_beneficiarios)}</td><td class="n">${nfInt.format(r.quantidade)}</td><td class="n">${moeda(r.valor)}</td><td class="n">${nf1.format(C.com_petrobras.faixas[i].percentual_renuncias)}%</td><td class="n">${nf1.format(C.sem_petrobras.faixas[i].percentual_renuncias)}%</td></tr>`).join("") + `</tbody></table>`;
 }
 
 function renderSetores() {
@@ -1679,6 +1690,7 @@ function init() {
   document.querySelectorAll("#tabs button").forEach(b =>
     b.addEventListener("click", () => irParaAba(b.dataset.v)));
 
+  $("#ben-incluir-petrobras").addEventListener("change", renderConcentracao);
   $("#setores-classificacao").addEventListener("change", renderSetores);
 
   $("#busca").addEventListener("input", debounce(e => {

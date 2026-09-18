@@ -121,7 +121,23 @@ cnae_rows = sorted([dict(setor=name,valores=vals,real=sum(vals),participacao=sum
                     for name,vals in cnae_series.items()], key=lambda r:-r['real'])
 for i, year in enumerate(annual):
     assert abs(sum(r['valores'][i] for r in cnae_rows)-year['real']) < .05
-out['beneficiarios']=dict(n_raizes=n,n_raizes_negativas=len(negative),saldo_negativo=sum(r['real'] for r in negative),n_top1=n1,pct_empresas_top1=n1/n*100,
+# Concentração cumulativa, com/sem a pessoa jurídica Petrobras (raiz 33000167).
+petrobras = roots['33000167']['real']
+concentracao = {}
+for incluir, key in [(True, 'com_petrobras'), (False, 'sem_petrobras')]:
+    universo = rank if incluir else [r for r in rank if r['raiz'] != '33000167']
+    denominador = total if incluir else total-petrobras
+    assert abs(sum(r['real'] for r in universo)+invalid-denominador) < .05
+    faixas = []
+    for numerador, divisor in [(1,1000),(1,100),(5,100),(10,100)]:
+        quantidade = (len(universo)*numerador+divisor-1)//divisor
+        valor = sum(r['real'] for r in universo[:quantidade])
+        faixas.append(dict(percentual_beneficiarios=100*numerador/divisor,
+                          quantidade=quantidade,percentual_efetivo=quantidade/len(universo)*100,
+                          valor=valor,percentual_renuncias=valor/denominador*100))
+    concentracao[key] = dict(n_beneficiarios=len(universo),total=denominador,faixas=faixas)
+assert concentracao['com_petrobras']['n_beneficiarios']-concentracao['sem_petrobras']['n_beneficiarios']==1
+out['beneficiarios']=dict(concentracao=concentracao,valor_petrobras=petrobras,n_raizes=n,n_raizes_negativas=len(negative),saldo_negativo=sum(r['real'] for r in negative),n_top1=n1,pct_empresas_top1=n1/n*100,
  pct_valor_top1=sum(r['real'] for r in rank[:n1])/total*100,
  pct_top10=sum(r['real'] for r in rank[:10])/total*100,
  pct_top100=sum(r['real'] for r in rank[:100])/total*100,
