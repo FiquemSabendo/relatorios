@@ -110,11 +110,22 @@ sector_rows=[dict(setor=name,valores=vals,real=sum(vals),participacao=sum(vals)/
 sector_rows.sort(key=lambda r:-r['real'])
 for i,year in enumerate(annual):
     assert abs(sum(r['valores'][i] for r in sector_rows)-year['real'])<.05
+# Seções CNAE: mesma granularidade de estabelecimento, período e deflação da classificação editorial.
+cnae_series = defaultdict(lambda: [0.0]*len(annual))
+for year, name, value in con.execute("""SELECT f.ano,
+ coalesce(nullif(c.secao_nome,''),'Sem informação'), sum(f.valor)
+ FROM fato_empresa_ano f JOIN dim_estab e USING(estab_id)
+ LEFT JOIN dim_cnae c ON e.cnae=c.cnae GROUP BY 1,2""").fetchall():
+    cnae_series[name][year-2015] += value*base/origins[year]
+cnae_rows = sorted([dict(setor=name,valores=vals,real=sum(vals),participacao=sum(vals)/total)
+                    for name,vals in cnae_series.items()], key=lambda r:-r['real'])
+for i, year in enumerate(annual):
+    assert abs(sum(r['valores'][i] for r in cnae_rows)-year['real']) < .05
 out['beneficiarios']=dict(n_raizes=n,n_raizes_negativas=len(negative),saldo_negativo=sum(r['real'] for r in negative),n_top1=n1,pct_empresas_top1=n1/n*100,
  pct_valor_top1=sum(r['real'] for r in rank[:n1])/total*100,
  pct_top10=sum(r['real'] for r in rank[:10])/total*100,
  pct_top100=sum(r['real'] for r in rank[:100])/total*100,
- valor_identificador_invalido=invalid,top20=top20,setores=sector_rows)
+ valor_identificador_invalido=invalid,top20=top20,setores=sector_rows,setores_cnae=cnae_rows)
 (ROOT/'artifact/apresentacao.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
 (QA/'validacao.json').write_text(json.dumps(dict(total_real=total,soma_tipos=sum(by_type.values()),indice_base=base, medias_2020_2024_conferidas=True,tipos=out['tipos'],fatores=[{'ano':r['ano'],'fator':r['fator']} for r in annual]),ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({k:out[k] for k in ['total_real','indice_base','razao_base_media2023','razao_base_media2024','tipos']},ensure_ascii=False,indent=2))

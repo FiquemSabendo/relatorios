@@ -373,7 +373,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     <button role="tab" data-v="metodologia" aria-selected="false">Metodologia</button>
     <button role="tab" data-v="inconsistencias" aria-selected="false">Inconsistências</button>
     <button role="tab" data-v="beneficiarios" aria-selected="false">Maiores Beneficiários</button>
-    <button role="tab" data-v="ranking" aria-selected="false">Ranking de beneficiários</button>
+    <button role="tab" data-v="setores" aria-selected="false">Setores beneficiados</button>
     <button role="tab" data-v="renuncia-lucro" aria-selected="false">Renúncia vs Lucro</button>
   </nav>
 </div>
@@ -571,16 +571,16 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos da Apresentação sem converter a base.
         <span id="intro-diferenca"></span></p>
 
-      <h3>Concentração e setores em Maiores Beneficiários</h3>
+      <h3>Concentração em Maiores Beneficiários e classificação em Setores beneficiados</h3>
       <p>O recorte é 2015–2024, incluindo 2024 parcial, em preços de <span data-base-ipca></span>.
         A concentração usa os oito primeiros dígitos dos CNPJs com 14 dígitos. O grupo dos maiores 1% é arredondado
         para cima em número de empresas. Os percentuais de valor usam o saldo total da base, preservando registros negativos
         e o valor do identificador inválido; este último não conta como empresa. <span id="ben-qualidade"></span></p>
-      <p>Nos gráficos e tabelas setoriais, cada estabelecimento leva seus valores para o seu próprio setor da classificação editorial.
+      <p>Na aba Setores beneficiados, o seletor alterna entre a classificação editorial e a seção CNAE declarada no cadastro. Gráfico e tabela usam a mesma seleção; cada estabelecimento leva seus valores para o seu próprio setor. Registros sem classificação permanecem nos totais e nas tabelas.
         Isso difere do rótulo resumido da raiz no ranking, que acompanha o estabelecimento de maior valor acumulado.
         O cadastro atual é aplicado a toda a série; não representa mudanças históricas de atividade. “Não identificado”
         permanece no total e na tabela. A tabela anual mostra todos os setores de 2015 a 2024, ordenados pelo acumulado.</p>
-      <p>O ranking principal é nominal e cobre 2015–2024, incluindo 2024 parcial. Assim, posições e acumulados podem diferir da nova aba,
+      <p>O ranking principal é nominal e cobre 2015–2024, incluindo 2024 parcial. Assim, as posições e participações nominais podem diferir das medidas de concentração corrigidas pela inflação,
         embora a chave de agrupamento por raiz seja a mesma.</p>
       <h3>Cobertura parcial, cadastro e classificação setorial</h3>
       <p><b>2024 é parcial.</b> <span id="foot-2024"></span></p>
@@ -608,30 +608,8 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       <p class="dek" id="ben-concentracao"></p>
       <div class="kv" id="ben-kpis"></div>
       <p class="note">Aqui, cada beneficiário reúne matriz e filiais com a mesma raiz do CNPJ, incluindo empresas e outras pessoas jurídicas. Raízes diferentes
-        podem ter o mesmo controlador, mas não são reunidas. O acumulado inclui 2024 parcial; difere da base monetária nominal usada no ranking de 2015–2024.</p>
+        podem ter o mesmo controlador, mas não são reunidas. A concentração acima usa valores corrigidos pela inflação; o ranking abaixo usa valores nominais. Ambos incluem 2024 parcial.</p>
     </div>
-    <div class="card">
-      <h2>Os 20 beneficiários com maiores valores acumulados</h2>
-      <p class="sub">Agrupamento por raiz do CNPJ · valores em reais de <span data-base-ipca></span></p>
-      <div class="tablewrap" id="ben-top"></div>
-    </div>
-    <div class="card">
-      <h2>Quais setores concentram os maiores valores?</h2>
-      <p class="sub">Dez maiores setores identificados · classificação editorial · acumulado 2015–2024</p>
-      <div id="ben-setores"></div>
-      <p class="note" id="ben-sem-setor"></p>
-      <details><summary>Ver todos os setores</summary><div class="tablewrap" id="ben-setores-table"></div></details>
-    </div>
-    <div class="card">
-      <h2>Renúncias por setor e ano</h2>
-      <p class="sub">Todos os setores · valores em reais de <span data-base-ipca></span> (IPCA) · ordenados pelo acumulado de 2015–2024</p>
-      <p class="note">2024 é parcial: cobre apenas a importação no primeiro semestre e não é diretamente comparável aos anos completos. Deslize a tabela horizontalmente para consultar todos os anos.</p>
-      <div class="tablewrap" id="ben-evolucao-table"></div>
-    </div>
-  </section>
-
-  <!-- ================================================ RANKING ======== -->
-  <section id="view-ranking" role="tabpanel" class="hidden">
     <div class="card">
       <div class="searchrow">
         <input type="search" id="busca" placeholder="Buscar por empresa, CNPJ ou setor — ex.: petrobras, tabaco, aviação"
@@ -646,6 +624,27 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
       </div></div>
       <div class="tablewrap" id="res-table"></div>
       <div id="res-mais"></div>
+    </div>
+  </section>
+
+  <section id="view-setores" role="tabpanel" class="hidden">
+    <div class="card">
+      <h2>Quais setores concentram os maiores valores?</h2>
+      <p class="sub">Dez maiores setores identificados · acumulado 2015–2024 · reais de <span data-base-ipca></span> (IPCA)</p>
+      <label for="setores-classificacao">Classificação dos setores</label>
+      <select id="setores-classificacao">
+        <option value="editorial">Classificação editorial</option>
+        <option value="cnae">Seção CNAE</option>
+      </select>
+      <div id="ben-setores"></div>
+      <p class="note" id="ben-sem-setor"></p>
+      <details><summary>Ver todos os setores</summary><div class="tablewrap" id="ben-setores-table"></div></details>
+    </div>
+    <div class="card">
+      <h2>Renúncias por setor e ano</h2>
+      <p class="sub">Todos os setores · valores em reais de <span data-base-ipca></span> (IPCA) · ordenados pelo acumulado de 2015–2024</p>
+      <p class="note">2024 é parcial: cobre apenas a importação no primeiro semestre e não é diretamente comparável aos anos completos. Deslize a tabela horizontalmente para consultar todos os anos.</p>
+      <div class="tablewrap" id="ben-evolucao-table"></div>
     </div>
   </section>
 
@@ -910,7 +909,7 @@ const salvar = debounce(() => {
 
 /* ------------------------------------------------------- transformação -- */
 // O ranking inclui 2024 parcial e mantém valores nominais, sem filtros do dashboard.
-const contexto = () => S.view === "ranking"
+const contexto = () => S.view === "beneficiarios"
   ? { medida: "nominal", anoBase: 2023, incluir2024: true, secao: "", uf: "", regime: "" }
   : S;
 const DET = { medida: "nominal", anoBase: 2023 };
@@ -961,14 +960,14 @@ const rotuloMedida = () => contexto().medida === "nominal" ? "R$ correntes"
 let FATIA = null;
 
 function passaEstab(e) {
-  if (S.view === "ranking") return true;
+  if (S.view === "beneficiarios") return true;
   if (S.uf && D.ufDe[e] !== S.uf) return false;
   if (S.secao && D.secaoDe[e] !== S.secao) return false;
   return true;
 }
 
 function valsFiltrados(E) {
-  if (S.view === "ranking" || (!S.uf && !S.secao && !S.regime)) return E.vals;
+  if (S.view === "beneficiarios" || (!S.uf && !S.secao && !S.regime)) return E.vals;
   const out = new Float64Array(E.n * NA);
   const regId = S.regime ? REG_ID.get(S.regime) : -1;
   for (let e = 0; e < D.n; e++) {
@@ -1197,14 +1196,18 @@ function renderBeneficiarios() {
   renderMetodologia();
   $("#ben-concentracao").innerHTML = `<b>${nf2.format(B.pct_empresas_top1)}% dos beneficiários concentram ${nf1.format(B.pct_valor_top1)}% das renúncias registradas.</b> São as ${nfInt.format(B.n_top1)} maiores entre ${nfInt.format(B.n_raizes)} raízes de CNPJ presentes no acervo.`;
   $("#ben-kpis").innerHTML = [[nf1.format(B.pct_top10)+"%","nos 10 maiores"],[nf1.format(B.pct_top100)+"%","nos 100 maiores"],[moeda(AP.total_real),"acumulado, com 2024 parcial"]].map(([v,k])=>`<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
-  $("#ben-top").innerHTML = `<table><thead><tr><th>#</th><th>Beneficiário</th><th>Raiz do CNPJ</th><th class="n">Estabelecimentos</th><th class="n">Acumulado</th><th class="n">% do total</th></tr></thead><tbody>` +
-    B.top20.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.nome)}</td><td class="mono">${esc(r.raiz)}</td><td class="n">${r.cnpjs}</td><td class="n">${moeda(r.real)}</td><td class="n">${nf1.format(r.participacao*100)}%</td></tr>`).join("")+`</tbody></table>`;
-  const identificados = B.setores.filter(r=>r.setor!=="Não identificado"), top=identificados.slice(0,10), max=top[0].real;
+  renderRanking();
+}
+
+function renderSetores() {
+  const moeda = v => fmtV(v,"nominal");
+  const setores = $("#setores-classificacao").value === "cnae" ? AP.beneficiarios.setores_cnae : AP.beneficiarios.setores;
+  const identificados = setores.filter(r=>!["Não identificado","Sem informação"].includes(r.setor)), top=identificados.slice(0,10), max=Math.max(...top.map(r=>r.real),1);
   $("#ben-setores").innerHTML = top.map(r=>`<div class="intro-tipo"><div><b>${esc(r.setor)}</b><span>${moeda(r.real)} · ${nf1.format(r.participacao*100)}%</span></div><div class="intro-track"><i style="width:${r.real/max*100}%;background:${corSlot(0)}"></i></div></div>`).join("");
-  const sem = B.setores.find(r=>r.setor==="Não identificado");
+  const sem = setores.find(r=>["Não identificado","Sem informação"].includes(r.setor));
   $("#ben-sem-setor").textContent = sem ? `Sem setor identificado: ${moeda(sem.real)} (${nf1.format(sem.participacao*100)}% do total). Esse valor permanece na soma e na tabela abaixo.` : "Todos os registros têm setor identificado.";
-  $("#ben-setores-table").innerHTML = `<table><thead><tr><th>Setor</th><th class="n">Acumulado</th><th class="n">% do total</th></tr></thead><tbody>`+B.setores.map(r=>`<tr><td>${esc(r.setor)}</td><td class="n">${moeda(r.real)}</td><td class="n">${nf1.format(r.participacao*100)}%</td></tr>`).join("")+`</tbody></table>`;
-  $("#ben-evolucao-table").innerHTML=`<table><thead><tr><th>Setor</th>${ANOS.map(a=>`<th class="n">${a}${a===ANO_PARCIAL?" (parcial)":""}</th>`).join("")}</tr></thead><tbody>`+B.setores.map(r=>`<tr><td>${esc(r.setor)}</td>${r.valores.map(v=>`<td class="n">${moeda(v)}</td>`).join("")}</tr>`).join("")+`</tbody><tfoot><tr><th>Total</th>${AP.anos.map(r=>`<td class="n"><b>${moeda(r.real)}</b></td>`).join("")}</tr></tfoot></table>`;
+  $("#ben-setores-table").innerHTML = `<table><thead><tr><th>Setor</th><th class="n">Acumulado</th><th class="n">% do total</th></tr></thead><tbody>`+setores.map(r=>`<tr><td>${esc(r.setor)}</td><td class="n">${moeda(r.real)}</td><td class="n">${nf1.format(r.participacao*100)}%</td></tr>`).join("")+`</tbody></table>`;
+  $("#ben-evolucao-table").innerHTML=`<table><thead><tr><th>Setor</th>${ANOS.map(a=>`<th class="n">${a}${a===ANO_PARCIAL?" (parcial)":""}</th>`).join("")}</tr></thead><tbody>`+setores.map(r=>`<tr><td>${esc(r.setor)}</td>${r.valores.map(v=>`<td class="n">${moeda(v)}</td>`).join("")}</tr>`).join("")+`</tbody><tfoot><tr><th>Total</th>${AP.anos.map(r=>`<td class="n"><b>${moeda(r.real)}</b></td>`).join("")}</tr></tfoot></table>`;
 }
 
 const FIN = __RENUNCIA_LUCRO__;
@@ -1645,7 +1648,7 @@ function montarNota2024() {
     `${nfInt.format(n23)} em 2023. A cobertura de 2024 se limita à importação no primeiro semestre; IRPJ/CSLL vai até 2023.`;
 }
 
-const ABAS = ["apresentacao", "metodologia", "inconsistencias", "beneficiarios", "ranking", "renuncia-lucro"];
+const ABAS = ["apresentacao", "metodologia", "inconsistencias", "beneficiarios", "setores", "renuncia-lucro"];
 
 function renderAll() {
   if (S.view === "apresentacao") renderApresentacao();
@@ -1653,10 +1656,11 @@ function renderAll() {
   else if (S.view === "inconsistencias") renderInconsistencias();
   else if (S.view === "renuncia-lucro") renderFinanceiro();
   else if (S.view === "beneficiarios") renderBeneficiarios();
-  else renderRanking();
+  else if (S.view === "setores") renderSetores();
 }
 
 function irParaAba(v) {
+  if (v === "ranking") v = "beneficiarios";
   S.view = v;
   invalidar();
   try { history.replaceState(null, "", "#" + v); } catch (e) { /* sandbox sem history */ }
@@ -1674,6 +1678,8 @@ function init() {
 
   document.querySelectorAll("#tabs button").forEach(b =>
     b.addEventListener("click", () => irParaAba(b.dataset.v)));
+
+  $("#setores-classificacao").addEventListener("change", renderSetores);
 
   $("#busca").addEventListener("input", debounce(e => {
     S.busca = e.target.value; renderRanking();
@@ -1694,12 +1700,12 @@ function init() {
   /* --- redesenho ----------------------------------------------------- */
   const redesenhar = debounce(() => {
     if (S.view === "apresentacao") renderApresentacao();
-    else if (S.view === "beneficiarios") renderBeneficiarios();
+    else if (S.view === "beneficiarios" && S.aberta !== null) montarDetalhe(S.aberta);
   }, 160);
   window.addEventListener("resize", redesenhar);
 
   const h = (location.hash || "").replace(/^#/, "");
-  irParaAba(ABAS.includes(h) ? h : S.view);
+  irParaAba(h === "ranking" ? "beneficiarios" : ABAS.includes(h) ? h : S.view);
 }
 
 (async function boot() {
