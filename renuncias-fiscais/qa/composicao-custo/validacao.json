@@ -1,0 +1,184 @@
+{
+  "composicao": [
+    {
+      "ano": 2015,
+      "medida": "nominal",
+      "diferenca": -0.0001068115234375
+    },
+    {
+      "ano": 2015,
+      "medida": "real",
+      "diferenca": -0.0001678466796875
+    },
+    {
+      "ano": 2016,
+      "medida": "nominal",
+      "diferenca": 0.0001068115234375
+    },
+    {
+      "ano": 2016,
+      "medida": "real",
+      "diferenca": 0.0002899169921875
+    },
+    {
+      "ano": 2017,
+      "medida": "nominal",
+      "diferenca": -3.0517578125e-05
+    },
+    {
+      "ano": 2017,
+      "medida": "real",
+      "diferenca": -9.1552734375e-05
+    },
+    {
+      "ano": 2018,
+      "medida": "nominal",
+      "diferenca": -6.103515625e-05
+    },
+    {
+      "ano": 2018,
+      "medida": "real",
+      "diferenca": 0.0
+    },
+    {
+      "ano": 2019,
+      "medida": "nominal",
+      "diferenca": -0.0001373291015625
+    },
+    {
+      "ano": 2019,
+      "medida": "real",
+      "diferenca": -0.0003662109375
+    },
+    {
+      "ano": 2020,
+      "medida": "nominal",
+      "diferenca": 0.000152587890625
+    },
+    {
+      "ano": 2020,
+      "medida": "real",
+      "diferenca": 0.000213623046875
+    },
+    {
+      "ano": 2021,
+      "medida": "nominal",
+      "diferenca": 6.103515625e-05
+    },
+    {
+      "ano": 2021,
+      "medida": "real",
+      "diferenca": 0.000152587890625
+    },
+    {
+      "ano": 2022,
+      "medida": "nominal",
+      "diferenca": 0.00018310546875
+    },
+    {
+      "ano": 2022,
+      "medida": "real",
+      "diferenca": 0.00030517578125
+    },
+    {
+      "ano": 2023,
+      "medida": "nominal",
+      "diferenca": -3.0517578125e-05
+    },
+    {
+      "ano": 2023,
+      "medida": "real",
+      "diferenca": 3.0517578125e-05
+    },
+    {
+      "ano": 2024,
+      "medida": "nominal",
+      "diferenca": 0.0
+    },
+    {
+      "ano": 2024,
+      "medida": "real",
+      "diferenca": -1.52587890625e-05
+    }
+  ],
+  "despesa_total": 2129922538038.3665,
+  "rubricas_exaustivas": [
+    64,
+    69,
+    71,
+    138
+  ],
+  "comparadores": [
+    {
+      "nome": "Bolsa Família e Auxílio Brasil",
+      "valor": 166311560833.81213,
+      "rotulo_fonte": "4.4.1.2 Bolsa Família e Auxílio Brasil",
+      "celula": "AB141",
+      "aba": "2.2",
+      "escopo": "Transferências do programa na rubrica do RTN; inclui a transição entre os programas em 2023.",
+      "razao": 1.078450123795515,
+      "percentual": 107.8450123795515
+    },
+    {
+      "nome": "BPC e Renda Mensal Vitalícia",
+      "valor": 92671236105.88002,
+      "rotulo_fonte": "4.3.05  Benefícios de Prestação Continuada da LOAS/RMV",
+      "celula": "AB79",
+      "aba": "2.2",
+      "escopo": "Benefícios de Prestação Continuada da LOAS e RMV, agrupados na fonte.",
+      "razao": 1.9354303547319325,
+      "percentual": 193.54303547319324
+    },
+    {
+      "nome": "Abono salarial e seguro-desemprego",
+      "valor": 72856081368.76,
+      "rotulo_fonte": "4.3.01 Abono e Seguro Desemprego",
+      "celula": "AB72",
+      "aba": "2.2",
+      "escopo": "Soma dos dois benefícios, conforme rubrica do RTN.",
+      "razao": 2.461822266586484,
+      "percentual": 246.1822266586484
+    },
+    {
+      "nome": "Fundeb — complementação da União",
+      "valor": 37487823048.09001,
+      "rotulo_fonte": "4.3.10  FUNDEB (Complem. União)",
+      "celula": "AB85",
+      "aba": "2.2",
+      "escopo": "Somente a complementação federal; não é todo o financiamento do Fundeb.",
+      "razao": 4.784452891269937,
+      "percentual": 478.4452891269937
+    },
+    {
+      "nome": "Benefícios previdenciários (RGPS)",
+      "valor": 898872912175.6799,
+      "rotulo_fonte": "4.1  Benefícios Previdenciários ",
+      "celula": "AB64",
+      "aba": "2.2",
+      "escopo": "Benefícios previdenciários urbanos e rurais, incluindo sentenças e precatórios; não é toda a Previdência pública.",
+      "razao": 0.19953735499239889,
+      "percentual": 19.95373549923989
+    },
+    {
+      "nome": "Minha Casa Minha Vida — despesa no RTN",
+      "valor": 9327275344.65,
+      "rotulo_fonte": "Minha Casa Minha Vida",
+      "celula": "AB175",
+      "aba": "2.2",
+      "escopo": "Rubrica orçamentária informada no RTN; não equivale ao total de financiamentos habitacionais ou de recursos do FGTS.",
+      "razao": 19.22948736285863,
+      "percentual": 1922.948736285863
+    }
+  ],
+  "soma_mensal_confere": true,
+  "arquivos": [
+    {
+      "arquivo": "rtn-dez2023.pdf",
+      "sha256": "7c2b583e87ad2953dcd45f74da074734659508d4270ff7ccdc1303bf9a13835c"
+    },
+    {
+      "arquivo": "rtn-dez2023.xlsx",
+      "sha256": "d2a3fbc26546930a9b34bfdfa4fc44c71010ca4a8505bb9336017d8f473185d7"
+    }
+  ]
+}

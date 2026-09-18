@@ -65,15 +65,15 @@ pay = pay.replace("</", "<\\/").replace("<!--", "<\\u0021--")
 
 inconsistencias = open(os.path.join(ROOT, "artifact", "inconsistencias.json"), encoding="utf-8").read()
 
-for marker in ("__PAYLOAD__", "__FONTS__", "__APRESENTACAO__", "__INCONSISTENCIAS__", "__RENUNCIA_LUCRO__"):
+for marker in ("__PAYLOAD__", "__FONTS__", "__APRESENTACAO__", "__INCONSISTENCIAS__", "__COMPOSICAO_CUSTO__"):
     if marker not in tpl:
         sys.exit(f"template sem marcador {marker}")
 html = tpl.replace("__FONTS__", font_css()).replace("__PAYLOAD__", pay).replace("__APRESENTACAO__", apresentacao.replace("</", "<\\/"))
 
 html = html.replace("__INCONSISTENCIAS__", inconsistencias.replace("</", "<\\/"))
 
-financeiro = open(os.path.join(ROOT, "artifact", "renuncia-lucro.json"), encoding="utf-8").read()
-html = html.replace("__RENUNCIA_LUCRO__", financeiro.replace("</", "<\\/"))
+composicao_custo = open(os.path.join(ROOT, "artifact", "composicao-custo.json"), encoding="utf-8").read()
+html = html.replace("__COMPOSICAO_CUSTO__", composicao_custo.replace("</", "<\\/"))
 
 for out in OUTS:
     os.makedirs(os.path.dirname(out), exist_ok=True)

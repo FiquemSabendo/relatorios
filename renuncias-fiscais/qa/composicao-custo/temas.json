@@ -1,0 +1,162 @@
+[
+  {
+    "mecanismo": "Acordos comerciais e cotas",
+    "tema": "Exportação e comércio exterior"
+  },
+  {
+    "mecanismo": "Admissão temporária",
+    "tema": "Exportação e comércio exterior"
+  },
+  {
+    "mecanismo": "Atividade audiovisual",
+    "tema": "Cultura, esporte e eventos"
+  },
+  {
+    "mecanismo": "Autopeças e máquinas agrícolas",
+    "tema": "Indústria e cadeias produtivas"
+  },
+  {
+    "mecanismo": "Ciência e pesquisa",
+    "tema": "Ciência, tecnologia e inovação"
+  },
+  {
+    "mecanismo": "Desoneração de alimentos e insumos agrícolas",
+    "tema": "Alimentos e insumos agrícolas"
+  },
+  {
+    "mecanismo": "Drawback",
+    "tema": "Exportação e comércio exterior"
+  },
+  {
+    "mecanismo": "Empresa Cidadã",
+    "tema": "Proteção social e trabalho"
+  },
+  {
+    "mecanismo": "Entes públicos e organismos internacionais",
+    "tema": "Administração pública e relações internacionais"
+  },
+  {
+    "mecanismo": "Entreposto e depósito aduaneiro",
+    "tema": "Exportação e comércio exterior"
+  },
+  {
+    "mecanismo": "Farmacêuticos e químicos",
+    "tema": "Indústria e cadeias produtivas"
+  },
+  {
+    "mecanismo": "Finor/Finam",
+    "tema": "Desenvolvimento regional"
+  },
+  {
+    "mecanismo": "Fundos da Criança e do Adolescente",
+    "tema": "Proteção social e trabalho"
+  },
+  {
+    "mecanismo": "Fundos do Idoso",
+    "tema": "Proteção social e trabalho"
+  },
+  {
+    "mecanismo": "Gás natural e energia",
+    "tema": "Energia, petróleo e gás"
+  },
+  {
+    "mecanismo": "Horário Eleitoral",
+    "tema": "Processo eleitoral"
+  },
+  {
+    "mecanismo": "Incentivo ao Desporto",
+    "tema": "Cultura, esporte e eventos"
+  },
+  {
+    "mecanismo": "Lei Rouanet (Pronac)",
+    "tema": "Cultura, esporte e eventos"
+  },
+  {
+    "mecanismo": "Livros e imprensa",
+    "tema": "Cultura, esporte e eventos"
+  },
+  {
+    "mecanismo": "Loja franca",
+    "tema": "Exportação e comércio exterior"
+  },
+  {
+    "mecanismo": "Outras isenções não capituladas",
+    "tema": "Tema não determinado"
+  },
+  {
+    "mecanismo": "Outros fundamentos de importação",
+    "tema": "Tema não determinado"
+  },
+  {
+    "mecanismo": "PAT (alimentação do trabalhador)",
+    "tema": "Proteção social e trabalho"
+  },
+  {
+    "mecanismo": "Padis (semicondutores)",
+    "tema": "Ciência, tecnologia e inovação"
+  },
+  {
+    "mecanismo": "Perse (setor de eventos)",
+    "tema": "Cultura, esporte e eventos"
+  },
+  {
+    "mecanismo": "Pronas/PCD (pessoa com deficiência)",
+    "tema": "Saúde e inclusão"
+  },
+  {
+    "mecanismo": "Pronon (oncologia)",
+    "tema": "Saúde e inclusão"
+  },
+  {
+    "mecanismo": "Prouni",
+    "tema": "Educação"
+  },
+  {
+    "mecanismo": "Recap (exportadoras)",
+    "tema": "Exportação e comércio exterior"
+  },
+  {
+    "mecanismo": "Recof (entreposto industrial)",
+    "tema": "Exportação e comércio exterior"
+  },
+  {
+    "mecanismo": "Regimes aduaneiros especiais (PIS/Cofins)",
+    "tema": "Tema não determinado"
+  },
+  {
+    "mecanismo": "Reidi (infraestrutura)",
+    "tema": "Infraestrutura e logística"
+  },
+  {
+    "mecanismo": "Repes (software)",
+    "tema": "Ciência, tecnologia e inovação"
+  },
+  {
+    "mecanismo": "Repetro (petróleo e gás)",
+    "tema": "Energia, petróleo e gás"
+  },
+  {
+    "mecanismo": "Reporto (portos)",
+    "tema": "Infraestrutura e logística"
+  },
+  {
+    "mecanismo": "Rota 2030",
+    "tema": "Indústria e cadeias produtivas"
+  },
+  {
+    "mecanismo": "Setor aeronáutico",
+    "tema": "Indústria e cadeias produtivas"
+  },
+  {
+    "mecanismo": "Setor naval e portuário",
+    "tema": "Infraestrutura e logística"
+  },
+  {
+    "mecanismo": "Sudam/Sudene",
+    "tema": "Desenvolvimento regional"
+  },
+  {
+    "mecanismo": "Zona Franca de Manaus",
+    "tema": "Desenvolvimento regional"
+  }
+]
