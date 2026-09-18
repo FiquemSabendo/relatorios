@@ -5,10 +5,11 @@
 Pipeline reprodutível que baixa os microdados de **Renúncias Fiscais** do Portal da
 Transparência, consolida em um banco DuckDB e gera uma página HTML autocontida
 (`../docs/renuncias-fiscais/index.html`, servida pelo GitHub Pages; cópia em `artifact/renuncias.html` para o
-artefato do claude.ai; ~9 MB), na identidade visual da Fiquem Sabendo, com quatro abas:
+artefato do claude.ai; ~9 MB), na identidade visual da Fiquem Sabendo, com cinco abas:
 
 - **Apresentação** — série anual e composição por tributo, corrigidas pelo IPCA.
 - **Metodologia** — cobertura, fontes, agrupamentos e correção monetária.
+- **Inconsistências** — evidências nos dados brutos, arquivos para conferência e perguntas propostas ao Ministério da Fazenda.
 - **Maiores Beneficiários** — concentração, maiores beneficiários e setores; tabela de todos os setores em todos os anos, de 2015 a 2024 (parcial).
 - **Ranking de beneficiários** — agrupamento por raiz do CNPJ, com busca e detalhes dos estabelecimentos, valores anuais e fundamentos legais.
 
@@ -205,10 +206,14 @@ silenciosamente. A API alternativa oficial de agregados do IBGE fornece SIDRA 17
 
 ## Abas e maiores beneficiários
 
-Ordem: Apresentação, Metodologia, Maiores Beneficiários e Ranking de beneficiários.
+Ordem: Apresentação, Metodologia, Inconsistências, Maiores Beneficiários e Ranking de beneficiários.
 A Metodologia reúne a descrição da base, as fontes e os critérios em uma aba própria.
 Maiores Beneficiários usa o acumulado real de 2015–2024, incluindo 2024 parcial.
 Concentração por raiz do CNPJ, sem inferir controlador; inclui empresas e outras pessoas
 jurídicas. Os setores são somados por estabelecimento usando a classificação editorial,
 em vez de atribuir todo o grupo ao setor do estabelecimento principal. A tabela anual mostra todos os setores nos dez anos, sem gráfico de evolução,
 com 2024 identificado como parcial e totais anuais para conferência. Detalhes em `qa/maiores-beneficiarios/metodologia.md`.
+
+## Auditoria de inconsistências
+
+`python3 renuncias-fiscais/scripts/13_export_inconsistencias.py` relê os CSVs monetários originais, reconcilia cada CNPJ/ano e gera `artifact/inconsistencias.json` e os CSVs públicos em `docs/renuncias-fiscais/evidencias/`. Rodar antes do build quando mudar a base. A aba distingue pendências dos registros de limitações documentais e não confirma erros ou irregularidades. Ver `qa/inconsistencias/consistencia.md`.

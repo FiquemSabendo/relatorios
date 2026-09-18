@@ -63,10 +63,14 @@ if json.loads(apresentacao).get("referencia") != reference:
 # íntegro e impede o fechamento prematuro da tag.
 pay = pay.replace("</", "<\\/").replace("<!--", "<\\u0021--")
 
-for marker in ("__PAYLOAD__", "__FONTS__", "__APRESENTACAO__"):
+inconsistencias = open(os.path.join(ROOT, "artifact", "inconsistencias.json"), encoding="utf-8").read()
+
+for marker in ("__PAYLOAD__", "__FONTS__", "__APRESENTACAO__", "__INCONSISTENCIAS__"):
     if marker not in tpl:
         sys.exit(f"template sem marcador {marker}")
 html = tpl.replace("__FONTS__", font_css()).replace("__PAYLOAD__", pay).replace("__APRESENTACAO__", apresentacao.replace("</", "<\\/"))
+
+html = html.replace("__INCONSISTENCIAS__", inconsistencias.replace("</", "<\\/"))
 
 for out in OUTS:
     os.makedirs(os.path.dirname(out), exist_ok=True)

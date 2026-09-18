@@ -1,0 +1,123 @@
+{
+  "anos": [
+    {
+      "ano": 2015,
+      "linhas": 65232,
+      "total_centavos": 7513047430692,
+      "duplicatas_centavos": 1200000,
+      "negativos_centavos": -8569434,
+      "cnae_ausente_linhas": 7378,
+      "cnae_ausente_centavos": 1052094355552,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    },
+    {
+      "ano": 2016,
+      "linhas": 62592,
+      "total_centavos": 7829359904765,
+      "duplicatas_centavos": 4208177,
+      "negativos_centavos": -40000,
+      "cnae_ausente_linhas": 6908,
+      "cnae_ausente_centavos": 1069028595589,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    },
+    {
+      "ano": 2017,
+      "linhas": 65315,
+      "total_centavos": 7058954247706,
+      "duplicatas_centavos": 33071200,
+      "negativos_centavos": 0,
+      "cnae_ausente_linhas": 7623,
+      "cnae_ausente_centavos": 1113911355382,
+      "sentinela_linhas": 2,
+      "sentinela_centavos": 12721900
+    },
+    {
+      "ano": 2018,
+      "linhas": 69187,
+      "total_centavos": 10023184942897,
+      "duplicatas_centavos": 2974174971,
+      "negativos_centavos": 0,
+      "cnae_ausente_linhas": 7805,
+      "cnae_ausente_centavos": 1433279067548,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    },
+    {
+      "ano": 2019,
+      "linhas": 74170,
+      "total_centavos": 11944335176811,
+      "duplicatas_centavos": 991595291,
+      "negativos_centavos": 0,
+      "cnae_ausente_linhas": 8629,
+      "cnae_ausente_centavos": 1771236401460,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    },
+    {
+      "ano": 2020,
+      "linhas": 78939,
+      "total_centavos": 15936442717177,
+      "duplicatas_centavos": 2731700924,
+      "negativos_centavos": -446900,
+      "cnae_ausente_linhas": 9035,
+      "cnae_ausente_centavos": 1948362797356,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    },
+    {
+      "ano": 2021,
+      "linhas": 82953,
+      "total_centavos": 20474399362478,
+      "duplicatas_centavos": 3547192232,
+      "negativos_centavos": 0,
+      "cnae_ausente_linhas": 10045,
+      "cnae_ausente_centavos": 2503097298124,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    },
+    {
+      "ano": 2022,
+      "linhas": 101442,
+      "total_centavos": 19469789091743,
+      "duplicatas_centavos": 7606299042,
+      "negativos_centavos": -432700,
+      "cnae_ausente_linhas": 10676,
+      "cnae_ausente_centavos": 2571164381376,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    },
+    {
+      "ano": 2023,
+      "linhas": 109337,
+      "total_centavos": 17935872336985,
+      "duplicatas_centavos": 5916323012,
+      "negativos_centavos": 0,
+      "cnae_ausente_linhas": 11109,
+      "cnae_ausente_centavos": 2473139495709,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    },
+    {
+      "ano": 2024,
+      "linhas": 43292,
+      "total_centavos": 7064536745000,
+      "duplicatas_centavos": 0,
+      "negativos_centavos": -9799600,
+      "cnae_ausente_linhas": 4569,
+      "cnae_ausente_centavos": 1169793831600,
+      "sentinela_linhas": 0,
+      "sentinela_centavos": 0
+    }
+  ],
+  "repeticoes": 307,
+  "negativos": 9,
+  "sentinela": 2,
+  "duplicatas_centavos": 23805764849,
+  "negativos_centavos": -19288634,
+  "sentinela_centavos": 12721900,
+  "cnae_ausente_linhas": 83777,
+  "cnae_ausente_centavos": 17105107579696,
+  "total_centavos": 125249921956254
+}

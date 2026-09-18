@@ -354,6 +354,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
   <nav class="tabs" role="tablist" id="tabs">
     <button role="tab" data-v="apresentacao" aria-selected="true">Apresentação</button>
     <button role="tab" data-v="metodologia" aria-selected="false">Metodologia</button>
+    <button role="tab" data-v="inconsistencias" aria-selected="false">Inconsistências</button>
     <button role="tab" data-v="beneficiarios" aria-selected="false">Maiores Beneficiários</button>
     <button role="tab" data-v="ranking" aria-selected="false">Ranking de beneficiários</button>
   </nav>
@@ -389,6 +390,73 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         descrevem este acervo, não o universo de todos os benefícios tributários.</p>
     </div>
 
+  </section>
+
+  <section id="view-inconsistencias" role="tabpanel" class="hidden">
+    <div class="card intro-copy">
+      <h2>Inconsistências e perguntas à fonte</h2>
+      <p>Revisão dos arquivos brutos de 2015–2024 usados neste site, extraídos em 21/08/2026 e com atualização indicada na origem em 05/12/2024. Auditoria revisada em 17/09/2026. Os valores abaixo são <b>nominais, sem correção pela inflação</b>.</p>
+      <p>O detalhe fecha com o totalizador oficial para cada CNPJ e ano. Essa consistência das somas não esclarece a natureza das repetições, dos valores negativos ou dos cadastros incompletos. Os casos abaixo são pendências de esclarecimento, não provas de irregularidade dos beneficiários.</p>
+      <p>As perguntas são propostas para o <b>Ministério da Fazenda / Receita Federal</b>, com articulação com a CGU quando envolver a publicação no Portal da Transparência. Não representam pedidos enviados nem respostas recebidas. A responsabilidade pelos registros é da fonte primária.</p>
+    </div>
+    <div class="card intro-copy">
+      <h2>1. Registros integralmente repetidos</h2>
+      <p id="inc-duplicatas"></p>
+      <p><b>Como tratamos e o que pode mudar:</b> mantivemos todas as ocorrências porque integram o totalizador oficial. Não há chave de operação publicada que permita distinguir eventos diferentes com os mesmos atributos. Se forem duplicações indevidas, os valores e rankings afetados estarão superestimados.</p>
+      <h3>Perguntas ao Ministério da Fazenda</h3>
+      <ul><li>As ocorrências com todas as colunas iguais representam operações distintas ou duplicações na extração/publicação? Solicitamos esclarecimento por registro do arquivo anexo.</li>
+      <li>Qual é a unidade de cada linha e qual chave permite identificar unicamente uma operação, declaração ou benefício?</li>
+      <li>Como os totalizadores incorporam essas ocorrências? Se houver duplicação indevida, quais valores e arquivos serão corrigidos e em que prazo?</li></ul>
+      <p><a href="evidencias/repeticoes.csv" download>Baixar ocorrências excedentes, com arquivo e linha de origem (CSV)</a></p>
+    </div>
+    <div class="card intro-copy">
+      <h2>2. Valores negativos sem natureza esclarecida</h2>
+      <p id="inc-negativos"></p>
+      <p><b>Como tratamos e o que pode mudar:</b> os negativos permanecem no saldo. Não os interpretamos como estorno, devolução ou erro. Uma regra diferente de tratamento pode alterar os totais e a posição dos beneficiários.</p>
+      <h3>Perguntas ao Ministério da Fazenda</h3>
+      <ul><li>O que significa cada valor negativo listado: ajuste, retificação, estorno ou outra situação? Qual regra de cálculo permite esse resultado?</li>
+      <li>A qual declaração, operação e período original cada registro está vinculado? O ajuste já foi aplicado em outro registro ou ano?</li>
+      <li>Os negativos devem reduzir a renúncia do ano indicado? Solicitamos a orientação oficial e a inclusão dessa regra no dicionário.</li></ul>
+      <p><a href="evidencias/negativos.csv" download>Baixar todos os registros negativos (CSV)</a></p>
+    </div>
+    <div class="card intro-copy">
+      <h2>3. Identificador “-3” e razão social “Inválido”</h2>
+      <p id="inc-sentinela"></p>
+      <p><b>Como tratamos e o que pode mudar:</b> o valor permanece no total, mas o código não identifica uma empresa e não serve para cruzamentos. Sua causa não está esclarecida no dicionário consultado. Uma identificação válida pode mudar a atribuição dos valores e a concentração por beneficiário.</p>
+      <h3>Perguntas ao Ministério da Fazenda</h3>
+      <ul><li>Qual é o significado do código “-3”? Ele reúne um ou vários contribuintes? Por qual motivo o CNPJ não foi publicado nesses registros?</li>
+      <li>É possível fornecer os identificadores corretos e a correspondência com cada registro anexo? Se não, qual é o impedimento e sua fundamentação?</li>
+      <li>Existem outros códigos especiais? Solicitamos a tabela completa de códigos, significados e regras de uso.</li></ul>
+      <p><a href="evidencias/identificador-invalido.csv" download>Baixar registros com identificador inválido (CSV)</a></p>
+    </div>
+    <div class="card intro-copy">
+      <h2>4. CNAE ausente no cadastro de origem</h2>
+      <p id="inc-cnae"></p>
+      <p><b>Como tratamos e o que pode mudar:</b> valores sem CNAE não são descartados. A classificação editorial pode recuperar parte deles mediante evidência documentada; por isso, esse montante não equivale ao setor “Não identificado” do site. Correções cadastrais podem redistribuir os valores entre setores.</p>
+      <h3>Perguntas ao Ministério da Fazenda</h3>
+      <ul><li>Por que há registros com CNAE vazio ou “00000”? Isso indica ausência no cadastro, falha de associação ou outra condição?</li>
+      <li>Qual cadastro fornece a CNAE e qual a data de referência: a do fato gerador ou a da extração? Como são tratadas mudanças de atividade?</li>
+      <li>É possível disponibilizar a CNAE válida por CNPJ e ano e identificar os casos em que não existe classificação aplicável?</li></ul>
+      <p><a href="evidencias/auditoria-anual.csv" download>Baixar quantidades e valores por ano (CSV; valores em centavos)</a></p>
+    </div>
+    <div class="card intro-copy">
+      <h2>Dúvidas de documentação e cobertura</h2>
+      <p>Os pontos seguintes afetam a interpretação dos arquivos, mas não demonstram erro nos valores publicados.</p>
+      <h3>5. Duas definições para o ano-calendário</h3>
+      <p>O <a href="https://portaldatransparencia.gov.br/dicionario-de-dados/renuncias" target="_blank" rel="noopener">dicionário</a> associa o campo ao ano da declaração da ECF. A <a href="https://portaldatransparencia.gov.br/entenda-a-gestao-publica/renuncias-fiscais" target="_blank" rel="noopener">página explicativa</a> o associa ao fato gerador. Adotamos o fato gerador; uma convenção diferente por tipo de renúncia mudaria as comparações anuais.</p>
+      <p><b>Perguntas ao Ministério da Fazenda:</b></p>
+      <ul><li>Qual definição vale para cada tipo de renúncia, incluindo importações e IRPJ/CSLL? Solicitamos exemplos de declaração original e retificadora.</li><li>Retificações substituem o valor do ano do fato gerador ou entram no ano de entrega? Quando o dicionário e a página explicativa serão harmonizados?</li></ul>
+      <h3>6. Cobertura parcial e atualização dos arquivos</h3>
+      <p>Na versão analisada, a documentação informa importações até o primeiro semestre de 2024 e IRPJ/CSLL até 2023. O recorte do Perse cobre apenas IRPJ/CSLL de 2022–2023. Essa limitação é documentada; não é uma queda anual comprovada nem uma medida de todos os benefícios federais.</p>
+      <p><b>Perguntas ao Ministério da Fazenda:</b></p>
+      <ul><li>Qual é a cobertura exata por benefício, tributo e mês em cada arquivo? Solicitamos uma matriz que distinga ausência de dados de renúncia igual a zero.</li><li>Onde estão ou quando serão publicados os períodos e tributos ausentes desta versão, inclusive os demais tributos do Perse?</li><li>Existe histórico de revisões com versões anteriores e indicação do que mudou? Como os usuários serão informados sobre correções retroativas?</li></ul>
+      <p><b>Tratamento e limite:</b> 2024 continua identificado como parcial, sem extrapolação automática. A inclusão de novos meses e tributos mudará os totais e exigirá nova auditoria.</p>
+    </div>
+    <div class="card intro-copy">
+      <h2>Como conferir e usar estas evidências</h2>
+      <p>Os valores dos casos podem se sobrepor e <b>não devem ser somados como um total de erros</b>. Os CSVs de ocorrências preservam as colunas originais e acrescentam arquivo e linha de origem; nas repetições, trazem somente as ocorrências além da primeira.</p>
+      <p><a href="evidencias/arquivos-sha256.csv" download>Identificação dos arquivos auditados (SHA-256)</a> · <a href="https://portaldatransparencia.gov.br/download-de-dados/renuncias" target="_blank" rel="noopener">Arquivos originais</a> · <a href="https://github.com/FiquemSabendo/relatorios/blob/main/renuncias-fiscais/qa/inconsistencias/consistencia.md" target="_blank" rel="noopener">Método de auditoria e riscos</a></p>
+    </div>
   </section>
 
   <section id="view-metodologia" role="tabpanel" class="hidden">
@@ -1069,6 +1137,15 @@ function renderBeneficiarios() {
   $("#ben-evolucao-table").innerHTML=`<table><thead><tr><th>Setor</th>${ANOS.map(a=>`<th class="n">${a}${a===ANO_PARCIAL?" (parcial)":""}</th>`).join("")}</tr></thead><tbody>`+B.setores.map(r=>`<tr><td>${esc(r.setor)}</td>${r.valores.map(v=>`<td class="n">${moeda(v)}</td>`).join("")}</tr>`).join("")+`</tbody><tfoot><tr><th>Total</th>${AP.anos.map(r=>`<td class="n"><b>${moeda(r.real)}</b></td>`).join("")}</tr></tfoot></table>`;
 }
 
+const INC = __INCONSISTENCIAS__;
+function renderInconsistencias() {
+  const reais = c => "R$ " + nf2.format(c / 100);
+  $("#inc-duplicatas").textContent = `Encontramos ${nfInt.format(INC.repeticoes)} ocorrências além da primeira, iguais em todas as colunas, somando ${reais(INC.duplicatas_centavos)}. Esse seria o valor retirado do acumulado nominal se todas essas repetições fossem eliminadas; não é uma estimativa de erro confirmado.`;
+  $("#inc-negativos").textContent = `O detalhe contém ${nfInt.format(INC.negativos)} registros negativos, com soma de ${reais(INC.negativos_centavos)}. Os arquivos para conferência estão disponíveis abaixo.`;
+  $("#inc-sentinela").textContent = `Há ${nfInt.format(INC.sentinela)} registros no detalhe sob o código “-3”, somando ${reais(INC.sentinela_centavos)}. A razão social publicada é “Inválido”.`;
+  $("#inc-cnae").textContent = `No detalhe bruto, ${nfInt.format(INC.cnae_ausente_linhas)} linhas têm CNAE vazio ou “00000”, somando ${reais(INC.cnae_ausente_centavos)} (${nf2.format(INC.cnae_ausente_centavos/INC.total_centavos*100)}% do acumulado nominal de 2015–2024, com 2024 parcial). São linhas de benefícios, não uma contagem de empresas distintas.`;
+}
+
 function renderMetodologia() {
   document.querySelectorAll("[data-base-ipca]").forEach(el => { el.textContent = AP.base; });
   $("#intro-base-fonte").href = AP.referencia.fonte_periodo;
@@ -1480,11 +1557,12 @@ function montarNota2024() {
     `${nfInt.format(n23)} em 2023. A cobertura de 2024 se limita à importação no primeiro semestre; IRPJ/CSLL vai até 2023.`;
 }
 
-const ABAS = ["apresentacao", "metodologia", "beneficiarios", "ranking"];
+const ABAS = ["apresentacao", "metodologia", "inconsistencias", "beneficiarios", "ranking"];
 
 function renderAll() {
   if (S.view === "apresentacao") renderApresentacao();
   else if (S.view === "metodologia") renderMetodologia();
+  else if (S.view === "inconsistencias") renderInconsistencias();
   else if (S.view === "beneficiarios") renderBeneficiarios();
   else renderRanking();
 }
