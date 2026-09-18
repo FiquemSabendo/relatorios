@@ -1,0 +1,21 @@
+posicao,razao_html,cnpjs_html,acumulado_bi_html,label,ticker,origem,excluido,nota,renuncia_2023_bi_html,ebitda_html,ratio_html,data_escolhida,campo_ebitda,ebitda_bruto,moeda_info,moeda_apos_heuristica,cambio_aplicado,ebitda_brl_codigo,comparacao_arredondada,status
+1,Petroleo Brasileiro S A Petrobras,62,167.2,Petrobras,PETR4.SA,entidade,False,,9.1,EBITDA 253.8 · Lucro 120.8,3.6%,2023-12-31,EBITDA,52292000000.0,BRL,USD,4.85,253616199999.99997,diverge,obtido
+2,Ge Celma Ltda.,4,56.5,GE Celma,GE,proxy,False,Filial BR; matriz GE Aerospace,7.2,GE · EBITDA 61.3,11.7%,2023-12-31,EBITDA,12649000000.0,USD,USD,4.85,61347649999.99999,coincide,obtido
+3,Vale S.A.,23,39.8,Vale,VALE3.SA,entidade,False,,5.7,EBITDA 75.6 · Lucro 38.7,7.6%,2023-12-31,EBITDA,15590000000.0,BRL,USD,4.85,75611500000.0,coincide,obtido
+4,Samsung Eletronica Da Amazonia Ltda,5,29.6,Samsung Amazônia,005930.KS,proxy,False,Filial ZFM; matriz Samsung Electronics,2.4,005930.KS · EBITDA 189.8,1.3%,2023-12-31,EBITDA,50603077000000.0,KRW,KRW,0.00375,189761538750.0,coincide,obtido
+5,Embraer S.A.,8,27.7,Embraer,EMBJ3.SA,entidade,False,,3.1,EBITDA 2.9 · Lucro 0.8,105%,2023-12-31,EBITDA,598200000.0,BRL,USD,4.85,2901270000.0,coincide,obtido
+6,Tam Linhas Aereas S/A.,12,27.6,LATAM (TAM),LTM,proxy,False,Filial BR; matriz LATAM Airlines (Chile),4.4,LTM · EBITDA 6.2,71.3%,2023-12-31,EBITDA,1279379000.0,USD,USD,4.85,6204988150.0,coincide,obtido
+7,Stellantis Automoveis Brasil Ltda.,7,26.3,Stellantis Brasil,STLA,proxy,False,Filial BR; matriz Stellantis NV,4.2,STLA · EBITDA 166.5,2.5%,2023-12-31,EBITDA,31297000000.0,EUR,EUR,5.32,166500040000.0,coincide,obtido
+8,Modec Servicos De Petroleo Do Brasil Ltda,4,19.7,Modec,MITSY,proxy,False,Adquirida por Mitsui; proxy Mitsui & Co,4.6,MITSY · EBITDA 60.6,7.6%,2023-03-31,EBITDA,1782566000000.0,JPY,JPY,0.034,60607244000.00001,coincide,obtido
+9,General Motors Do Brasil Ltda,9,18.8,GM Brasil,GM,proxy,False,Filial BR; matriz General Motors,2.9,GM · EBITDA 112.5,2.6%,2023-12-31,EBITDA,23202000000.0,USD,USD,4.85,112529699999.99998,coincide,obtido
+10,Cnh Industrial Brasil Ltda.,8,14.1,CNH Industrial,CNH,proxy,False,Filial BR; matriz CNH Industrial,1.8,CNH · EBITDA 22.4,8.2%,2023-12-31,EBITDA,4612000000.0,USD,USD,4.85,22368200000.0,coincide,obtido
+11,Caterpillar Brasil Ltda,4,14.0,Caterpillar Brasil,CAT,proxy,False,Filial BR; matriz Caterpillar,1.9,CAT · EBITDA 76.2,2.5%,2023-12-31,EBITDA,15705000000.0,USD,USD,4.85,76169250000.0,coincide,obtido
+12,Renault Do Brasil S.A,1,14.0,Renault Brasil,RNO.PA,proxy,False,Filial BR; matriz Renault,1.2,RNO.PA · EBITDA 34.0,3.6%,2023-12-31,EBITDA,6394000000.0,EUR,EUR,5.32,34016080000.0,coincide,obtido
+13,Yara Brasil Fertilizantes S/A,30,14.0,Yara Brasil,YAR.OL,proxy,False,Filial BR; matriz Yara International,1.1,YAR.OL · EBITDA 7.4,15.1%,2023-12-31,EBITDA,1531000000.0,USD,USD,4.85,7425349999.999999,coincide,obtido
+14,Syngenta Protecao De Cultivos Ltda,9,13.1,Syngenta Brasil,FMC,proxy,False,Syngenta privada; proxy FMC (setor agroquímico),1.4,FMC · EBITDA 3.5,39.9%,2023-12-31,EBITDA,721700000.0,USD,USD,4.85,3500244999.9999995,coincide,obtido
+15,Ministerio Da Saude,5,12.8,Ministério da Saúde,,sem ticker,True,Setor público,,,,,,,,,,,,excluído por código
+16,Ventura Petroleo S.A.,1,11.2,Ventura Petróleo,,sem ticker,False,Empresa privada — sem DRE pública,3.0,n/d,n/d,,,,,,,,,sem ticker
+17,Lg Electronics Do Brasil Ltda,2,11.0,LG Brasil,066570.KS,proxy,False,Filial BR; matriz LG Electronics,1.0,066570.KS · EBITDA 21.6,4.4%,2023-12-31,EBITDA,5767150000000.0,KRW,KRW,0.00375,21626812500.0,coincide,obtido
+18,Volkswagen Do Brasil Industria De Veiculos Auto…,5,10.9,Volkswagen Brasil,VOW3.DE,proxy,False,Filial BR; matriz Volkswagen Group,2.2,VOW3.DE · EBITDA 288.9,0.8%,2023-12-31,EBITDA,54305000000.0,EUR,EUR,5.32,288902600000.0,coincide,obtido
+19,Azul Linhas Aereas Brasileiras S.A.,4,10.2,Azul,AZUL,entidade,False,Listada NYSE/B3,1.2,EBITDA 4.6 · Lucro -2.4,25.4%,2023-12-31,EBITDA,4618956000.0,BRL,BRL,1.0,4618956000.0,coincide,obtido
+20,Gol Linhas Aereas S.A.,4,10.1,Gol,GOLL4.SA,entidade,False,Em RJ; DRE pode estar distorcida,0.6,n/d,n/d,,,,,,,,,sem demonstração ou falha de consulta

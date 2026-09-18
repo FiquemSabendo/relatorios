@@ -1,0 +1,20 @@
+{
+  "ticker": "GOLL4.SA",
+  "consulta_utc": "2026-09-17T18:32:57.523176+00:00",
+  "yfinance_version": "1.7.0",
+  "datas_disponiveis": [],
+  "info": {
+    "symbol": "GOLL4.SA",
+    "shortName": null,
+    "longName": null,
+    "financialCurrency": "BRL",
+    "currency": null,
+    "marketCap": null,
+    "exchange": null,
+    "quoteType": "NONE",
+    "mostRecentQuarter": null,
+    "lastFiscalYearEnd": null,
+    "ebitda": null,
+    "totalRevenue": null
+  }
+}

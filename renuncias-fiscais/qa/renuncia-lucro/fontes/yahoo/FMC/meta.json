@@ -1,0 +1,26 @@
+{
+  "ticker": "FMC",
+  "consulta_utc": "2026-09-17T18:32:56.432930+00:00",
+  "yfinance_version": "1.7.0",
+  "datas_disponiveis": [
+    "2025-12-31",
+    "2024-12-31",
+    "2023-12-31",
+    "2022-12-31",
+    "2021-12-31"
+  ],
+  "info": {
+    "symbol": "FMC",
+    "shortName": "FMC Corporation",
+    "longName": "FMC Corporation",
+    "financialCurrency": "USD",
+    "currency": "USD",
+    "marketCap": 1301733120,
+    "exchange": "NYQ",
+    "quoteType": "EQUITY",
+    "mostRecentQuarter": 1782777600,
+    "lastFiscalYearEnd": 1767139200,
+    "ebitda": 269300000,
+    "totalRevenue": 3251200000
+  }
+}

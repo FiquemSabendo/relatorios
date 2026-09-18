@@ -5,7 +5,7 @@
 Pipeline reprodutível que baixa os microdados de **Renúncias Fiscais** do Portal da
 Transparência, consolida em um banco DuckDB e gera uma página HTML autocontida
 (`../docs/renuncias-fiscais/index.html`, servida pelo GitHub Pages; cópia em `artifact/renuncias.html` para o
-artefato do claude.ai; ~9 MB), na identidade visual da Fiquem Sabendo, com cinco abas:
+artefato do claude.ai; ~9 MB), na identidade visual da Fiquem Sabendo, com seis abas:
 
 - **Apresentação** — série anual e composição por tributo, corrigidas pelo IPCA.
 - **Metodologia** — cobertura, fontes, agrupamentos e correção monetária.
@@ -206,7 +206,7 @@ silenciosamente. A API alternativa oficial de agregados do IBGE fornece SIDRA 17
 
 ## Abas e maiores beneficiários
 
-Ordem: Apresentação, Metodologia, Inconsistências, Maiores Beneficiários e Ranking de beneficiários.
+Ordem: Apresentação, Metodologia, Inconsistências, Maiores Beneficiários, Ranking de beneficiários e Renúncia vs Lucro.
 A Metodologia reúne a descrição da base, as fontes e os critérios em uma aba própria.
 Maiores Beneficiários usa o acumulado real de 2015–2024, incluindo 2024 parcial.
 Concentração por raiz do CNPJ, sem inferir controlador; inclui empresas e outras pessoas
@@ -217,3 +217,7 @@ com 2024 identificado como parcial e totais anuais para conferência. Detalhes e
 ## Auditoria de inconsistências
 
 `python3 renuncias-fiscais/scripts/13_export_inconsistencias.py` relê os CSVs monetários originais, reconcilia cada CNPJ/ano e gera `artifact/inconsistencias.json` e os CSVs públicos em `docs/renuncias-fiscais/evidencias/`. Rodar antes do build quando mudar a base. A aba distingue pendências dos registros de limitações documentais e não confirma erros ou irregularidades. Ver `qa/inconsistencias/consistencia.md`.
+
+## Renúncia vs Lucro
+
+A aba reproduz a seleção e as aproximações financeiras autorizadas do Carabetta, com vinte beneficiários e dezoito EBITDAs. Fonte versionada: `qa/renuncia-lucro/fontes/`, incluindo a tabela em Markdown e snapshots Yahoo de 17/09/2026. `scripts/14_export_renuncia_lucro.py` gera `artifact/renuncia-lucro.json` e o CSV público. Não faz consultas novas. Os percentuais são recalculados com o EBITDA histórico arredondado, salvo Volvo, cujo valor integral foi preservado. A renúncia de 2023 recebe o fator histórico do autor e o EBITDA não: essa reprodução é uma exceção explícita às bases de preços das outras abas e não mede parcela do lucro causada pelo incentivo. Ver metodologia na própria aba e `qa/renuncia-lucro/consistencia.md`.

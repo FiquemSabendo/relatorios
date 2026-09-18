@@ -1,0 +1,25 @@
+{
+  "ticker": "MITSY",
+  "consulta_utc": "2026-09-17T18:32:57.752798+00:00",
+  "yfinance_version": "1.7.0",
+  "datas_disponiveis": [
+    "2026-03-31",
+    "2025-03-31",
+    "2024-03-31",
+    "2023-03-31"
+  ],
+  "info": {
+    "symbol": "MITSY",
+    "shortName": "Mitsui & Co., Ltd.",
+    "longName": "Mitsui & Co., Ltd.",
+    "financialCurrency": "JPY",
+    "currency": "USD",
+    "marketCap": 95723307008,
+    "exchange": "PNK",
+    "quoteType": "EQUITY",
+    "mostRecentQuarter": 1782777600,
+    "lastFiscalYearEnd": 1774915200,
+    "ebitda": 775447969792,
+    "totalRevenue": 15042844033024
+  }
+}

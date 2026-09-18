@@ -1,0 +1,26 @@
+{
+  "ticker": "GE",
+  "consulta_utc": "2026-09-17T18:32:56.747450+00:00",
+  "yfinance_version": "1.7.0",
+  "datas_disponiveis": [
+    "2025-12-31",
+    "2024-12-31",
+    "2023-12-31",
+    "2022-12-31",
+    "2021-12-31"
+  ],
+  "info": {
+    "symbol": "GE",
+    "shortName": "GE Aerospace",
+    "longName": "GE Aerospace",
+    "financialCurrency": "USD",
+    "currency": "USD",
+    "marketCap": 327869759488,
+    "exchange": "NYQ",
+    "quoteType": "EQUITY",
+    "mostRecentQuarter": 1782777600,
+    "lastFiscalYearEnd": 1767139200,
+    "ebitda": 11482999808,
+    "totalRevenue": 50638999552
+  }
+}

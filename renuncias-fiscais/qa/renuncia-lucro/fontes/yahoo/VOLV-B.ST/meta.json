@@ -1,0 +1,19 @@
+{
+  "ticker": "VOLV-B.ST",
+  "consulta_utc": "2026-09-17T18:56:54.965365+00:00",
+  "yfinance_version": "1.7.0",
+  "info": {
+    "symbol": "VOLV-B.ST",
+    "longName": "AB Volvo (publ)",
+    "financialCurrency": "SEK",
+    "currency": "SEK",
+    "marketCap": 686900051968
+  },
+  "datas_disponiveis": [
+    "2025-12-31",
+    "2024-12-31",
+    "2023-12-31",
+    "2022-12-31",
+    "2021-12-31"
+  ]
+}

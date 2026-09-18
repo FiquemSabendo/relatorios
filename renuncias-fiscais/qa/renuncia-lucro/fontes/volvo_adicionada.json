@@ -1,0 +1,17 @@
+{
+  "posicao_ranking_fiscal": 21,
+  "razao_social": "VOLVO DO BRASIL VEICULOS LTDA",
+  "beneficiario": "Volvo Brasil",
+  "ticker": "VOLV-B.ST",
+  "data_final_exercicio": "2023-12-31",
+  "moeda": "SEK",
+  "ebitda_original": 89637000000.0,
+  "taxa_brl": 0.47,
+  "ebitda_brl": 42129390000.0,
+  "renuncia_acumulada_corrigida": "10033860174.17065141900855444",
+  "renuncia_2023_nominal": "1132772604.49",
+  "renuncia_2023_corrigida": "1282937361.222605984612662357",
+  "renuncia_2023_ebitda_pct": 3.045231277316396,
+  "origem": "Nova consulta Yahoo; mesma regra e ticker já previstos no mapa de Carabetta",
+  "nota": "Filial BR; matriz Volvo Group"
+}

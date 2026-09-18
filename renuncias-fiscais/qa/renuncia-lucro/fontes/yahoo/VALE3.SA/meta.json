@@ -1,0 +1,26 @@
+{
+  "ticker": "VALE3.SA",
+  "consulta_utc": "2026-09-17T18:32:59.247559+00:00",
+  "yfinance_version": "1.7.0",
+  "datas_disponiveis": [
+    "2025-12-31",
+    "2024-12-31",
+    "2023-12-31",
+    "2022-12-31",
+    "2021-12-31"
+  ],
+  "info": {
+    "symbol": "VALE3.SA",
+    "shortName": "VALE        ON      NM",
+    "longName": "Vale S.A.",
+    "financialCurrency": "BRL",
+    "currency": "BRL",
+    "marketCap": 317862936576,
+    "exchange": "SAO",
+    "quoteType": "EQUITY",
+    "mostRecentQuarter": 1782777600,
+    "lastFiscalYearEnd": 1767139200,
+    "ebitda": 77332996096,
+    "totalRevenue": 218068992000
+  }
+}

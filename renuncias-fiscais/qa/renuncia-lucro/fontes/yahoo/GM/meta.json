@@ -1,0 +1,25 @@
+{
+  "ticker": "GM",
+  "consulta_utc": "2026-09-17T18:32:56.770111+00:00",
+  "yfinance_version": "1.7.0",
+  "datas_disponiveis": [
+    "2025-12-31",
+    "2024-12-31",
+    "2023-12-31",
+    "2022-12-31"
+  ],
+  "info": {
+    "symbol": "GM",
+    "shortName": "General Motors Company",
+    "longName": "General Motors Company",
+    "financialCurrency": "USD",
+    "currency": "USD",
+    "marketCap": 78628487168,
+    "exchange": "NYQ",
+    "quoteType": "EQUITY",
+    "mostRecentQuarter": 1782777600,
+    "lastFiscalYearEnd": 1767139200,
+    "ebitda": 16462000128,
+    "totalRevenue": 185527992320
+  }
+}

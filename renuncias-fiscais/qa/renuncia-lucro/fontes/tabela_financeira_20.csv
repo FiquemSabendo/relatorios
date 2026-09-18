@@ -1,0 +1,21 @@
+linha,posicao_ranking_fiscal,beneficiario,ticker,renuncia_2023_corrigida_bi,ebitda_exibido,renuncia_ebitda_pct_exibido,proveniencia
+1,1,Petrobras,PETR4.SA,9.1,EBITDA 253.8 · Lucro 120.8,3.6%,Tabela publicada pelo Carabetta; valores preservados
+2,2,GE Celma,GE,7.2,GE · EBITDA 61.3,11.7%,Tabela publicada pelo Carabetta; valores preservados
+3,3,Vale,VALE3.SA,5.7,EBITDA 75.6 · Lucro 38.7,7.6%,Tabela publicada pelo Carabetta; valores preservados
+4,4,Samsung Amazônia,005930.KS,2.4,005930.KS · EBITDA 189.8,1.3%,Tabela publicada pelo Carabetta; valores preservados
+5,5,Embraer,EMBJ3.SA,3.1,EBITDA 2.9 · Lucro 0.8,105%,Tabela publicada pelo Carabetta; valores preservados
+6,6,LATAM (TAM),LTM,4.4,LTM · EBITDA 6.2,71.3%,Tabela publicada pelo Carabetta; valores preservados
+7,7,Stellantis Brasil,STLA,4.2,STLA · EBITDA 166.5,2.5%,Tabela publicada pelo Carabetta; valores preservados
+8,8,Modec,MITSY,4.6,MITSY · EBITDA 60.6,7.6%,Tabela publicada pelo Carabetta; valores preservados
+9,9,GM Brasil,GM,2.9,GM · EBITDA 112.5,2.6%,Tabela publicada pelo Carabetta; valores preservados
+10,10,CNH Industrial,CNH,1.8,CNH · EBITDA 22.4,8.2%,Tabela publicada pelo Carabetta; valores preservados
+11,11,Caterpillar Brasil,CAT,1.9,CAT · EBITDA 76.2,2.5%,Tabela publicada pelo Carabetta; valores preservados
+12,12,Renault Brasil,RNO.PA,1.2,RNO.PA · EBITDA 34.0,3.6%,Tabela publicada pelo Carabetta; valores preservados
+13,13,Yara Brasil,YAR.OL,1.1,YAR.OL · EBITDA 7.4,15.1%,Tabela publicada pelo Carabetta; valores preservados
+14,14,Syngenta Brasil,FMC,1.4,FMC · EBITDA 3.5,39.9%,Tabela publicada pelo Carabetta; valores preservados
+15,16,Ventura Petróleo,,3.0,n/d,n/d,Tabela publicada pelo Carabetta; valores preservados
+16,17,LG Brasil,066570.KS,1.0,066570.KS · EBITDA 21.6,4.4%,Tabela publicada pelo Carabetta; valores preservados
+17,18,Volkswagen Brasil,VOW3.DE,2.2,VOW3.DE · EBITDA 288.9,0.8%,Tabela publicada pelo Carabetta; valores preservados
+18,19,Azul,AZUL,1.2,EBITDA 4.6 · Lucro -2.4,25.4%,Tabela publicada pelo Carabetta; valores preservados
+19,20,Gol,GOLL4.SA,0.6,n/d,n/d,Tabela publicada pelo Carabetta; valores preservados
+20,21,Volvo Brasil,VOLV-B.ST,1.3,VOLV-B.ST · EBITDA 42.1,3.0%,Nova consulta Yahoo; mesma regra e ticker já previstos no mapa de Carabetta

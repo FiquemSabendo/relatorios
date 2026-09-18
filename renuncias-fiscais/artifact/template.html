@@ -11,6 +11,21 @@
 /* Fontes da identidade visual da Fiquem Sabendo (Supply + Roboto), embutidas pelo
  * scripts/05_build_artifact.py a partir de artifact/assets/fonts/. */
 __FONTS__
+
+.fin-row { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.fin-row h3 { margin: 0 0 5px; font-size: 15px; }
+.fin-row .sub { margin-bottom: 8px; }
+.fin-bar { display: grid; grid-template-columns: 76px minmax(0,1fr) 100px; gap: 10px; align-items: center; margin: 5px 0; font-size: 13px; }
+.fin-track { height: 13px; background: var(--surface-2); }
+.fin-track i { display: block; height: 100%; background: var(--s1); }
+.fin-bar.ebitda i { background: var(--s2); }
+.fin-bar .amount { text-align: right; font-variant-numeric: tabular-nums; }
+#fin-table table { min-width: 950px; }
+#fin-fontes table { min-width: 1200px; }
+#fin-fontes td { white-space: normal; min-width: 120px; }
+#fin-fontes td:last-child { min-width: 310px; }
+#fin-fontes td:nth-child(2) { min-width: 200px; }
+
 </style>
 <style>
 /* ===================================================================== *
@@ -357,6 +372,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     <button role="tab" data-v="inconsistencias" aria-selected="false">Inconsistências</button>
     <button role="tab" data-v="beneficiarios" aria-selected="false">Maiores Beneficiários</button>
     <button role="tab" data-v="ranking" aria-selected="false">Ranking de beneficiários</button>
+    <button role="tab" data-v="renuncia-lucro" aria-selected="false">Renúncia vs Lucro</button>
   </nav>
 </div>
 
@@ -390,6 +406,58 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         descrevem este acervo, não o universo de todos os benefícios tributários.</p>
     </div>
 
+  </section>
+
+  <section id="view-renuncia-lucro" role="tabpanel" class="hidden">
+    <div class="card intro-copy">
+      <h2>Renúncia vs Lucro: comparação com EBITDA</h2>
+      <p>Comparamos a renúncia fiscal de 2023 com o EBITDA das empresas selecionadas no levantamento do Carabetta, usando a tabela financeira arquivada em 17/09/2026. <b>EBITDA é o resultado antes de juros, tributos sobre o lucro, depreciação e amortização; não é lucro líquido.</b></p>
+      <p id="fin-cobertura"></p>
+      <p class="note"><b>Como ler:</b> esta aba reproduz as escolhas do Carabetta. A renúncia foi corrigida pelo fator histórico do autor; o EBITDA não recebeu inflação. Há aproximações por matrizes globais e por outra empresa do setor. Portanto, o percentual não mede quanto do lucro da empresa brasileira veio da renúncia nem demonstra dependência do benefício.</p>
+    </div>
+    <div class="card">
+      <h2>Renúncia de 2023 e EBITDA usado na comparação</h2>
+      <p class="sub">R$ bilhões · barras partem de zero e usam a mesma escala para todas as empresas · ordem do acumulado fiscal do Carabetta</p>
+      <p class="note">Renúncia corrigida pelo método histórico do autor; EBITDA nominal convertido para reais. O EBITDA de Mitsui (aproximação para Modec) encerra em março de 2023; os demais disponíveis encerram em dezembro de 2023. As barras comparam bases monetárias e, em vários casos, entidades diferentes.</p>
+      <div id="fin-chart" aria-label="Comparação de renúncia de 2023 e EBITDA por beneficiário"></div>
+    </div>
+    <div class="card">
+      <h2>Quanto a renúncia representou do EBITDA?</h2>
+      <p class="sub">Valores em R$ bilhões · percentual aproximado = renúncia corrigida ÷ EBITDA utilizado × 100</p>
+      <div class="tablewrap" id="fin-table"></div>
+      <p class="note">Os percentuais foram recalculados com os valores fiscais sem arredondamento e os EBITDAs disponíveis na tabela histórica. Podem diferir ligeiramente do percentual publicado pelo autor. “n/d” significa indisponível, não zero.</p>
+      <p><a href="evidencias/renuncia-lucro.csv" download>Baixar valores, percentuais e fontes de cada linha (CSV)</a></p>
+    </div>
+    <div class="card intro-copy">
+      <h2>Metodologia desta comparação</h2>
+      <h3>Seleção e unidade de análise</h3>
+      <p>A seleção original ordena razões sociais pela renúncia acumulada corrigida de 2015–2024, incluindo 2024 parcial. O Ministério da Saúde foi excluído da tabela financeira e acrescentamos a próxima razão social elegível, Volvo Brasil. Preservamos as outras linhas históricas. A comparação financeira usa apenas a renúncia de 2023, não o acumulado.</p>
+      <p>Esta seleção agrupa pelo texto da razão social. Ela difere das abas Maiores Beneficiários e Ranking de beneficiários, que agrupam pela raiz do CNPJ. Não há consolidação societária validada por QSA. O pareamento com tickers é manual; o primeiro padrão de nome correspondente no mapa do autor prevalece.</p>
+      <h3>Origem do EBITDA e período da demonstração</h3>
+      <p>Fonte financeira: Yahoo Finance, acessado por yfinance na auditoria de 17/09/2026. O código lê a demonstração anual (<code>income_stmt</code>), procura primeiro a coluna cujo encerramento é em 2023, depois 2022 e, na falta de ambas, a primeira disponível. Busca o campo <code>EBITDA</code> e, como alternativa, <code>Normalized EBITDA</code>. Nos casos disponíveis desta tabela, o campo foi EBITDA e não foi necessária substituição do ano.</p>
+      <p>A data de encerramento não garante coincidência com o ano civil: MITSY tem exercício encerrado em 31/03/2023, enquanto a renúncia é do ano-calendário de 2023. Os demais disponíveis encerram em 31/12/2023. Não usamos o EBITDA corrente dos metadados do ticker nem dados da CVM.</p>
+      <h3>Inflação: reprodução do método histórico</h3>
+      <p id="fin-inflacao"></p>
+      <p>O código do autor toma dezembro de cada ano como origem. Seu rótulo indica julho/2026, mas as taxas cadastradas terminam em junho/2026, identificado no código como IPCA-15; julho não é aplicado. As taxas históricas desse código não foram certificadas contra o IBGE nesta reprodução. Não apresentamos esse fator como IPCA definitivo de julho/2026.</p>
+      <p>Essa regra é específica desta comparação e difere da referência em <span data-base-ipca></span> e das médias dos meses de origem usadas na Apresentação e em Maiores Beneficiários. Para uma razão em bases de preços equivalentes, seria necessário usar ambos os valores nominais ou corrigir os dois pelo mesmo fator.</p>
+      <h3>Taxas de câmbio adotadas</h3>
+      <p>Reproduzimos as taxas fixas do código, em reais por unidade da moeda da demonstração. O autor as descreve como médias de dezembro de 2023, mas não há consulta ao BCB no cálculo; essa atribuição não foi certificada pela auditoria. Não são cotações atuais. A bolsa onde o ticker negocia não determina a moeda do EBITDA.</p>
+      <div class="tablewrap" id="fin-cambio"></div>
+      <p>Em Petrobras, Vale e Embraer, os metadados retornaram BRL, mas a heurística do autor substituiu a moeda por USD quando valor de mercado dividido pela receita superou quatro. A regra mistura valor de mercado da consulta com receita histórica; não comprova a moeda contábil. Preservamos a escolha e identificamos as duas moedas nas fontes abaixo.</p>
+      <h3>Arredondamentos e divergências</h3>
+      <p>Os EBITDAs históricos do Markdown são arredondados a uma casa decimal em bilhões. Para essas linhas, usamos esse valor como denominador; os percentuais são aproximações, não uma recuperação da precisão original. Volvo usa o valor integral da consulta adicional. Os valores fiscais foram recuperados da reprodução arquivada, sem arredondar antes da divisão.</p>
+      <p>Petrobras permanece com R$ 253,8 bilhões, como na tabela histórica. A reconsulta retornou R$ 253,6162 bilhões após a conversão do autor. Sem o snapshot financeiro da publicação original, a causa da divergência não está demonstrada. A tabela de fontes mostra separadamente o valor utilizado e a reconsulta.</p>
+      <h3>Escopo, aproximações e ausências</h3>
+      <p>EBITDAs de matrizes e grupos globais não isolam a operação brasileira beneficiária. Para Syngenta, o autor escolheu a FMC como aproximação setorial: não é sua demonstração financeira. Para Modec, usou Mitsui &amp; Co.; o vínculo alegado no mapa não foi validado nesta auditoria. Mesmo nas companhias diretamente mapeadas, o perímetro contábil não foi conciliado com os CNPJs fiscais.</p>
+      <p>Ventura não tem ticker no mapa. Para Gol, a consulta arquivada de GOLL4.SA não trouxe uma demonstração utilizável. Mantemos ambas na seleção, com EBITDA e percentual indisponíveis. Nenhuma ausência foi substituída por zero.</p>
+      <p><b>Suposições e riscos:</b> o mapa de tickers, as moedas inferidas e o escopo das matrizes são escolhas reproduzidas, não validações contábeis. Se estiverem inadequados, os percentuais podem mudar substancialmente. Esclarecer exige demonstrações do mesmo período e perímetro dos beneficiários, confirmação da moeda e bases de preços equivalentes. Não somamos os EBITDAs nem interpretamos os percentuais como efeito causal dos incentivos.</p>
+    </div>
+    <div class="card intro-copy">
+      <h2>De onde veio o EBITDA de cada beneficiário?</h2>
+      <p>A reconsulta serve para rastrear o dado Yahoo e a transformação aplicada; não substitui automaticamente o EBITDA histórico preservado. Os links de ticker levam ao Yahoo atual e podem mostrar dados revisados; os arquivos da consulta estão no repositório.</p>
+      <div class="tablewrap" id="fin-fontes"></div>
+      <p><a href="https://github.com/FiquemSabendo/relatorios/tree/main/renuncias-fiscais/qa/renuncia-lucro/fontes" target="_blank" rel="noopener">Markdown original, auditoria e consultas Yahoo arquivadas</a> · <a href="https://carabetta.xyz/transparencia/renunciafiscal.html" target="_blank" rel="noopener">Referência: levantamento do Carabetta (pode exigir login)</a> · <a href="https://portaldatransparencia.gov.br/download-de-dados/renuncias" target="_blank" rel="noopener">Fonte fiscal: Portal da Transparência / Receita Federal</a></p>
+    </div>
   </section>
 
   <section id="view-inconsistencias" role="tabpanel" class="hidden">
@@ -1137,6 +1205,21 @@ function renderBeneficiarios() {
   $("#ben-evolucao-table").innerHTML=`<table><thead><tr><th>Setor</th>${ANOS.map(a=>`<th class="n">${a}${a===ANO_PARCIAL?" (parcial)":""}</th>`).join("")}</tr></thead><tbody>`+B.setores.map(r=>`<tr><td>${esc(r.setor)}</td>${r.valores.map(v=>`<td class="n">${moeda(v)}</td>`).join("")}</tr>`).join("")+`</tbody><tfoot><tr><th>Total</th>${AP.anos.map(r=>`<td class="n"><b>${moeda(r.real)}</b></td>`).join("")}</tr></tfoot></table>`;
 }
 
+const FIN = __RENUNCIA_LUCRO__;
+function renderFinanceiro() {
+  renderMetodologia();
+  const rows=FIN.linhas, bi=v=>v===null?"n/d":nf2.format(v/1e9), pct=v=>v===null?"n/d":nf1.format(v)+"%";
+  const full=v=>v===null?"n/d":nf2.format(v);
+  $("#fin-cobertura").textContent=`São ${rows.length} beneficiários selecionados e ${rows.filter(r=>r.ebitda!==null).length} EBITDAs disponíveis. Ventura e Gol permanecem na tabela sem EBITDA. A seleção segue o acumulado do Carabetta; não corresponde aos maiores valores apenas de 2023.`;
+  const max=Math.max(...rows.flatMap(r=>[r.renuncia_comparada,r.ebitda||0]));
+  $("#fin-chart").innerHTML=rows.map(r=>`<div class="fin-row"><h3>${r.linha}. ${esc(r.beneficiario)}</h3><p class="sub">${esc(r.escopo)}</p>${[["Renúncia",r.renuncia_comparada,""],["EBITDA",r.ebitda,"ebitda"]].map(([label,v,cl])=>`<div class="fin-bar ${cl}"><span>${label}</span><div class="fin-track" aria-hidden="true">${v===null?"":`<i style="width:${v/max*100}%"></i>`}</div><span class="amount">${bi(v)}${v===null?"":" bi"}</span></div>`).join("")}</div>`).join("");
+  $("#fin-table").innerHTML=`<table><thead><tr><th>#</th><th>Beneficiário</th><th class="n">Renúncia 2023<br>corrigida (R$ bi)</th><th class="n">EBITDA usado<br>(R$ bi)</th><th class="n">Renúncia / EBITDA<br>aproximado</th><th>Referência do EBITDA</th></tr></thead><tbody>`+rows.map(r=>`<tr><td>${r.linha}</td><td>${esc(r.beneficiario)}</td><td class="n">${bi(r.renuncia_comparada)}</td><td class="n">${bi(r.ebitda)}</td><td class="n">${pct(r.percentual)}</td><td>${esc(r.ticker||"Sem ticker")} · ${esc(r.escopo)}</td></tr>`).join("")+`</tbody></table>`;
+  $("#fin-inflacao").textContent=`Fórmula reproduzida: renúncia nominal de 2023 × ${new Intl.NumberFormat("pt-BR",{maximumFractionDigits:12}).format(FIN.fator_2023)} ÷ EBITDA em reais × 100. Apenas a renúncia recebe a correção: isso eleva a razão em ${nf2.format((FIN.fator_2023-1)*100)}% em relação à divisão com os dois valores nominais.`;
+  const rates=[...new Map(rows.filter(r=>r.cambio!==null).map(r=>[r.moeda,r.cambio])).entries()].sort();
+  $("#fin-cambio").innerHTML=`<table><thead><tr><th>Moeda da demonstração</th><th class="n">Reais por unidade</th></tr></thead><tbody>`+rates.map(([m,v])=>`<tr><td>${esc(m)}</td><td class="n">${new Intl.NumberFormat("pt-BR",{maximumFractionDigits:5}).format(v)}</td></tr>`).join("")+`</tbody></table>`;
+  $("#fin-fontes").innerHTML=`<table><thead><tr><th>Beneficiário</th><th>Ticker / emissor consultado</th><th>Encerramento</th><th class="n">EBITDA original<br>na moeda indicada</th><th>Moeda / câmbio</th><th class="n">Reconsulta<br>em R$ bi</th><th class="n">Utilizado<br>em R$ bi</th><th>Origem e escopo</th></tr></thead><tbody>`+rows.map(r=>`<tr><td>${esc(r.beneficiario)}</td><td>${r.ticker?`<a href="https://finance.yahoo.com/quote/${encodeURIComponent(r.ticker)}/financials/" target="_blank" rel="noopener">${esc(r.ticker)}</a><br>${esc(r.emissor)}`:"Sem ticker"}</td><td>${esc(r.data_final||"n/d")}</td><td class="n">${full(r.ebitda_yahoo_original)}</td><td>${esc(r.moeda||"n/d")}${r.cambio===null?"":` × ${r.cambio}`}<br>${r.moeda_metadado&&r.moeda_metadado!==r.moeda?`Metadado: ${esc(r.moeda_metadado)}; alterado pela heurística`:""}</td><td class="n">${r.ebitda_reconsulta_brl===null?"n/d":new Intl.NumberFormat("pt-BR",{maximumFractionDigits:4}).format(r.ebitda_reconsulta_brl/1e9)}</td><td class="n">${bi(r.ebitda)}</td><td>${esc(r.escopo)}. ${r.ebitda===null?"Sem valor disponível.":esc(r.origem)+"."}</td></tr>`).join("")+`</tbody></table>`;
+}
+
 const INC = __INCONSISTENCIAS__;
 function renderInconsistencias() {
   const reais = c => "R$ " + nf2.format(c / 100);
@@ -1557,12 +1640,13 @@ function montarNota2024() {
     `${nfInt.format(n23)} em 2023. A cobertura de 2024 se limita à importação no primeiro semestre; IRPJ/CSLL vai até 2023.`;
 }
 
-const ABAS = ["apresentacao", "metodologia", "inconsistencias", "beneficiarios", "ranking"];
+const ABAS = ["apresentacao", "metodologia", "inconsistencias", "beneficiarios", "ranking", "renuncia-lucro"];
 
 function renderAll() {
   if (S.view === "apresentacao") renderApresentacao();
   else if (S.view === "metodologia") renderMetodologia();
   else if (S.view === "inconsistencias") renderInconsistencias();
+  else if (S.view === "renuncia-lucro") renderFinanceiro();
   else if (S.view === "beneficiarios") renderBeneficiarios();
   else renderRanking();
 }

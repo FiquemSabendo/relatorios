@@ -1,0 +1,26 @@
+{
+  "ticker": "EMBJ3.SA",
+  "consulta_utc": "2026-09-17T18:32:55.895585+00:00",
+  "yfinance_version": "1.7.0",
+  "datas_disponiveis": [
+    "2025-12-31",
+    "2024-12-31",
+    "2023-12-31",
+    "2022-12-31",
+    "2021-12-31"
+  ],
+  "info": {
+    "symbol": "EMBJ3.SA",
+    "shortName": "EMBRAER     ON  ATZ NM",
+    "longName": "Embraer S.A.",
+    "financialCurrency": "BRL",
+    "currency": "BRL",
+    "marketCap": 68279033856,
+    "exchange": "SAO",
+    "quoteType": "EQUITY",
+    "mostRecentQuarter": 1782777600,
+    "lastFiscalYearEnd": 1767139200,
+    "ebitda": 4756832256,
+    "totalRevenue": 44127916032
+  }
+}
