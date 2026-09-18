@@ -391,7 +391,6 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     <button role="tab" data-v="beneficiarios" aria-selected="false">Maiores Beneficiários</button>
     <button role="tab" data-v="setores" aria-selected="false">Setores beneficiados</button>
     <button role="tab" data-v="composicao" aria-selected="false">Composição das renúncias</button>
-    <button role="tab" data-v="custo-fiscal" aria-selected="false">Custo fiscal</button>
   </nav>
 </div>
 
@@ -454,22 +453,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
     </div>
   </section>
 
-  <section id="view-custo-fiscal" role="tabpanel" class="hidden">
-    <div class="card intro-copy"><h2>Qual é a dimensão das renúncias diante de outros gastos federais?</h2>
-      <p class="sub">2023 · valores nominais daquele ano · sem correção pela inflação</p>
-      <p class="dek" id="custo-resposta"></p>
-      <p class="note">Esta é uma comparação de magnitude. Renúncia fiscal é receita dispensada; despesa é pagamento público. A retirada de um benefício não garante arrecadação do mesmo valor nem sua transferência automática para outro programa. O Portal cobre apenas parte das renúncias federais.</p>
-    </div>
-    <div class="card"><h2>Renúncias e despesas selecionadas em 2023</h2><p class="sub">R$ bilhões · barras partem de zero e usam a mesma escala · pagamentos efetivos do Governo Central segundo o Tesouro</p><div id="custo-chart"></div></div>
-    <div class="card"><h2>Quanto as renúncias representam de cada despesa?</h2><p class="sub">Renúncias registradas em 2023 ÷ despesa indicada de 2023. Cada linha é uma comparação independente; não some programas para obter o gasto público total.</p><div class="tablewrap" id="custo-table"></div></div>
-    <div class="card intro-copy"><h2>Fontes e limites da comparação</h2>
-      <p>As despesas vêm da edição de dezembro de 2023 do Resultado do Tesouro Nacional, publicada em 29 de janeiro de 2024. Usamos a tabela 2.2, coluna 2023, em valores correntes, conferida contra a soma de janeiro a dezembro da tabela 1.2. Valores em milhões foram convertidos para reais. Não usamos dotação autorizada ou empenho como se fossem pagamento.</p>
-      <p>O RTN define despesa pelo pagamento efetivo, correspondente ao saque na Conta Única. Isso pode incluir pagamentos de obrigações de anos anteriores; não é uma seleção pelo ano do empenho. O acervo fiscal usa o ano-calendário da renúncia. Os dois lados cobrem 2023, mas representam conceitos diferentes.</p>
-      <p>Bolsa Família inclui a rubrica Auxílio Brasil; BPC inclui RMV; Fundeb considera apenas a complementação da União; RGPS não inclui toda a previdência dos servidores; Minha Casa Minha Vida corresponde à despesa indicada no RTN, não ao total de financiamento habitacional. Os valores preservam a versão histórica da fonte e podem diferir de séries posteriormente revisadas.</p>
-      <p>Não corrigimos nenhum dos lados pela inflação: a pergunta compara o tamanho de fluxos do mesmo ano. Isso difere das abas de séries históricas, expressas em reais de <span data-base-ipca></span>. Também não somamos renúncia e gasto para formar um suposto total de despesas.</p>
-      <p id="custo-fontes"></p><div class="tablewrap" id="custo-rastreio"></div>
-    </div>
-  </section>
+
 
 
 
@@ -513,7 +497,7 @@ tr.clickable[aria-expanded="true"] { background: var(--accent-wash); }
         não mede o retorno econômico dos incentivos.</p>
       <p><b>As bases de preços variam entre as abas.</b> No ranking, os valores são nominais; ao abrir uma empresa, “Real” usa a média de
         janeiro a dezembro de 2023. Esses valores não são diretamente comparáveis aos da Apresentação sem converter a base.
-        <span id="intro-diferenca"></span> Em Custo fiscal, ambos os lados da comparação usam valores nominais de 2023, sem deflação.</p>
+        <span id="intro-diferenca"></span></p>
 
       <h3>Concentração em Maiores Beneficiários e classificação em Setores beneficiados</h3>
       <p>O recorte é 2015–2024, incluindo 2024 parcial, em preços de <span data-base-ipca></span>.
@@ -13043,16 +13027,6 @@ function renderComposicaoDetalhada() {
   $("#comp-fundamentos").innerHTML=`<table><thead><tr><th>Fundamento legal na fonte</th><th>Mecanismo</th><th>Tema editorial</th><th class="n">Valor</th><th class="n">% da seleção</th></tr></thead><tbody>`+[...fund.values()].sort((a,b)=>b.valor-a.valor).map(r=>`<tr><td>${esc(r.fundamento)}</td><td>${esc(r.mecanismo)}</td><td>${esc(r.tema)}</td><td class="n">${fmtV(r.valor,"nominal")}</td><td class="n">${nf1.format(total?r.valor/total*100:0)}%</td></tr>`).join("")+`</tbody><tfoot><tr><th colspan="3">Total da seleção</th><td class="n">${fmtV(total,"nominal")}</td><td></td></tr></tfoot></table>`;
   $("#comp-regras").innerHTML=`<table><thead><tr><th>Mecanismo identificado</th><th>Tema editorial</th></tr></thead><tbody>`+CC.regras_tema.map(r=>`<tr><td>${esc(r.mecanismo)}</td><td>${esc(r.tema)}</td></tr>`).join("")+`</tbody></table>`;
 }
-function renderCustoFiscal() {
-  const C=CC.custo, bolsa=C.comparadores.find(r=>r.nome.startsWith("Bolsa"));
-  $("#custo-resposta").textContent=`As renúncias registradas no Portal somaram ${fmtV(C.renuncia,"nominal")} em 2023: ${nf2.format(bolsa.razao)} vez o pagamento de Bolsa Família e Auxílio Brasil no RTN (${fmtV(bolsa.valor,"nominal")}).`;
-  const rows=[{nome:"Renúncias registradas no Portal",valor:C.renuncia,renuncia:true},...C.comparadores].sort((a,b)=>b.valor-a.valor),max=rows[0].valor;
-  $("#custo-chart").innerHTML=rows.map(r=>`<div class="intro-tipo"><div><b>${esc(r.nome)}</b><span>R$ ${nf2.format(r.valor/1e9)} bi</span></div><div class="intro-track" aria-hidden="true"><i style="width:${r.valor/max*100}%;background:${corSlot(r.renuncia?0:1)}"></i></div></div>`).join("");
-  $("#custo-table").innerHTML=`<table><thead><tr><th>Despesa de referência</th><th class="n">2023 (R$ bi)</th><th class="n">Renúncias / despesa</th><th class="n">Em %</th></tr></thead><tbody>`+C.comparadores.map(r=>`<tr><td>${esc(r.nome)}</td><td class="n">${nf2.format(r.valor/1e9)}</td><td class="n">${nf2.format(r.razao)}×</td><td class="n">${nf1.format(r.percentual)}%</td></tr>`).join("")+`</tbody></table>`;
-  $("#custo-fontes").innerHTML=`<a href="${esc(C.url)}" target="_blank" rel="noopener">Tesouro: planilha histórica de dezembro/2023</a> · <a href="${esc(C.pdf)}" target="_blank" rel="noopener">Boletim e notas metodológicas (p. 19)</a> · <a href="https://portaldatransparencia.gov.br/download-de-dados/renuncias" target="_blank" rel="noopener">Portal: arquivos de renúncias</a>. Consulta: 18/09/2026.`;
-  $("#custo-rastreio").innerHTML=`<table><thead><tr><th>Comparador</th><th>Escopo</th><th>Localização na planilha</th></tr></thead><tbody>`+C.comparadores.map(r=>`<tr><td>${esc(r.nome)}</td><td>${esc(r.escopo)}</td><td>Aba ${esc(r.aba)}, célula ${esc(r.celula)}<br>${esc(r.rotulo_fonte)}</td></tr>`).join("")+`</tbody></table>`;
-}
-
 const INC = {
   "anos": [
     {
@@ -13600,13 +13574,12 @@ function montarNota2024() {
     `${nfInt.format(n23)} em 2023. A cobertura de 2024 se limita à importação no primeiro semestre; IRPJ/CSLL vai até 2023.`;
 }
 
-const ABAS = ["apresentacao", "metodologia", "beneficiarios", "setores", "composicao", "custo-fiscal"];
+const ABAS = ["apresentacao", "metodologia", "beneficiarios", "setores", "composicao"];
 
 function renderAll() {
   if (S.view === "apresentacao") renderApresentacao();
   else if (S.view === "metodologia") renderMetodologia();
   else if (S.view === "composicao") renderComposicaoDetalhada();
-  else if (S.view === "custo-fiscal") renderCustoFiscal();
   else if (S.view === "beneficiarios") renderBeneficiarios();
   else if (S.view === "setores") renderSetores();
 }

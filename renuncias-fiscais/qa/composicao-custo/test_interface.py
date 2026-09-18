@@ -9,12 +9,10 @@ with sync_playwright() as p:
  page.goto('http://127.0.0.1:8765/docs/renuncias-fiscais/index.html#composicao')
  page.locator('#comp-arvore details').first.wait_for()
  assert page.locator('[data-v="renuncia-lucro"]').count()==0
- for tab in ['apresentacao','metodologia','beneficiarios','setores','composicao','custo-fiscal']:
+ for tab in ['apresentacao','metodologia','beneficiarios','setores','composicao']:
   page.locator(f'[data-v="{tab}"]').click()
   assert page.locator('#view-'+tab).is_visible()
- assert page.locator('#custo-table tbody tr').count()==6
- assert '166,31' in page.locator('#custo-table').inner_text()
- for tab in ['composicao','custo-fiscal']:
+ for tab in ['composicao']:
   page.locator(f'[data-v="{tab}"]').click()
   for width in [1300,420]:
    page.set_viewport_size({'width':width,'height':1000})
@@ -29,5 +27,5 @@ with sync_playwright() as p:
  page.locator('#comp-busca').fill('');page.wait_for_timeout(300)
  assert page.locator('#comp-fundamentos tbody tr').count()>0
  assert not errors,errors
- print('PASS: 6 abas; filtros; tabela de 6 comparadores; nenhum erro JS; sem overflow em 1300/420px.')
+ print('PASS: 5 abas; filtros; nenhum erro JS; sem overflow em 1300/420px.')
  b.close()
